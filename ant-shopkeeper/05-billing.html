@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Billing</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Billing — Payments, Vouchers & Bank Deposits</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a class="active" href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 5a: PAGO DE BILLETERA ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5a. Pago de Billetera</div>
+      <div class="screen-sublabel">Payment Menu</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Pago de Billetera</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">refresh</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Wallet Gradient Card -->
+          <div class="card" style="background:linear-gradient(135deg, #f16824, #f3864f); color:white; padding:20px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:24px;">account_balance_wallet</span>
+              <span style="font-size:16px; font-weight:600;">Mi Billetera</span>
+            </div>
+            <div style="font-size:12px; opacity:.8; margin-bottom:4px;">Saldo Disponible</div>
+            <div style="font-size:32px; font-weight:800; margin-bottom:16px;">Q 1,250.00</div>
+            <div style="display:flex; gap:12px;">
+              <div style="flex:1; background:rgba(255,255,255,.15); border-radius:10px; padding:10px; text-align:center;">
+                <div style="font-size:11px; opacity:.8;">Credito</div>
+                <div style="font-size:15px; font-weight:700;">Q 2,000.00</div>
+              </div>
+              <div style="flex:1; background:rgba(194,34,34,.35); border-radius:10px; padding:10px; text-align:center;">
+                <div style="font-size:11px; opacity:.8;">Deuda</div>
+                <div style="font-size:15px; font-weight:700;">Q 750.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Title -->
+          <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Que deseas hacer?</div>
+
+          <!-- Option 1: Pago a Agente -->
+          <div class="card card-sm" style="padding:16px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, #41a247, #6abf69); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:white;">person</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Pago a Agente</div>
+                <div style="font-size:12px; color:var(--gray); margin-top:2px;">Pagar tu deuda a un agente cercano</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- Option 2: Deposito Bancario -->
+          <div class="card card-sm" style="padding:16px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, #0a70b9, #3b9de0); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:white;">business</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Deposito Bancario</div>
+                <div style="font-size:12px; color:var(--gray); margin-top:2px;">Subir boleta de deposito bancario</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- Option 3: Mis Boletas -->
+          <div class="card card-sm" style="padding:16px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, #f16824, #f3864f); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:white;">receipt_long</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Mis Boletas</div>
+                <div style="font-size:12px; color:var(--gray); margin-top:2px;">Ver historial de boletas subidas</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- Option 4: Historial de Pagos -->
+          <div class="card card-sm" style="padding:16px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, #7c3aed, #a78bfa); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:white;">history</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Historial de Pagos</div>
+                <div style="font-size:12px; color:var(--gray); margin-top:2px;">Consultar todos los pagos realizados</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5b: PAGO A AGENTE (Bluetooth) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5b. Pago a Agente</div>
+      <div class="screen-sublabel">Bluetooth Payment</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Confirmacion de pago</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Bluetooth Status -->
+          <div class="card" style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:44px; height:44px; border-radius:22px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:24px; color:#0a70b9;">bluetooth</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">Selecciona un dispositivo</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">Buscando dispositivos cercanos...</div>
+            </div>
+            <div class="spinner" style="width:20px; height:20px; border-width:2px;"></div>
+          </div>
+
+          <!-- Device 1 -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">smartphone</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Samsung Galaxy A13</div>
+                <div style="font-size:11px; color:var(--gray); font-family:monospace;">AA:BB:CC:DD:EE</div>
+              </div>
+              <button style="background:rgba(241,104,36,.12); color:#f16824; border:none; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;">Conectar</button>
+            </div>
+          </div>
+
+          <!-- Device 2 -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">smartphone</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Motorola G52</div>
+                <div style="font-size:11px; color:var(--gray); font-family:monospace;">11:22:33:44:55</div>
+              </div>
+              <button style="background:rgba(241,104,36,.12); color:#f16824; border:none; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;">Conectar</button>
+            </div>
+          </div>
+
+          <!-- No Devices Message (shown as alternative state) -->
+          <div class="card" style="text-align:center; padding:32px 20px; background:rgba(0,0,0,.02); border:1.5px dashed var(--gray-border);">
+            <div style="width:48px; height:48px; border-radius:24px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+              <span class="mi" style="font-size:28px; color:var(--gray);">phone_android</span>
+            </div>
+            <div style="font-size:14px; color:var(--gray); font-weight:500;">No se encontraron dispositivos</div>
+            <div style="font-size:12px; color:var(--gray); opacity:.7; margin-top:4px;">Asegurate que el Bluetooth este activo</div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5c: PAGO A AGENTE (Connected) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5c. Pago a Agente (Connected)</div>
+      <div class="screen-sublabel">Bluetooth Connected</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Confirmacion de pago</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Agent Card -->
+          <div class="card" style="margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:48px; height:48px; border-radius:24px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:26px; color:#41a247;">person</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Agente Pedro Lopez</div>
+                <div style="margin-top:4px;">
+                  <span class="badge badge-green" style="font-size:11px;">ID: AG-001</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connection Status -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:0 4px;">
+            <span class="mi" style="font-size:20px; color:#41a247;">check_circle</span>
+            <span style="font-size:14px; font-weight:600; color:#41a247;">Conexion establecida</span>
+          </div>
+
+          <!-- Payment Options Card -->
+          <div class="card">
+            <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Opciones de pago</div>
+
+            <!-- Radio: Pago de contado -->
+            <label style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border); cursor:pointer;">
+              <div style="width:22px; height:22px; border-radius:11px; border:2px solid #f16824; display:flex; align-items:center; justify-content:center;">
+                <div style="width:12px; height:12px; border-radius:6px; background:#f16824;"></div>
+              </div>
+              <span style="font-size:14px; font-weight:600; color:var(--text-dark);">Pago de contado</span>
+            </label>
+
+            <!-- Radio: Abono -->
+            <label style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border); cursor:pointer;">
+              <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center;">
+              </div>
+              <span style="font-size:14px; font-weight:500; color:var(--gray);">Abono</span>
+            </label>
+
+            <!-- Radio: Pago Minimo -->
+            <label style="display:flex; align-items:center; gap:12px; padding:12px 0; cursor:pointer;">
+              <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center;">
+              </div>
+              <span style="font-size:14px; font-weight:500; color:var(--gray);">Pago Minimo</span>
+            </label>
+
+            <div class="divider" style="margin:16px 0;"></div>
+
+            <!-- Amount Input -->
+            <div class="input-group" style="margin-bottom:0;">
+              <label>Cantidad a pagar</label>
+              <div class="input-wrap focus">
+                <span class="mi" style="color:#f16824;">payments</span>
+                <input type="text" value="750.00" style="color:var(--text-dark); font-weight:600;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Button -->
+          <button class="btn mt-16" style="background:#f16824; color:white;">
+            <span class="mi">check</span>
+            Confirmar
+          </button>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5d: DEPOSITO BANCARIO ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5d. Deposito Bancario</div>
+      <div class="screen-sublabel">Bank Pay</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Pago Bancario</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Debt Card -->
+          <div class="card" style="text-align:center; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
+              <span class="mi" style="font-size:24px; color:#C22222;">account_balance_wallet</span>
+              <span style="font-size:14px; color:var(--gray); font-weight:500;">Deuda Actual</span>
+            </div>
+            <div style="font-size:32px; font-weight:800; color:#C22222;">Q 750.00</div>
+          </div>
+
+          <!-- Bank Selection -->
+          <div class="card" style="margin-bottom:16px;">
+            <div style="font-size:14px; font-weight:600; color:var(--text-dark); margin-bottom:8px;">Banco</div>
+            <div class="input-wrap" style="cursor:pointer;">
+              <span class="mi" style="color:#0a70b9;">account_balance</span>
+              <span style="flex:1; font-size:15px; color:var(--text-dark); font-weight:500;">Banrural</span>
+              <span class="mi" style="color:var(--gray);">expand_more</span>
+            </div>
+          </div>
+
+          <!-- Photo Section -->
+          <div class="card" style="margin-bottom:16px;">
+            <div style="font-size:14px; font-weight:600; color:var(--text-dark); margin-bottom:12px;">Foto de la boleta</div>
+            <div style="border:2px dashed var(--gray-border); border-radius:16px; padding:32px 20px; text-align:center; cursor:pointer;">
+              <div style="width:56px; height:56px; border-radius:28px; background:rgba(241,104,36,.08); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+                <span class="mi" style="font-size:32px; color:#f16824;">photo_camera</span>
+              </div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Tomar foto de la boleta</div>
+              <div style="font-size:12px; color:var(--gray);">Asegurate que la imagen sea legible</div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button class="btn" style="background:#f16824; color:white;">
+            <span class="mi">cloud_upload</span>
+            Registrar Deposito
+          </button>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5e: PAGOS PROCESADOS ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5e. Pagos Procesados</div>
+      <div class="screen-sublabel">Payment History</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Pagos Procesados</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">refresh</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Summary Card -->
+          <div class="card" style="text-align:center; margin-bottom:16px;">
+            <div style="font-size:13px; color:var(--gray); margin-bottom:4px;">Total Pagado</div>
+            <div style="font-size:28px; font-weight:800; color:#0a70b9; margin-bottom:12px;">Q 5,250.00</div>
+            <div style="display:flex; gap:12px;">
+              <div style="flex:1; background:rgba(65,162,71,.08); border-radius:10px; padding:10px;">
+                <div style="font-size:11px; color:var(--gray);">Agente</div>
+                <div style="font-size:15px; font-weight:700; color:#41a247;">Q 3,000.00</div>
+              </div>
+              <div style="flex:1; background:rgba(10,112,185,.08); border-radius:10px; padding:10px;">
+                <div style="font-size:11px; color:var(--gray);">Banco</div>
+                <div style="font-size:15px; font-weight:700; color:#0a70b9;">Q 2,250.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:16px;">
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; background:#f16824; color:white;">Todos (15)</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Agente</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Banco</div>
+          </div>
+
+          <!-- Payment Item 1 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">person</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Q 500.00</div>
+                <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                  <span class="badge badge-blue" style="font-size:10px; padding:2px 8px;">Agente</span>
+                  <span style="font-size:12px; color:var(--gray);">18/02/2026</span>
+                </div>
+              </div>
+              <span class="badge badge-green" style="font-size:11px;">Completado</span>
+            </div>
+          </div>
+
+          <!-- Payment Item 2 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">account_balance</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Q 750.00</div>
+                <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                  <span class="badge badge-green" style="font-size:10px; padding:2px 8px;">Banco</span>
+                  <span style="font-size:12px; color:var(--gray);">15/02/2026</span>
+                </div>
+              </div>
+              <span class="badge badge-orange" style="font-size:11px;">Pendiente</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5f: HISTORIAL DE BOLETAS ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5f. Historial de Boletas</div>
+      <div class="screen-sublabel">Voucher History</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Historial de Boletas</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">refresh</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Gradient Summary Card -->
+          <div class="card" style="background:linear-gradient(135deg, #f16824, #f3864f); color:white; padding:20px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:24px;">receipt_long</span>
+              <div>
+                <div style="font-size:16px; font-weight:700;">Mis Boletas</div>
+                <div style="font-size:12px; opacity:.8;">Historial de depositos bancarios</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <!-- Pending -->
+              <div style="flex:1; text-align:center;">
+                <div style="width:44px; height:44px; border-radius:22px; background:rgba(254,209,8,.25); display:flex; align-items:center; justify-content:center; margin:0 auto 6px;">
+                  <span style="font-size:18px; font-weight:800; color:#fed108;">2</span>
+                </div>
+                <div style="font-size:11px; opacity:.85;">Pendientes</div>
+              </div>
+              <!-- Approved -->
+              <div style="flex:1; text-align:center;">
+                <div style="width:44px; height:44px; border-radius:22px; background:rgba(65,162,71,.3); display:flex; align-items:center; justify-content:center; margin:0 auto 6px;">
+                  <span style="font-size:18px; font-weight:800; color:#a5f3a5;">8</span>
+                </div>
+                <div style="font-size:11px; opacity:.85;">Aprobadas</div>
+              </div>
+              <!-- Voided -->
+              <div style="flex:1; text-align:center;">
+                <div style="width:44px; height:44px; border-radius:22px; background:rgba(194,34,34,.3); display:flex; align-items:center; justify-content:center; margin:0 auto 6px;">
+                  <span style="font-size:18px; font-weight:800; color:#fca5a5;">1</span>
+                </div>
+                <div style="font-size:11px; opacity:.85;">Anulada</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Count Label -->
+          <div style="font-size:13px; color:var(--gray); margin-bottom:12px;">11 boleta(s) encontrada(s)</div>
+
+          <!-- Voucher Card 1 -->
+          <div class="card" style="padding:16px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">receipt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Boleta #1</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026</div>
+              </div>
+              <span class="badge badge-amber" style="font-size:11px;">Pendiente</span>
+            </div>
+            <div class="divider" style="margin:0 0 10px;"></div>
+            <div style="display:flex; gap:16px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">account_balance</span>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Banrural</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">credit_card</span>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Cta 001-234567</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Voucher Card 2 (example approved) -->
+          <div class="card" style="padding:16px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">receipt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Boleta #2</div>
+                <div style="font-size:12px; color:var(--gray);">15/02/2026</div>
+              </div>
+              <span class="badge badge-green" style="font-size:11px;">Aprobada</span>
+            </div>
+            <div class="divider" style="margin:0 0 10px;"></div>
+            <div style="display:flex; gap:16px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">account_balance</span>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Banrural</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">credit_card</span>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Cta 001-234567</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

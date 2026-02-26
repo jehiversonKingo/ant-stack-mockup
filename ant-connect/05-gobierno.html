@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — Gobierno de Guatemala</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    :root {
+      --gov-blue: #003876;
+      --gov-blue-light: #E8EFF7;
+      --gov-cyan: #0077B6;
+      --gov-green: #2D8B4E;
+      --gov-green-light: #E6F5EC;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #003876 0%, #0077B6 100%);">
+    <h1>Ant Connect</h1>
+    <p>Gobierno de Guatemala — Programas Sociales, Blogs, Actividades & Notificaciones</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-features.html">Features</a>
+    <a href="04-navigation.html">Navigation</a>
+    <a class="active" href="05-gobierno.html">Gobierno</a>
+    <a href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ===================================================================== -->
+    <!-- G1. DRAWER CON OPCION GOBIERNO DE GUATEMALA (copia de screen 10)      -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G1. Drawer + Gobierno de Guatemala</div>
+      <div class="screen-sublabel">Copia de Drawer Navigation con nueva opción</div>
+      <div class="phone" style="overflow:hidden;">
+        <div class="drawer-overlay">
+          <div class="drawer-panel">
+            <!-- Drawer Header (igual) -->
+            <div style="background:var(--orange); padding:48px 20px 24px; color:white;">
+              <div style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.2); border:2px solid white; display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:24px; font-weight:700;">JC</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; margin-top:12px;">Juan Carlos Pérez</div>
+              <div style="font-size:13px; opacity:.8; margin-top:2px;">+502 5555 1234</div>
+            </div>
+            <!-- Drawer Items -->
+            <div style="flex:1; padding:8px 12px; overflow-y:auto;">
+              <!-- Home -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">home</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Inicio</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- History -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">schedule</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Historial</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Subscriptions -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">confirmation_number</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Suscripciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Notifications -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">notifications</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Notificaciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+
+              <div style="height:1px; background:var(--gray-border); margin:12px 0;"></div>
+
+              <!-- ★ NUEVA OPCION: Gobierno de Guatemala (activa) -->
+              <div style="display:flex; align-items:center; padding:14px 16px; background:var(--gov-blue-light); border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gov-blue); font-size:22px;">account_balance</span>
+                <span style="flex:1; font-size:15px; font-weight:600; color:var(--gov-blue);">Gobierno de Guatemala</span>
+                <span class="mi" style="color:var(--gov-blue); font-size:20px;">chevron_right</span>
+              </div>
+
+              <div style="height:1px; background:var(--gray-border); margin:12px 0;"></div>
+
+              <!-- Profile -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">person</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Mi Perfil</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Settings -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">settings</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Configuración</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div style="padding:16px 20px; border-top:1px solid var(--gray-border);">
+              <div style="display:flex; align-items:center; gap:10px; color:var(--red);">
+                <span class="mi" style="font-size:22px;">exit_to_app</span>
+                <span style="font-size:15px; font-weight:600;">Cerrar Sesión</span>
+              </div>
+              <div style="font-size:12px; color:var(--gray); margin-top:12px;">Ant Connect v1.0.6</div>
+            </div>
+          </div>
+          <div class="drawer-dim"></div>
+        </div>
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content"></div>
+        <div class="tab-bar"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G2. GOBIERNO DE GUATEMALA - INSTITUCIONES (MIDES, MAGA, etc)          -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G2. Gobierno - Instituciones</div>
+      <div class="screen-sublabel">Listado de ministerios</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Header Banner -->
+          <div style="background:linear-gradient(135deg, #003876, #0077B6); border-radius:20px; padding:24px; color:white; margin-bottom:20px; position:relative; overflow:hidden;">
+            <div style="position:absolute; right:-10px; top:-10px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.08);"></div>
+            <span class="mi" style="font-size:32px; opacity:.8; margin-bottom:8px; display:block;">account_balance</span>
+            <div style="font-size:20px; font-weight:700;">Gobierno de Guatemala</div>
+            <div style="font-size:13px; opacity:.8; margin-top:4px;">Programas sociales y servicios para ti</div>
+          </div>
+
+          <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Instituciones</div>
+
+          <!-- MIDES -->
+          <div class="card card-sm" style="cursor:pointer; border-left:4px solid #003876;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:50px; height:50px; border-radius:14px; background:var(--gov-blue-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:26px; color:var(--gov-blue);">groups</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">MIDES</div>
+                <div style="font-size:12px; color:var(--gray);">Ministerio de Desarrollo Social</div>
+              </div>
+              <span class="mi" style="color:var(--gray-border); font-size:22px;">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- MAGA -->
+          <div class="card card-sm" style="cursor:pointer; border-left:4px solid var(--gov-green);">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:50px; height:50px; border-radius:14px; background:var(--gov-green-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:26px; color:var(--gov-green);">agriculture</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">MAGA</div>
+                <div style="font-size:12px; color:var(--gray);">Ministerio de Agricultura</div>
+              </div>
+              <span class="mi" style="color:var(--gray-border); font-size:22px;">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- MINEDUC -->
+          <div class="card card-sm" style="cursor:pointer; border-left:4px solid var(--blue);">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:50px; height:50px; border-radius:14px; background:rgba(59,130,246,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:26px; color:var(--blue);">school</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">MINEDUC</div>
+                <div style="font-size:12px; color:var(--gray);">Ministerio de Educación</div>
+              </div>
+              <span class="mi" style="color:var(--gray-border); font-size:22px;">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- MSPAS -->
+          <div class="card card-sm" style="cursor:pointer; border-left:4px solid var(--red);">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:50px; height:50px; border-radius:14px; background:rgba(239,68,68,.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:26px; color:var(--red);">local_hospital</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">MSPAS</div>
+                <div style="font-size:12px; color:var(--gray);">Ministerio de Salud Pública</div>
+              </div>
+              <span class="mi" style="color:var(--gray-border); font-size:22px;">chevron_right</span>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar"><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G3. MIDES - TABS: Blogs / Actividades / Programas                     -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G3. MIDES - Programas</div>
+      <div class="screen-sublabel">Tab Programas activo</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--gov-blue);">MIDES</div>
+            <div style="font-size:11px; color:var(--gray);">Ministerio de Desarrollo Social</div>
+          </div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content">
+          <!-- Tabs -->
+          <div style="display:flex; border-bottom:2px solid var(--gray-border); background:white;">
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Blogs</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Actividades</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:700; color:var(--gov-blue); border-bottom:3px solid var(--gov-blue); margin-bottom:-2px;">Programas</div>
+          </div>
+          <div class="content-pad">
+            <!-- Bono Social -->
+            <div class="card card-sm" style="border-left:4px solid var(--gov-blue);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:var(--gov-blue-light); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:22px; color:var(--gov-blue);">payments</span>
+                </div>
+                <div>
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Bono Social</div>
+                  <div class="badge badge-blue" style="margin-top:2px;">TMC</div>
+                </div>
+              </div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">Programa de Transferencias Monetarias Condicionadas que entrega asistencia financiera a familias en condición de pobreza y pobreza extrema a través de una cuenta bancaria.</div>
+              <button class="btn btn-sm btn-outline mt-12" style="width:auto; padding:8px 16px;">
+                <span class="mi" style="font-size:16px;">info</span> Ver más
+              </button>
+            </div>
+
+            <!-- Jóvenes Protagonistas -->
+            <div class="card card-sm" style="border-left:4px solid var(--gov-green);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:var(--gov-green-light); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:22px; color:var(--gov-green);">diversity_3</span>
+                </div>
+                <div>
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Jóvenes Protagonistas</div>
+                  <div class="badge badge-green" style="margin-top:2px;">Educación</div>
+                </div>
+              </div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">Programa social que promueve la participación de adolescentes y jóvenes en situación de vulnerabilidad y riesgo social, a través de un proceso de educación integral.</div>
+              <button class="btn btn-sm btn-outline mt-12" style="width:auto; padding:8px 16px;">
+                <span class="mi" style="font-size:16px;">info</span> Ver más
+              </button>
+            </div>
+
+            <!-- Bolsa de Alimentos -->
+            <div class="card card-sm" style="border-left:4px solid var(--orange);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:var(--orange-20); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:22px; color:var(--orange);">shopping_basket</span>
+                </div>
+                <div>
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Bolsa de Alimentos</div>
+                  <div class="badge badge-orange" style="margin-top:2px;">Q250.00</div>
+                </div>
+              </div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">Programa de TMC que otorga Q250.00 acreditados de forma periódica para apoyar la alimentación de familias en condición de vulnerabilidad.</div>
+              <button class="btn btn-sm btn-outline mt-12" style="width:auto; padding:8px 16px;">
+                <span class="mi" style="font-size:16px;">info</span> Ver más
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar"><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G4. MIDES - Tab Blogs                                                 -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G4. MIDES - Blogs</div>
+      <div class="screen-sublabel">Tab Blogs activo</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--gov-blue);">MIDES</div>
+            <div style="font-size:11px; color:var(--gray);">Ministerio de Desarrollo Social</div>
+          </div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content">
+          <!-- Tabs -->
+          <div style="display:flex; border-bottom:2px solid var(--gray-border); background:white;">
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:700; color:var(--gov-blue); border-bottom:3px solid var(--gov-blue); margin-bottom:-2px;">Blogs</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Actividades</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Programas</div>
+          </div>
+          <div class="content-pad">
+            <!-- Blog 1 (Real news) -->
+            <div class="card card-sm" style="cursor:pointer;">
+              <div style="height:140px; background:linear-gradient(135deg, #003876, #0077B6); border-radius:12px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                <div style="position:absolute; right:-15px; bottom:-15px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.06);"></div>
+                <span class="mi" style="font-size:56px; color:rgba(255,255,255,.2);">groups</span>
+              </div>
+              <div class="badge badge-blue mb-8">Noticias</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark); line-height:1.4; margin-bottom:6px;">Programas sociales del MIDES beneficiaron a más de 30 mil jóvenes en 2025</div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">Los programas Jóvenes Protagonistas y Becas Sociales operaron en los 22 departamentos del país, con más de 607 talleres activos donde 18 mil jóvenes participaron regularmente.</div>
+              <div style="display:flex; align-items:center; gap:6px; margin-top:10px;">
+                <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:11px; color:var(--gray);">Diciembre 2025</span>
+              </div>
+            </div>
+
+            <!-- Blog 2 -->
+            <div class="card card-sm" style="cursor:pointer;">
+              <div style="height:140px; background:linear-gradient(135deg, #2D8B4E, #10B981); border-radius:12px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                <div style="position:absolute; right:-15px; bottom:-15px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.06);"></div>
+                <span class="mi" style="font-size:56px; color:rgba(255,255,255,.2);">volunteer_activism</span>
+              </div>
+              <div class="badge badge-green mb-8">Iniciativa</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark); line-height:1.4; margin-bottom:6px;">Bolsa Social fortalece presencia en el departamento de Guatemala</div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">El programa Bono Social ha beneficiado a 4,077 familias a través de la iniciativa intersectorial Mano a Mano, fortaleciendo integralmente a familias en pobreza extrema.</div>
+              <div style="display:flex; align-items:center; gap:6px; margin-top:10px;">
+                <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:11px; color:var(--gray);">Noviembre 2025</span>
+              </div>
+            </div>
+
+            <!-- Blog 3 -->
+            <div class="card card-sm" style="cursor:pointer;">
+              <div style="height:140px; background:linear-gradient(135deg, #9f246f, #d946a8); border-radius:12px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
+                <div style="position:absolute; right:-15px; bottom:-15px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.06);"></div>
+                <span class="mi" style="font-size:56px; color:rgba(255,255,255,.2);">menu_book</span>
+              </div>
+              <div class="badge" style="background:rgba(159,36,111,.12); color:#9f246f;">Política Pública</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark); line-height:1.4; margin-top:8px; margin-bottom:6px;">Política Nacional de la Juventud 2025-2040 es una realidad</div>
+              <div style="font-size:13px; color:var(--gray); line-height:1.5;">Guatemala cuenta con una nueva política nacional enfocada en el desarrollo integral de la juventud para los próximos 15 años.</div>
+              <div style="display:flex; align-items:center; gap:6px; margin-top:10px;">
+                <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:11px; color:var(--gray);">Octubre 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar"><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G5. MIDES - Tab Actividades (Video + Formulario + Recompensa)         -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G5. MIDES - Actividades</div>
+      <div class="screen-sublabel">Video educativo + formulario + recompensa</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--gov-blue);">MIDES</div>
+            <div style="font-size:11px; color:var(--gray);">Ministerio de Desarrollo Social</div>
+          </div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content">
+          <!-- Tabs -->
+          <div style="display:flex; border-bottom:2px solid var(--gray-border); background:white;">
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Blogs</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:700; color:var(--gov-blue); border-bottom:3px solid var(--gov-blue); margin-bottom:-2px;">Actividades</div>
+            <div style="flex:1; padding:14px 0; text-align:center; font-size:13px; font-weight:600; color:var(--gray);">Programas</div>
+          </div>
+          <div class="content-pad">
+            <!-- Reward Banner -->
+            <div style="background:linear-gradient(135deg, var(--orange), #f3864f); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+              <span class="mi" style="font-size:32px;">card_giftcard</span>
+              <div>
+                <div style="font-size:14px; font-weight:700;">Gana recompensas</div>
+                <div style="font-size:12px; opacity:.85;">Completa actividades y recibe películas gratis en NeoPlay</div>
+              </div>
+            </div>
+
+            <!-- Activity Card 1 -->
+            <div class="card">
+              <div class="badge badge-green mb-8"><span class="mi" style="font-size:12px;">star</span> Recompensa disponible</div>
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Nutrición en tu Comunidad</div>
+
+              <!-- Video placeholder -->
+              <div style="height:160px; background:#111; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; position:relative;">
+                <div style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:32px; color:white;">play_arrow</span>
+                </div>
+                <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,.7); color:white; padding:2px 8px; border-radius:4px; font-size:11px;">4:32</div>
+              </div>
+
+              <div style="font-size:13px; color:var(--gray); margin-bottom:14px;">Mira el video sobre nutrición básica y completa el formulario para ganar tu recompensa.</div>
+
+              <!-- Form Fields -->
+              <div class="input-group">
+                <label>1. ¿Qué aprendiste del video?</label>
+                <div class="input-wrap" style="height:auto; min-height:52px; padding:12px 16px;">
+                  <input type="text" placeholder="Escribe tu respuesta...">
+                </div>
+              </div>
+              <div class="input-group">
+                <label>2. ¿Cómo aplicarías esto en tu hogar?</label>
+                <div class="input-wrap" style="height:auto; min-height:52px; padding:12px 16px;">
+                  <input type="text" placeholder="Escribe tu respuesta...">
+                </div>
+              </div>
+
+              <!-- Reward preview -->
+              <div style="background:var(--green-light); border:1px solid rgba(16,185,129,.2); border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+                <span class="mi" style="font-size:24px; color:var(--green);">emoji_events</span>
+                <div>
+                  <div style="font-size:13px; font-weight:700; color:var(--green);">Recompensa al completar:</div>
+                  <div style="font-size:12px; color:var(--gray);">1 película gratis en NeoPlay</div>
+                </div>
+              </div>
+
+              <button class="btn btn-orange">
+                <span class="mi" style="font-size:18px;">send</span>
+                Enviar y Reclamar Recompensa
+              </button>
+            </div>
+
+            <!-- Activity Card 2 (locked) -->
+            <div class="card" style="opacity:.6;">
+              <div class="badge" style="background:var(--gray-bg); color:var(--gray);"><span class="mi" style="font-size:12px;">lock</span> Próximamente</div>
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-top:8px;">Salud Preventiva en Familia</div>
+              <div style="font-size:13px; color:var(--gray); margin-top:6px;">Disponible en 3 días</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar"><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G6. ACTIVIDAD COMPLETADA - Recompensa Modal                           -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G6. Recompensa Obtenida</div>
+      <div class="screen-sublabel">Modal de éxito al completar actividad</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">arrow_back</span></div><div style="flex:1; text-align:center;"><div style="font-size:16px; font-weight:700; color:var(--gov-blue);">MIDES</div></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div style="width:72px; height:72px; border-radius:36px; background:var(--green-light); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:40px; color:var(--green);">emoji_events</span>
+            </div>
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">¡Felicidades!</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Has completado la actividad exitosamente</div>
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Tu recompensa:</div>
+            <!-- Película reward -->
+            <div style="border:2px solid var(--orange); border-radius:14px; padding:14px; display:flex; align-items:center; gap:12px; margin-bottom:16px; background:rgba(252,107,23,.04);">
+              <span class="mi" style="font-size:28px; color:var(--orange);">movie</span>
+              <div style="text-align:left;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">1 Película en NeoPlay</div>
+                <div style="font-size:12px; color:var(--gray);">Disfruta una película del catálogo gratis</div>
+              </div>
+            </div>
+            <button class="btn btn-green">Reclamar Recompensa</button>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G7. NOTIFICACIONES (copia de screen 8 con nuevas notificaciones)      -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G7. Notificaciones + Gobierno</div>
+      <div class="screen-sublabel">Copia de Notifications con nuevos items</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:20px;">Notificaciones</div>
+
+          <!-- ★ NUEVA: Connectivity alert (unread) -->
+          <div class="card card-sm" style="border-left:4px solid var(--amber); background:#FFFDF5;">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:rgba(245,158,11,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--amber);">data_usage</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Consumo de datos alto</div>
+                  <div style="width:8px; height:8px; border-radius:4px; background:var(--amber); flex-shrink:0; margin-top:4px;"></div>
+                </div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">Ya consumiste 2 GB de tus 3 GB disponibles en tu plan de conectividad nacional. Optimiza tu navegación para que te dure más.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 30 min</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ★ NUEVA: Gobierno - Actividad disponible (unread) -->
+          <div class="card card-sm" style="border-left:4px solid var(--gov-blue); background:#F6F9FD;">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:var(--gov-blue-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--gov-blue);">school</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Nueva Actividad MIDES</div>
+                  <div style="width:8px; height:8px; border-radius:4px; background:var(--gov-blue); flex-shrink:0; margin-top:4px;"></div>
+                </div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">Completa la actividad "Nutrición en tu Comunidad" y gana 1 película gratis en NeoPlay.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 1 hora</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ★ NUEVA: Gobierno - Blog -->
+          <div class="card card-sm" style="border-left:4px solid var(--gov-green);">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:var(--gov-green-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--gov-green);">article</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Nuevo Blog del MIDES</div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">Más de 30 mil jóvenes se beneficiaron con los programas sociales del MIDES durante 2025.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 2 horas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ★ NUEVA: Programa nuevo -->
+          <div class="card card-sm" style="border-left:4px solid var(--blue);">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:rgba(59,130,246,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--blue);">campaign</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Nuevo Programa: Bolsa de Alimentos</div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">El MIDES acredita Q250.00 de forma periódica a familias en condición de vulnerabilidad. Conoce si calificas.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 3 días</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G8. PUSH NOTIFICATION - Pantalla de llegada                           -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G8. Push Notification</div>
+      <div class="screen-sublabel">Notificación push de gobierno</div>
+      <div class="phone">
+        <!-- Lock screen style -->
+        <div style="flex:1; background:linear-gradient(180deg, #1a1a2e 0%, #252542 100%); display:flex; flex-direction:column; padding:0;">
+          <!-- Status bar -->
+          <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; color:rgba(255,255,255,.8); font-size:14px; font-weight:600;">
+            <span>9:41</span>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span class="mi" style="font-size:16px">signal_cellular_alt</span>
+              <span class="mi" style="font-size:16px">wifi</span>
+              <span class="mi" style="font-size:16px">battery_full</span>
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div style="text-align:center; padding:40px 0 32px; color:white;">
+            <div style="font-size:64px; font-weight:200; letter-spacing:-2px;">9:41</div>
+            <div style="font-size:16px; opacity:.6; margin-top:4px;">Lunes, 16 de febrero</div>
+          </div>
+
+          <!-- Push Notification Cards -->
+          <div style="padding:0 16px; display:flex; flex-direction:column; gap:10px;">
+            <!-- Push 1: Actividad -->
+            <div style="background:rgba(255,255,255,.12); backdrop-filter:blur(20px); border-radius:20px; padding:14px 16px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <div style="width:28px; height:28px; border-radius:7px; background:var(--orange); display:flex; align-items:center; justify-content:center;">
+                  <span style="color:white; font-size:12px; font-weight:800;">K</span>
+                </div>
+                <span style="font-size:12px; color:rgba(255,255,255,.6); flex:1;">ANT CONNECT</span>
+                <span style="font-size:11px; color:rgba(255,255,255,.4);">ahora</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:white; margin-bottom:3px;">Nueva Actividad del MIDES</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7); line-height:1.4;">Aprende sobre nutrición y gana 1 película gratis en NeoPlay. ¡Completa la actividad ahora!</div>
+            </div>
+
+            <!-- Push 2: Blog -->
+            <div style="background:rgba(255,255,255,.12); backdrop-filter:blur(20px); border-radius:20px; padding:14px 16px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <div style="width:28px; height:28px; border-radius:7px; background:var(--orange); display:flex; align-items:center; justify-content:center;">
+                  <span style="color:white; font-size:12px; font-weight:800;">K</span>
+                </div>
+                <span style="font-size:12px; color:rgba(255,255,255,.6); flex:1;">ANT CONNECT</span>
+                <span style="font-size:11px; color:rgba(255,255,255,.4);">hace 2h</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:white; margin-bottom:3px;">Programas sociales beneficiaron a 30 mil jóvenes</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7); line-height:1.4;">Lee la última noticia del MIDES sobre los programas Jóvenes Protagonistas y Becas Sociales.</div>
+            </div>
+
+            <!-- Push 3: Programa -->
+            <div style="background:rgba(255,255,255,.12); backdrop-filter:blur(20px); border-radius:20px; padding:14px 16px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <div style="width:28px; height:28px; border-radius:7px; background:var(--orange); display:flex; align-items:center; justify-content:center;">
+                  <span style="color:white; font-size:12px; font-weight:800;">K</span>
+                </div>
+                <span style="font-size:12px; color:rgba(255,255,255,.6); flex:1;">ANT CONNECT</span>
+                <span style="font-size:11px; color:rgba(255,255,255,.4);">hace 5h</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:white; margin-bottom:3px;">Bolsa de Alimentos: Q250 para tu familia</div>
+              <div style="font-size:13px; color:rgba(255,255,255,.7); line-height:1.4;">Conoce los requisitos del programa de ayuda alimentaria del Gobierno de Guatemala.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G9. HOME con banners de promoción gobierno (copia de 4b Active Plan)  -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G9. Home + Promo Gobierno</div>
+      <div class="screen-sublabel">Copia de Home Active Plan con banners sociales</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn" style="opacity:.3;"><span class="mi" style="font-size:22px;">notifications</span></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Welcome -->
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <!-- ★ PROMO BANNER 1: Películas gratis con MIDES -->
+          <div style="background:linear-gradient(135deg, #003876, #0077B6); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:12px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">movie</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Películas Gratis con el MIDES</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">Completa actividades educativas y gana películas en NeoPlay</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- ★ PROMO BANNER 2: Jóvenes protagonistas -->
+          <div style="background:linear-gradient(135deg, #2D8B4E, #10B981); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:12px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">diversity_3</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Jóvenes Protagonistas</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">18 mil jóvenes ya participan. Únete a los talleres</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- ★ PROMO BANNER 3: Bolsa de Alimentos -->
+          <div style="background:linear-gradient(135deg, var(--orange), #f3864f); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:16px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">shopping_basket</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Bolsa de Alimentos Q250</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">Apoyo periódico para familias guatemaltecas</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- Active Plan (same as 4b) -->
+          <div class="card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div class="badge badge-green"><span class="mi" style="font-size:14px;">check_circle</span> Plan Activo</div>
+              <div class="icon-btn" style="width:36px; height:36px;"><span class="mi" style="font-size:20px; color:var(--gray);">refresh</span></div>
+            </div>
+            <!-- Compact plan info -->
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="width:80px; height:80px; position:relative;">
+                <svg viewBox="0 0 80 80" width="80" height="80">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#F0F0F0" stroke-width="8"/>
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#10B981" stroke-width="8" stroke-linecap="round" stroke-dasharray="214" stroke-dashoffset="64" transform="rotate(-90 40 40)"/>
+                </svg>
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:var(--text-dark);">70%</div>
+              </div>
+              <div>
+                <div style="font-size:18px; font-weight:700; color:var(--text-dark);">5.2 Horas</div>
+                <div style="font-size:13px; color:var(--gray);">Plan: <strong>1 Semana</strong></div>
+                <div style="font-size:12px; color:var(--green); font-weight:600;">120 MB / 500 MB</div>
+              </div>
+            </div>
+            <!-- Deadline -->
+            <div style="background:var(--orange); border-radius:10px; padding:10px 14px; display:flex; align-items:center; gap:8px; color:white; margin-top:14px;">
+              <span class="mi" style="font-size:18px;">calendar_today</span>
+              <div style="font-size:13px;"><span style="opacity:.8;">Hasta el</span> <strong>23-02-2026 18:30</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="fab"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- G10. HOME Promo variante - Más mensajes sociales                      -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">G10. Home + Más Promos</div>
+      <div class="screen-sublabel">Variante con mensajes de progreso social</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn" style="opacity:.3;"><span class="mi" style="font-size:22px;">notifications</span></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <!-- ★ PROMO: Conectividad para todos -->
+          <div style="background:linear-gradient(135deg, #6B21A8, #9333EA); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:12px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">public</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Conectividad para Todos</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">El Gobierno impulsa internet en comunidades rurales</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- ★ PROMO: Educación digital -->
+          <div style="background:linear-gradient(135deg, #0369A1, #0EA5E9); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:12px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">laptop</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Educación Digital Gratuita</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">Talleres digitales para jóvenes de tu comunidad</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- ★ PROMO: Mano a Mano -->
+          <div style="background:linear-gradient(135deg, #B45309, #F59E0B); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:12px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">volunteer_activism</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Iniciativa Mano a Mano</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">4,077 familias ya reciben el Bono Social en tu departamento</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- ★ PROMO: RSH -->
+          <div style="background:linear-gradient(135deg, #166534, #22C55E); border-radius:16px; padding:16px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:16px; cursor:pointer;">
+            <div style="width:48px; height:48px; border-radius:14px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px;">how_to_reg</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700;">Registro Social de Hogares</div>
+              <div style="font-size:12px; opacity:.8; margin-top:2px;">2 millones de guatemaltecos serán registrados. Conoce cómo participar</div>
+            </div>
+            <span class="mi" style="font-size:20px; opacity:.6;">chevron_right</span>
+          </div>
+
+          <!-- Plan card compact -->
+          <div class="card card-sm">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">check_circle</span> Plan Activo</div>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">5.2h · 1 Semana</div>
+            </div>
+          </div>
+        </div>
+        <div class="fab"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

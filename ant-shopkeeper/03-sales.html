@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Sales</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* Shopkeeper orange header */
+    .sk-header { height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0; background:#f16824; gap:8px; }
+    .sk-header .mi { color:white; font-size:24px; }
+    .sk-header-title { flex:1; text-align:center; font-size:18px; font-weight:700; color:white; }
+
+    /* Plan grid */
+    .plan-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .plan-card { background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1.5px solid var(--gray-border); cursor:pointer; text-align:center; transition:border-color .2s; }
+    .plan-card:hover { border-color:#41a247; }
+    .plan-card .plan-name { font-size:14px; font-weight:600; color:#41a247; margin-bottom:6px; }
+    .plan-card .plan-price { font-size:18px; font-weight:700; color:var(--text-dark); }
+
+    /* Code boxes */
+    .code-box { border-radius:12px; padding:12px 16px; text-align:center; flex:1; }
+    .code-box-label { font-size:10px; font-weight:700; letter-spacing:.5px; opacity:.85; margin-bottom:4px; }
+    .code-box-value { font-size:16px; font-weight:700; font-family:'Courier New', monospace; letter-spacing:1px; }
+
+    /* Detail row */
+    .detail-row { display:flex; align-items:center; gap:10px; padding:10px 0; }
+    .detail-row .mi { font-size:20px; color:var(--gray); }
+    .detail-row-label { font-size:13px; color:var(--gray); flex:1; }
+    .detail-row-value { font-size:14px; font-weight:600; color:var(--text-dark); }
+
+    /* Stats row */
+    .stats-row { display:flex; gap:0; }
+    .stat-item { flex:1; text-align:center; padding:10px 4px; }
+    .stat-item .stat-num { font-size:16px; font-weight:700; color:var(--text-dark); }
+    .stat-item .stat-label { font-size:10px; color:var(--gray); margin-top:2px; }
+
+    /* Code card for list */
+    .code-list-card { background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px; }
+
+    /* Filter chips */
+    .filter-chips { display:flex; gap:8px; margin-bottom:16px; }
+    .chip { padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; background:var(--gray-bg); color:var(--gray); cursor:pointer; }
+    .chip.active { background:#f16824; color:white; }
+
+    /* Search bar */
+    .search-bar { display:flex; align-items:center; gap:10px; background:var(--gray-input); border:1.5px solid #E0E0E0; border-radius:12px; padding:0 14px; height:44px; margin-bottom:12px; }
+    .search-bar .mi { font-size:20px; color:var(--gray); }
+    .search-bar input { flex:1; border:none; background:transparent; font-size:14px; font-family:inherit; outline:none; color:var(--text-dark); }
+
+    /* Invoice card */
+    .invoice-card { background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px; }
+
+    /* Subscription gradient card */
+    .sub-gradient { background:linear-gradient(135deg, #f16824 0%, #f3864f 60%, #f9a870 100%); border-radius:20px; padding:24px; color:white; margin-bottom:16px; position:relative; overflow:hidden; }
+
+    /* Animated check circle */
+    @keyframes scaleIn { 0% { transform:scale(0); } 60% { transform:scale(1.1); } 100% { transform:scale(1); } }
+    .check-circle-anim { animation:scaleIn .5s ease-out; }
+
+    /* Instruction step for subscription */
+    .instr-step { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
+    .instr-num { width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+    .instr-text { font-size:13px; color:var(--gray); line-height:1.5; padding-top:4px; }
+  </style>
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <a href="index.html" class="back-link"><span class="mi" style="font-size:18px;">arrow_back</span> Volver al Hub</a>
+    <h1>Ant Shopkeeper</h1>
+    <p>Sales — Plans, Codes & Subscriptions</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a class="active" href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 3a: Plans Screen (Initial) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3a. Plans (Initial)</div>
+      <div class="screen-sublabel">Vender Kingo — Empty state</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Vender Kingo</div>
+          <span class="mi">qr_code_scanner</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Input card -->
+          <div class="card" style="margin-bottom:16px;">
+            <div class="input-group" style="margin-bottom:12px;">
+              <label>Codigo Kingo</label>
+              <div class="input-wrap">
+                <span class="mi">smartphone</span>
+                <input type="text" placeholder="Ingresa el codigo" readonly>
+                <span class="mi" style="color:#ccc;">close</span>
+              </div>
+            </div>
+            <button class="btn btn-orange">Validar</button>
+          </div>
+
+          <!-- Empty state placeholder -->
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; text-align:center;">
+            <span class="mi" style="font-size:48px; color:var(--gray); opacity:.4; margin-bottom:16px;">smartphone</span>
+            <div style="font-size:16px; font-weight:600; color:var(--text-dark); margin-bottom:6px;">Ingresa el codigo del Kingo</div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Valida el codigo para ver los planes disponibles</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3b: Plans Screen (With Plans) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3b. Plans (With Plans)</div>
+      <div class="screen-sublabel">Validated Kingo — Plan selection</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Vender Kingo</div>
+          <span class="mi">qr_code_scanner</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Input card with value -->
+          <div class="card" style="margin-bottom:12px;">
+            <div class="input-group" style="margin-bottom:0;">
+              <label>Codigo Kingo</label>
+              <div class="input-wrap" style="border-color:#41a247;">
+                <span class="mi">smartphone</span>
+                <input type="text" value="9931838" readonly style="font-weight:600;">
+                <span class="mi" style="color:#41a247;">check_circle</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Validation message -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:0 4px;">
+            <span class="mi" style="font-size:18px; color:#41a247;">check_circle</span>
+            <span style="font-size:14px; font-weight:600; color:#41a247;">Modelo: Kingo - Luz</span>
+          </div>
+
+          <!-- Plan grid -->
+          <div class="plan-grid">
+            <div class="plan-card">
+              <div class="plan-name">Plan 1 Dia</div>
+              <div class="plan-price">Q 5.00</div>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Plan 3 Dias</div>
+              <div class="plan-price">Q 12.00</div>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Plan 1 Semana</div>
+              <div class="plan-price">Q 25.00</div>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Plan 2 Semanas</div>
+              <div class="plan-price">Q 45.00</div>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Plan 1 Mes</div>
+              <div class="plan-price">Q 75.00</div>
+            </div>
+            <div class="plan-card">
+              <div class="plan-name">Plan 3 Meses</div>
+              <div class="plan-price">Q 200.00</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3c: Plans (Confirm Modal) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3c. Confirm Purchase Modal</div>
+      <div class="screen-sublabel">Plan selected — Confirmation</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Vender Kingo</div>
+          <span class="mi">qr_code_scanner</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg); opacity:.4;">
+          <!-- Dimmed background content -->
+          <div class="card" style="margin-bottom:12px;">
+            <div class="input-group" style="margin-bottom:0;">
+              <label>Codigo Kingo</label>
+              <div class="input-wrap" style="border-color:#41a247;">
+                <span class="mi">smartphone</span>
+                <input type="text" value="9931838" readonly style="font-weight:600;">
+                <span class="mi" style="color:#41a247;">check_circle</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:0 4px;">
+            <span class="mi" style="font-size:18px; color:#41a247;">check_circle</span>
+            <span style="font-size:14px; font-weight:600; color:#41a247;">Modelo: Kingo - Luz</span>
+          </div>
+          <div class="plan-grid">
+            <div class="plan-card"><div class="plan-name">Plan 1 Dia</div><div class="plan-price">Q 5.00</div></div>
+            <div class="plan-card"><div class="plan-name">Plan 3 Dias</div><div class="plan-price">Q 12.00</div></div>
+            <div class="plan-card" style="border-color:#41a247;"><div class="plan-name">Plan 1 Semana</div><div class="plan-price">Q 25.00</div></div>
+            <div class="plan-card"><div class="plan-name">Plan 2 Semanas</div><div class="plan-price">Q 45.00</div></div>
+          </div>
+        </div>
+
+        <!-- Modal overlay -->
+        <div class="modal-overlay">
+          <div class="modal-card">
+            <!-- Modal header -->
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+              <div style="width:48px; height:48px; border-radius:24px; background:rgba(241,104,36,.1); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:24px; color:#f16824;">shopping_cart</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; color:var(--text-dark);">Confirmar Compra</div>
+            </div>
+
+            <!-- Details -->
+            <div style="background:var(--gray-bg); border-radius:12px; padding:14px; margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gray-border);">
+                <span style="font-size:13px; color:var(--gray);">Codigo Kingo</span>
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">9931838</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gray-border);">
+                <span style="font-size:13px; color:var(--gray);">Modelo</span>
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Kingo - Luz</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:6px 0;">
+                <span style="font-size:13px; color:var(--gray);">Plan</span>
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Plan 1 Semana</span>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div style="text-align:center; margin-bottom:20px;">
+              <div style="font-size:13px; color:var(--gray); margin-bottom:4px;">Total a pagar</div>
+              <div style="font-size:28px; font-weight:700; color:#f16824;">Q 25.00</div>
+            </div>
+
+            <!-- Buttons -->
+            <div style="display:flex; gap:12px;">
+              <button class="btn btn-outline" style="flex:1;">Cancelar</button>
+              <button class="btn" style="flex:1; background:#41a247; color:white;">Confirmar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-bar" style="opacity:.4;">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3d: Show Code (Purchase Success) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3d. Purchase Success (Show Code)</div>
+      <div class="screen-sublabel">B2C code generated</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Compra Exitosa</div>
+          <span class="mi">share</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Green check circle -->
+          <div style="text-align:center; margin-bottom:20px;">
+            <div class="check-circle-anim" style="width:72px; height:72px; border-radius:36px; background:#41a247; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(65,162,71,.3);">
+              <span class="mi" style="font-size:36px; color:white;">check</span>
+            </div>
+          </div>
+
+          <!-- Code card -->
+          <div class="card" style="padding:20px;">
+            <!-- Code boxes side by side -->
+            <div style="display:flex; gap:10px; margin-bottom:16px;">
+              <div class="code-box" style="background:#f16824; color:white;">
+                <div class="code-box-label">CODIGO KINGO</div>
+                <div class="code-box-value">4829 3847 2938</div>
+              </div>
+              <div class="code-box" style="background:#0a70b9; color:white;">
+                <div class="code-box-label">CODIGO CLIENTE</div>
+                <div class="code-box-value">7382 9103</div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Detail rows -->
+            <div class="detail-row">
+              <span class="mi" style="color:#f16824;">smartphone</span>
+              <div class="detail-row-label">Modelo</div>
+              <div class="detail-row-value">Kingo - Luz</div>
+            </div>
+            <div class="detail-row">
+              <span class="mi" style="color:#f16824;">inventory</span>
+              <div class="detail-row-label">Plan</div>
+              <div class="detail-row-value">Plan 1 Semana</div>
+            </div>
+            <div class="detail-row">
+              <span class="mi" style="color:#f16824;">payments</span>
+              <div class="detail-row-label">Precio</div>
+              <div class="detail-row-value">Q 25.00</div>
+            </div>
+            <div class="detail-row" style="border-bottom:none;">
+              <span class="mi" style="color:#f16824;">schedule</span>
+              <div class="detail-row-label">Fecha</div>
+              <div class="detail-row-value">19/02/2026 - 14:30</div>
+            </div>
+
+            <!-- Info box -->
+            <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; background:rgba(241,104,36,.08); margin-top:12px;">
+              <span class="mi" style="font-size:18px; color:#f16824;">info</span>
+              <span style="font-size:12px; color:var(--gray); line-height:1.4;">Guarda estos codigos para futuras referencias</span>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+            <button class="btn" style="background:#41a247; color:white;"><span class="mi" style="font-size:20px;">share</span> Compartir Codigo</button>
+            <button class="btn btn-orange"><span class="mi" style="font-size:20px;">list_alt</span> Ver Mis Codigos</button>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3e: Show Subscription (NeoPlay Activated) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3e. Subscription Activated (NeoPlay)</div>
+      <div class="screen-sublabel">NeoPlay subscription success</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Suscripcion Activada</div>
+          <span style="width:24px;"></span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Gradient subscription card -->
+          <div class="sub-gradient">
+            <!-- KINGO logo text -->
+            <div style="font-size:28px; font-weight:800; letter-spacing:2px; text-align:center; margin-bottom:20px; text-shadow:0 2px 8px rgba(0,0,0,.15);">KINGO</div>
+
+            <!-- Check + message -->
+            <div style="text-align:center; margin-bottom:20px;">
+              <div class="check-circle-anim" style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.2); display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; border:2px solid rgba(255,255,255,.4);">
+                <span class="mi" style="font-size:28px; color:white;">check</span>
+              </div>
+              <div style="font-size:18px; font-weight:700;">Suscripcion Exitosa!</div>
+              <div style="font-size:13px; opacity:.85; margin-top:4px;">Tu suscripcion ha sido activada correctamente</div>
+            </div>
+
+            <!-- Dark overlay detail section -->
+            <div style="background:rgba(0,0,0,.25); border-radius:14px; padding:16px; margin-bottom:4px;">
+              <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.15);">
+                <span class="mi" style="font-size:20px; opacity:.8;">person</span>
+                <span style="font-size:13px; opacity:.8; flex:1;">Cliente</span>
+                <span style="font-size:14px; font-weight:600;">Juan Perez</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.15);">
+                <span class="mi" style="font-size:20px; opacity:.8;">tv</span>
+                <span style="font-size:13px; opacity:.8; flex:1;">Plan</span>
+                <span style="font-size:14px; font-weight:600;">NeoPlay Basico</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.15);">
+                <span class="mi" style="font-size:20px; opacity:.8;">payments</span>
+                <span style="font-size:13px; opacity:.8; flex:1;">Precio</span>
+                <span style="font-size:14px; font-weight:600;">Q 50.00</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:8px 0;">
+                <span class="mi" style="font-size:20px; opacity:.8;">calendar_today</span>
+                <span style="font-size:13px; opacity:.8; flex:1;">Activacion</span>
+                <span style="font-size:14px; font-weight:600;">19/02/2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instructions card -->
+          <div class="card" style="padding:20px;">
+            <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Instrucciones</div>
+            <div class="instr-step">
+              <div class="instr-num">1</div>
+              <div class="instr-text">Conecta tu dispositivo a la red WiFi de Kingo</div>
+            </div>
+            <div class="instr-step">
+              <div class="instr-num">2</div>
+              <div class="instr-text">Abre la aplicacion NeoPlay</div>
+            </div>
+            <div class="instr-step">
+              <div class="instr-num">3</div>
+              <div class="instr-text">Tu suscripcion se activara automaticamente</div>
+            </div>
+            <div class="instr-step" style="margin-bottom:0;">
+              <div class="instr-num">4</div>
+              <div class="instr-text">Disfruta de tu contenido favorito!</div>
+            </div>
+          </div>
+
+          <!-- Continue button -->
+          <button class="btn btn-orange mt-8"><span class="mi" style="font-size:20px;">arrow_forward</span> Continuar</button>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3f: My Codes List ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3f. My Codes List</div>
+      <div class="screen-sublabel">Code history</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Mis Codigos</div>
+          <span class="mi">refresh</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Stats card -->
+          <div class="card card-sm" style="padding:12px 8px; margin-bottom:16px;">
+            <div class="stats-row">
+              <div class="stat-item" style="border-right:1px solid var(--gray-border);">
+                <div class="stat-num">15</div>
+                <div class="stat-label">Total</div>
+              </div>
+              <div class="stat-item" style="border-right:1px solid var(--gray-border);">
+                <div class="stat-num" style="color:#41a247;">5</div>
+                <div class="stat-label">Activos</div>
+              </div>
+              <div class="stat-item" style="border-right:1px solid var(--gray-border);">
+                <div class="stat-num" style="color:#0a70b9;">10</div>
+                <div class="stat-label">Usados</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num" style="color:#f16824;">Q 375.00</div>
+                <div class="stat-label">Vendido</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search bar -->
+          <div class="search-bar">
+            <span class="mi">search</span>
+            <input type="text" placeholder="Buscar por codigo o ID Kingo" readonly>
+          </div>
+
+          <!-- Filter chips -->
+          <div class="filter-chips">
+            <div class="chip active">Todos</div>
+            <div class="chip">Activos</div>
+            <div class="chip">Usados</div>
+          </div>
+
+          <!-- Code card 1 - Active -->
+          <div class="code-list-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:16px; font-weight:700; font-family:'Courier New',monospace; color:#f16824; letter-spacing:1px;">4829 3847</span>
+                <div class="badge badge-green" style="background:rgba(65,162,71,.12); color:#41a247;">Activo</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray); cursor:pointer;">share</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; gap:16px;">
+                <span style="font-size:12px; color:var(--gray);">ID: 9931838</span>
+                <span style="font-size:12px; color:var(--gray);">Plan 1 Semana</span>
+                <span style="font-size:12px; color:var(--gray);">19/02/2026</span>
+              </div>
+              <span style="font-size:14px; font-weight:700; color:#41a247;">Q 25.00</span>
+            </div>
+          </div>
+
+          <!-- Code card 2 - Used -->
+          <div class="code-list-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:16px; font-weight:700; font-family:'Courier New',monospace; color:#f16824; letter-spacing:1px;">7261 9382</span>
+                <div class="badge badge-blue" style="background:rgba(10,112,185,.12); color:#0a70b9;">Usado</div>
+              </div>
+              <span style="width:20px;"></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; gap:16px;">
+                <span style="font-size:12px; color:var(--gray);">ID: 1234567</span>
+                <span style="font-size:12px; color:var(--gray);">Plan 1 Mes</span>
+                <span style="font-size:12px; color:var(--gray);">15/02/2026</span>
+              </div>
+              <span style="font-size:14px; font-weight:700; color:#41a247;">Q 75.00</span>
+            </div>
+          </div>
+
+          <!-- Code card 3 - Active -->
+          <div class="code-list-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:16px; font-weight:700; font-family:'Courier New',monospace; color:#f16824; letter-spacing:1px;">5918 2047</span>
+                <div class="badge badge-green" style="background:rgba(65,162,71,.12); color:#41a247;">Activo</div>
+              </div>
+              <span class="mi" style="font-size:20px; color:var(--gray); cursor:pointer;">share</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; gap:16px;">
+                <span style="font-size:12px; color:var(--gray);">ID: 5567823</span>
+                <span style="font-size:12px; color:var(--gray);">Plan 3 Dias</span>
+                <span style="font-size:12px; color:var(--gray);">18/02/2026</span>
+              </div>
+              <span style="font-size:14px; font-weight:700; color:#41a247;">Q 12.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 3g: Invoices ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3g. Invoices</div>
+      <div class="screen-sublabel">Mis Facturas</div>
+      <div class="phone">
+        <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="sk-header">
+          <span class="mi">arrow_back</span>
+          <div class="sk-header-title">Mis Facturas</div>
+          <span class="mi">refresh</span>
+        </div>
+        <div class="content content-pad" style="background:var(--gray-bg);">
+          <!-- Stats card -->
+          <div class="card card-sm" style="padding:16px; margin-bottom:16px;">
+            <!-- Top stats row -->
+            <div class="stats-row" style="margin-bottom:12px;">
+              <div class="stat-item" style="border-right:1px solid var(--gray-border);">
+                <div class="stat-num">12</div>
+                <div class="stat-label">Total</div>
+              </div>
+              <div class="stat-item" style="border-right:1px solid var(--gray-border);">
+                <div class="stat-num" style="color:#41a247;">10</div>
+                <div class="stat-label">Pagadas</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num" style="color:#F59E0B;">2</div>
+                <div class="stat-label">Pendientes</div>
+              </div>
+            </div>
+            <div class="divider" style="margin:0 0 12px 0;"></div>
+            <!-- Totals -->
+            <div style="display:flex; justify-content:space-between;">
+              <div>
+                <div style="font-size:11px; color:var(--gray);">Total Facturado</div>
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Q 1,500.00</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:11px; color:var(--gray);">Total Pagado</div>
+                <div style="font-size:15px; font-weight:700; color:#41a247;">Q 1,250.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter chips -->
+          <div class="filter-chips">
+            <div class="chip active">Todos</div>
+            <div class="chip">Pagadas</div>
+            <div class="chip">Pendientes</div>
+          </div>
+
+          <!-- Invoice card 1 - Paid -->
+          <div class="invoice-card">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(241,104,36,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">bolt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:6px;">
+                  <div>
+                    <div style="font-size:15px; font-weight:700; color:var(--text-dark);">FAC-001</div>
+                    <div style="font-size:12px; color:var(--gray);">19/02/2026</div>
+                  </div>
+                  <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Q 125.00</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:12px; color:var(--gray);">Venta de Plan 1 Semana</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="badge badge-green" style="background:rgba(65,162,71,.12); color:#41a247; padding:3px 10px; font-size:11px;">Pagada</div>
+                    <span class="mi" style="font-size:18px; color:#0a70b9; cursor:pointer;">download</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Invoice card 2 - Paid -->
+          <div class="invoice-card">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(241,104,36,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">bolt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:6px;">
+                  <div>
+                    <div style="font-size:15px; font-weight:700; color:var(--text-dark);">FAC-002</div>
+                    <div style="font-size:12px; color:var(--gray);">15/02/2026</div>
+                  </div>
+                  <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Q 75.00</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:12px; color:var(--gray);">Venta de Plan 1 Mes</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="badge badge-green" style="background:rgba(65,162,71,.12); color:#41a247; padding:3px 10px; font-size:11px;">Pagada</div>
+                    <span class="mi" style="font-size:18px; color:#0a70b9; cursor:pointer;">download</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Invoice card 3 - Pending -->
+          <div class="invoice-card">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(245,158,11,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#F59E0B;">bolt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:6px;">
+                  <div>
+                    <div style="font-size:15px; font-weight:700; color:var(--text-dark);">FAC-003</div>
+                    <div style="font-size:12px; color:var(--gray);">10/02/2026</div>
+                  </div>
+                  <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Q 200.00</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:12px; color:var(--gray);">Venta de Plan 3 Meses</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="badge badge-amber" style="padding:3px 10px; font-size:11px;">Pendiente</div>
+                    <span class="mi" style="font-size:18px; color:#0a70b9; cursor:pointer;">download</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Clients, Settings & Warehouse</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Clients, Settings & Warehouse</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a class="active" href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 6a: MIS CLIENTES (CLIENT LIST) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6a. Mis Clientes</div>
+      <div class="screen-sublabel">Client list with search & filters</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Mis Clientes</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">refresh</span></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Stats Card -->
+          <div class="card card-sm" style="display:flex; justify-content:space-around; text-align:center; padding:16px 8px;">
+            <div>
+              <div style="font-size:22px; font-weight:700; color:#f16824;">24</div>
+              <div style="font-size:11px; color:var(--gray); font-weight:600;">Total</div>
+            </div>
+            <div style="width:1px; background:var(--gray-border);"></div>
+            <div>
+              <div style="font-size:22px; font-weight:700; color:#41a247;">18</div>
+              <div style="font-size:11px; color:var(--gray); font-weight:600;">Con Kingo</div>
+            </div>
+            <div style="width:1px; background:var(--gray-border);"></div>
+            <div>
+              <div style="font-size:22px; font-weight:700; color:#0a70b9;">3</div>
+              <div style="font-size:11px; color:var(--gray); font-weight:600;">Esta Semana</div>
+            </div>
+          </div>
+          <!-- Search -->
+          <div class="input-wrap" style="margin-bottom:12px;">
+            <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
+            <input type="text" placeholder="Buscar por nombre, teléfono o DPI" style="flex:1; border:none; background:transparent; font-size:14px; font-family:inherit; outline:none; color:var(--text-dark);">
+          </div>
+          <!-- Filter Chips -->
+          <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <div style="padding:6px 16px; border-radius:20px; background:#f16824; color:white; font-size:13px; font-weight:600;">Todos</div>
+            <div style="padding:6px 16px; border-radius:20px; background:white; color:var(--gray); font-size:13px; font-weight:600; border:1px solid var(--gray-border);">Con Kingo</div>
+          </div>
+          <!-- Count -->
+          <div style="font-size:13px; color:var(--gray); margin-bottom:12px; font-weight:500;">24 cliente(s)</div>
+          <!-- Client Card 1 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <div style="width:42px; height:42px; border-radius:21px; background:#f16824; display:flex; align-items:center; justify-content:center; color:white; font-size:15px; font-weight:700; flex-shrink:0;">MG</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">María González</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px; padding-left:54px;">
+              <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray);">
+                <span class="mi" style="font-size:16px; color:var(--gray);">phone</span>
+                5555 1234
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#f16824; font-weight:600;">
+                <span class="mi" style="font-size:16px; color:#f16824;">flash_on</span>
+                Kingo: 9931838
+              </div>
+              <div style="font-size:12px; color:var(--gray); opacity:.7;">Registrado: 15 Ene 2026</div>
+            </div>
+          </div>
+          <!-- Client Card 2 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <div style="width:42px; height:42px; border-radius:21px; background:#0a70b9; display:flex; align-items:center; justify-content:center; color:white; font-size:15px; font-weight:700; flex-shrink:0;">JL</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Juan López</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px; padding-left:54px;">
+              <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray);">
+                <span class="mi" style="font-size:16px; color:var(--gray);">phone</span>
+                5555 5678
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#f16824; font-weight:600;">
+                <span class="mi" style="font-size:16px; color:#f16824;">flash_on</span>
+                Kingo: 1234567
+              </div>
+              <div style="font-size:12px; color:var(--gray); opacity:.7;">Registrado: 10 Feb 2026</div>
+            </div>
+          </div>
+          <!-- Client Card 3 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <div style="width:42px; height:42px; border-radius:21px; background:#41a247; display:flex; align-items:center; justify-content:center; color:white; font-size:15px; font-weight:700; flex-shrink:0;">AP</div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Ana Pérez</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px; padding-left:54px;">
+              <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray);">
+                <span class="mi" style="font-size:16px; color:var(--gray);">phone</span>
+                5555 9012
+              </div>
+              <div style="font-size:12px; color:var(--gray); opacity:.7;">Registrado: 18 Feb 2026</div>
+            </div>
+          </div>
+        </div>
+        <!-- FAB -->
+        <div class="fab"><span class="mi" style="font-size:28px;">add</span></div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 6b: NUEVO CLIENTE (NEW CLIENT FORM) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6b. Nuevo Cliente</div>
+      <div class="screen-sublabel">New client registration form</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Nuevo Cliente</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Info Card -->
+          <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; border-radius:12px; background:rgba(10,112,185,.08); border:1px solid rgba(10,112,185,.15); margin-bottom:16px;">
+            <span class="mi" style="font-size:20px; color:#0a70b9; flex-shrink:0;">info</span>
+            <div style="font-size:13px; color:#0a70b9; line-height:1.4;">Registra un nuevo cliente para asociarlo con equipos Kingo</div>
+          </div>
+          <!-- Form Card -->
+          <div class="card" style="padding:20px;">
+            <!-- Section: Información Personal -->
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">Información Personal</div>
+            <div class="input-group">
+              <label>Nombre completo *</label>
+              <div class="input-wrap">
+                <span class="mi">person</span>
+                <input type="text" placeholder="Nombre completo">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>DPI / CUI</label>
+              <div class="input-wrap">
+                <span class="mi">badge</span>
+                <input type="text" placeholder="13 dígitos">
+              </div>
+            </div>
+            <div class="divider" style="margin:16px 0;"></div>
+            <!-- Section: Contacto -->
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">Contacto</div>
+            <div class="input-group">
+              <label>Teléfono</label>
+              <div class="input-wrap">
+                <span class="mi">phone</span>
+                <input type="text" placeholder="8 dígitos">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Email</label>
+              <div class="input-wrap">
+                <span class="mi">email</span>
+                <input type="text" placeholder="correo@ejemplo.com">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Dirección</label>
+              <div class="input-wrap" style="height:72px; align-items:flex-start; padding-top:14px;">
+                <span class="mi">location_on</span>
+                <input type="text" placeholder="Dirección completa">
+              </div>
+            </div>
+            <div class="divider" style="margin:16px 0;"></div>
+            <!-- Section: Equipo Kingo -->
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">Equipo Kingo</div>
+            <div class="input-group">
+              <label>ID Kingo (opcional)</label>
+              <div class="input-wrap">
+                <span class="mi">memory</span>
+                <input type="text" placeholder="ID del equipo">
+              </div>
+              <div style="font-size:12px; color:var(--gray); margin-top:6px;">Asocia un equipo Kingo a este cliente</div>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <button class="btn" style="background:#f16824; color:white; margin-bottom:8px;">
+            <span class="mi" style="font-size:20px;">person_add</span>
+            Registrar Cliente
+          </button>
+          <div style="font-size:12px; color:var(--gray); text-align:center;">* Campos requeridos</div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 6c: CONFIGURACIÓN (SETTINGS) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6c. Configuración</div>
+      <div class="screen-sublabel">App settings & user profile</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Configuración</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- User Card -->
+          <div style="background:linear-gradient(135deg, #f16824, #f3864f); border-radius:16px; padding:20px; color:white; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:52px; height:52px; border-radius:26px; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; flex-shrink:0;">MG</div>
+              <div style="flex:1;">
+                <div style="font-size:17px; font-weight:700;">María García</div>
+                <div style="font-size:13px; opacity:.85;">2987654321013</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:12px;">
+              <div style="width:8px; height:8px; border-radius:4px; background:#41a247;"></div>
+              <span style="font-size:13px; opacity:.9;">En línea</span>
+            </div>
+          </div>
+
+          <!-- Appearance Section -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Apariencia</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Dark Mode -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(159,36,111,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#9f246f;">dark_mode</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Modo Oscuro</div>
+              <div style="width:44px; height:24px; border-radius:12px; background:#E0E0E0; position:relative;">
+                <div style="width:20px; height:20px; border-radius:10px; background:white; position:absolute; top:2px; left:2px; box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+            <!-- Customize Theme -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">palette</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Personalizar Tema</div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- About Section -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; margin-top:8px;">Acerca de</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Version -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(104,106,107,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#686a6b;">info</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Versión</div>
+              <span style="font-size:13px; color:var(--gray);">v2.11.21</span>
+            </div>
+            <!-- Help -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">help</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Ayuda y Soporte</div>
+              <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+            </div>
+          </div>
+
+          <!-- Logout Button -->
+          <button class="btn" style="background:transparent; border:1.5px solid #EF4444; color:#EF4444; margin-top:16px; margin-bottom:12px;">
+            <span class="mi" style="font-size:20px;">exit_to_app</span>
+            Cerrar Sesión
+          </button>
+
+          <!-- Footer -->
+          <div style="text-align:center; font-size:12px; color:var(--gray); opacity:.7; margin-top:8px;">Kingo Net &copy; 2026</div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 6d: MI BODEGA (WAREHOUSE) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6d. Mi Bodega</div>
+      <div class="screen-sublabel">Warehouse inventory management</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Mi Bodega</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">refresh</span></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Summary Card -->
+          <div class="card card-sm" style="display:flex; justify-content:space-around; text-align:center; padding:16px;">
+            <div>
+              <div style="font-size:22px; font-weight:700; color:#f16824;">12</div>
+              <div style="font-size:11px; color:var(--gray); font-weight:600;">Total Kingos</div>
+              <div style="font-size:11px; color:var(--gray); opacity:.7;">(10 disp.)</div>
+            </div>
+            <div style="width:1px; background:var(--gray-border);"></div>
+            <div>
+              <div style="font-size:22px; font-weight:700; color:#0a70b9;">8</div>
+              <div style="font-size:11px; color:var(--gray); font-weight:600;">Total Accesorios</div>
+              <div style="font-size:11px; color:var(--gray); opacity:.7;">(6 disp.)</div>
+            </div>
+          </div>
+          <!-- Filter Tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:16px;">
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px; border-radius:12px; background:#f16824; color:white; font-size:13px; font-weight:600;">
+              <span class="mi" style="font-size:18px;">home</span>
+              Kingos (12)
+            </div>
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px; border-radius:12px; background:white; color:var(--gray); font-size:13px; font-weight:600; border:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:18px;">view_in_ar</span>
+              Accesorios (8)
+            </div>
+          </div>
+          <!-- Kingo Item 1 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:22px; color:#f16824;">home</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Kingo #1001</div>
+                <div style="font-size:12px; color:var(--gray);">KNG-001-2026</div>
+              </div>
+              <span class="badge badge-green">Activo</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; padding-left:52px;">
+              <div style="font-size:12px; color:var(--gray);">Modelo: <span style="font-weight:600; color:var(--text-dark);">Kingo - Luz</span></div>
+              <div style="font-size:12px; color:var(--gray);">Región: <span style="font-weight:600; color:var(--text-dark);">Guatemala</span></div>
+              <div style="font-size:12px; color:var(--gray);">Ingreso: <span style="font-weight:600; color:var(--text-dark);">15/01/2026</span></div>
+            </div>
+          </div>
+          <!-- Kingo Item 2 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:22px; color:#f16824;">home</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Kingo #1002</div>
+                <div style="font-size:12px; color:var(--gray);">KNG-002-2026</div>
+              </div>
+              <span class="badge badge-blue">Asignado</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; padding-left:52px;">
+              <div style="font-size:12px; color:var(--gray);">Modelo: <span style="font-weight:600; color:var(--text-dark);">Kingo 15</span></div>
+              <div style="font-size:12px; color:var(--gray);">Región: <span style="font-weight:600; color:var(--text-dark);">Guatemala</span></div>
+              <div style="font-size:12px; color:var(--gray);">Ingreso: <span style="font-weight:600; color:var(--text-dark);">20/01/2026</span></div>
+              <div style="font-size:12px; color:#0a70b9; font-weight:600; margin-top:4px;">
+                <span class="mi" style="font-size:14px; vertical-align:middle;">person</span>
+                Asignado a: María González
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

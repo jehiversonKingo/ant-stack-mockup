@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Fieldservice — Tasks</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+    <h1>Ant Fieldservice</h1>
+    <p>Tasks — Tasks, Orders & Inventory</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-bank.html">Bank</a>
+    <a href="04-operations.html">Operations</a>
+    <a class="active" href="05-tasks.html">Tasks</a>
+    <a href="06-visits.html">Visits</a>
+    <a href="07-sync.html">Sync</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 5a: TASK LIST ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5a. Task List</div>
+      <div class="screen-sublabel">Pending & Review Tasks</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Tareas</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content" style="background:#f5f5f5;">
+
+          <!-- Tab Buttons -->
+          <div style="display:flex; gap:10px; padding:16px 20px 0;">
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 0; border-radius:10px; background:#f16824; color:white; font-size:14px; font-weight:600; cursor:pointer;">
+              <span class="mi" style="font-size:18px;">schedule</span>
+              Pendientes
+              <span style="background:rgba(255,255,255,.3); padding:1px 8px; border-radius:10px; font-size:11px; font-weight:700;">8</span>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 0; border-radius:10px; background:white; color:#f16824; font-size:14px; font-weight:600; border:1.5px solid #f16824; cursor:pointer;">
+              <span class="mi" style="font-size:18px;">visibility</span>
+              Revision
+              <span style="background:rgba(241,104,36,.12); padding:1px 8px; border-radius:10px; font-size:11px; font-weight:700;">3</span>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div style="padding:12px 20px;">
+            <div style="display:flex; align-items:center; gap:10px; background:white; border-radius:12px; padding:0 14px; height:44px; box-shadow:0 1px 4px rgba(0,0,0,.06);">
+              <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
+              <span style="font-size:14px; color:#aaa;">Buscar tareas...</span>
+            </div>
+          </div>
+
+          <div style="padding:0 20px 20px;">
+            <!-- Task Card 1 -->
+            <div class="card card-sm" style="padding:16px; cursor:pointer;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-001</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <span class="badge badge-orange" style="font-size:11px; padding:3px 10px;">Instalacion</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                    <span style="font-size:12px; color:var(--gray);">19/02/2026</span>
+                  </div>
+                </div>
+                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+              </div>
+            </div>
+
+            <!-- Task Card 2 -->
+            <div class="card card-sm" style="padding:16px; cursor:pointer;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-002</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <span class="badge badge-blue" style="font-size:11px; padding:3px 10px;">Mantenimiento</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                    <span style="font-size:12px; color:var(--gray);">19/02/2026</span>
+                  </div>
+                </div>
+                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+              </div>
+            </div>
+
+            <!-- Task Card 3 -->
+            <div class="card card-sm" style="padding:16px; cursor:pointer;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-003</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <span class="badge badge-red" style="font-size:11px; padding:3px 10px;">Retiro</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+                    <span style="font-size:12px; color:var(--gray);">20/02/2026</span>
+                  </div>
+                </div>
+                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5b: TASK DESCRIPTION (Multi-step) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5b. Task Description</div>
+      <div class="screen-sublabel">Multi-step Wizard</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Tarea TAR-001</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- Step Indicator -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 10px;">
+            <!-- Step 1 (active) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">1</div>
+              <span style="font-size:10px; color:#f16824; font-weight:600;">Datos</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
+            <!-- Step 2 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Equipo</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
+            <!-- Step 3 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Actividades</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
+            <!-- Step 4 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">4</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Retirar</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
+            <!-- Step 5 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">5</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Control</span>
+            </div>
+          </div>
+
+          <!-- Section Header -->
+          <div class="card" style="padding:20px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:22px; color:#f16824;">edit</span>
+              <span style="font-size:17px; font-weight:700; color:var(--text-dark);">Datos del Cliente</span>
+            </div>
+
+            <!-- Info Rows -->
+            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
+              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Nombre</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">Juan Carlos Perez</div>
+            </div>
+            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
+              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Telefono</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">5555-1234</div>
+            </div>
+            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
+              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Comunidad</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">San Pedro Sacatepequez</div>
+            </div>
+            <div style="padding:12px 0;">
+              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">DPI</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">2345 67890 0101</div>
+            </div>
+
+            <!-- Status -->
+            <div style="display:flex; align-items:center; gap:6px; margin-top:12px; padding:10px; background:rgba(241,104,36,.08); border-radius:10px;">
+              <span class="mi" style="font-size:18px; color:#f16824;">info</span>
+              <span style="font-size:13px; font-weight:600; color:#f16824;">3 campos por completar</span>
+            </div>
+          </div>
+
+          <!-- Bottom Button -->
+          <button class="btn" style="background:#f16824; color:white;">
+            Siguiente
+            <span class="mi">chevron_right</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5c: TASK INFO ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5c. Task Info</div>
+      <div class="screen-sublabel">General Information</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Informacion</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- Title -->
+          <div style="font-size:20px; font-weight:700; color:#f16824; text-align:center; margin-bottom:16px;">Informacion general</div>
+
+          <!-- 4 Action Buttons Row -->
+          <div style="display:flex; gap:8px; margin-bottom:20px;">
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#41a247;">play_arrow</span>
+              </div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Iniciar</span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(239,68,68,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#EF4444;">close</span>
+              </div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Cancelar</span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">location_on</span>
+              </div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Llegada</span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(239,68,68,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#EF4444;">logout</span>
+              </div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Salida</span>
+            </div>
+          </div>
+
+          <!-- Info Cards -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="mi" style="font-size:20px; color:#f16824;">event</span>
+              <div style="flex:1;">
+                <div style="font-size:11px; color:var(--gray);">Fecha de vencimiento</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">25/02/2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="mi" style="font-size:20px; color:#f16824;">person</span>
+              <div style="flex:1;">
+                <div style="font-size:11px; color:var(--gray);">Nombre del cliente</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Juan Carlos Perez</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="mi" style="font-size:20px; color:#f16824;">phone</span>
+              <div style="flex:1;">
+                <div style="font-size:11px; color:var(--gray);">Telefono</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">5555-1234</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="mi" style="font-size:20px; color:#f16824;">description</span>
+              <div style="flex:1;">
+                <div style="font-size:11px; color:var(--gray);">Descripcion de la tarea</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Instalacion de sistema Kingo 15 con panel solar</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Componentes Requeridos -->
+          <div style="font-size:16px; font-weight:700; color:#f16824; text-align:center; margin:16px 0 12px;">Componentes requeridos</div>
+          <div class="card" style="padding:16px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Panel Solar</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Foco LED</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Cable 5m</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
+                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Base Kingo</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5d: NOC VALIDATION ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5d. NOC Validation</div>
+      <div class="screen-sublabel">Evidence & Photos</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Evidencia</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- Title Section -->
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+            <span class="mi" style="font-size:24px; color:#f16824;">photo_camera</span>
+            <div>
+              <div style="font-size:17px; font-weight:700; color:var(--text-dark);">Evidencia Adicional</div>
+              <div style="font-size:12px; color:var(--gray);">Sube fotos como evidencia de la tarea</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <!-- Step Card 1 -->
+            <div class="card" style="padding:16px; border-left:4px solid #f16824; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Paso 1: Instalacion</div>
+                  <div style="font-size:12px; color:var(--gray); margin-top:2px;">2 nueva(s) | 1 existente(s)</div>
+                </div>
+                <div style="width:36px; height:36px; border-radius:18px; background:#f16824; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                  <span class="mi" style="font-size:18px; color:white;">photo_camera</span>
+                </div>
+              </div>
+              <!-- Photo Thumbnails -->
+              <div style="display:flex; gap:8px; overflow-x:auto;">
+                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
+                </div>
+                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
+                </div>
+                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step Card 2 -->
+            <div class="card" style="padding:16px; border-left:4px solid #f16824; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Paso 2: Verificacion</div>
+                  <div style="font-size:12px; color:var(--gray); margin-top:2px;">1 nueva(s) | 0 existente(s)</div>
+                </div>
+                <div style="width:36px; height:36px; border-radius:18px; background:#f16824; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                  <span class="mi" style="font-size:18px; color:white;">photo_camera</span>
+                </div>
+              </div>
+              <!-- Photo Thumbnails -->
+              <div style="display:flex; gap:8px; overflow-x:auto;">
+                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload Button -->
+          <button class="btn" style="background:#41a247; color:white; margin-top:8px;">
+            <span class="mi">cloud_upload</span>
+            Subir 3 foto(s)
+          </button>
+
+          <!-- Progress Bar -->
+          <div style="margin-top:10px; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:60%; height:100%; background:#f16824; border-radius:3px;"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5e: ORDERS LIST ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5e. Orders List</div>
+      <div class="screen-sublabel">Work Orders</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Ordenes</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- Order Card 1 -->
+          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-001</div>
+              <span class="badge badge-orange" style="font-size:11px; padding:3px 10px;">Bodega</span>
+              <div style="flex:1;"></div>
+              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
+              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
+                <span style="font-size:13px; color:var(--text-dark);">Bodega Central</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:13px; color:var(--gray);">19/02/2026</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:#41a247;">arrow_downward</span>
+                <span style="font-size:13px; font-weight:600; color:#41a247;">Recibido</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Card 2 -->
+          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-002</div>
+              <span class="badge badge-green" style="font-size:11px; padding:3px 10px;">Agente</span>
+              <div style="flex:1;"></div>
+              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
+              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
+                <span style="font-size:13px; color:var(--text-dark);">Agente Lopez</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:13px; color:var(--gray);">18/02/2026</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:#0a70b9;">arrow_upward</span>
+                <span style="font-size:13px; font-weight:600; color:#0a70b9;">Enviado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Card 3 -->
+          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-003</div>
+              <span class="badge badge-blue" style="font-size:11px; padding:3px 10px;">Tecnico</span>
+              <div style="flex:1;"></div>
+              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
+              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
+                <span style="font-size:13px; color:var(--text-dark);">Tecnico Martinez</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
+                <span style="font-size:13px; color:var(--gray);">17/02/2026</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:#41a247;">arrow_downward</span>
+                <span style="font-size:13px; font-weight:600; color:#41a247;">Recibido</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5f: ORDER ADD (Step 1) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5f. Order Add (Step 1)</div>
+      <div class="screen-sublabel">New Order Form</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Nueva Orden</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- 3-Step Progress -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
+            <!-- Step 1 (active) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">1</div>
+              <span style="font-size:10px; color:#f16824; font-weight:600;">Datos</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 2 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Equipo</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 3 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Fotos</span>
+            </div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="card" style="padding:20px;">
+            <div class="input-group">
+              <label>Tipo de orden</label>
+              <div class="input-wrap" style="cursor:pointer;">
+                <span class="mi" style="color:var(--gray);">category</span>
+                <span style="flex:1; font-size:15px; color:var(--gray);">Seleccionar tipo...</span>
+                <span class="mi" style="color:var(--gray);">expand_more</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Bodega destino</label>
+              <div class="input-wrap" style="cursor:pointer;">
+                <span class="mi" style="color:var(--gray);">warehouse</span>
+                <span style="flex:1; font-size:15px; color:var(--gray);">Seleccionar bodega...</span>
+                <span class="mi" style="color:var(--gray);">expand_more</span>
+              </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom:0;">
+              <label>Observaciones</label>
+              <div style="border:1.5px solid #E0E0E0; border-radius:12px; background:var(--gray-input); padding:14px 16px; min-height:90px;">
+                <span style="font-size:14px; color:#aaa;">Escribir observaciones...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Button -->
+          <button class="btn mt-16" style="background:#0a70b9; color:white;">
+            Siguiente
+            <span class="mi">chevron_right</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5g: ORDER UPDATE (Step 2 - Equipment) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5g. Order Update (Step 2)</div>
+      <div class="screen-sublabel">Equipment List</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Actualizar Orden</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- 3-Step Progress -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
+            <!-- Step 1 (done) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:18px;">check</span>
+              </div>
+              <span style="font-size:10px; color:#41a247; font-weight:600;">Datos</span>
+            </div>
+            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 2 (active) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
+              <span style="font-size:10px; color:#f16824; font-weight:600;">Equipo</span>
+            </div>
+            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 3 -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
+              <span style="font-size:10px; color:var(--gray); font-weight:500;">Fotos</span>
+            </div>
+          </div>
+
+          <!-- Equipment Item 1 -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#1 — Panel Solar KNG-100</div>
+              </div>
+              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Equipment Item 2 -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#2 — Foco LED KNG-050</div>
+              </div>
+              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Equipment Item 3 -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#3 — Cable 5m</div>
+              </div>
+              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Button -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:1.5px dashed #f16824; border-radius:14px; cursor:pointer; margin-bottom:20px;">
+            <span class="mi" style="font-size:22px; color:#f16824;">add_circle</span>
+            <span style="font-size:14px; font-weight:600; color:#f16824;">Agregar equipo</span>
+          </div>
+
+          <!-- Bottom Buttons -->
+          <div style="display:flex; gap:12px;">
+            <button class="btn" style="flex:1; background:white; color:#f16824; border:1.5px solid #f16824;">
+              Anterior
+            </button>
+            <button class="btn" style="flex:1; background:#0a70b9; color:white;">
+              Siguiente
+              <span class="mi">chevron_right</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5h: ORDER TO-DO (Step 3 - Photos) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5h. Order To-Do (Step 3)</div>
+      <div class="screen-sublabel">Photos & Completion</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Orden OIK-001</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f5f5;">
+
+          <!-- 3-Step Progress -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
+            <!-- Step 1 (done) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:18px;">check</span>
+              </div>
+              <span style="font-size:10px; color:#41a247; font-weight:600;">Datos</span>
+            </div>
+            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 2 (done) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:18px;">check</span>
+              </div>
+              <span style="font-size:10px; color:#41a247; font-weight:600;">Equipo</span>
+            </div>
+            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
+            <!-- Step 3 (active) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
+              <span style="font-size:10px; color:#f16824; font-weight:600;">Fotos</span>
+            </div>
+          </div>
+
+          <!-- Photo Grid (3 columns) -->
+          <div class="card" style="padding:20px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+              <!-- Photo 1 -->
+              <div style="text-align:center;">
+                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
+                  <span class="mi" style="font-size:32px; color:#bbb;">image</span>
+                </div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 1</div>
+              </div>
+              <!-- Photo 2 -->
+              <div style="text-align:center;">
+                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
+                  <span class="mi" style="font-size:32px; color:#bbb;">image</span>
+                </div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 2</div>
+              </div>
+              <!-- Photo 3 -->
+              <div style="text-align:center;">
+                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
+                  <span class="mi" style="font-size:32px; color:#bbb;">add</span>
+                </div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 3</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Buttons -->
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <button class="btn" style="flex:1; background:white; color:#f16824; border:1.5px solid #f16824;">
+              Anterior
+            </button>
+            <button class="btn" style="flex:1; background:#41a247; color:white;">
+              <span class="mi">check_circle</span>
+              Completar
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 5i: INVENTORY ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5i. Inventory</div>
+      <div class="screen-sublabel">Equipment & Accessories</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Inventario</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content" style="background:#f5f5f5;">
+
+          <!-- Stats Card -->
+          <div style="padding:16px 20px 0;">
+            <div class="card" style="padding:16px;">
+              <div style="display:flex; gap:12px;">
+                <div style="flex:1; display:flex; align-items:center; gap:10px; background:rgba(241,104,36,.08); border-radius:12px; padding:14px;">
+                  <span class="mi" style="font-size:24px; color:#f16824;">bolt</span>
+                  <div>
+                    <div style="font-size:20px; font-weight:800; color:var(--text-dark);">24</div>
+                    <div style="font-size:11px; color:var(--gray);">Equipos</div>
+                  </div>
+                </div>
+                <div style="flex:1; display:flex; align-items:center; gap:10px; background:rgba(10,112,185,.08); border-radius:12px; padding:14px;">
+                  <span class="mi" style="font-size:24px; color:#0a70b9;">extension</span>
+                  <div>
+                    <div style="font-size:20px; font-weight:800; color:var(--text-dark);">12</div>
+                    <div style="font-size:11px; color:var(--gray);">Accesorios</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div style="padding:0 20px 8px;">
+            <div style="display:flex; align-items:center; gap:10px; background:white; border-radius:12px; padding:0 14px; height:44px; box-shadow:0 1px 4px rgba(0,0,0,.06);">
+              <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
+              <span style="font-size:14px; color:#aaa;">Buscar inventario...</span>
+            </div>
+          </div>
+
+          <!-- Filter Chips -->
+          <div style="display:flex; gap:8px; padding:4px 20px 12px; overflow-x:auto;">
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; background:#f16824; color:white; white-space:nowrap;">Todos</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray); white-space:nowrap;">Equipos</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray); white-space:nowrap;">Accesorios</div>
+          </div>
+
+          <div style="padding:0 20px 20px;">
+            <!-- Inventory Item 1 -->
+            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:22px; color:#f16824;">bolt</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">KNG-001 — Kingo 15</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                    <span class="badge badge-green" style="font-size:10px; padding:2px 8px;">Activo</span>
+                  </div>
+                  <div style="display:flex; gap:12px; margin-top:6px;">
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
+                      <span style="font-size:11px; color:var(--gray);">SN-20260001</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
+                      <span style="font-size:11px; color:var(--gray);">Bodega Central</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inventory Item 2 -->
+            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:22px; color:#f16824;">solar_power</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">KNG-002 — Panel Solar</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                    <span class="badge badge-blue" style="font-size:10px; padding:2px 8px;">Asignado</span>
+                  </div>
+                  <div style="display:flex; gap:12px; margin-top:6px;">
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
+                      <span style="font-size:11px; color:var(--gray);">SN-20260045</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
+                      <span style="font-size:11px; color:var(--gray);">Tecnico Lopez</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inventory Item 3 -->
+            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:22px; color:#f16824;">lightbulb</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">ACC-001 — Foco LED</div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                    <span class="badge badge-orange" style="font-size:10px; padding:2px 8px;">Disponible</span>
+                  </div>
+                  <div style="display:flex; gap:12px; margin-top:6px;">
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
+                      <span style="font-size:11px; color:var(--gray);">SN-20260102</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
+                      <span style="font-size:11px; color:var(--gray);">Bodega Central</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

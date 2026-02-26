@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Sync</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Sync — Synchronization & Offline Mode</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a class="active" href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 7a: SINCRONIZACIÓN (SYNC STATUS) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7a. Sincronización</div>
+      <div class="screen-sublabel">Sync status & pending items</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronización</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">refresh</span></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Status Card -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:14px; padding:18px;">
+            <div style="width:48px; height:48px; border-radius:24px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:28px; color:#41a247;">cloud_done</span>
+            </div>
+            <div>
+              <div style="font-size:17px; font-weight:700; color:#41a247;">Conectado</div>
+              <div style="font-size:13px; color:var(--gray);">Todos los datos están sincronizados</div>
+            </div>
+          </div>
+
+          <!-- Last Sync Card -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:12px; padding:14px 16px;">
+            <span class="mi" style="font-size:22px; color:var(--gray);">schedule</span>
+            <div style="font-size:14px; color:var(--text-dark);">Última sincronización: <span style="font-weight:600;">19/02/2026 14:30</span></div>
+          </div>
+
+          <!-- Pending Items Card -->
+          <div class="card" style="padding:0;">
+            <div style="padding:16px 16px 8px; font-size:14px; font-weight:700; color:var(--text-dark);">Elementos Pendientes</div>
+            <!-- Sales -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">shopping_cart</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Ventas</div>
+              <span style="font-size:13px; color:var(--gray); font-weight:500;">0 pendientes</span>
+            </div>
+            <!-- Tickets -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">confirmation_number</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Tickets</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">2 pendientes</span>
+            </div>
+            <!-- Offline Batches -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px;">
+              <span class="mi" style="font-size:22px; color:var(--gray);">layers</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Lotes Offline</div>
+              <span style="font-size:13px; color:var(--gray); font-weight:500;">0 pendientes</span>
+            </div>
+          </div>
+
+          <!-- Sync Buttons -->
+          <button class="btn" style="background:#0a70b9; color:white; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">cloud_sync</span>
+            Sincronizar con Servidor
+          </button>
+          <button class="btn" style="background:transparent; border:1.5px solid #0a70b9; color:#0a70b9;">
+            <span class="mi" style="font-size:20px;">bluetooth</span>
+            Sincronización Bluetooth
+          </button>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 7b: CONFIGURACIÓN OFFLINE ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7b. Configuración Offline</div>
+      <div class="screen-sublabel">Offline mode settings & storage</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Configuración Offline</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Status Card -->
+          <div style="background:linear-gradient(135deg, #41a247, #4db853); border-radius:16px; padding:18px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:16px;">
+            <div style="width:44px; height:44px; border-radius:22px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:26px;">cloud_done</span>
+            </div>
+            <div>
+              <div style="font-size:16px; font-weight:700;">Conectado</div>
+              <div style="font-size:13px; opacity:.85;">Datos sincronizados</div>
+            </div>
+          </div>
+
+          <!-- Storage Card -->
+          <div class="card card-sm">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">storage</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Almacenamiento Local</div>
+            </div>
+            <!-- Progress Bar -->
+            <div style="height:8px; background:#E0E0E0; border-radius:4px; margin-bottom:10px; overflow:hidden;">
+              <div style="width:40%; height:100%; background:#f16824; border-radius:4px;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--gray);">
+              <span>156 elementos en caché</span>
+              <span style="color:#f16824; font-weight:600;">2 por sincronizar</span>
+            </div>
+          </div>
+
+          <!-- Sync Settings -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Sincronización</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Auto Sync -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#41a247;">sync</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Sincronizar automáticamente</div>
+              <div style="width:44px; height:24px; border-radius:12px; background:#41a247; position:relative;">
+                <div style="width:20px; height:20px; border-radius:10px; background:white; position:absolute; top:2px; right:2px; box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+            <!-- WiFi Only -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">wifi</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Solo WiFi</div>
+              <div style="width:44px; height:24px; border-radius:12px; background:#E0E0E0; position:relative;">
+                <div style="width:20px; height:20px; border-radius:10px; background:white; position:absolute; top:2px; left:2px; box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+            <!-- Notify -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#f16824;">notifications</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Notificar al sincronizar</div>
+              <div style="width:44px; height:24px; border-radius:12px; background:#41a247; position:relative;">
+                <div style="width:20px; height:20px; border-radius:10px; background:white; position:absolute; top:2px; right:2px; box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Settings -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; margin-top:8px;">Datos</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Compress Images -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(159,36,111,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#9f246f;">image</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Comprimir imágenes</div>
+              <div style="width:44px; height:24px; border-radius:12px; background:#41a247; position:relative;">
+                <div style="width:20px; height:20px; border-radius:10px; background:white; position:absolute; top:2px; right:2px; box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+            <!-- Keep Data -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(104,106,107,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#686a6b;">date_range</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Mantener datos por</div>
+              <span style="font-size:13px; color:var(--gray); font-weight:500;">30 días</span>
+            </div>
+            <!-- Sync Interval -->
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(104,106,107,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:#686a6b;">timer</span>
+              </div>
+              <div style="flex:1; font-size:14px; font-weight:600; color:var(--text-dark);">Intervalo de sincronización</div>
+              <span style="font-size:13px; color:var(--gray); font-weight:500;">15 min</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <button class="btn" style="background:#0a70b9; color:white; margin-top:8px; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">sync</span>
+            Sincronizar Ahora
+          </button>
+          <button class="btn" style="background:transparent; border:1.5px solid #EF4444; color:#EF4444; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">delete_sweep</span>
+            Limpiar Caché
+          </button>
+          <button class="btn" style="background:transparent; color:var(--gray); font-weight:500;">
+            Restaurar Valores
+          </button>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 7c: SINCRONIZACIÓN BLUETOOTH (PEER SYNC) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7c. Sincronización Bluetooth</div>
+      <div class="screen-sublabel">Peer-to-peer Bluetooth sync</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronización Bluetooth</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">refresh</span></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f6fa;">
+          <!-- Bluetooth Status Card -->
+          <div style="background:linear-gradient(135deg, #0a70b9, #1a8ad4); border-radius:16px; padding:20px; color:white; display:flex; align-items:center; gap:14px; margin-bottom:16px;">
+            <div style="width:48px; height:48px; border-radius:24px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:28px;">bluetooth</span>
+            </div>
+            <div>
+              <div style="font-size:17px; font-weight:700;">Bluetooth Activo</div>
+              <div style="font-size:13px; opacity:.85;">Listo para conectar</div>
+            </div>
+          </div>
+
+          <!-- Instructions Card -->
+          <div class="card" style="padding:20px;">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">Instrucciones</div>
+            <!-- Step 1 -->
+            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:14px;">
+              <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</div>
+              <div style="font-size:13px; color:var(--text-dark); line-height:1.5; padding-top:4px;">Activa Bluetooth en el otro dispositivo</div>
+            </div>
+            <!-- Step 2 -->
+            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:14px;">
+              <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</div>
+              <div style="font-size:13px; color:var(--text-dark); line-height:1.5; padding-top:4px;">Selecciona un dispositivo emparejado o busca nuevos</div>
+            </div>
+            <!-- Step 3 -->
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</div>
+              <div style="font-size:13px; color:var(--text-dark); line-height:1.5; padding-top:4px;">Acepta la solicitud de sincronización en ambos dispositivos</div>
+            </div>
+          </div>
+
+          <!-- Paired Devices Section -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px; color:#41a247;">link</span>
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Dispositivos Emparejados</div>
+          </div>
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:22px; color:#41a247;">phone_android</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Samsung Galaxy A13</div>
+                <div style="font-size:12px; color:var(--gray);">AA:BB:CC</div>
+              </div>
+              <span class="badge badge-green">Emparejado</span>
+            </div>
+          </div>
+
+          <!-- Nearby Devices Section -->
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; margin-top:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="mi" style="font-size:20px; color:#0a70b9;">search</span>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Dispositivos Cercanos</div>
+            </div>
+            <button style="padding:6px 14px; border-radius:20px; background:transparent; border:1.5px solid #0a70b9; color:#0a70b9; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;">Buscar</button>
+          </div>
+          <div class="card card-sm" style="display:flex; align-items:center; justify-content:center; padding:32px; color:var(--gray); font-size:13px;">
+            <span class="mi" style="font-size:20px; margin-right:8px;">bluetooth_searching</span>
+            Buscando dispositivos...
+          </div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

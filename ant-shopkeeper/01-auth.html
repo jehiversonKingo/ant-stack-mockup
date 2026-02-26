@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Auth Flow</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Auth — Splash & Sign In</p>
+  </div>
+  <nav class="page-nav">
+    <a class="active" href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1a. Splash Screen</div>
+      <div class="screen-sublabel">App loading</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content" style="background:#f16824; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;">
+          <!-- Kingo Logo -->
+          <div style="width:180px; height:60px; display:flex; align-items:center; justify-content:center; border:2px solid rgba(255,255,255,.4); border-radius:12px; margin-bottom:32px;">
+            <span style="color:white; font-size:36px; font-weight:800; letter-spacing:2px;">KINGO</span>
+          </div>
+          <!-- Spinner -->
+          <div class="spinner" style="border-color:rgba(255,255,255,.3); border-top-color:white;"></div>
+          <!-- Version -->
+          <div style="position:absolute; bottom:40px; color:white; opacity:.7; font-size:12px;">v2.11.21</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SIGN IN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1b. Sign In</div>
+      <div class="screen-sublabel">(auth)/login.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <!-- Logo -->
+          <div style="text-align:center; margin-bottom:32px;">
+            <div style="font-size:28px; font-weight:800; color:#f16824; letter-spacing:1px;">KINGO</div>
+            <div style="font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-top:4px;">Shopkeeper</div>
+          </div>
+
+          <!-- Card -->
+          <div class="card" style="width:100%;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:24px;">Iniciar Sesion</div>
+
+            <div class="input-group">
+              <label>DPI / Cedula</label>
+              <div class="input-wrap">
+                <span class="mi">badge</span>
+                <input type="text" placeholder="Ingresa tu DPI">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Contrasena</label>
+              <div class="input-wrap">
+                <span class="mi">lock</span>
+                <input type="password" placeholder="Tu contrasena">
+                <span class="mi" style="color:var(--gray); cursor:pointer;">visibility_off</span>
+              </div>
+            </div>
+
+            <button class="btn mt-8" style="background:#f16824; color:white;">Ingresar</button>
+          </div>
+
+          <!-- Support link -->
+          <div style="text-align:center; margin-top:24px;">
+            <div style="font-size:14px; color:var(--gray); margin-bottom:4px;">Problemas para ingresar?</div>
+            <div style="font-size:14px; color:#0a70b9; font-weight:600; cursor:pointer;">Contacta a soporte tecnico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SIGN IN (ERROR STATE) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1c. Sign In (Error)</div>
+      <div class="screen-sublabel">Validation error</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <!-- Logo -->
+          <div style="text-align:center; margin-bottom:32px;">
+            <div style="font-size:28px; font-weight:800; color:#f16824; letter-spacing:1px;">KINGO</div>
+            <div style="font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-top:4px;">Shopkeeper</div>
+          </div>
+
+          <!-- Card -->
+          <div class="card" style="width:100%;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:24px;">Iniciar Sesion</div>
+
+            <div class="input-group">
+              <label>DPI / Cedula</label>
+              <div class="input-wrap error">
+                <span class="mi" style="color:var(--red);">badge</span>
+                <input type="text" placeholder="Ingresa tu DPI" value="12345" style="color:var(--text-dark);">
+              </div>
+              <div style="font-size:12px; color:var(--red); margin-top:4px; padding-left:4px;">El DPI debe tener entre 10 y 15 digitos</div>
+            </div>
+
+            <div class="input-group">
+              <label>Contrasena</label>
+              <div class="input-wrap">
+                <span class="mi">lock</span>
+                <input type="password" placeholder="Tu contrasena">
+                <span class="mi" style="color:var(--gray); cursor:pointer;">visibility_off</span>
+              </div>
+            </div>
+
+            <button class="btn mt-8" style="background:#f16824; color:white; opacity:.8;">
+              <div class="spinner" style="width:20px; height:20px; border-width:2px; border-color:rgba(255,255,255,.3); border-top-color:white;"></div>
+              Ingresando...
+            </button>
+          </div>
+
+          <!-- Support link -->
+          <div style="text-align:center; margin-top:24px;">
+            <div style="font-size:14px; color:var(--gray); margin-bottom:4px;">Problemas para ingresar?</div>
+            <div style="font-size:14px; color:#0a70b9; font-weight:600; cursor:pointer;">Contacta a soporte tecnico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SIGN IN (NETWORK ERROR) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1d. Sign In (Network Error)</div>
+      <div class="screen-sublabel">No connection modal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px; color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center; filter:brightness(.7);">
+          <!-- Logo -->
+          <div style="text-align:center; margin-bottom:32px;">
+            <div style="font-size:28px; font-weight:800; color:#f16824; letter-spacing:1px;">KINGO</div>
+            <div style="font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-top:4px;">Shopkeeper</div>
+          </div>
+          <div class="card" style="width:100%;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:24px;">Iniciar Sesion</div>
+            <div class="input-group">
+              <label>DPI / Cedula</label>
+              <div class="input-wrap">
+                <span class="mi">badge</span>
+                <input type="text" placeholder="Ingresa tu DPI">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Contrasena</label>
+              <div class="input-wrap">
+                <span class="mi">lock</span>
+                <input type="password" placeholder="Tu contrasena">
+              </div>
+            </div>
+            <button class="btn mt-8" style="background:#f16824; color:white;">Ingresar</button>
+          </div>
+        </div>
+        <!-- Modal Overlay -->
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div style="width:64px; height:64px; border-radius:32px; background:var(--red-light); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:48px; color:var(--red);">wifi_off</span>
+            </div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Sin Conexion</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:24px;">Verifica tu conexion a internet e intenta de nuevo.</div>
+            <button class="btn" style="background:#f16824; color:white;">Reintentar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

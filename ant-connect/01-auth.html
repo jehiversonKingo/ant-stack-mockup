@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — Auth Flow</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header">
+    <h1>Ant Connect</h1>
+    <p>Authentication Flow — Landing, Login & Register</p>
+  </div>
+  <nav class="page-nav">
+    <a class="active" href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-features.html">Features</a>
+    <a href="04-navigation.html">Navigation</a>
+    <a href="05-gobierno.html">Gobierno</a>
+    <a href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== AUTH INDEX - HAS INTERNET ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1a. Auth Landing (Online)</div>
+      <div class="screen-sublabel">(auth)/index.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <!-- KingoNet Logo -->
+          <div style="margin-bottom:48px;">
+            <div style="width:180px; height:60px; display:flex; align-items:center; justify-content:center; background:var(--orange); border-radius:12px;">
+              <span style="color:white; font-size:26px; font-weight:800; letter-spacing:1px;">KingoNet</span>
+            </div>
+          </div>
+
+          <div style="text-align:center; margin-bottom:40px;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Bienvenido</div>
+            <div style="font-size:14px; color:var(--gray);">Conéctate a internet de forma rápida y sencilla</div>
+          </div>
+
+          <!-- Login Button -->
+          <button class="btn btn-orange mb-16">
+            <span class="mi" style="font-size:20px">login</span>
+            Iniciar Sesión
+          </button>
+          <!-- Register Button -->
+          <button class="btn btn-outline">
+            <span class="mi" style="font-size:20px">person_add</span>
+            Registrarse
+          </button>
+
+          <!-- Version -->
+          <div style="position:absolute; bottom:32px; font-size:12px; color:var(--gray);">v1.0.6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== AUTH INDEX - NO INTERNET ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1b. Auth Landing (Offline)</div>
+      <div class="screen-sublabel">Activation form</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray)">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="display:flex; flex-direction:column;">
+          <!-- Logo -->
+          <div style="text-align:center; margin:20px 0 24px;">
+            <div style="width:180px; height:60px; display:inline-flex; align-items:center; justify-content:center; background:var(--orange); border-radius:12px;">
+              <span style="color:white; font-size:26px; font-weight:800;">KingoNet</span>
+            </div>
+          </div>
+
+          <!-- Offline Alert -->
+          <div class="alert alert-red">
+            <span class="mi" style="font-size:22px; color:var(--red);">wifi_off</span>
+            <div>
+              <div style="font-size:14px; font-weight:600; color:var(--red);">Sin acceso a internet</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">Activa tu plan para conectarte</div>
+            </div>
+          </div>
+
+          <!-- Activation Card -->
+          <div class="card" style="margin-top:8px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+              <span class="mi" style="font-size:24px; color:var(--orange);">wifi</span>
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Activar Plan</div>
+                <div style="font-size:12px; color:var(--gray);">Ingresa tus datos para conectarte</div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Celular / DPI</label>
+              <div class="input-wrap">
+                <span class="mi">phone</span>
+                <input type="text" placeholder="Ingresa tu número o DPI">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Contraseña</label>
+              <div class="input-wrap">
+                <span class="mi">lock</span>
+                <input type="password" placeholder="Tu contraseña">
+              </div>
+            </div>
+
+            <button class="btn btn-orange mt-8">
+              Activar Ahora
+            </button>
+          </div>
+
+          <div style="position:absolute; bottom:32px; left:0; right:0; text-align:center; font-size:12px; color:var(--gray);">v1.0.6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ACTIVATION SUCCESS MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">1c. Activation Success</div>
+      <div class="screen-sublabel">Plan activated modal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="content content-pad" style="filter:brightness(.7);">
+          <div style="text-align:center; margin:20px 0 24px;">
+            <div style="width:180px; height:60px; display:inline-flex; align-items:center; justify-content:center; background:var(--orange); border-radius:12px;">
+              <span style="color:white; font-size:26px; font-weight:800;">KingoNet</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div style="width:64px; height:64px; border-radius:32px; background:var(--green-light); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:36px; color:var(--green);">check_circle</span>
+            </div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">¡Plan Activado!</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Tu plan ha sido activado exitosamente. Ya puedes navegar por internet.</div>
+            <button class="btn btn-green">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LOGIN SCREEN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2a. Login</div>
+      <div class="screen-sublabel">(auth)/login.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:24px;">
+            <div style="font-size:24px; font-weight:700; color:var(--text-dark);">Iniciar Sesión</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">Ingresa con tu teléfono o DPI</div>
+          </div>
+
+          <!-- Mode Toggle -->
+          <div style="display:flex; background:var(--gray-bg); border-radius:12px; padding:4px; margin-bottom:24px;">
+            <div style="flex:1; padding:10px; text-align:center; background:var(--orange); color:white; border-radius:10px; font-size:14px; font-weight:600;">Teléfono</div>
+            <div style="flex:1; padding:10px; text-align:center; color:var(--gray); font-size:14px; font-weight:600;">DPI</div>
+          </div>
+
+          <!-- Phone Input -->
+          <div class="input-group">
+            <label>Número de teléfono</label>
+            <div class="input-wrap">
+              <div style="display:flex; align-items:center; gap:4px; padding-right:10px; border-right:1px solid var(--gray-border); margin-right:4px;">
+                <span style="font-size:16px;">🇬🇹</span>
+                <span style="font-size:14px; color:var(--text-dark); font-weight:500;">+502</span>
+              </div>
+              <input type="tel" placeholder="5555 1234">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="input-group">
+            <label>Contraseña</label>
+            <div class="input-wrap">
+              <span class="mi">lock</span>
+              <input type="password" placeholder="Mínimo 6 caracteres">
+              <span class="mi" style="color:var(--gray); cursor:pointer;">visibility_off</span>
+            </div>
+          </div>
+
+          <button class="btn btn-orange mt-16">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LOGIN - DPI MODE ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2b. Login (DPI Mode)</div>
+      <div class="screen-sublabel">DPI tab selected</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:24px;">
+            <div style="font-size:24px; font-weight:700; color:var(--text-dark);">Iniciar Sesión</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">Ingresa con tu teléfono o DPI</div>
+          </div>
+
+          <!-- Mode Toggle - DPI active -->
+          <div style="display:flex; background:var(--gray-bg); border-radius:12px; padding:4px; margin-bottom:24px;">
+            <div style="flex:1; padding:10px; text-align:center; color:var(--gray); font-size:14px; font-weight:600;">Teléfono</div>
+            <div style="flex:1; padding:10px; text-align:center; background:var(--orange); color:white; border-radius:10px; font-size:14px; font-weight:600;">DPI</div>
+          </div>
+
+          <!-- DPI Input -->
+          <div class="input-group">
+            <label>DPI / CUI</label>
+            <div class="input-wrap">
+              <span class="mi">badge</span>
+              <input type="text" placeholder="Número de documento">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="input-group">
+            <label>Contraseña</label>
+            <div class="input-wrap">
+              <span class="mi">lock</span>
+              <input type="password" placeholder="Mínimo 6 caracteres">
+              <span class="mi" style="color:var(--gray);">visibility_off</span>
+            </div>
+          </div>
+
+          <button class="btn btn-orange mt-16">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LOGIN - ERROR 409 MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2c. Active Session (409)</div>
+      <div class="screen-sublabel">ActiveSessionModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">arrow_back</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card">
+            <div class="modal-header">
+              <div class="modal-icon" style="background:var(--red-light);">
+                <span class="mi" style="font-size:24px; color:var(--red);">devices</span>
+              </div>
+              <div>
+                <div style="font-size:18px; font-weight:700; color:var(--text-dark);">Sesión Activa Detectada</div>
+              </div>
+            </div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:12px;">Se detectó una sesión activa en otro dispositivo. ¿Deseas cerrarla?</div>
+
+            <div class="info-box orange">
+              <span class="mi" style="font-size:18px; color:var(--orange); flex-shrink:0;">info</span>
+              <div>
+                <div style="font-weight:600; color:var(--text-dark); margin-bottom:2px;">¿Qué sucederá?</div>
+                <div style="font-size:12px; color:var(--gray);">La sesión anterior será cerrada y podrás iniciar aquí.</div>
+              </div>
+            </div>
+
+            <div class="info-box red" style="margin-bottom:20px;">
+              <span class="mi" style="font-size:18px; color:var(--red); flex-shrink:0;">warning</span>
+              <div style="font-size:12px; color:var(--red);">Guarda tu trabajo antes de continuar</div>
+            </div>
+
+            <button class="btn btn-red mb-8">Sí, Cerrar Sesión Anterior</button>
+            <button class="btn btn-ghost">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REGISTER SCREEN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3a. Register</div>
+      <div class="screen-sublabel">(auth)/register.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:20px;">
+            <div style="font-size:24px; font-weight:700; color:var(--text-dark);">Crear Cuenta</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">Completa tus datos para registrarte</div>
+          </div>
+
+          <div class="input-group">
+            <label>Nombre completo</label>
+            <div class="input-wrap">
+              <span class="mi">person</span>
+              <input type="text" placeholder="Juan Carlos Pérez">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Teléfono</label>
+            <div class="input-wrap">
+              <div style="display:flex; align-items:center; gap:4px; padding-right:10px; border-right:1px solid var(--gray-border); margin-right:4px;">
+                <span style="font-size:16px;">🇬🇹</span>
+                <span style="font-size:14px; font-weight:500;">+502</span>
+              </div>
+              <input type="tel" placeholder="5555 1234">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>CUI / DPI</label>
+            <div class="input-wrap">
+              <span class="mi">badge</span>
+              <input type="text" placeholder="1234567890101">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Contraseña</label>
+            <div class="input-wrap">
+              <span class="mi">lock</span>
+              <input type="password" placeholder="Mínimo 6 caracteres">
+              <span class="mi" style="color:var(--gray);">visibility_off</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Confirmar contraseña</label>
+            <div class="input-wrap">
+              <span class="mi">lock</span>
+              <input type="password" placeholder="Repite tu contraseña">
+              <span class="mi" style="color:var(--gray);">visibility_off</span>
+            </div>
+          </div>
+
+          <button class="btn btn-orange mt-8">Crear Cuenta</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REGISTER - LOCATION PERMISSION ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">3b. Location Permission</div>
+      <div class="screen-sublabel">Permission modal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">arrow_back</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div style="width:64px; height:64px; border-radius:32px; background:rgba(252,107,23,.1); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:32px; color:var(--orange);">location_on</span>
+            </div>
+            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Acceso a Ubicación</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Necesitamos tu ubicación para mejorar el servicio y encontrar redes cercanas.</div>
+            <button class="btn btn-orange mb-8">Permitir</button>
+            <button class="btn btn-ghost">Ahora no</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

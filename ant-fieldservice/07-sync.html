@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Fieldservice — Sync</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+    <h1>Ant Fieldservice</h1>
+    <p>Sync — Data Synchronization</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-bank.html">Bank</a>
+    <a href="04-operations.html">Operations</a>
+    <a href="05-tasks.html">Tasks</a>
+    <a href="06-visits.html">Visits</a>
+    <a class="active" href="07-sync.html">Sync</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 7a: SYNC DATA ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7a. Sincronizacion</div>
+      <div class="screen-sublabel">Data sync status & download</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronizacion</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f5f5;">
+          <!-- Sync Status Card -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:14px; padding:18px;">
+            <div style="width:48px; height:48px; border-radius:24px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:28px; color:#41a247;">cloud_done</span>
+            </div>
+            <div>
+              <div style="font-size:17px; font-weight:700; color:#41a247;">Datos sincronizados</div>
+              <div style="font-size:13px; color:var(--gray);">Ultima sincronizacion: 19/02/2026 14:30</div>
+            </div>
+          </div>
+
+          <!-- Server Data Section -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Datos del Servidor</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Menu -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">menu_book</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Menu</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">12</span>
+            </div>
+            <!-- Inventario -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">inventory_2</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Inventario</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">24</span>
+            </div>
+            <!-- Comunidades -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">location_city</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Comunidades</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">8</span>
+            </div>
+            <!-- Tareas -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">task_alt</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Tareas</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">15</span>
+            </div>
+            <!-- Planes -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px;">
+              <span class="mi" style="font-size:22px; color:var(--gray);">sell</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Planes</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">6</span>
+            </div>
+          </div>
+
+          <!-- Local Data Section -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; margin-top:8px;">Datos Locales</div>
+          <div class="card card-sm" style="padding:0;">
+            <!-- Ventas -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">shopping_cart</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Ventas</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">3</span>
+            </div>
+            <!-- Boletas -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:var(--gray);">receipt_long</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Boletas</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">2</span>
+            </div>
+            <!-- Lotes -->
+            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px;">
+              <span class="mi" style="font-size:22px; color:var(--gray);">layers</span>
+              <div style="flex:1; font-size:14px; color:var(--text-dark);">Lotes</div>
+              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">1</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <button class="btn" style="background:#f16824; color:white; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">cloud_download</span>
+            Descargar Todo
+          </button>
+          <button class="btn" style="background:#41a247; color:white;">
+            <span class="mi" style="font-size:20px;">cloud_upload</span>
+            Subir Pendientes
+          </button>
+        </div>
+        <!-- NO tab bar -->
+      </div>
+    </div>
+
+    <!-- ========== 7b: HANDSHAKE SERVER (BLUETOOTH SYNC) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7b. Sincronizacion Bluetooth</div>
+      <div class="screen-sublabel">Bluetooth handshake server</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronizacion Bluetooth</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f5f5;">
+          <!-- Bluetooth Icon + Title -->
+          <div style="text-align:center; margin-bottom:24px; padding-top:12px;">
+            <div style="width:80px; height:80px; border-radius:40px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:50px; color:#f16824;">bluetooth</span>
+            </div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Sincronizacion por Bluetooth</div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Sincronice datos con otro dispositivo cercano mediante conexion Bluetooth.</div>
+          </div>
+
+          <!-- Requirements Checklist Card -->
+          <div class="card card-sm" style="padding:0;">
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
+              <div style="font-size:14px; color:var(--text-dark);">Bluetooth activado</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
+              <div style="font-size:14px; color:var(--text-dark);">Ubicacion activada</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
+              <div style="font-size:14px; color:var(--text-dark);">El cliente cerca del dispositivo</div>
+            </div>
+          </div>
+
+          <!-- Info Note -->
+          <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; border-radius:12px; background:rgba(241,104,36,.08); margin-bottom:16px;">
+            <span class="mi" style="font-size:20px; color:#f16824; flex-shrink:0;">info</span>
+            <span style="font-size:12px; color:var(--text-dark); line-height:1.5;">Asegurese de que ambos dispositivos tengan Bluetooth activado y esten a menos de 10 metros de distancia.</span>
+          </div>
+
+          <!-- Buttons -->
+          <button class="btn" style="background:#f16824; color:white; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">bluetooth</span>
+            Iniciar Sincronizacion
+          </button>
+          <button class="btn" style="background:white; border:1.5px solid #f16824; color:#f16824; margin-bottom:16px;">
+            Cancelar
+          </button>
+
+          <!-- Server Status -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:10px; padding:14px 16px; margin-bottom:16px;">
+            <div style="width:10px; height:10px; border-radius:5px; background:#41a247;"></div>
+            <span style="font-size:14px; font-weight:600; color:#41a247;">Servidor activo</span>
+          </div>
+
+          <!-- Timeline Card -->
+          <div class="card card-sm" style="padding:0;">
+            <div style="padding:14px 16px 8px; font-size:14px; font-weight:700; color:var(--text-dark);">Eventos de Sincronizacion</div>
+            <!-- Event 1 -->
+            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:20px; color:#41a247;">check_circle</span>
+              <div style="flex:1;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Conectado</span>
+                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:01</span>
+              </div>
+            </div>
+            <!-- Event 2 -->
+            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:20px; color:#0a70b9;">sync</span>
+              <div style="flex:1;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Enviando datos</span>
+                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:05</span>
+              </div>
+            </div>
+            <!-- Event 3 -->
+            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px;">
+              <span class="mi" style="font-size:20px; color:#41a247;">check_circle</span>
+              <div style="flex:1;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Completado</span>
+                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- NO tab bar -->
+      </div>
+    </div>
+
+    <!-- ========== 7c: SYNC LIST (PENDING BATCHES) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7c. Lotes Pendientes</div>
+      <div class="screen-sublabel">Pending sync batches list</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Lotes Pendientes</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="content content-pad" style="background:#f5f5f5;">
+          <!-- Stats Card -->
+          <div class="card card-sm" style="display:flex; align-items:center; justify-content:space-around; padding:18px; text-align:center;">
+            <div>
+              <div style="font-size:24px; font-weight:700; color:#f16824;">3</div>
+              <div style="font-size:12px; color:var(--gray); font-weight:600;">Lotes</div>
+            </div>
+            <div style="width:1px; height:36px; background:var(--gray-border);"></div>
+            <div>
+              <div style="font-size:24px; font-weight:700; color:#0a70b9;">12</div>
+              <div style="font-size:12px; color:var(--gray); font-weight:600;">Registros</div>
+            </div>
+            <div style="width:1px; height:36px; background:var(--gray-border);"></div>
+            <div>
+              <div style="font-size:24px; font-weight:700; color:#41a247;">2.4 MB</div>
+              <div style="font-size:12px; color:var(--gray); font-weight:600;">Tamano</div>
+            </div>
+          </div>
+
+          <!-- Batch #1 — Tareas -->
+          <div class="card card-sm" style="padding:16px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:44px; height:44px; border-radius:22px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:24px; color:#f16824;">task_alt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#1 — Tareas</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026 14:30</div>
+              </div>
+              <span style="font-size:12px; color:#F59E0B; background:rgba(245,158,11,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Pendiente</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
+              <span style="font-size:13px; color:var(--gray);">5 registros</span>
+            </div>
+          </div>
+
+          <!-- Batch #2 — Boletas -->
+          <div class="card card-sm" style="padding:16px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:44px; height:44px; border-radius:22px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:24px; color:#0a70b9;">receipt_long</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#2 — Boletas</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026 13:15</div>
+              </div>
+              <span style="font-size:12px; color:#F59E0B; background:rgba(245,158,11,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Pendiente</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
+              <span style="font-size:13px; color:var(--gray);">4 registros</span>
+            </div>
+          </div>
+
+          <!-- Batch #3 — Inventario -->
+          <div class="card card-sm" style="padding:16px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:44px; height:44px; border-radius:22px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:24px; color:#41a247;">inventory_2</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#3 — Inventario</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026 11:45</div>
+              </div>
+              <span style="font-size:12px; color:#EF4444; background:rgba(239,68,68,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Error</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
+              <span style="font-size:13px; color:var(--gray);">3 registros</span>
+            </div>
+          </div>
+
+          <!-- Upload All Button -->
+          <button class="btn" style="background:#f16824; color:white; margin-top:4px;">
+            <span class="mi" style="font-size:20px;">cloud_upload</span>
+            Subir Todos
+          </button>
+        </div>
+        <!-- NO tab bar -->
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

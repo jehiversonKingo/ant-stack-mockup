@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — Home Screen</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header">
+    <h1>Ant Connect</h1>
+    <p>Home Screen — All States, Plan Views & Modals</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a class="active" href="02-home.html">Home</a>
+    <a href="03-features.html">Features</a>
+    <a href="04-navigation.html">Navigation</a>
+    <a href="05-gobierno.html">Gobierno</a>
+    <a href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== HOME - NOT CONNECTED ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4a. Home (Not Connected)</div>
+      <div class="screen-sublabel">LoginFormCard shown</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn" style="opacity:.3;"><span class="mi" style="font-size:22px; color:var(--text-dark);">notifications</span></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Welcome -->
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <!-- Alert: No active plan -->
+          <div class="alert alert-orange">
+            <span class="mi" style="font-size:20px; color:var(--orange);">info</span>
+            <span style="font-size:14px; color:var(--orange); font-weight:600;">Sin plan activo</span>
+          </div>
+
+          <!-- Login Form Card -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+              <span class="mi" style="font-size:24px; color:var(--orange);">wifi</span>
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Conectar a Internet</div>
+            </div>
+
+            <div class="input-group">
+              <label>Celular / DPI</label>
+              <div class="input-wrap">
+                <span class="mi">phone</span>
+                <input type="text" placeholder="Tu número o DPI">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Contraseña</label>
+              <div class="input-wrap">
+                <span class="mi">lock</span>
+                <input type="password" placeholder="Tu contraseña">
+              </div>
+            </div>
+
+            <button class="btn btn-orange">Conectar Ahora</button>
+          </div>
+
+          <!-- How it works -->
+          <div class="card card-sm" style="background:var(--gray-bg); border:none; box-shadow:none;">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">¿Cómo funciona suscripción Kingo Play?</div>
+            <div class="step-row">
+              <div class="step-num">1</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Adquiere tu suscripción</div><div style="font-size:12px; color:var(--gray);">Contacta a tu tendero</div></div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">2</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Accede a tu módulo</div><div style="font-size:12px; color:var(--gray);">Conéctate a la red KingoNet</div></div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">3</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Accede a la plataforma</div><div style="font-size:12px; color:var(--gray);">Abre NeoPlay desde tu navegador</div></div>
+            </div>
+            <div class="step-row" style="margin-bottom:0;">
+              <div class="step-num">4</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Disfruta del catálogo</div><div style="font-size:12px; color:var(--gray);">Películas y series sin límite</div></div>
+            </div>
+            <button class="btn btn-orange btn-sm mt-16">
+              <span class="mi" style="font-size:18px;">help_outline</span>
+              Necesitas ayuda?
+            </button>
+          </div>
+        </div>
+
+        <!-- FAB QR -->
+        <div class="fab"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME - ACTIVE PLAN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4b. Home (Active Plan)</div>
+      <div class="screen-sublabel">ActivePlanView</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn" style="opacity:.3;"><span class="mi" style="font-size:22px;">notifications</span></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <!-- Plan Active Card -->
+          <div class="card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+              <div class="badge badge-green"><span class="mi" style="font-size:14px;">check_circle</span> Plan Activo</div>
+              <div class="icon-btn" style="width:36px; height:36px;"><span class="mi" style="font-size:20px; color:var(--gray);">refresh</span></div>
+            </div>
+
+            <!-- Circular Progress -->
+            <div style="width:200px; height:200px; margin:0 auto 20px; position:relative;">
+              <svg viewBox="0 0 200 200" width="200" height="200">
+                <circle cx="100" cy="100" r="88" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                <circle cx="100" cy="100" r="88" fill="none" stroke="#10B981" stroke-width="12" stroke-linecap="round" stroke-dasharray="553" stroke-dashoffset="166" transform="rotate(-90 100 100)"/>
+              </svg>
+              <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div style="font-size:14px; color:var(--gray);">Llevas</div>
+                <div style="font-size:28px; font-weight:700; color:var(--text-dark);">5.2 Horas</div>
+                <div style="font-size:13px; color:var(--gray);">Activo de <span style="font-weight:600;">1 Semana</span></div>
+                <div style="font-size:12px; color:var(--green); font-weight:600; margin-top:4px;">120 MB / 500 MB</div>
+              </div>
+            </div>
+
+            <!-- Plan Info -->
+            <div style="display:flex; align-items:center; gap:8px; justify-content:center; margin-bottom:16px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">schedule</span>
+              <span style="font-size:14px; color:var(--gray);">Plan: <strong>1 Semana</strong></span>
+            </div>
+
+            <!-- Deadline -->
+            <div style="background:var(--orange); border-radius:12px; padding:14px; display:flex; align-items:center; gap:10px; color:white;">
+              <span class="mi" style="font-size:22px;">calendar_today</span>
+              <div>
+                <div style="font-size:12px; opacity:.8;">Disfruta tu plan hasta el</div>
+                <div style="font-size:15px; font-weight:700;">23-02-2026 18:30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fab"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME - LOADING PLAN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4c. Home (Loading)</div>
+      <div class="screen-sublabel">PlanLoadingView</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+          <div class="card" style="display:flex; flex-direction:column; align-items:center; padding:48px 24px;">
+            <div class="spinner" style="margin-bottom:16px;"></div>
+            <div style="font-size:16px; font-weight:600; color:var(--gray);">Consultando tu plan...</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME - PLAN ERROR ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4d. Home (Plan Error)</div>
+      <div class="screen-sublabel">PlanErrorView</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+          <div class="card" style="display:flex; flex-direction:column; align-items:center; padding:32px 24px; text-align:center;">
+            <span class="mi" style="font-size:56px; color:var(--red); margin-bottom:12px;">cloud_off</span>
+            <div style="font-size:16px; font-weight:700; color:var(--red); margin-bottom:6px;">No se pudo verificar tu plan</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Hubo un error al consultar. Intenta de nuevo.</div>
+            <button class="btn btn-orange" style="width:auto; padding:12px 32px;">
+              <span class="mi" style="font-size:18px;">refresh</span>
+              Reintentar
+            </button>
+            <div style="font-size:12px; color:var(--gray); margin-top:12px;">También puedes conectarte manualmente</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME - NO KINGONET NETWORK ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4e. Home (No KingoNet)</div>
+      <div class="screen-sublabel">NetworkNotAvailable</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:100%; margin-bottom:20px; padding:0 4px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <div style="width:80px; height:80px; border-radius:40px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+            <span class="mi" style="font-size:40px; color:var(--gray);">wifi_off</span>
+          </div>
+          <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Sin conexión a KingoNet</div>
+          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:20px;">Conéctate a una red KingoNet para usar los servicios</div>
+
+          <!-- Status card -->
+          <div class="card card-sm w-full" style="background:var(--gray-bg); border:none; box-shadow:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:13px; color:var(--gray);">Red actual</span>
+              <span style="font-size:13px; font-weight:600; color:var(--text-dark);">CasaWifi_5G</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:var(--gray);">Estado WiFi</span>
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">wifi</span> Conectado</div>
+            </div>
+          </div>
+
+          <!-- Instructions -->
+          <div class="card card-sm w-full">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Cómo conectarse</div>
+            <div class="step-row">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">1</div>
+              <div style="font-size:13px; color:var(--gray);">Abre Configuración de WiFi</div>
+            </div>
+            <div class="step-row">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">2</div>
+              <div style="font-size:13px; color:var(--gray);">Busca una red "KingoNet"</div>
+            </div>
+            <div class="step-row" style="margin-bottom:0;">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">3</div>
+              <div style="font-size:13px; color:var(--gray);">Conéctate y regresa a la app</div>
+            </div>
+            <button class="btn btn-outline btn-sm mt-16">
+              <span class="mi" style="font-size:18px;">settings</span>
+              Abrir Config. WiFi
+            </button>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CONNECTING MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5a. Connecting Modal</div>
+      <div class="screen-sublabel">ConnectingModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div class="spinner" style="margin:0 auto 20px;"></div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Estableciendo Conexión</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:24px;">Verificando tus credenciales y conectando...</div>
+            <div style="text-align:left;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span class="mi" style="font-size:18px; color:var(--green);">check_circle</span>
+                <span style="font-size:14px; color:var(--text-dark);">Autenticación exitosa</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div class="spinner" style="width:18px; height:18px; border-width:2px;"></div>
+                <span style="font-size:14px; color:var(--gray);">Verificando acceso a internet...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== SUCCESS MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5b. Success Modal</div>
+      <div class="screen-sublabel">SuccessModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card" style="background:var(--green-light);">
+            <div style="text-align:center; margin-bottom:16px;">
+              <div style="width:64px; height:64px; border-radius:32px; background:rgba(16,185,129,.15); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+                <span class="mi" style="font-size:36px; color:var(--green);">check_circle</span>
+              </div>
+              <div style="font-size:20px; font-weight:700; color:var(--text-dark);">¡Conexión Exitosa!</div>
+            </div>
+            <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:16px;">Tu conexión ha sido establecida correctamente</div>
+
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:18px; color:var(--green);">wifi</span>
+              <span style="font-size:14px; color:var(--text-dark);">Ya puedes navegar libremente</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+              <span class="mi" style="font-size:18px; color:var(--blue);">info</span>
+              <span style="font-size:12px; color:var(--gray);">El icono de internet puede tardar unos segundos</span>
+            </div>
+
+            <div class="info-box orange">
+              <span class="mi" style="font-size:16px; color:var(--orange); flex-shrink:0;">lightbulb</span>
+              <span style="font-size:12px; color:var(--gray);">Guarda tus credenciales en un lugar seguro</span>
+            </div>
+
+            <button class="btn btn-green mt-12">Ver Mi Plan</button>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== REGISTER PROMPT MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5c. Register Prompt</div>
+      <div class="screen-sublabel">RegisterPromptModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card" style="background:#FFF5F0;">
+            <div class="modal-header">
+              <div class="modal-icon" style="background:var(--orange-20);">
+                <span class="mi" style="font-size:24px; color:var(--orange);">person_add</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; color:var(--text-dark);">¡Activa tu Plan Ahora!</div>
+            </div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:16px;">Regístrate para acceder a todos los beneficios</div>
+
+            <div style="margin-bottom:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="mi" style="font-size:16px; color:var(--orange);">notifications</span>
+                <span style="font-size:13px; color:var(--text-dark);">Notificaciones de planes</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="mi" style="font-size:16px; color:var(--orange);">history</span>
+                <span style="font-size:13px; color:var(--text-dark);">Historial de compras</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="mi" style="font-size:16px; color:var(--orange);">local_offer</span>
+                <span style="font-size:13px; color:var(--text-dark);">Promociones exclusivas</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="mi" style="font-size:16px; color:var(--orange);">speed</span>
+                <span style="font-size:13px; color:var(--text-dark);">Activación rápida</span>
+              </div>
+            </div>
+
+            <div class="info-box orange">
+              <span class="mi" style="font-size:16px; color:var(--orange); flex-shrink:0;">lightbulb</span>
+              <span style="font-size:12px; color:var(--gray);">Regístrate con el mismo número de tu plan</span>
+            </div>
+
+            <button class="btn btn-orange mt-12 mb-8">Registrarme Ahora</button>
+            <button class="btn btn-ghost">Tal vez después</button>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== ERROR MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5d. Error Modal</div>
+      <div class="screen-sublabel">ErrorModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card">
+            <div class="modal-header">
+              <div class="modal-icon" style="background:var(--red-light);">
+                <span class="mi" style="font-size:24px; color:var(--red);">error</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; color:var(--text-dark);">Error de Conexión</div>
+            </div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:12px;">No se pudo establecer la conexión. Verifica tus credenciales.</div>
+
+            <!-- Technical details -->
+            <div style="background:#F9F9F9; border-radius:8px; padding:12px; margin-bottom:16px; font-family:monospace; font-size:11px; color:var(--gray); max-height:80px; overflow-y:auto; border:1px solid var(--gray-border);">
+              Error: AUTH_FAILED<br>
+              Code: 401<br>
+              Message: Invalid credentials
+            </div>
+
+            <div class="info-box orange">
+              <span class="mi" style="font-size:16px; color:var(--orange); flex-shrink:0;">help_outline</span>
+              <span style="font-size:12px; color:var(--gray);">Si el problema persiste, contacta a soporte técnico</span>
+            </div>
+
+            <button class="btn btn-orange mt-12">Entendido</button>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== SUPPORT MODAL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">5e. Support Modal</div>
+      <div class="screen-sublabel">SupportModal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center">
+            <div style="width:64px; height:64px; border-radius:32px; background:var(--orange-20); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:32px; color:var(--orange);">support_agent</span>
+            </div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Soporte Técnico</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Contáctanos por WhatsApp</div>
+            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:20px;">+502 4572 9718</div>
+            <button class="btn" style="background:#25D366; color:white; margin-bottom:12px;">
+              <span style="font-size:20px;">💬</span>
+              Abrir WhatsApp
+            </button>
+            <div style="font-size:12px; color:var(--gray);">Lunes a Domingo · 7AM - 7PM</div>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Fieldservice — Home</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+    <h1>Ant Fieldservice</h1>
+    <p>Home — Dashboard, Settings & Codes</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a class="active" href="02-home.html">Home</a>
+    <a href="03-bank.html">Bank</a>
+    <a href="04-operations.html">Operations</a>
+    <a href="05-tasks.html">Tasks</a>
+    <a href="06-visits.html">Visits</a>
+    <a href="07-sync.html">Sync</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== HOME (DASHBOARD) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2a. Home (Dashboard)</div>
+      <div class="screen-sublabel">Main menu grid</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="background:#f16824; height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <div style="color:white; font-size:18px; font-weight:700; letter-spacing:1px;">KINGO</div>
+          <div style="flex:1;"></div>
+          <div style="background:rgba(255,255,255,.2); padding:4px 12px; border-radius:12px; font-size:12px; color:white; font-weight:600;">v2.8.0</div>
+        </div>
+        <div class="content" style="background:#f5f5f5; overflow-y:auto; padding:20px; position:relative;">
+          <!-- Title -->
+          <div style="margin-bottom:20px;">
+            <div style="font-size:24px; font-weight:700; color:var(--text-dark);">Menu Principal</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">Selecciona una opcion</div>
+          </div>
+
+          <!-- 2-column grid -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <!-- Tareas -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">task_alt</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Tareas</div>
+            </div>
+            <!-- Banco -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">account_balance</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Banco</div>
+            </div>
+            <!-- Inventario -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">inventory</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Inventario</div>
+            </div>
+            <!-- Visitas -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">location_on</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Visitas</div>
+            </div>
+            <!-- Sync -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">sync</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Sync</div>
+            </div>
+            <!-- Ajustes -->
+            <div class="card" style="text-align:center; padding:20px 12px; margin-bottom:0; cursor:pointer;">
+              <div style="width:50px; height:50px; border-radius:25px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:white;">settings</span>
+              </div>
+              <div style="font-size:12px; font-weight:700; color:var(--text-dark);">Ajustes</div>
+            </div>
+          </div>
+
+          <!-- FAB -->
+          <div style="position:absolute; bottom:20px; right:20px; width:56px; height:56px; border-radius:28px; background:#f16824; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(241,104,36,.4); cursor:pointer;">
+            <span class="mi" style="font-size:24px; color:white;">more_vert</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME (SYNC BLOCKED) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2b. Home (Sync Blocked)</div>
+      <div class="screen-sublabel">Pending sync state</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="background:#f16824; height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <div style="color:white; font-size:18px; font-weight:700; letter-spacing:1px;">KINGO</div>
+          <div style="flex:1;"></div>
+          <div style="background:rgba(255,255,255,.2); padding:4px 12px; border-radius:12px; font-size:12px; color:white; font-weight:600;">v2.8.0</div>
+        </div>
+        <div class="content" style="background:#f5f5f5; overflow-y:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px;">
+          <!-- Sync icon -->
+          <div style="width:72px; height:72px; border-radius:36px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+            <span class="mi" style="font-size:40px; color:#f16824;">sync</span>
+          </div>
+          <div style="font-size:18px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:8px;">Sincronizacion Pendiente</div>
+          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:28px; line-height:1.5;">Tienes lotes de informacion pendientes de subir.</div>
+          <button class="btn" style="background:#f16824; color:white; max-width:280px;">
+            <span class="mi">cloud_upload</span>
+            Subir Informacion
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SETTINGS MENU ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2c. Settings Menu</div>
+      <div class="screen-sublabel">Configuration options</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="background:#f16824; height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <span class="mi" style="color:white; font-size:24px; cursor:pointer;">arrow_back</span>
+          <div style="flex:1; text-align:center; color:white; font-size:18px; font-weight:700;">Configuracion</div>
+          <div style="width:24px;"></div>
+        </div>
+        <div class="content" style="background:#f5f5f5; overflow-y:auto; padding:20px;">
+          <!-- Title -->
+          <div style="margin-bottom:20px;">
+            <div style="font-size:22px; font-weight:700; color:var(--text-dark);">Opciones de Configuracion</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">Selecciona una opcion para configurar</div>
+          </div>
+
+          <!-- Option 1: Configurar Kingo -->
+          <div class="card" style="display:flex; align-items:center; gap:14px; cursor:pointer; padding:18px;">
+            <div style="width:44px; height:44px; border-radius:22px; background:#f16824; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:22px; color:white;">solar_power</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Configurar Kingo</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">Consultar y configurar dispositivos Kingo</div>
+            </div>
+            <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+          </div>
+
+          <!-- Option 2: Restablecer Plan -->
+          <div class="card" style="display:flex; align-items:center; gap:14px; cursor:pointer; padding:18px;">
+            <div style="width:44px; height:44px; border-radius:22px; background:#0a70b9; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:22px; color:white;">restart_alt</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Restablecer Plan</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">Generar codigos de reposicion de plan</div>
+            </div>
+            <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+          </div>
+
+          <!-- Option 3: Codigos de Configuracion -->
+          <div class="card" style="display:flex; align-items:center; gap:14px; cursor:pointer; padding:18px;">
+            <div style="width:44px; height:44px; border-radius:22px; background:#41a247; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:22px; color:white;">qr_code</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Codigos de Configuracion</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">Ver codigos de configuracion disponibles</div>
+            </div>
+            <span class="mi" style="font-size:20px; color:var(--gray);">chevron_right</span>
+          </div>
+
+          <!-- Info banner -->
+          <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; border-radius:12px; background:rgba(107,114,128,.08); margin-top:8px;">
+            <span class="mi" style="font-size:18px; color:var(--gray); flex-shrink:0; margin-top:1px;">info</span>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Estas configuraciones afectan directamente los dispositivos Kingo asignados.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== KINGO SETTINGS (CONFIGURAR KINGO) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2d. Kingo Settings</div>
+      <div class="screen-sublabel">Configure Kingo device</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="background:#f16824; height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <span class="mi" style="color:white; font-size:24px; cursor:pointer;">arrow_back</span>
+          <div style="flex:1; text-align:center; color:white; font-size:18px; font-weight:700;">Configurar Kingo</div>
+          <div style="width:24px;"></div>
+        </div>
+        <div class="content" style="background:#f5f5f5; overflow-y:auto; padding:20px;">
+          <!-- Icon -->
+          <div style="text-align:center; margin-bottom:16px;">
+            <div style="width:72px; height:72px; border-radius:36px; background:#f16824; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+              <span class="mi" style="font-size:32px; color:white;">solar_power</span>
+            </div>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:4px;">Configuracion de Kingo</div>
+          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:20px;">Ingresa el ID del dispositivo para consultar</div>
+
+          <!-- Form Card -->
+          <div class="card" style="margin-bottom:16px;">
+            <div class="input-group">
+              <label>ID de Kingo</label>
+              <div class="input-wrap" style="background:#e0e0e0; border-color:#e0e0e0;">
+                <span class="mi" style="color:var(--gray);">tag</span>
+                <input type="number" placeholder="Ej: 1234567" value="1234567" style="color:var(--text-dark);">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Pais</label>
+              <div class="input-wrap" style="background:#e0e0e0; border-color:#e0e0e0;">
+                <span class="mi" style="color:var(--gray);">public</span>
+                <span style="flex:1; font-size:16px; color:var(--text-dark);">Guatemala</span>
+                <span class="mi" style="color:var(--gray);">expand_more</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <button class="btn btn-sm" style="background:#f16824; color:white;">
+                <span class="mi" style="font-size:18px;">search</span>
+                Consultar
+              </button>
+              <button class="btn btn-sm" style="background:transparent; border:1.5px solid #0a70b9; color:#0a70b9;">
+                <span class="mi" style="font-size:18px;">clear</span>
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Results Card -->
+          <div class="card" style="padding:20px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
+              <span style="font-size:16px; font-weight:700; color:var(--text-dark);">Informacion de Configuracion</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--gray-border);">
+              <div style="font-size:13px; color:var(--gray); width:100px;">ID</div>
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">1234567</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--gray-border);">
+              <div style="font-size:13px; color:var(--gray); width:100px;">Modelo</div>
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Kingo - Luz</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--gray-border);">
+              <div style="font-size:13px; color:var(--gray); width:100px;">Inicializador</div>
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">8472 3910</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--gray-border);">
+              <div style="font-size:13px; color:var(--gray); width:100px;">Modo Admin</div>
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">5839 2847</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 0;">
+              <div style="font-size:13px; color:var(--gray); width:100px;">Codigo Hora</div>
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">9284 1037</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REPOSITION CODE (RESTABLECER PLAN) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2e. Reposition Code</div>
+      <div class="screen-sublabel">Reset plan code generator</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="background:#f16824; height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <span class="mi" style="color:white; font-size:24px; cursor:pointer;">arrow_back</span>
+          <div style="flex:1; text-align:center; color:white; font-size:18px; font-weight:700;">Restablecer Plan</div>
+          <div style="width:24px;"></div>
+        </div>
+        <div class="content" style="background:#f5f5f5; overflow-y:auto; padding:20px;">
+          <!-- Icon -->
+          <div style="text-align:center; margin-bottom:16px;">
+            <div style="width:72px; height:72px; border-radius:36px; background:#0a70b9; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+              <span class="mi" style="font-size:32px; color:white;">restart_alt</span>
+            </div>
+          </div>
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); text-align:center; margin-bottom:4px;">Restablecer Plan</div>
+          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:20px;">Genera un codigo para restablecer el plan del Kingo</div>
+
+          <!-- Form Card -->
+          <div class="card" style="margin-bottom:16px;">
+            <div class="input-group">
+              <label>ID de Kingo</label>
+              <div class="input-wrap" style="background:#e0e0e0; border-color:#e0e0e0;">
+                <span class="mi" style="color:var(--gray);">tag</span>
+                <input type="number" placeholder="Ej: 1234567" value="1234567" style="color:var(--text-dark);">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Motivo</label>
+              <div style="border:1.5px solid #e0e0e0; border-radius:12px; background:#e0e0e0; padding:12px 16px; min-height:80px;">
+                <span style="font-size:14px; color:var(--gray);">Describe el motivo del restablecimiento...</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+              <div class="input-group" style="margin-bottom:0;">
+                <label>Pais</label>
+                <div class="input-wrap" style="background:#e0e0e0; border-color:#e0e0e0;">
+                  <span style="flex:1; font-size:14px; color:var(--text-dark);">Guatemala</span>
+                  <span class="mi" style="color:var(--gray); font-size:18px;">expand_more</span>
+                </div>
+              </div>
+              <div class="input-group" style="margin-bottom:0;">
+                <label>Plan</label>
+                <div class="input-wrap" style="background:#e0e0e0; border-color:#e0e0e0;">
+                  <span style="flex:1; font-size:14px; color:var(--text-dark);">Plan 30</span>
+                  <span class="mi" style="color:var(--gray); font-size:18px;">expand_more</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <button class="btn btn-sm" style="background:#0a70b9; color:white;">
+                <span class="mi" style="font-size:18px;">vpn_key</span>
+                Generar Codigo
+              </button>
+              <button class="btn btn-sm" style="background:transparent; border:1.5px solid #0a70b9; color:#0a70b9;">
+                <span class="mi" style="font-size:18px;">clear</span>
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Display -->
+          <div style="border:2px dashed #0a70b9; border-radius:16px; padding:24px; text-align:center; background:rgba(10,112,185,.05);">
+            <div style="font-size:13px; color:var(--gray); margin-bottom:8px;">Codigo Generado</div>
+            <div style="font-size:24px; font-weight:700; color:#0a70b9; letter-spacing:2px;">4829 3847</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

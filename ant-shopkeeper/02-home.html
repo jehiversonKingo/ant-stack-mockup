@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Home Screen</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Home — Dashboard, Wallet & Actions</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a class="active" href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== HOME (NORMAL) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2a. Home (Normal)</div>
+      <div class="screen-sublabel">Dashboard with wallet & projects</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Header -->
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:#f16824;">menu</span></div>
+          <div class="logo"><span class="logo-text" style="color:#f16824;">Inicio</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Wallet Card -->
+          <div style="background:#f16824; border-radius:12px; padding:20px; color:white; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+              <div>
+                <div style="font-size:18px; font-weight:700;">Maria Garcia</div>
+                <div style="font-size:13px; opacity:.9;">ID 12345</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+              <span class="mio" style="font-size:50px; opacity:.9;">account_balance_wallet</span>
+              <div>
+                <div style="font-size:24px; font-weight:700;">Q 1,250.50</div>
+                <div style="font-size:13px; opacity:.8;">Total Balance</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(255,255,255,.2); margin:14px 0;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px;">
+              <span>FB: 15/03/2026</span>
+              <span style="opacity:.5;">|</span>
+              <span>FA: 19/02/2026</span>
+            </div>
+          </div>
+
+          <!-- Projects Section -->
+          <div style="background:#f16824; border-radius:4px; padding:8px 14px; margin-bottom:12px;">
+            <span style="color:white; font-size:14px; font-weight:700;">Proyectos</span>
+          </div>
+
+          <!-- Project Card 1 -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+            <div style="flex:1;">
+              <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Kingo Energia</div>
+              <div><span style="font-size:16px; font-weight:700; color:#f16824;">Q 850.00</span> <span style="font-size:13px; color:var(--gray);">Saldo</span></div>
+            </div>
+            <div style="width:70px; height:70px; background:var(--gray-bg); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:32px; color:var(--gray);">bolt</span>
+            </div>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+            <div style="flex:1;">
+              <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Viasat Internet</div>
+              <div><span style="font-size:16px; font-weight:700; color:#f16824;">Q 400.50</span> <span style="font-size:13px; color:var(--gray);">Saldo</span></div>
+            </div>
+            <div style="width:70px; height:70px; background:var(--gray-bg); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:32px; color:var(--gray);">router</span>
+            </div>
+          </div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME (ACTION MODAL) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2b. Home (Action Modal)</div>
+      <div class="screen-sublabel">Action selection overlay</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Header dimmed -->
+        <div class="header" style="filter:brightness(.7);">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:#f16824;">menu</span></div>
+          <div class="logo"><span class="logo-text" style="color:#f16824;">Inicio</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <!-- Modal -->
+        <div class="modal-overlay">
+          <div class="modal-card">
+            <!-- Header -->
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+              <span class="mi" style="font-size:28px; color:#f16824;">touch_app</span>
+              <div style="font-size:22px; font-weight:700; color:var(--text-dark);">Selecciona una Accion</div>
+            </div>
+            <!-- Action Cards -->
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+              <!-- Compra -->
+              <div style="background:#f16824; border-radius:12px; padding:16px; display:flex; align-items:center; gap:14px; color:white; cursor:pointer;">
+                <span class="mi" style="font-size:28px;">shopping_cart</span>
+                <div>
+                  <div style="font-size:16px; font-weight:700;">Compra</div>
+                  <div style="font-size:13px; opacity:.85;">Comprar saldo</div>
+                </div>
+              </div>
+              <!-- Venta -->
+              <div style="background:#41a247; border-radius:12px; padding:16px; display:flex; align-items:center; gap:14px; color:white; cursor:pointer;">
+                <span class="mi" style="font-size:28px;">point_of_sale</span>
+                <div>
+                  <div style="font-size:16px; font-weight:700;">Venta</div>
+                  <div style="font-size:13px; opacity:.85;">Vender a cliente</div>
+                </div>
+              </div>
+              <!-- Mis Ventas -->
+              <div style="background:#0a70b9; border-radius:12px; padding:16px; display:flex; align-items:center; gap:14px; color:white; cursor:pointer;">
+                <span class="mi" style="font-size:28px;">receipt_long</span>
+                <div>
+                  <div style="font-size:16px; font-weight:700;">Mis Ventas</div>
+                  <div style="font-size:13px; opacity:.85;">Ver historial</div>
+                </div>
+              </div>
+            </div>
+            <!-- Cancel -->
+            <button class="btn" style="background:var(--gray-bg); color:var(--gray);">Cancelar</button>
+          </div>
+        </div>
+        <!-- Tab Bar dimmed -->
+        <div class="tab-bar" style="filter:brightness(.7);">
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME (BLOCKED - NO INTERNET) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2c. Home (No Internet)</div>
+      <div class="screen-sublabel">Blocked - no connection</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px; color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Header -->
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:#f16824;">menu</span></div>
+          <div class="logo"><span class="logo-text" style="color:#f16824;">Inicio</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+          <span class="mi" style="font-size:80px; color:#f16824; margin-bottom:16px;">wifi_off</span>
+          <div style="font-size:20px; font-weight:700; color:#f16824; margin-bottom:10px;">Sin Conexion a Internet</div>
+          <div style="font-size:16px; color:var(--text-dark); margin-bottom:8px;">Esta aplicacion necesita conexion a internet para funcionar.</div>
+          <div style="font-size:14px; color:var(--gray); margin-bottom:28px;">Por favor verifica tu conexion e intenta nuevamente.</div>
+          <button class="btn" style="background:#f16824; color:white; width:auto; padding:16px 48px;">Reintentar</button>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HOME (BLOCKED - PAYMENT DUE) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2d. Home (Payment Due)</div>
+      <div class="screen-sublabel">Blocked - falta de pago</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Header -->
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:#f16824;">menu</span></div>
+          <div class="logo"><span class="logo-text" style="color:#f16824;">Inicio</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <span class="mi" style="font-size:60px; color:#f16824; margin-bottom:16px; margin-top:24px;">app_blocking</span>
+
+          <!-- Info card with orange border -->
+          <div style="border:2px solid #f16824; border-radius:12px; padding:16px; width:100%; margin-bottom:20px; text-align:left;">
+            <div style="font-size:14px; color:#f16824; font-weight:700; margin-bottom:6px;">ID Tendero: 12345</div>
+            <div style="font-size:14px; color:#f16824; font-weight:700; margin-bottom:6px;">Fecha de bloqueo: 15/03/2026</div>
+            <div style="font-size:14px; color:#f16824; font-weight:700;">Motivo: Falta de pago</div>
+          </div>
+
+          <!-- Debt Amount -->
+          <div style="margin-bottom:24px;">
+            <div style="font-size:14px; color:var(--gray); margin-bottom:4px;">Deuda Total</div>
+            <div style="font-size:28px; font-weight:700; color:#f16824;">Q 5,000.00</div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display:flex; gap:10px; width:100%;">
+            <button class="btn" style="background:#f16824; color:white; flex:1; padding:14px 12px; font-size:14px;">
+              <span class="mi" style="font-size:18px;">receipt</span>
+              Subir Boleta
+            </button>
+            <button class="btn" style="background:#41a247; color:white; flex:1; padding:14px 12px; font-size:14px;">
+              <span class="mi" style="font-size:18px;">person</span>
+              Pagar a Agente
+            </button>
+          </div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== DRAWER NAVIGATION ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">2e. Drawer Navigation</div>
+      <div class="screen-sublabel">Side menu open</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Background (dimmed header + content) -->
+        <div style="flex:1; position:relative; display:flex; flex-direction:column;">
+          <!-- Drawer Overlay -->
+          <div class="drawer-overlay">
+            <!-- Drawer Panel -->
+            <div class="drawer-panel">
+              <!-- Drawer Header -->
+              <div style="background:#f16824; padding:32px 20px 20px; color:white;">
+                <div style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+                  <span style="font-size:20px; font-weight:700; color:white;">MG</span>
+                </div>
+                <div style="font-size:16px; font-weight:700;">Maria Garcia</div>
+                <div style="font-size:13px; opacity:.85;">Tendero</div>
+              </div>
+              <!-- Menu Items -->
+              <div style="flex:1; padding:12px 0; overflow-y:auto;">
+                <!-- Active Item -->
+                <div style="display:flex; align-items:center; gap:14px; padding:12px 20px; background:rgba(241,104,36,.1); color:#f16824; font-weight:600; font-size:14px;">
+                  <span class="mi" style="font-size:22px;">home</span>
+                  Inicio
+                </div>
+                <div style="display:flex; align-items:center; gap:14px; padding:12px 20px; color:var(--text-dark); font-size:14px;">
+                  <span class="mi" style="font-size:22px; color:var(--gray);">account_balance_wallet</span>
+                  Billetera
+                </div>
+                <div style="display:flex; align-items:center; gap:14px; padding:12px 20px; color:var(--text-dark); font-size:14px;">
+                  <span class="mi" style="font-size:22px; color:var(--gray);">description</span>
+                  Facturas
+                </div>
+                <div style="display:flex; align-items:center; gap:14px; padding:12px 20px; color:var(--text-dark); font-size:14px;">
+                  <span class="mi" style="font-size:22px; color:var(--gray);">credit_card</span>
+                  Pago de billetera
+                </div>
+                <!-- Divider -->
+                <div class="divider" style="margin:8px 20px;"></div>
+                <div style="padding:8px 20px; font-size:12px; color:var(--gray); font-weight:600; text-transform:uppercase; letter-spacing:1px;">Opciones</div>
+              </div>
+              <!-- Drawer Footer -->
+              <div style="padding:16px 20px; border-top:1px solid var(--gray-border);">
+                <div style="font-size:12px; color:var(--gray);">Kingo Net</div>
+                <div style="font-size:11px; color:var(--gray); opacity:.7;">Shopkeeper 2.11.21</div>
+              </div>
+            </div>
+            <!-- Dim area -->
+            <div class="drawer-dim"></div>
+          </div>
+        </div>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

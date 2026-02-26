@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — Features</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header">
+    <h1>Ant Connect</h1>
+    <p>Features — History, Subscriptions, Notifications & Scan</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a class="active" href="03-features.html">Features</a>
+    <a href="04-navigation.html">Navigation</a>
+    <a href="05-gobierno.html">Gobierno</a>
+    <a href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== HISTORY - ALL ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6a. History (All)</div>
+      <div class="screen-sublabel">(app)/history.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Historial</div>
+
+          <!-- Filter tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:20px;">
+            <div style="padding:8px 16px; border-radius:20px; background:var(--orange); color:white; font-size:13px; font-weight:600;">Todos</div>
+            <div style="padding:8px 16px; border-radius:20px; background:var(--gray-bg); color:var(--gray); font-size:13px; font-weight:600;">Activos</div>
+            <div style="padding:8px 16px; border-radius:20px; background:var(--gray-bg); color:var(--gray); font-size:13px; font-weight:600;">Expirados</div>
+          </div>
+
+          <!-- Purchase Card 1 - Active -->
+          <div class="card card-sm" style="border-left:4px solid var(--green);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">1 Semana</div>
+                <div style="font-size:12px; color:var(--gray);">16 Feb 2026</div>
+              </div>
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">check_circle</span> Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--green);">wifi</span>
+                <span style="font-size:13px; color:var(--gray);">120 MB / 500 MB</span>
+              </div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 25.00</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+              <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+              <span style="font-size:12px; color:var(--gray);">Expira: 23 Feb 2026</span>
+            </div>
+          </div>
+
+          <!-- Purchase Card 2 - Active -->
+          <div class="card card-sm" style="border-left:4px solid var(--green);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">3 Días</div>
+                <div style="font-size:12px; color:var(--gray);">10 Feb 2026</div>
+              </div>
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">check_circle</span> Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--green);">wifi</span>
+                <span style="font-size:13px; color:var(--gray);">50 MB / 200 MB</span>
+              </div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 10.00</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+              <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+              <span style="font-size:12px; color:var(--gray);">Expira: 13 Feb 2026</span>
+            </div>
+          </div>
+
+          <!-- Purchase Card 3 - Expired -->
+          <div class="card card-sm" style="border-left:4px solid var(--red); opacity:.7;">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">1 Semana</div>
+                <div style="font-size:12px; color:var(--gray);">01 Feb 2026</div>
+              </div>
+              <div class="badge badge-red"><span class="mi" style="font-size:12px;">cancel</span> Expirado</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--red);">wifi_off</span>
+                <span style="font-size:13px; color:var(--gray);">500 MB / 500 MB</span>
+              </div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 25.00</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
+              <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
+              <span style="font-size:12px; color:var(--gray);">Expiró: 08 Feb 2026</span>
+            </div>
+          </div>
+
+          <!-- Purchase Card 4 - Expired -->
+          <div class="card card-sm" style="border-left:4px solid var(--red); opacity:.7;">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">1 Mes</div>
+                <div style="font-size:12px; color:var(--gray);">15 Ene 2026</div>
+              </div>
+              <div class="badge badge-red"><span class="mi" style="font-size:12px;">cancel</span> Expirado</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:var(--red);">wifi_off</span>
+                <span style="font-size:13px; color:var(--gray);">2.1 GB / 2 GB</span>
+              </div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 75.00</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item active"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HISTORY - ACTIVE FILTER ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6b. History (Active Only)</div>
+      <div class="screen-sublabel">Filtered view</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Historial</div>
+          <div style="display:flex; gap:8px; margin-bottom:20px;">
+            <div style="padding:8px 16px; border-radius:20px; background:var(--gray-bg); color:var(--gray); font-size:13px; font-weight:600;">Todos</div>
+            <div style="padding:8px 16px; border-radius:20px; background:var(--green); color:white; font-size:13px; font-weight:600;">Activos</div>
+            <div style="padding:8px 16px; border-radius:20px; background:var(--gray-bg); color:var(--gray); font-size:13px; font-weight:600;">Expirados</div>
+          </div>
+          <div class="card card-sm" style="border-left:4px solid var(--green);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">1 Semana</div>
+                <div style="font-size:12px; color:var(--gray);">16 Feb 2026</div>
+              </div>
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">check_circle</span> Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;"><span class="mi" style="font-size:16px; color:var(--green);">wifi</span><span style="font-size:13px; color:var(--gray);">120 MB / 500 MB</span></div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 25.00</div>
+            </div>
+          </div>
+          <div class="card card-sm" style="border-left:4px solid var(--green);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">3 Días</div>
+                <div style="font-size:12px; color:var(--gray);">10 Feb 2026</div>
+              </div>
+              <div class="badge badge-green"><span class="mi" style="font-size:12px;">check_circle</span> Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:6px;"><span class="mi" style="font-size:16px; color:var(--green);">wifi</span><span style="font-size:13px; color:var(--gray);">50 MB / 200 MB</span></div>
+              <div style="font-size:16px; font-weight:700; color:var(--orange);">Q 10.00</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item active"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SUBSCRIPTIONS - ACTIVE ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7a. Subscriptions</div>
+      <div class="screen-sublabel">subscriptions.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Suscripciones</div>
+          <div style="font-size:14px; color:var(--gray); margin-bottom:20px;">Tus planes NeoPlay activos</div>
+
+          <!-- Subscription Card 1 -->
+          <div class="card" style="border:1px solid rgba(16,185,129,.2);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(252,107,23,.1); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:24px; color:var(--orange);">movie</span>
+                </div>
+                <div>
+                  <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Kingo Play Básico</div>
+                  <div style="font-size:12px; color:var(--gray);">Plan mensual</div>
+                </div>
+              </div>
+              <div class="badge badge-green">Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+              <div><div style="font-size:11px; color:var(--gray);">Vence en</div><div style="font-size:14px; font-weight:600; color:var(--text-dark);">15 días</div></div>
+              <div><div style="font-size:11px; color:var(--gray);">Películas</div><div style="font-size:14px; font-weight:600; color:var(--text-dark);">3 / 10</div></div>
+            </div>
+            <!-- Progress -->
+            <div style="height:6px; background:#F0F0F0; border-radius:3px; overflow:hidden;">
+              <div style="width:30%; height:100%; background:var(--green); border-radius:3px;"></div>
+            </div>
+            <button class="btn btn-orange btn-sm mt-12">Abrir NeoPlay</button>
+          </div>
+
+          <!-- Subscription Card 2 -->
+          <div class="card" style="border:1px solid rgba(16,185,129,.2);">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(252,107,23,.1); display:flex; align-items:center; justify-content:center;">
+                  <span class="mi" style="font-size:24px; color:var(--orange);">star</span>
+                </div>
+                <div>
+                  <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Kingo Play Premium</div>
+                  <div style="font-size:12px; color:var(--gray);">Plan ilimitado</div>
+                </div>
+              </div>
+              <div class="badge badge-green">Activo</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+              <div><div style="font-size:11px; color:var(--gray);">Vence en</div><div style="font-size:14px; font-weight:600; color:var(--text-dark);">28 días</div></div>
+              <div><div style="font-size:11px; color:var(--gray);">Películas</div><div style="font-size:14px; font-weight:600; color:var(--orange);">Ilimitadas</div></div>
+            </div>
+            <div style="height:6px; background:#F0F0F0; border-radius:3px;"></div>
+            <button class="btn btn-orange btn-sm mt-12">Abrir NeoPlay</button>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item active"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SUBSCRIPTIONS - NO KINGONET ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7b. Subscriptions (No KingoNet)</div>
+      <div class="screen-sublabel">NetworkNotAvailable</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <div style="width:80px; height:80px; border-radius:40px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+            <span class="mi" style="font-size:40px; color:var(--gray);">wifi_off</span>
+          </div>
+          <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Sin conexión a KingoNet</div>
+          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:24px;">Conéctate a KingoNet para ver tus suscripciones</div>
+
+          <div class="card card-sm w-full" style="background:var(--gray-bg); border:none; box-shadow:none;">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Cómo conectarse</div>
+            <div class="step-row">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">1</div>
+              <div style="font-size:13px; color:var(--gray);">Abre Configuración de WiFi</div>
+            </div>
+            <div class="step-row">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">2</div>
+              <div style="font-size:13px; color:var(--gray);">Busca una red "KingoNet"</div>
+            </div>
+            <div class="step-row" style="margin-bottom:0;">
+              <div class="step-num" style="width:28px; height:28px; font-size:12px;">3</div>
+              <div style="font-size:13px; color:var(--gray);">Conéctate y regresa a la app</div>
+            </div>
+            <button class="btn btn-outline btn-sm mt-16"><span class="mi" style="font-size:18px;">settings</span> Abrir Config. WiFi</button>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item active"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== NOTIFICATIONS ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">8. Notifications</div>
+      <div class="screen-sublabel">(others)/notification.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:20px;">Notificaciones</div>
+
+          <!-- Promo notification (unread) -->
+          <div class="card card-sm" style="border-left:4px solid var(--orange); background:#FFFAF6;">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:var(--orange-20); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--orange);">local_offer</span>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">¡Promoción Especial!</div>
+                  <div style="width:8px; height:8px; border-radius:4px; background:var(--orange); flex-shrink:0; margin-top:4px;"></div>
+                </div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">50% de descuento en tu próximo plan semanal. Válido hasta el 20 de febrero.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 2 horas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info notification -->
+          <div class="card card-sm" style="border-left:4px solid var(--blue);">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:rgba(59,130,246,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--blue);">info</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Mantenimiento Programado</div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">El servicio estará en mantenimiento el 18 de febrero de 2AM a 4AM.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 1 día</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Success notification -->
+          <div class="card card-sm" style="border-left:4px solid var(--green);">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:rgba(16,185,129,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--green);">check_circle</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Plan Activado</div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">Tu plan de 1 Semana ha sido activado correctamente.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 3 días</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warning notification -->
+          <div class="card card-sm" style="border-left:4px solid var(--amber);">
+            <div style="display:flex; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:18px; background:rgba(245,158,11,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:var(--amber);">warning</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Plan por Expirar</div>
+                <div style="font-size:13px; color:var(--gray); margin-top:2px;">Tu plan actual expira mañana. Renueva para seguir conectado.</div>
+                <div style="font-size:11px; color:var(--gray); margin-top:6px; opacity:.7;">Hace 5 días</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SCAN (Placeholder) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9. Scan Screen</div>
+      <div class="screen-sublabel">(app)/scan.tsx - Placeholder</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content" style="background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;">
+          <!-- Camera viewfinder -->
+          <div style="width:250px; height:250px; position:relative;">
+            <!-- Corner brackets -->
+            <div style="position:absolute; top:0; left:0; width:40px; height:40px; border-top:3px solid var(--orange); border-left:3px solid var(--orange);"></div>
+            <div style="position:absolute; top:0; right:0; width:40px; height:40px; border-top:3px solid var(--orange); border-right:3px solid var(--orange);"></div>
+            <div style="position:absolute; bottom:0; left:0; width:40px; height:40px; border-bottom:3px solid var(--orange); border-left:3px solid var(--orange);"></div>
+            <div style="position:absolute; bottom:0; right:0; width:40px; height:40px; border-bottom:3px solid var(--orange); border-right:3px solid var(--orange);"></div>
+            <!-- Scan line -->
+            <div style="position:absolute; top:50%; left:10px; right:10px; height:2px; background:var(--orange); opacity:.8;"></div>
+          </div>
+          <div style="color:white; font-size:16px; font-weight:600; margin-top:24px;">Escanear código QR</div>
+          <div style="color:rgba(255,255,255,.6); font-size:13px; margin-top:6px;">Alinea el código dentro del recuadro</div>
+
+          <!-- Bottom controls -->
+          <div style="position:absolute; bottom:24px; display:flex; gap:32px; align-items:center;">
+            <div style="width:44px; height:44px; border-radius:22px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:22px; color:white;">flash_off</span>
+            </div>
+            <div style="width:44px; height:44px; border-radius:22px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:22px; color:white;">refresh</span>
+            </div>
+            <div style="width:44px; height:44px; border-radius:22px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;">
+              <span class="mi" style="font-size:22px; color:white;">close</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

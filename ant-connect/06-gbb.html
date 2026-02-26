@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — GBB Green Business Belt</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    :root {
+      --gbb-green: #2D8B4E;
+      --gbb-green-light: #E6F5EC;
+      --gbb-green-dark: #1A5C32;
+      --gbb-earth: #8B6914;
+      --gbb-earth-light: #FFF8E7;
+      --gbb-sky: #0288D1;
+      --gbb-sky-light: #E1F5FE;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #1A5C32 0%, #2D8B4E 100%);">
+    <h1>Ant Connect</h1>
+    <p>GBB — Green Business Belt: Clima, Precios Agricolas & Herramientas para Productores</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-features.html">Features</a>
+    <a href="04-navigation.html">Navigation</a>
+    <a href="05-gobierno.html">Gobierno</a>
+    <a class="active" href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ===================================================================== -->
+    <!-- GBB-1. DRAWER CON OPCION GBB                                          -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-1. Drawer + Green Business Belt</div>
+      <div class="screen-sublabel">Nueva opcion en el menu lateral</div>
+      <div class="phone" style="overflow:hidden;">
+        <div class="drawer-overlay">
+          <div class="drawer-panel">
+            <div style="background:var(--orange); padding:48px 20px 24px; color:white;">
+              <div style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.2); border:2px solid white; display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:24px; font-weight:700;">JC</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; margin-top:12px;">Juan Carlos Perez</div>
+              <div style="font-size:13px; opacity:.8; margin-top:2px;">+502 5555 1234</div>
+            </div>
+            <div style="flex:1; padding:8px 12px; overflow-y:auto;">
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">home</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Inicio</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">schedule</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Historial</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">confirmation_number</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Suscripciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">notifications</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Notificaciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gov-blue); font-size:22px;">account_balance</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gov-blue);">Gobierno</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <div style="height:1px; background:var(--gray-border); margin:12px 0;"></div>
+              <!-- GBB Option (active) -->
+              <div style="display:flex; align-items:center; padding:14px 16px; background:var(--gbb-green-light); border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gbb-green); font-size:22px;">eco</span>
+                <span style="flex:1; font-size:15px; font-weight:600; color:var(--gbb-green);">Green Business Belt</span>
+                <span style="background:var(--gbb-green); color:white; font-size:9px; font-weight:700; padding:2px 8px; border-radius:8px;">NUEVO</span>
+              </div>
+            </div>
+            <div style="padding:12px 16px; border-top:1px solid var(--gray-border);">
+              <div style="display:flex; align-items:center; padding:12px; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">person</span>
+                <span style="font-size:15px; font-weight:500; color:var(--gray);">Mi Perfil</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:12px; gap:14px;">
+                <span class="mi" style="color:var(--red); font-size:22px;">logout</span>
+                <span style="font-size:15px; font-weight:500; color:var(--red);">Cerrar Sesion</span>
+              </div>
+            </div>
+          </div>
+          <div class="drawer-dim"></div>
+        </div>
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">notifications</span></div>
+        </div>
+        <div class="content"></div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span>Inicio</div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">person</span>Perfil</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-2. GBB DASHBOARD (Pantalla principal del modulo)                   -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-2. Dashboard Principal</div>
+      <div class="screen-sublabel">Hub del modulo con clima y precios</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <!-- GBB Header -->
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 20px; display:flex; align-items:center; gap:12px;">
+          <div style="width:40px; height:40px; border-radius:20px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="font-size:22px;">arrow_back</span>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:20px; font-weight:700;">Green Business Belt</div>
+            <div style="font-size:12px; opacity:.8;">Herramientas para tu produccion</div>
+          </div>
+          <span class="mi" style="font-size:24px;">eco</span>
+        </div>
+        <div class="content content-pad" style="background:#F8FBF8;">
+          <!-- Location Banner -->
+          <div style="display:flex; align-items:center; gap:10px; background:white; border-radius:14px; padding:14px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <span class="mi" style="font-size:20px; color:var(--gbb-green);">location_on</span>
+            <div style="flex:1;">
+              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">San Marcos, Guatemala</div>
+              <div style="font-size:11px; color:var(--gray);">Altitud: 2,398 msnm</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gray);">edit</span>
+          </div>
+
+          <!-- Weather Summary Card -->
+          <div style="background:linear-gradient(135deg, #0288D1 0%, #4FC3F7 100%); border-radius:18px; padding:20px; color:white; margin-bottom:16px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:-10px; right:-10px; font-size:80px; opacity:.15;">
+              <span class="mi">wb_cloudy</span>
+            </div>
+            <div style="font-size:12px; font-weight:500; opacity:.8; margin-bottom:4px;">HOY · 23 Feb 2026</div>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div>
+                <div style="font-size:48px; font-weight:800; line-height:1;">18°</div>
+                <div style="font-size:13px; opacity:.9;">Parcialmente nublado</div>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; opacity:.8;">Max</span>
+                  <span style="font-size:14px; font-weight:700;">24°</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; opacity:.8;">Min</span>
+                  <span style="font-size:14px; font-weight:700;">12°</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                  <span style="font-size:12px; opacity:.8;">Lluvia</span>
+                  <span style="font-size:14px; font-weight:700;">35%</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:14px;">
+              <div style="flex:1; background:rgba(255,255,255,.2); border-radius:10px; padding:8px; text-align:center;">
+                <span class="mi" style="font-size:16px;">water_drop</span>
+                <div style="font-size:11px; margin-top:2px;">Humedad</div>
+                <div style="font-size:14px; font-weight:700;">72%</div>
+              </div>
+              <div style="flex:1; background:rgba(255,255,255,.2); border-radius:10px; padding:8px; text-align:center;">
+                <span class="mi" style="font-size:16px;">air</span>
+                <div style="font-size:11px; margin-top:2px;">Viento</div>
+                <div style="font-size:14px; font-weight:700;">12 km/h</div>
+              </div>
+              <div style="flex:1; background:rgba(255,255,255,.2); border-radius:10px; padding:8px; text-align:center;">
+                <span class="mi" style="font-size:16px;">wb_sunny</span>
+                <div style="font-size:11px; margin-top:2px;">UV</div>
+                <div style="font-size:14px; font-weight:700;">6 Alto</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-sky-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-sky);">wb_cloudy</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Pronostico</div>
+              <div style="font-size:11px; color:var(--gray);">7 dias</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-earth-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-earth);">trending_up</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Precios</div>
+              <div style="font-size:11px; color:var(--gray);">Commodities</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--red);">warning</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Alertas</div>
+              <div style="font-size:11px; color:var(--gray);">Clima severo</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-green-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-green);">grass</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Suelo</div>
+              <div style="font-size:11px; color:var(--gray);">Humedad</div>
+            </div>
+          </div>
+
+          <!-- Commodity Quick Glance -->
+          <div style="background:white; border-radius:14px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Precios del dia</div>
+              <span style="font-size:12px; color:var(--gbb-green); font-weight:600;">Ver todos &rarr;</span>
+            </div>
+            <div style="display:flex; align-items:center; padding:10px 0; border-bottom:1px solid var(--gray-border); gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:var(--gbb-earth-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:var(--gbb-earth);">local_cafe</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Cafe Pergamino</div>
+                <div style="font-size:11px; color:var(--gray);">ICO Composite</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Q 1,285</div>
+                <div style="font-size:11px; color:var(--green); font-weight:600;">+2.3% <span class="mi" style="font-size:12px;">arrow_upward</span></div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:10px 0; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:rgba(139,105,20,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:var(--gbb-earth);">spa</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Cacao</div>
+                <div style="font-size:11px; color:var(--gray);">ICCO Daily Price</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Q 840</div>
+                <div style="font-size:11px; color:var(--red); font-weight:600;">-1.1% <span class="mi" style="font-size:12px;">arrow_downward</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-3. PRONOSTICO 7 DIAS                                               -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-3. Pronostico 7 Dias</div>
+      <div class="screen-sublabel">Open Meteo API — Datos del clima semanal</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-sky); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-sky); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Pronostico 7 Dias</div>
+          <span class="mi" style="font-size:22px;">my_location</span>
+        </div>
+        <div class="content content-pad" style="background:#F0F8FF;">
+          <!-- Today highlight -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="font-size:12px; font-weight:600; color:var(--gbb-sky); margin-bottom:8px;">HOY — DOMINGO 23</div>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <span class="mi" style="font-size:48px; color:#FFA726;">wb_sunny</span>
+              <div style="flex:1;">
+                <div style="font-size:32px; font-weight:800; color:var(--text-dark);">18°C</div>
+                <div style="font-size:13px; color:var(--gray);">Parcialmente nublado</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:13px; color:var(--red);">24° <span class="mi" style="font-size:12px;">arrow_upward</span></div>
+                <div style="font-size:13px; color:var(--blue);">12° <span class="mi" style="font-size:12px;">arrow_downward</span></div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:12px;">
+              <div style="flex:1; background:var(--gbb-sky-light); border-radius:8px; padding:8px; text-align:center; font-size:12px;">
+                <span class="mi" style="font-size:14px; color:var(--gbb-sky);">water_drop</span> 35%
+              </div>
+              <div style="flex:1; background:var(--gbb-sky-light); border-radius:8px; padding:8px; text-align:center; font-size:12px;">
+                <span class="mi" style="font-size:14px; color:var(--gbb-sky);">air</span> 12 km/h
+              </div>
+              <div style="flex:1; background:rgba(255,167,38,.1); border-radius:8px; padding:8px; text-align:center; font-size:12px;">
+                <span class="mi" style="font-size:14px; color:#FFA726;">wb_sunny</span> UV 6
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming days -->
+          <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">PROXIMOS DIAS</div>
+          <!-- Day rows -->
+          <div style="background:white; border-radius:16px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Lun 24</div>
+              <span class="mi" style="font-size:24px; color:#78909C; margin-right:12px;">cloud</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Nublado</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">65%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">22°</span>
+                <span style="color:var(--gray);">11°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Mar 25</div>
+              <span class="mi" style="font-size:24px; color:var(--gbb-sky); margin-right:12px;">thunderstorm</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Tormenta</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">90%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">19°</span>
+                <span style="color:var(--gray);">10°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border); background:rgba(239,68,68,.04);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Mie 26</div>
+              <span class="mi" style="font-size:24px; color:var(--red); margin-right:12px;">thunderstorm</span>
+              <div style="flex:1; font-size:12px; color:var(--red); font-weight:600;">Tormenta fuerte</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--red);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--red);">95%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">17°</span>
+                <span style="color:var(--gray);">9°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Jue 27</div>
+              <span class="mi" style="font-size:24px; color:#78909C; margin-right:12px;">cloud</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Nublado</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">40%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">21°</span>
+                <span style="color:var(--gray);">11°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Vie 28</div>
+              <span class="mi" style="font-size:24px; color:#FFA726; margin-right:12px;">wb_sunny</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Soleado</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">10%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">25°</span>
+                <span style="color:var(--gray);">13°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; border-bottom:1px solid var(--gray-border);">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Sab 01</div>
+              <span class="mi" style="font-size:24px; color:#FFA726; margin-right:12px;">wb_cloudy</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Parcial</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">25%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">23°</span>
+                <span style="color:var(--gray);">12°</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px;">
+              <div style="width:60px; font-size:13px; font-weight:600; color:var(--text-dark);">Dom 02</div>
+              <span class="mi" style="font-size:24px; color:#FFA726; margin-right:12px;">wb_sunny</span>
+              <div style="flex:1; font-size:12px; color:var(--gray);">Soleado</div>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:var(--blue);">water_drop</span>
+                <span style="font-size:12px; font-weight:600; color:var(--blue);">15%</span>
+              </div>
+              <div style="width:55px; text-align:right; font-size:13px;">
+                <span style="color:var(--red); font-weight:600;">24°</span>
+                <span style="color:var(--gray);">13°</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Source -->
+          <div style="text-align:center; margin-top:16px; font-size:11px; color:var(--gray);">
+            <span class="mi" style="font-size:14px;">info</span> Datos: Open Meteo API — Actualizados cada 6h
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-4. ALERTAS CLIMATICAS                                              -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-4. Alertas Climaticas</div>
+      <div class="screen-sublabel">Tormentas, heladas, lluvias fuertes</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Alertas del Clima</div>
+          <span class="mi" style="font-size:22px;">notifications_active</span>
+        </div>
+        <div class="content content-pad" style="background:#FFF8F8;">
+          <!-- Active Alert -->
+          <div style="background:linear-gradient(135deg, #D32F2F 0%, #F44336 100%); border-radius:16px; padding:18px; color:white; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <span class="mi" style="font-size:28px;">warning</span>
+              <div>
+                <div style="font-size:16px; font-weight:700;">ALERTA ACTIVA</div>
+                <div style="font-size:12px; opacity:.8;">Emitida hace 2 horas</div>
+              </div>
+            </div>
+            <div style="font-size:14px; line-height:1.5; opacity:.95;">
+              Tormenta electrica severa esperada para <strong>Martes 25 — Miercoles 26</strong>. Probabilidad de lluvia superior al 90%. Riesgo de granizo.
+            </div>
+            <div style="margin-top:12px; display:flex; gap:8px;">
+              <div style="background:rgba(255,255,255,.2); border-radius:8px; padding:8px 12px; font-size:12px; font-weight:600;">
+                <span class="mi" style="font-size:14px;">water_drop</span> 90-95%
+              </div>
+              <div style="background:rgba(255,255,255,.2); border-radius:8px; padding:8px 12px; font-size:12px; font-weight:600;">
+                <span class="mi" style="font-size:14px;">air</span> Rafagas 60 km/h
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommendation Card -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:16px; border-left:4px solid var(--amber); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:20px; color:var(--amber);">lightbulb</span>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Recomendaciones</div>
+            </div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.6;">
+              &bull; No programar fumigacion Mar-Mie<br>
+              &bull; Proteger almacigos y semilleros<br>
+              &bull; Revisar drenajes de las parcelas<br>
+              &bull; Cosechar cafe maduro disponible
+            </div>
+          </div>
+
+          <!-- Frost Alert -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:16px; border-left:4px solid var(--blue); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="mi" style="font-size:24px; color:var(--blue);">ac_unit</span>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Riesgo de Helada</div>
+                <div style="font-size:11px; color:var(--gray);">Proximo Jueves 27 — madrugada</div>
+              </div>
+              <span style="background:rgba(59,130,246,.12); color:var(--blue); font-size:11px; font-weight:700; padding:4px 10px; border-radius:10px;">MODERADO</span>
+            </div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">
+              Temperatura minima esperada de 3°C entre las 4:00-6:00 AM. Considerar cobertura para cultivos sensibles.
+            </div>
+          </div>
+
+          <!-- Past alert (resolved) -->
+          <div style="background:white; border-radius:16px; padding:16px; opacity:.6; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="mi" style="font-size:24px; color:var(--green);">check_circle</span>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Lluvia intensa — Resuelta</div>
+                <div style="font-size:11px; color:var(--gray);">20 Feb 2026 · Duracion: 8 hrs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-5. HORAS DE LLUVIA PROBABLES                                       -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-5. Probabilidad de Lluvia por Hora</div>
+      <div class="screen-sublabel">Mejores horas para fumigar, cosechar, etc.</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-sky); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-sky); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Lluvia por Hora</div>
+          <span style="font-size:13px; font-weight:600; opacity:.8;">Hoy</span>
+        </div>
+        <div class="content content-pad" style="background:#F0F8FF;">
+          <!-- Best hours card -->
+          <div style="background:var(--gbb-green-light); border:1px solid rgba(45,139,78,.2); border-radius:16px; padding:16px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:20px; color:var(--gbb-green);">check_circle</span>
+              <div style="font-size:14px; font-weight:700; color:var(--gbb-green-dark);">Mejores horas para trabajar</div>
+            </div>
+            <div style="font-size:24px; font-weight:800; color:var(--gbb-green-dark);">6:00 — 11:00 AM</div>
+            <div style="font-size:12px; color:var(--gbb-green); margin-top:4px;">Probabilidad de lluvia menor al 15%</div>
+          </div>
+
+          <!-- Hourly bars -->
+          <div style="background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">PROBABILIDAD POR HORA</div>
+            <!-- Hour entries -->
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">6:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:5%; height:100%; background:var(--gbb-green); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--gbb-green);">5%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">7:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:8%; height:100%; background:var(--gbb-green); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--gbb-green);">8%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">8:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:10%; height:100%; background:var(--gbb-green); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--gbb-green);">10%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">9:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:12%; height:100%; background:var(--gbb-green); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--gbb-green);">12%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">10:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:20%; height:100%; background:var(--amber); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--amber);">20%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">11:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:35%; height:100%; background:var(--amber); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--amber);">35%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">12:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:55%; height:100%; background:var(--orange); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--orange);">55%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">1:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:75%; height:100%; background:var(--red); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--red);">75%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">2:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:85%; height:100%; background:var(--red); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--red);">85%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">3:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:70%; height:100%; background:var(--red); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--red);">70%</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:50px; font-size:12px; font-weight:600; color:var(--text-dark);">4:00</div>
+              <div style="flex:1; height:20px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+                <div style="width:45%; height:100%; background:var(--orange); border-radius:10px;"></div>
+              </div>
+              <div style="width:32px; text-align:right; font-size:12px; font-weight:700; color:var(--orange);">45%</div>
+            </div>
+          </div>
+
+          <div style="text-align:center; margin-top:14px; font-size:11px; color:var(--gray);">
+            <span class="mi" style="font-size:14px;">info</span> Datos: Open Meteo API
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-6. INDICE UV + HUMEDAD DEL SUELO                                  -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-6. Indice UV & Humedad del Suelo</div>
+      <div class="screen-sublabel">NASA Power API + Open Meteo</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Condiciones del Campo</div>
+        </div>
+        <div class="content content-pad" style="background:#F8FBF8;">
+          <!-- UV Index -->
+          <div style="background:white; border-radius:16px; padding:20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:24px; color:#FFA726;">wb_sunny</span>
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Indice UV</div>
+            </div>
+            <!-- UV Gauge -->
+            <div style="text-align:center; margin-bottom:16px;">
+              <div style="font-size:56px; font-weight:800; color:#FFA726;">6</div>
+              <div style="font-size:16px; font-weight:700; color:#FFA726;">ALTO</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:4px;">Usar proteccion solar al trabajar</div>
+            </div>
+            <!-- UV Scale bar -->
+            <div style="display:flex; border-radius:8px; overflow:hidden; height:12px; margin-bottom:8px;">
+              <div style="flex:1; background:#4CAF50;"></div>
+              <div style="flex:1; background:#FFEB3B;"></div>
+              <div style="flex:1; background:#FFA726; position:relative;">
+                <div style="position:absolute; top:-3px; left:50%; width:4px; height:18px; background:var(--text-dark); border-radius:2px; transform:translateX(-50%);"></div>
+              </div>
+              <div style="flex:1; background:#F44336;"></div>
+              <div style="flex:1; background:#9C27B0;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--gray);">
+              <span>1 Bajo</span><span>3 Mod</span><span>6 Alto</span><span>8 Muy Alto</span><span>11+ Extremo</span>
+            </div>
+          </div>
+
+          <!-- Soil Humidity -->
+          <div style="background:white; border-radius:16px; padding:20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <span class="mi" style="font-size:24px; color:var(--gbb-earth);">grass</span>
+              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Humedad del Suelo</div>
+              <span style="margin-left:auto; background:var(--gbb-green-light); color:var(--gbb-green); font-size:11px; font-weight:700; padding:4px 10px; border-radius:10px;">OPTIMA</span>
+            </div>
+            <!-- Depth layers (NASA POWER API) -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Superficie (0–7 cm)</span>
+                <span style="font-size:13px; font-weight:700; color:var(--gbb-green);">32%</span>
+              </div>
+              <div style="height:10px; background:#F0F0F0; border-radius:5px; overflow:hidden;">
+                <div style="width:32%; height:100%; background:linear-gradient(90deg, var(--gbb-green), #66BB6A); border-radius:5px;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Raiz (7–28 cm)</span>
+                <span style="font-size:13px; font-weight:700; color:var(--gbb-green);">48%</span>
+              </div>
+              <div style="height:10px; background:#F0F0F0; border-radius:5px; overflow:hidden;">
+                <div style="width:48%; height:100%; background:linear-gradient(90deg, var(--gbb-green), #66BB6A); border-radius:5px;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Profundo (28–100 cm)</span>
+                <span style="font-size:13px; font-weight:700; color:var(--gbb-green);">61%</span>
+              </div>
+              <div style="height:10px; background:#F0F0F0; border-radius:5px; overflow:hidden;">
+                <div style="width:61%; height:100%; background:linear-gradient(90deg, var(--gbb-green), #66BB6A); border-radius:5px;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Subsuelo (100–255 cm)</span>
+                <span style="font-size:13px; font-weight:700; color:var(--gbb-green);">74%</span>
+              </div>
+              <div style="height:10px; background:#F0F0F0; border-radius:5px; overflow:hidden;">
+                <div style="width:74%; height:100%; background:linear-gradient(90deg, var(--gbb-green), #66BB6A); border-radius:5px;"></div>
+              </div>
+            </div>
+            <div style="background:var(--gbb-green-light); border-radius:10px; padding:12px; margin-top:12px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="mi" style="font-size:18px; color:var(--gbb-green);">check_circle</span>
+                <div style="font-size:12px; color:var(--gbb-green-dark); line-height:1.4;">
+                  <strong>Buen momento para fertilizar.</strong> Humedad en zona de raices es ideal para absorcion de nutrientes.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center; font-size:11px; color:var(--gray);">
+            <span class="mi" style="font-size:14px;">info</span> UV: Open Meteo · Suelo: NASA POWER API
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-7. PRECIOS COMMODITIES — LISTA                                     -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-7. Precios Commodities</div>
+      <div class="screen-sublabel">Precios diarios/semanales de productos agricolas</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-earth); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-earth); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Precios Agricolas</div>
+          <span class="mi" style="font-size:22px;">filter_list</span>
+        </div>
+        <div class="content" style="background:#FFFBF0;">
+          <!-- Tabs -->
+          <div style="display:flex; padding:12px 16px; gap:8px; background:white; border-bottom:1px solid var(--gray-border);">
+            <div style="background:var(--gbb-earth); color:white; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600;">Todos</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500;">Cafe</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500;">Cacao</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500;">Otros</div>
+          </div>
+
+          <div style="padding:16px;">
+            <!-- Last update -->
+            <div style="font-size:11px; color:var(--gray); margin-bottom:12px; display:flex; align-items:center; gap:4px;">
+              <span class="mi" style="font-size:14px;">schedule</span> Ultima actualizacion: 23 Feb 2026 · 08:30 AM
+            </div>
+
+            <!-- Coffee Pergamino -->
+            <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:var(--gbb-earth-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:var(--gbb-earth);">local_cafe</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Cafe Pergamino</div>
+                  <div style="font-size:11px; color:var(--gray);">ICO Composite Indicator · Semanal</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:18px; font-weight:800; color:var(--text-dark);">Q 1,285</div>
+                  <div style="font-size:12px; font-weight:700; color:var(--green);">
+                    <span class="mi" style="font-size:14px;">arrow_upward</span> +2.3%
+                  </div>
+                </div>
+              </div>
+              <!-- Mini chart placeholder -->
+              <div style="height:40px; background:linear-gradient(90deg, rgba(16,185,129,.05), rgba(16,185,129,.15)); border-radius:8px; position:relative; overflow:hidden;">
+                <svg viewBox="0 0 300 40" style="width:100%; height:100%;">
+                  <polyline points="0,35 30,32 60,28 90,30 120,25 150,22 180,18 210,20 240,15 270,12 300,8" fill="none" stroke="#10B981" stroke-width="2"/>
+                </svg>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--gray); margin-top:4px;">
+                <span>8 sem atras</span><span>Hoy</span>
+              </div>
+            </div>
+
+            <!-- Cacao -->
+            <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(139,105,20,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:var(--gbb-earth);">spa</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Cacao</div>
+                  <div style="font-size:11px; color:var(--gray);">ICCO Daily Price · Diario</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:18px; font-weight:800; color:var(--text-dark);">Q 840</div>
+                  <div style="font-size:12px; font-weight:700; color:var(--red);">
+                    <span class="mi" style="font-size:14px;">arrow_downward</span> -1.1%
+                  </div>
+                </div>
+              </div>
+              <div style="height:40px; background:linear-gradient(90deg, rgba(239,68,68,.05), rgba(239,68,68,.15)); border-radius:8px; position:relative; overflow:hidden;">
+                <svg viewBox="0 0 300 40" style="width:100%; height:100%;">
+                  <polyline points="0,10 30,12 60,8 90,15 120,18 150,14 180,20 210,25 240,28 270,30 300,32" fill="none" stroke="#EF4444" stroke-width="2"/>
+                </svg>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--gray); margin-top:4px;">
+                <span>8 sem atras</span><span>Hoy</span>
+              </div>
+            </div>
+
+            <!-- Cardamomo -->
+            <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; opacity:.55; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:var(--gbb-green-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:var(--gbb-green);">grass</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Cardamomo</div>
+                  <div style="font-size:11px; color:var(--gray);">Sin datos publicos estables</div>
+                </div>
+                <span style="background:var(--gray-bg); color:var(--gray); font-size:11px; font-weight:600; padding:4px 10px; border-radius:10px;">Proximamente</span>
+              </div>
+            </div>
+
+            <!-- Pimienta -->
+            <div style="background:white; border-radius:16px; padding:16px; opacity:.55; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:rgba(239,68,68,.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:24px; color:var(--red);">local_fire_department</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Pimienta Gorda</div>
+                  <div style="font-size:11px; color:var(--gray);">Sin datos publicos estables</div>
+                </div>
+                <span style="background:var(--gray-bg); color:var(--gray); font-size:11px; font-weight:600; padding:4px 10px; border-radius:10px;">Proximamente</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-8. DETALLE CAFE PERGAMINO — HISTORICO                              -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-8. Detalle Cafe — Historico</div>
+      <div class="screen-sublabel">Comparacion con precios historicos</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-earth); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-earth); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Cafe Pergamino</div>
+          <span class="mi" style="font-size:22px;">share</span>
+        </div>
+        <div class="content content-pad" style="background:#FFFBF0;">
+          <!-- Price Hero -->
+          <div style="text-align:center; margin-bottom:20px;">
+            <div style="font-size:14px; color:var(--gray); margin-bottom:4px;">Precio actual por quintal</div>
+            <div style="font-size:42px; font-weight:800; color:var(--text-dark);">Q 1,285</div>
+            <div style="display:inline-flex; align-items:center; gap:4px; background:rgba(16,185,129,.1); padding:6px 14px; border-radius:20px; margin-top:8px;">
+              <span class="mi" style="font-size:16px; color:var(--green);">trending_up</span>
+              <span style="font-size:14px; font-weight:700; color:var(--green);">+Q 29 (+2.3%) esta semana</span>
+            </div>
+          </div>
+
+          <!-- Time tabs -->
+          <div style="display:flex; gap:6px; margin-bottom:16px; justify-content:center;">
+            <div style="padding:6px 14px; border-radius:16px; font-size:12px; font-weight:600; background:var(--gray-bg); color:var(--gray);">1M</div>
+            <div style="padding:6px 14px; border-radius:16px; font-size:12px; font-weight:600; background:var(--gray-bg); color:var(--gray);">3M</div>
+            <div style="padding:6px 14px; border-radius:16px; font-size:12px; font-weight:700; background:var(--gbb-earth); color:white;">6M</div>
+            <div style="padding:6px 14px; border-radius:16px; font-size:12px; font-weight:600; background:var(--gray-bg); color:var(--gray);">1A</div>
+            <div style="padding:6px 14px; border-radius:16px; font-size:12px; font-weight:600; background:var(--gray-bg); color:var(--gray);">Todo</div>
+          </div>
+
+          <!-- Chart Area -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="height:120px; position:relative; overflow:hidden;">
+              <svg viewBox="0 0 300 100" style="width:100%; height:100%;">
+                <defs>
+                  <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2D8B4E" stop-opacity=".2"/>
+                    <stop offset="100%" stop-color="#2D8B4E" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,80 30,75 60,70 90,72 120,60 150,55 180,45 210,50 240,35 270,25 300,15 L300,100 L0,100 Z" fill="url(#grad)"/>
+                <polyline points="0,80 30,75 60,70 90,72 120,60 150,55 180,45 210,50 240,35 270,25 300,15" fill="none" stroke="#2D8B4E" stroke-width="2.5"/>
+                <circle cx="300" cy="15" r="4" fill="#2D8B4E"/>
+              </svg>
+              <!-- Y axis labels -->
+              <div style="position:absolute; left:0; top:0; font-size:9px; color:var(--gray);">Q 1,300</div>
+              <div style="position:absolute; left:0; bottom:10px; font-size:9px; color:var(--gray);">Q 1,100</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--gray); margin-top:8px;">
+              <span>Sep 25</span><span>Nov 25</span><span>Ene 26</span><span>Feb 26</span>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+            <div style="background:white; border-radius:12px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="font-size:11px; color:var(--gray); margin-bottom:4px;">Maximo 6M</div>
+              <div style="font-size:18px; font-weight:800; color:var(--text-dark);">Q 1,310</div>
+              <div style="font-size:10px; color:var(--gray);">Ene 15, 2026</div>
+            </div>
+            <div style="background:white; border-radius:12px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="font-size:11px; color:var(--gray); margin-bottom:4px;">Minimo 6M</div>
+              <div style="font-size:18px; font-weight:800; color:var(--text-dark);">Q 1,085</div>
+              <div style="font-size:10px; color:var(--gray);">Sep 28, 2025</div>
+            </div>
+            <div style="background:white; border-radius:12px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="font-size:11px; color:var(--gray); margin-bottom:4px;">Promedio 6M</div>
+              <div style="font-size:18px; font-weight:800; color:var(--text-dark);">Q 1,198</div>
+            </div>
+            <div style="background:white; border-radius:12px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="font-size:11px; color:var(--gray); margin-bottom:4px;">Tendencia</div>
+              <div style="font-size:18px; font-weight:800; color:var(--green);">Subiendo</div>
+              <div style="font-size:10px; color:var(--green);"><span class="mi" style="font-size:12px;">trending_up</span> +18.4% en 6M</div>
+            </div>
+          </div>
+
+          <!-- Decision helper -->
+          <div style="background:var(--gbb-green-light); border:1px solid rgba(45,139,78,.2); border-radius:14px; padding:14px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="mi" style="font-size:18px; color:var(--gbb-green);">insights</span>
+              <div style="font-size:13px; font-weight:700; color:var(--gbb-green-dark);">Analisis de precio</div>
+            </div>
+            <div style="font-size:12px; color:var(--gbb-green-dark); line-height:1.5;">
+              El precio esta <strong>7.3% arriba</strong> del promedio de 6 meses. La tendencia alcista sugiere un buen momento para negociar contratos forward.
+            </div>
+          </div>
+
+          <div style="text-align:center; margin-top:14px; font-size:11px; color:var(--gray);">
+            Fuentes: ICO · Ministerio de Agricultura · FAOSTAT
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-9. PLANIFICACION DE SIEMBRA                                        -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-9. Planificacion de Siembra</div>
+      <div class="screen-sublabel">Herramienta basada en datos del clima y suelo</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Planificacion de Siembra</div>
+        </div>
+        <div class="content content-pad" style="background:#F8FBF8;">
+          <!-- Current conditions summary -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Condiciones Actuales</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+              <div style="text-align:center; padding:10px; background:var(--gbb-green-light); border-radius:10px;">
+                <span class="mi" style="font-size:20px; color:var(--gbb-green);">thermostat</span>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-top:4px;">18°C</div>
+                <div style="font-size:10px; color:var(--gray);">Temp.</div>
+              </div>
+              <div style="text-align:center; padding:10px; background:var(--gbb-green-light); border-radius:10px;">
+                <span class="mi" style="font-size:20px; color:var(--gbb-green);">water_drop</span>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-top:4px;">52%</div>
+                <div style="font-size:10px; color:var(--gray);">Suelo</div>
+              </div>
+              <div style="text-align:center; padding:10px; background:rgba(255,167,38,.1); border-radius:10px;">
+                <span class="mi" style="font-size:20px; color:#FFA726;">wb_sunny</span>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-top:4px;">UV 6</div>
+                <div style="font-size:10px; color:var(--gray);">Indice</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommendation cards -->
+          <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">RECOMENDACIONES ESTA SEMANA</div>
+
+          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--gbb-green); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="mi" style="font-size:20px; color:var(--gbb-green);">check_circle</span>
+              <div style="font-size:14px; font-weight:700; color:var(--gbb-green-dark);">Fertilizar</div>
+              <span style="margin-left:auto; background:var(--gbb-green-light); color:var(--gbb-green); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">IDEAL</span>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Humedad del suelo optima para absorcion. Aplicar Lun-Mar antes de la lluvia del Mie.</div>
+          </div>
+
+          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--amber); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="mi" style="font-size:20px; color:var(--amber);">warning</span>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">No fumigar Mar-Mie</div>
+              <span style="margin-left:auto; background:rgba(245,158,11,.1); color:var(--amber); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">CUIDADO</span>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Tormenta pronosticada lavara los productos. Esperar hasta Jue-Vie.</div>
+          </div>
+
+          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--gbb-green); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="mi" style="font-size:20px; color:var(--gbb-green);">check_circle</span>
+              <div style="font-size:14px; font-weight:700; color:var(--gbb-green-dark);">Cosechar cafe</div>
+              <span style="margin-left:auto; background:var(--gbb-green-light); color:var(--gbb-green); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">BUEN MOMENTO</span>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Precio actual Q 1,285/qq (+2.3%). Recoger cereza madura antes de la tormenta.</div>
+          </div>
+
+          <div style="background:white; border-radius:14px; padding:14px; border-left:4px solid var(--red); box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="mi" style="font-size:20px; color:var(--red);">dangerous</span>
+              <div style="font-size:14px; font-weight:700; color:var(--text-dark);">Proteger almacigos</div>
+              <span style="margin-left:auto; background:rgba(239,68,68,.1); color:var(--red); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">URGENTE</span>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Helada pronosticada Jue 27 madrugada. Cubrir semilleros con plastico o sararan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-10. HOME CON BANNER GBB                                            -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-10. Home + Banner GBB</div>
+      <div class="screen-sublabel">Banner promocional en pantalla principal</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">menu</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">notifications</span></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Welcome -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:14px; color:var(--gray);">Hola,</div>
+            <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
+          </div>
+
+          <!-- Active plan badge -->
+          <div class="alert alert-green" style="margin-bottom:16px;">
+            <span class="mi" style="font-size:20px; color:var(--green);">wifi</span>
+            <div>
+              <span style="font-size:14px; font-weight:600; color:var(--green);">Conectado — Plan Semanal</span>
+              <div style="font-size:11px; color:var(--gray);">Expira en 3 dias</div>
+            </div>
+          </div>
+
+          <!-- GBB Promo Banner -->
+          <div style="background:linear-gradient(135deg, #1A5C32 0%, #2D8B4E 100%); border-radius:18px; padding:18px; color:white; margin-bottom:16px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:-5px; right:-5px; font-size:60px; opacity:.1;">
+              <span class="mi">eco</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+              <span class="mi" style="font-size:18px;">eco</span>
+              <span style="font-size:11px; font-weight:700; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:8px;">NUEVO</span>
+            </div>
+            <div style="font-size:17px; font-weight:700; margin-bottom:4px;">Green Business Belt</div>
+            <div style="font-size:12px; opacity:.85; line-height:1.4; margin-bottom:12px;">Clima, precios de cafe y cacao, alertas y herramientas para tu produccion agricola.</div>
+            <div style="display:inline-flex; align-items:center; gap:6px; background:white; color:var(--gbb-green-dark); padding:10px 18px; border-radius:10px; font-size:13px; font-weight:700;">
+              Explorar <span class="mi" style="font-size:16px;">arrow_forward</span>
+            </div>
+          </div>
+
+          <!-- How it works -->
+          <div class="card card-sm" style="background:var(--gray-bg); border:none; box-shadow:none;">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">¿Como funciona suscripcion Kingo Play?</div>
+            <div class="step-row">
+              <div class="step-num">1</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Adquiere tu suscripcion</div><div style="font-size:12px; color:var(--gray);">Contacta a tu tendero</div></div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">2</div>
+              <div><div style="font-size:13px; font-weight:600; color:var(--text-dark);">Conecta tu dispositivo</div><div style="font-size:12px; color:var(--gray);">Escanea el QR o ingresa codigo</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span>Inicio</div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">person</span>Perfil</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-11. DASHBOARD CON LOGO HEIFER INTERNATIONAL                       -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-11. Partnership Heifer International</div>
+      <div class="screen-sublabel">Logo y alianza estrategica en el dashboard</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 20px; display:flex; align-items:center; gap:12px;">
+          <div style="width:40px; height:40px; border-radius:20px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="font-size:22px;">arrow_back</span>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:20px; font-weight:700;">Green Business Belt</div>
+            <div style="font-size:12px; opacity:.8;">Herramientas para tu produccion</div>
+          </div>
+          <span class="mi" style="font-size:24px;">eco</span>
+        </div>
+        <div class="content content-pad" style="background:#F8FBF8;">
+          <!-- Partnership Banner -->
+          <div style="background:white; border-radius:16px; padding:20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04); text-align:center;">
+            <div style="font-size:10px; font-weight:700; color:var(--gray); letter-spacing:1px; margin-bottom:12px;">EN ALIANZA CON</div>
+            <!-- Heifer Logo Placeholder -->
+            <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:12px;">
+              <div style="width:160px; height:50px; border-radius:8px; border:2px dashed var(--gray-border); display:flex; align-items:center; justify-content:center; background:var(--gray-bg);">
+                <div style="text-align:center;">
+                  <span class="mi" style="font-size:24px; color:var(--gbb-green);">image</span>
+                  <div style="font-size:9px; color:var(--gray); margin-top:2px;">heifer-logo.png</div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Heifer International</div>
+            <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.4;">Trabajando juntos por la prosperidad de los productores guatemaltecos</div>
+            <div style="height:1px; background:var(--gray-border); margin:16px 0;"></div>
+            <div style="display:flex; gap:12px;">
+              <div style="flex:1; text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:var(--gbb-green);">2,400+</div>
+                <div style="font-size:10px; color:var(--gray);">Productores</div>
+              </div>
+              <div style="flex:1; text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:var(--gbb-green);">12</div>
+                <div style="font-size:10px; color:var(--gray);">Departamentos</div>
+              </div>
+              <div style="flex:1; text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:var(--gbb-green);">4</div>
+                <div style="font-size:10px; color:var(--gray);">Cursos activos</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick actions (same as dashboard) -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-sky-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-sky);">wb_cloudy</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Clima</div>
+              <div style="font-size:11px; color:var(--gray);">Pronostico</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-earth-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-earth);">trending_up</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Precios</div>
+              <div style="font-size:11px; color:var(--gray);">Commodities</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:rgba(156,39,176,.1); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:#9C27B0;">play_circle</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Cursos</div>
+              <div style="font-size:11px; color:var(--gray);">Video cursos</div>
+            </div>
+            <div style="background:white; border-radius:14px; padding:16px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <div style="width:48px; height:48px; border-radius:14px; background:var(--gbb-green-light); display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+                <span class="mi" style="font-size:24px; color:var(--gbb-green);">grass</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Suelo</div>
+              <div style="font-size:11px; color:var(--gray);">Humedad</div>
+            </div>
+          </div>
+
+          <!-- Continue course card -->
+          <div style="background:white; border-radius:14px; padding:14px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Continua tu curso</div>
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:64px; height:48px; border-radius:8px; background:linear-gradient(135deg, #1A5C32, #2D8B4E); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:24px; color:white;">play_arrow</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:var(--text-dark);">Finanzas para Productores</div>
+                <div style="font-size:11px; color:var(--gray);">Leccion 3 de 8 · 45% completado</div>
+                <div style="height:4px; background:#F0F0F0; border-radius:2px; margin-top:6px; overflow:hidden;">
+                  <div style="width:45%; height:100%; background:var(--gbb-green); border-radius:2px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-12. VIDEO CURSOS — CATALOGO (Estilo Platzi/Udemy)                  -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-12. Video Cursos — Catalogo</div>
+      <div class="screen-sublabel">Estilo Platzi/Udemy con categorias</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">arrow_back</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Video Cursos</div>
+          <span class="mi" style="font-size:22px;">search</span>
+        </div>
+        <div class="content" style="background:#F8FBF8;">
+          <!-- Category tabs -->
+          <div style="display:flex; padding:12px 16px; gap:8px; background:white; border-bottom:1px solid var(--gray-border); overflow-x:auto;">
+            <div style="background:var(--gbb-green); color:white; padding:8px 16px; border-radius:20px; font-size:13px; font-weight:600; white-space:nowrap;">Todos</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500; white-space:nowrap;">Finanzas</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500; white-space:nowrap;">Agricultura</div>
+            <div style="background:var(--gray-bg); color:var(--gray); padding:8px 16px; border-radius:20px; font-size:13px; font-weight:500; white-space:nowrap;">Salud</div>
+          </div>
+
+          <div style="padding:16px;">
+            <!-- Continue Learning -->
+            <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">CONTINUA APRENDIENDO</div>
+            <div style="background:white; border-radius:16px; overflow:hidden; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+              <!-- Course thumbnail -->
+              <div style="height:100px; background:linear-gradient(135deg, #1A5C32 0%, #2D8B4E 50%, #4CAF50 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                <span class="mi" style="font-size:48px; color:rgba(255,255,255,.3);">play_circle</span>
+                <!-- Progress overlay -->
+                <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(0,0,0,.2);">
+                  <div style="width:45%; height:100%; background:white;"></div>
+                </div>
+              </div>
+              <div style="padding:14px;">
+                <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                  <span style="background:rgba(139,105,20,.1); color:var(--gbb-earth); font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px;">FINANZAS</span>
+                  <span style="font-size:11px; color:var(--gray);">45% completado</span>
+                </div>
+                <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Finanzas para Productores</div>
+                <div style="font-size:12px; color:var(--gray);">8 lecciones · 2h 15min · Heifer International</div>
+              </div>
+            </div>
+
+            <!-- All courses -->
+            <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">TODOS LOS CURSOS</div>
+
+            <!-- Course: Agricultura -->
+            <div style="background:white; border-radius:14px; overflow:hidden; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04); display:flex;">
+              <div style="width:90px; background:linear-gradient(135deg, #0288D1, #4FC3F7); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:32px; color:rgba(255,255,255,.4);">play_circle</span>
+              </div>
+              <div style="flex:1; padding:12px;">
+                <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                  <span style="background:var(--gbb-green-light); color:var(--gbb-green); font-size:10px; font-weight:700; padding:2px 8px; border-radius:6px;">AGRICULTURA</span>
+                </div>
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:2px;">Buenas Practicas de Cultivo</div>
+                <div style="font-size:11px; color:var(--gray);">10 lecciones · 3h 20min</div>
+                <div style="display:flex; align-items:center; gap:4px; margin-top:6px;">
+                  <span class="mi" style="font-size:14px; color:#FFA726;">star</span>
+                  <span style="font-size:11px; font-weight:600; color:var(--text-dark);">4.8</span>
+                  <span style="font-size:11px; color:var(--gray);">(142)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course: Salud -->
+            <div style="background:white; border-radius:14px; overflow:hidden; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04); display:flex;">
+              <div style="width:90px; background:linear-gradient(135deg, #E53935, #EF5350); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:32px; color:rgba(255,255,255,.4);">play_circle</span>
+              </div>
+              <div style="flex:1; padding:12px;">
+                <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                  <span style="background:rgba(239,68,68,.1); color:var(--red); font-size:10px; font-weight:700; padding:2px 8px; border-radius:6px;">SALUD</span>
+                </div>
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:2px;">Salud y Nutricion Familiar</div>
+                <div style="font-size:11px; color:var(--gray);">6 lecciones · 1h 45min</div>
+                <div style="display:flex; align-items:center; gap:4px; margin-top:6px;">
+                  <span class="mi" style="font-size:14px; color:#FFA726;">star</span>
+                  <span style="font-size:11px; font-weight:600; color:var(--text-dark);">4.6</span>
+                  <span style="font-size:11px; color:var(--gray);">(89)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course: Historias de Exito -->
+            <div style="background:white; border-radius:14px; overflow:hidden; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04); display:flex;">
+              <div style="width:90px; background:linear-gradient(135deg, #FFA726, #FFB74D); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:32px; color:rgba(255,255,255,.4);">play_circle</span>
+              </div>
+              <div style="flex:1; padding:12px;">
+                <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                  <span style="background:rgba(255,167,38,.1); color:#F57C00; font-size:10px; font-weight:700; padding:2px 8px; border-radius:6px;">HISTORIAS</span>
+                </div>
+                <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:2px;">Historias de Exito</div>
+                <div style="font-size:11px; color:var(--gray);">5 lecciones · 1h 10min</div>
+                <div style="display:flex; align-items:center; gap:4px; margin-top:6px;">
+                  <span class="mi" style="font-size:14px; color:#FFA726;">star</span>
+                  <span style="font-size:11px; font-weight:600; color:var(--text-dark);">4.9</span>
+                  <span style="font-size:11px; color:var(--gray);">(203)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-13. VIDEO CURSO — DETALLE + PLAYER                                 -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-13. Curso Detalle + Player</div>
+      <div class="screen-sublabel">Vista de leccion con video y progreso</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#111; color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <!-- Video Player Area -->
+        <div style="background:#111; height:210px; position:relative; display:flex; align-items:center; justify-content:center;">
+          <div style="position:absolute; top:12px; left:12px;">
+            <span class="mi" style="font-size:24px; color:white;">arrow_back</span>
+          </div>
+          <!-- Play button -->
+          <div style="width:60px; height:60px; border-radius:30px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; border:2px solid rgba(255,255,255,.4);">
+            <span class="mi" style="font-size:32px; color:white;">play_arrow</span>
+          </div>
+          <!-- Progress bar -->
+          <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,.2);">
+            <div style="width:35%; height:100%; background:var(--gbb-green);"></div>
+          </div>
+          <!-- Duration -->
+          <div style="position:absolute; bottom:10px; right:12px; font-size:11px; color:rgba(255,255,255,.7);">4:32 / 12:15</div>
+        </div>
+        <div class="content content-pad" style="background:white;">
+          <!-- Course info -->
+          <div style="margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <span style="background:rgba(139,105,20,.1); color:var(--gbb-earth); font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px;">FINANZAS</span>
+              <span style="font-size:11px; color:var(--gray);">Leccion 3 de 8</span>
+            </div>
+            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Como manejar tus ingresos</div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Aprende a separar tus gastos personales de los de tu negocio y crea un presupuesto mensual efectivo.</div>
+          </div>
+
+          <!-- Lesson list -->
+          <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">LECCIONES DEL CURSO</div>
+          <!-- Completed -->
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border);">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gbb-green); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:16px; color:white;">check</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:var(--text-dark);">1. Que son las finanzas personales</div>
+              <div style="font-size:11px; color:var(--gray);">8:30 min</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gbb-green);">check_circle</span>
+          </div>
+          <!-- Completed -->
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border);">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gbb-green); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:16px; color:white;">check</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:var(--text-dark);">2. Diferencia gastos vs inversion</div>
+              <div style="font-size:11px; color:var(--gray);">10:45 min</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gbb-green);">check_circle</span>
+          </div>
+          <!-- Current (playing) -->
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border); background:var(--gbb-green-light); margin:0 -20px; padding-left:20px; padding-right:20px;">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gbb-green); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:16px; color:white;">play_arrow</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:700; color:var(--gbb-green-dark);">3. Como manejar tus ingresos</div>
+              <div style="font-size:11px; color:var(--gbb-green);">12:15 min · En progreso</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gbb-green);">volume_up</span>
+          </div>
+          <!-- Locked -->
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border); opacity:.5;">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:12px; font-weight:700; color:var(--gray);">4</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:var(--text-dark);">4. Ahorro inteligente</div>
+              <div style="font-size:11px; color:var(--gray);">9:20 min</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gray-border);">lock</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; opacity:.5;">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:12px; font-weight:700; color:var(--gray);">5</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:var(--text-dark);">5. Credito y deuda responsable</div>
+              <div style="font-size:11px; color:var(--gray);">11:00 min · Quiz incluido</div>
+            </div>
+            <span class="mi" style="font-size:18px; color:var(--gray-border);">lock</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-14. QUIZ / FORMULARIO POST-VIDEO                                   -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">GBB-14. Quiz Post-Video</div>
+      <div class="screen-sublabel">Formulario corto al finalizar leccion (opcional)</div>
+      <div class="phone">
+        <div class="status-bar" style="background:var(--gbb-green); color:white;"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
+        <div style="background:var(--gbb-green); color:white; padding:0 16px 16px; display:flex; align-items:center; gap:12px;">
+          <span class="mi" style="font-size:24px;">close</span>
+          <div style="flex:1; font-size:18px; font-weight:700;">Quiz Rapido</div>
+          <span style="font-size:13px; font-weight:600; opacity:.8;">Pregunta 2/3</span>
+        </div>
+        <div class="content content-pad" style="background:white;">
+          <!-- Progress -->
+          <div style="display:flex; gap:4px; margin-bottom:24px;">
+            <div style="flex:1; height:4px; border-radius:2px; background:var(--gbb-green);"></div>
+            <div style="flex:1; height:4px; border-radius:2px; background:var(--gbb-green);"></div>
+            <div style="flex:1; height:4px; border-radius:2px; background:#F0F0F0;"></div>
+          </div>
+
+          <!-- Course context -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:20px;">
+            <span style="background:rgba(139,105,20,.1); color:var(--gbb-earth); font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px;">FINANZAS</span>
+            <span style="font-size:12px; color:var(--gray);">Leccion 3: Como manejar tus ingresos</span>
+          </div>
+
+          <!-- Question -->
+          <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">¿Cual es la mejor forma de separar tus ingresos?</div>
+          <div style="font-size:13px; color:var(--gray); margin-bottom:24px;">Selecciona la respuesta correcta</div>
+
+          <!-- Options -->
+          <div style="border:2px solid var(--gray-border); border-radius:14px; padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:14px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:13px; font-weight:700; color:var(--gray);">A</span>
+            </div>
+            <div style="font-size:14px; color:var(--text-dark);">Guardar todo en un solo lugar</div>
+          </div>
+          <!-- Selected (correct) -->
+          <div style="border:2px solid var(--gbb-green); background:var(--gbb-green-light); border-radius:14px; padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:14px; background:var(--gbb-green); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:16px; color:white;">check</span>
+            </div>
+            <div style="font-size:14px; font-weight:600; color:var(--gbb-green-dark);">Separar gastos personales de los del negocio</div>
+          </div>
+          <div style="border:2px solid var(--gray-border); border-radius:14px; padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:14px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-size:13px; font-weight:700; color:var(--gray);">C</span>
+            </div>
+            <div style="font-size:14px; color:var(--text-dark);">Gastar primero e invertir despues</div>
+          </div>
+
+          <!-- Feedback -->
+          <div style="background:var(--gbb-green-light); border:1px solid rgba(45,139,78,.2); border-radius:14px; padding:14px; margin-top:8px; margin-bottom:20px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="mi" style="font-size:20px; color:var(--gbb-green);">check_circle</span>
+              <div style="font-size:14px; font-weight:700; color:var(--gbb-green-dark);">Correcto!</div>
+            </div>
+            <div style="font-size:12px; color:var(--gbb-green-dark); line-height:1.4;">
+              Separar tus finanzas te permite saber cuanto gana realmente tu negocio.
+            </div>
+          </div>
+
+          <!-- Next button -->
+          <button class="btn" style="background:var(--gbb-green); color:white;">
+            Siguiente pregunta <span class="mi" style="font-size:18px;">arrow_forward</span>
+          </button>
+
+          <!-- Optional note -->
+          <div style="text-align:center; margin-top:16px;">
+            <span style="font-size:11px; color:var(--gray);">
+              <span class="mi" style="font-size:14px;">info</span> El quiz es opcional y no afecta tu progreso
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screens-container -->
+</body>
+</html>

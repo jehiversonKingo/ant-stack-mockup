@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Balance</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Balance — Wallet, Sales Status & Providers</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a class="active" href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 4a: MI BILLETERA ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4a. Mi Billetera</div>
+      <div class="screen-sublabel">Account Status</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Mi Billetera</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">refresh</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Wallet Card -->
+          <div class="card">
+            <!-- User Info -->
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:44px; height:44px; border-radius:22px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:24px; color:#f16824;">person</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">Maria Garcia</div>
+                <div style="font-size:13px; color:var(--gray);">ID 12345</div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Credit / Debt -->
+            <div style="display:flex; gap:12px; margin:12px 0;">
+              <div style="flex:1; text-align:center;">
+                <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Credito</div>
+                <div style="font-size:16px; font-weight:700; color:#0a70b9;">Q 2,000.00</div>
+              </div>
+              <div style="flex:1; text-align:center;">
+                <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Deuda</div>
+                <div style="font-size:16px; font-weight:700; color:#C22222;">Q 750.00</div>
+              </div>
+            </div>
+
+            <!-- Available Balance -->
+            <div style="background:rgba(241,104,36,.08); border-radius:12px; padding:16px; text-align:center;">
+              <div style="font-size:13px; color:var(--gray); margin-bottom:4px;">Saldo Disponible</div>
+              <div style="font-size:28px; font-weight:800; color:#f16824;">Q 1,250.00</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div style="display:flex; gap:12px; margin-bottom:16px;">
+            <button class="btn btn-sm" style="flex:1; background:#f16824; color:white; border-radius:12px; font-size:13px; font-weight:600; padding:12px 8px;">
+              <span class="mi" style="font-size:18px;">receipt</span>
+              Subir Boleta
+            </button>
+            <button class="btn btn-sm" style="flex:1; background:#41a247; color:white; border-radius:12px; font-size:13px; font-weight:600; padding:12px 8px;">
+              <span class="mi" style="font-size:18px;">person</span>
+              Pagar Agente
+            </button>
+          </div>
+
+          <!-- Movement History Title -->
+          <div style="font-size:16px; font-weight:700; color:#f16824; margin-bottom:12px;">Historial de Movimientos</div>
+
+          <!-- Filter Tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:16px;">
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; background:#f16824; color:white;">Semana</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Mes</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Todo</div>
+          </div>
+
+          <!-- Transaction: Sale -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">bolt</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Venta Plan 1 Semana</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026</div>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:#41a247;">+Q 25.00</div>
+            </div>
+          </div>
+
+          <!-- Transaction: Agent Payment -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#0a70b9;">payments</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Pago Agente</div>
+                <div style="font-size:12px; color:var(--gray);">18/02/2026</div>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:#C22222;">-Q 500.00</div>
+            </div>
+          </div>
+
+          <!-- Transaction: Credit Received -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">add_circle</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Credito Recibido</div>
+                <div style="font-size:12px; color:var(--gray);">17/02/2026</div>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:#41a247;">+Q 1,000.00</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 4b: ESTADO DE VENTAS ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4b. Estado de Ventas</div>
+      <div class="screen-sublabel">Sales Status</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Estado de Ventas</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">refresh</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Stats Card -->
+          <div class="card">
+            <!-- Top Stats -->
+            <div style="display:flex; gap:12px; margin-bottom:12px;">
+              <div style="flex:1; display:flex; align-items:center; gap:10px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:20px; color:#f16824;">bolt</span>
+                </div>
+                <div>
+                  <div style="font-size:20px; font-weight:800; color:var(--text-dark);">45</div>
+                  <div style="font-size:11px; color:var(--gray);">Ventas Totales</div>
+                </div>
+              </div>
+              <div style="flex:1; display:flex; align-items:center; gap:10px;">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span class="mi" style="font-size:20px; color:#41a247;">payments</span>
+                </div>
+                <div>
+                  <div style="font-size:16px; font-weight:800; color:var(--text-dark);">Q 3,750.00</div>
+                  <div style="font-size:11px; color:var(--gray);">Total Vendido</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Bottom Stats -->
+            <div style="display:flex; gap:8px; margin-top:12px;">
+              <div style="flex:1; text-align:center; background:rgba(241,104,36,.06); border-radius:10px; padding:10px 4px;">
+                <div style="font-size:11px; color:var(--gray); margin-bottom:2px;">Hoy</div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">5</div>
+                <div style="font-size:11px; color:var(--gray);">ventas</div>
+                <div style="font-size:12px; font-weight:600; color:#f16824;">Q 125.00</div>
+              </div>
+              <div style="flex:1; text-align:center; background:rgba(10,112,185,.06); border-radius:10px; padding:10px 4px;">
+                <div style="font-size:11px; color:var(--gray); margin-bottom:2px;">Semana</div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">18</div>
+                <div style="font-size:11px; color:var(--gray);">ventas</div>
+                <div style="font-size:12px; font-weight:600; color:#0a70b9;">Q 450.00</div>
+              </div>
+              <div style="flex:1; text-align:center; background:rgba(65,162,71,.06); border-radius:10px; padding:10px 4px;">
+                <div style="font-size:11px; color:var(--gray); margin-bottom:2px;">Completadas</div>
+                <div style="font-size:16px; font-weight:700; color:var(--text-dark);">45</div>
+                <div style="font-size:11px; color:var(--gray);">ventas</div>
+                <div style="font-size:12px; font-weight:600; color:#41a247;">100%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div style="display:flex; gap:12px; margin-bottom:16px;">
+            <button class="btn btn-sm" style="flex:1; background:#f16824; color:white; border-radius:12px; font-size:13px; font-weight:600; padding:12px 8px;">
+              <span class="mi" style="font-size:18px;">bolt</span>
+              Nueva Venta
+            </button>
+            <button class="btn btn-sm" style="flex:1; background:#0a70b9; color:white; border-radius:12px; font-size:13px; font-weight:600; padding:12px 8px;">
+              <span class="mi" style="font-size:18px;">qr_code</span>
+              Ver Codigos
+            </button>
+          </div>
+
+          <!-- Search -->
+          <div class="input-wrap" style="margin-bottom:12px; height:44px; border-radius:22px;">
+            <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
+            <input type="text" placeholder="Buscar por ID, codigo o plan" style="font-size:14px;">
+          </div>
+
+          <!-- Filter Tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:16px;">
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; background:#f16824; color:white;">Hoy</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Semana</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Mes</div>
+            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray);">Todo</div>
+          </div>
+
+          <!-- Sale Item 1 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">wifi_tethering</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#41a247;">ID: 98765</div>
+                <div style="font-size:13px; color:var(--text-dark);">Plan 1 Semana</div>
+                <div style="font-size:12px; color:var(--gray);">19/02/2026</div>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:#41a247;">Q 25.00</div>
+            </div>
+          </div>
+
+          <!-- Sale Item 2 -->
+          <div class="card card-sm" style="padding:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#41a247;">wifi_tethering</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#41a247;">ID: 98764</div>
+                <div style="font-size:13px; color:var(--text-dark);">Plan 1 Mes</div>
+                <div style="font-size:12px; color:var(--gray);">18/02/2026</div>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:#41a247;">Q 75.00</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 4c: VENTA DE PROYECTOS ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4c. Venta de Proyectos</div>
+      <div class="screen-sublabel">Sale Provider</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Venta de proyectos</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Provider Grid -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+
+            <!-- Kingo Card -->
+            <div class="card" style="padding:20px; text-align:center; cursor:pointer;">
+              <div style="width:52px; height:52px; border-radius:26px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+                <span class="mi" style="font-size:28px; color:#f16824;">wb_sunny</span>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Kingo</div>
+              <div style="font-size:11px; color:var(--gray); line-height:1.4; margin-bottom:12px;">Venta de productos solares Kingo</div>
+              <div style="width:32px; height:32px; border-radius:16px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                <span class="mi" style="font-size:18px; color:#f16824;">arrow_forward</span>
+              </div>
+            </div>
+
+            <!-- Viasat Card -->
+            <div class="card" style="padding:20px; text-align:center; cursor:pointer;">
+              <div style="width:52px; height:52px; border-radius:26px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+                <span class="mi" style="font-size:28px; color:#0a70b9;">satellite_alt</span>
+              </div>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Viasat</div>
+              <div style="font-size:11px; color:var(--gray); line-height:1.4; margin-bottom:12px;">Servicios de internet satelital</div>
+              <div style="width:32px; height:32px; border-radius:16px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                <span class="mi" style="font-size:18px; color:#0a70b9;">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Card -->
+          <div class="card" style="display:flex; align-items:flex-start; gap:12px; background:rgba(10,112,185,.06); border:1px solid rgba(10,112,185,.15);">
+            <div style="width:36px; height:36px; border-radius:18px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:20px; color:#0a70b9;">info</span>
+            </div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Selecciona un proveedor para ver el estado de ventas y realizar nuevas transacciones.</div>
+          </div>
+
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="mi">home</span>
+            Inicio
+          </div>
+          <div class="tab-item">
+            <span class="mi">settings</span>
+            Ajustes
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

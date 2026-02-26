@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Connect — Navigation & Modals</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header">
+    <h1>Ant Connect</h1>
+    <p>Navigation — Drawer, Profile & QR Modal</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-features.html">Features</a>
+    <a class="active" href="04-navigation.html">Navigation</a>
+    <a href="05-gobierno.html">Gobierno</a>
+    <a href="06-gbb.html">GBB</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== DRAWER OPEN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">10. Drawer Navigation</div>
+      <div class="screen-sublabel">Custom Drawer</div>
+      <div class="phone" style="overflow:hidden;">
+        <div class="drawer-overlay">
+          <div class="drawer-panel">
+            <!-- Drawer Header -->
+            <div style="background:var(--orange); padding:48px 20px 24px; color:white;">
+              <div style="width:56px; height:56px; border-radius:28px; background:rgba(255,255,255,.2); border:2px solid white; display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:24px; font-weight:700;">JC</span>
+              </div>
+              <div style="font-size:18px; font-weight:700; margin-top:12px;">Juan Carlos Pérez</div>
+              <div style="font-size:13px; opacity:.8; margin-top:2px;">+502 5555 1234</div>
+            </div>
+
+            <!-- Drawer Items -->
+            <div style="flex:1; padding:8px 12px;">
+              <!-- Home (active) -->
+              <div style="display:flex; align-items:center; padding:14px 16px; background:var(--orange-20); border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--orange); font-size:22px;">home</span>
+                <span style="flex:1; font-size:15px; font-weight:600; color:var(--orange);">Inicio</span>
+                <span class="mi" style="color:var(--orange); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- History -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">schedule</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Historial</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Subscriptions -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">confirmation_number</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Suscripciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Notifications -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">notifications</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Notificaciones</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+
+              <div style="height:1px; background:var(--gray-border); margin:12px 0;"></div>
+
+              <!-- Profile -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">person</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Mi Perfil</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+              <!-- Settings -->
+              <div style="display:flex; align-items:center; padding:14px 16px; border-radius:12px; margin:4px 0; gap:14px;">
+                <span class="mi" style="color:var(--gray); font-size:22px;">settings</span>
+                <span style="flex:1; font-size:15px; font-weight:500; color:var(--gray);">Configuración</span>
+                <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
+              </div>
+            </div>
+
+            <!-- Drawer Footer -->
+            <div style="padding:16px 20px; border-top:1px solid var(--gray-border);">
+              <div style="display:flex; align-items:center; gap:10px; color:var(--red);">
+                <span class="mi" style="font-size:22px;">exit_to_app</span>
+                <span style="font-size:15px; font-weight:600;">Cerrar Sesión</span>
+              </div>
+              <div style="font-size:12px; color:var(--gray); margin-top:12px;">Ant Connect v1.0.6</div>
+            </div>
+          </div>
+          <div class="drawer-dim"></div>
+        </div>
+        <!-- Background -->
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content"></div>
+        <div class="tab-bar"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== QR MODAL (LOGGED IN) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">11a. QR Modal (Logged In)</div>
+      <div class="screen-sublabel">QRModal.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center" style="padding:28px;">
+            <!-- Close button -->
+            <div style="display:flex; justify-content:flex-end; margin:-8px -8px 12px 0;">
+              <div style="width:32px; height:32px; border-radius:16px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <span class="mi" style="font-size:20px; color:var(--gray);">close</span>
+              </div>
+            </div>
+
+            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Mi Código QR</div>
+            <div style="font-size:13px; color:var(--gray); margin-bottom:20px;">Escanea para identificarte</div>
+
+            <!-- QR Code placeholder -->
+            <div style="width:240px; height:240px; margin:0 auto 20px; background:white; border:2px solid var(--gray-border); border-radius:20px; display:flex; align-items:center; justify-content:center; position:relative;">
+              <!-- Simulated QR pattern -->
+              <svg viewBox="0 0 200 200" width="200" height="200">
+                <!-- QR corners -->
+                <rect x="10" y="10" width="50" height="50" rx="4" fill="none" stroke="#FC6B17" stroke-width="6"/>
+                <rect x="20" y="20" width="30" height="30" rx="2" fill="#FC6B17"/>
+                <rect x="140" y="10" width="50" height="50" rx="4" fill="none" stroke="#FC6B17" stroke-width="6"/>
+                <rect x="150" y="20" width="30" height="30" rx="2" fill="#FC6B17"/>
+                <rect x="10" y="140" width="50" height="50" rx="4" fill="none" stroke="#FC6B17" stroke-width="6"/>
+                <rect x="20" y="150" width="30" height="30" rx="2" fill="#FC6B17"/>
+                <!-- Data pattern -->
+                <rect x="75" y="15" width="8" height="8" fill="#FC6B17"/>
+                <rect x="90" y="15" width="8" height="8" fill="#FC6B17"/>
+                <rect x="105" y="15" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="30" width="8" height="8" fill="#FC6B17"/>
+                <rect x="120" y="30" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="90" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="105" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="120" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="90" width="8" height="8" fill="#FC6B17"/>
+                <rect x="105" y="90" width="8" height="8" fill="#FC6B17"/>
+                <rect x="135" y="90" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="105" width="8" height="8" fill="#FC6B17"/>
+                <rect x="90" y="105" width="8" height="8" fill="#FC6B17"/>
+                <rect x="120" y="105" width="8" height="8" fill="#FC6B17"/>
+                <rect x="150" y="105" width="8" height="8" fill="#FC6B17"/>
+                <rect x="90" y="120" width="8" height="8" fill="#FC6B17"/>
+                <rect x="105" y="120" width="8" height="8" fill="#FC6B17"/>
+                <rect x="135" y="120" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="150" width="8" height="8" fill="#FC6B17"/>
+                <rect x="90" y="150" width="8" height="8" fill="#FC6B17"/>
+                <rect x="120" y="150" width="8" height="8" fill="#FC6B17"/>
+                <rect x="150" y="150" width="8" height="8" fill="#FC6B17"/>
+                <rect x="75" y="165" width="8" height="8" fill="#FC6B17"/>
+                <rect x="105" y="165" width="8" height="8" fill="#FC6B17"/>
+                <rect x="135" y="165" width="8" height="8" fill="#FC6B17"/>
+                <rect x="165" y="165" width="8" height="8" fill="#FC6B17"/>
+                <rect x="150" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="165" y="75" width="8" height="8" fill="#FC6B17"/>
+                <rect x="165" y="135" width="8" height="8" fill="#FC6B17"/>
+                <rect x="150" y="135" width="8" height="8" fill="#FC6B17"/>
+              </svg>
+            </div>
+
+            <!-- User Info Card -->
+            <div style="background:var(--gray-bg); border-radius:16px; padding:16px; text-align:left;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:12px; color:var(--gray);">ID</span>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <span style="font-size:14px; font-weight:600; color:var(--text-dark);">USR-78432</span>
+                  <span class="mi" style="font-size:16px; color:var(--orange); cursor:pointer;">content_copy</span>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:12px; color:var(--gray);">Nombre</span>
+                <span style="font-size:14px; font-weight:600; color:var(--text-dark);">Juan Carlos Pérez</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:var(--gray);">Celular</span>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <span style="font-size:14px; font-weight:600; color:var(--text-dark);">+502 5555 1234</span>
+                  <span class="mi" style="font-size:16px; color:var(--orange); cursor:pointer;">content_copy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== QR MODAL (NOT LOGGED IN) ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">11b. QR Modal (No Auth)</div>
+      <div class="screen-sublabel">No user state</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"><span class="mi" style="font-size:22px;">menu</span></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
+        <div class="content" style="filter:brightness(.7);"></div>
+        <div class="modal-overlay">
+          <div class="modal-card text-center" style="padding:28px;">
+            <div style="display:flex; justify-content:flex-end; margin:-8px -8px 12px 0;">
+              <div style="width:32px; height:32px; border-radius:16px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:var(--gray);">close</span>
+              </div>
+            </div>
+            <div style="width:80px; height:80px; border-radius:40px; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <span class="mi" style="font-size:40px; color:var(--gray);">person_outline</span>
+            </div>
+            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Mi Código QR</div>
+            <div style="font-size:14px; color:var(--gray); margin-bottom:24px;">Inicia sesión para ver tu código QR</div>
+            <button class="btn btn-orange">Iniciar Sesión</button>
+          </div>
+        </div>
+        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
+      </div>
+    </div>
+
+    <!-- ========== PROFILE SCREEN ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">12. Profile</div>
+      <div class="screen-sublabel">(others)/profile.tsx</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span class="logo-text">KingoNet</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <!-- Profile Header -->
+          <div style="text-align:center; margin-bottom:24px;">
+            <div style="width:80px; height:80px; border-radius:40px; background:var(--orange); display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+              <span style="font-size:32px; font-weight:700; color:white;">JC</span>
+            </div>
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark);">Juan Carlos Pérez</div>
+            <div style="font-size:14px; color:var(--gray);">Usuario registrado</div>
+          </div>
+
+          <!-- Info Card -->
+          <div class="card">
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Información Personal</div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:20px; color:var(--orange);">phone</span>
+              <div style="flex:1;">
+                <div style="font-size:12px; color:var(--gray);">Teléfono</div>
+                <div style="font-size:15px; font-weight:600; color:var(--text-dark);">+502 5555 1234</div>
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:20px; color:var(--orange);">badge</span>
+              <div style="flex:1;">
+                <div style="font-size:12px; color:var(--gray);">DPI / CUI</div>
+                <div style="font-size:15px; font-weight:600; color:var(--text-dark);">2987654321013</div>
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:20px; color:var(--orange);">location_on</span>
+              <div style="flex:1;">
+                <div style="font-size:12px; color:var(--gray);">Ubicación</div>
+                <div style="font-size:15px; font-weight:600; color:var(--text-dark);">14.6349° N, 90.5069° W</div>
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0;">
+              <span class="mi" style="font-size:20px; color:var(--orange);">calendar_today</span>
+              <div style="flex:1;">
+                <div style="font-size:12px; color:var(--gray);">Miembro desde</div>
+                <div style="font-size:15px; font-weight:600; color:var(--text-dark);">Enero 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; cursor:pointer;">
+              <span class="mi" style="font-size:20px; color:var(--gray);">edit</span>
+              <span style="flex:1; font-size:15px; font-weight:500; color:var(--text-dark);">Editar Perfil</span>
+              <span class="mi" style="font-size:20px; color:var(--gray-border);">chevron_right</span>
+            </div>
+            <div style="height:1px; background:var(--gray-border);"></div>
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; cursor:pointer;">
+              <span class="mi" style="font-size:20px; color:var(--red);">exit_to_app</span>
+              <span style="flex:1; font-size:15px; font-weight:500; color:var(--red);">Cerrar Sesión</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Fieldservice — Visits</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+    <h1>Ant Fieldservice</h1>
+    <p>Visits — Client Visit Tracking</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-bank.html">Bank</a>
+    <a href="04-operations.html">Operations</a>
+    <a href="05-tasks.html">Tasks</a>
+    <a class="active" href="06-visits.html">Visits</a>
+    <a href="07-sync.html">Sync</a>
+  </nav>
+
+  <div class="screens-container">
+
+    <!-- ========== 6a: VISIT MAP ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">6a. Mapa de Visitas</div>
+      <div class="screen-sublabel">Client visit map with priority markers</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Orange Header -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
+          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Mapa de Visitas</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <!-- Priority Legend Bar -->
+        <div style="display:flex; align-items:center; justify-content:center; gap:20px; padding:10px 16px; background:white; border-bottom:1px solid var(--gray-border); flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <div style="width:16px; height:16px; border-radius:3px; background:#d93832;"></div>
+            <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Alta</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <div style="width:16px; height:16px; border-radius:3px; background:#fed108;"></div>
+            <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Media</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <div style="width:16px; height:16px; border-radius:3px; background:#b2d236;"></div>
+            <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Baja</span>
+          </div>
+        </div>
+
+        <!-- Map Area with Pins and Popup -->
+        <div style="flex:1; position:relative; overflow:hidden;">
+          <!-- Map Background -->
+          <div style="width:100%; height:100%; background:linear-gradient(145deg, #c8d6e5 0%, #b8c9db 25%, #d4dfe9 50%, #bfcfde 75%, #c2d3e3 100%); position:relative;">
+            <!-- Map grid lines (simulating roads) -->
+            <div style="position:absolute; top:80px; left:0; right:0; height:1px; background:rgba(255,255,255,.6);"></div>
+            <div style="position:absolute; top:180px; left:0; right:0; height:1px; background:rgba(255,255,255,.6);"></div>
+            <div style="position:absolute; top:280px; left:0; right:0; height:1px; background:rgba(255,255,255,.6);"></div>
+            <div style="position:absolute; top:0; bottom:0; left:100px; width:1px; background:rgba(255,255,255,.6);"></div>
+            <div style="position:absolute; top:0; bottom:0; left:220px; width:1px; background:rgba(255,255,255,.6);"></div>
+            <div style="position:absolute; top:0; bottom:0; left:300px; width:1px; background:rgba(255,255,255,.6);"></div>
+            <!-- Diagonal road -->
+            <div style="position:absolute; top:40px; left:50px; width:200px; height:1px; background:rgba(255,255,255,.5); transform:rotate(30deg);"></div>
+            <div style="position:absolute; top:200px; left:120px; width:180px; height:1px; background:rgba(255,255,255,.5); transform:rotate(-20deg);"></div>
+
+            <!-- Map block fills (simulating map areas) -->
+            <div style="position:absolute; top:85px; left:105px; width:110px; height:90px; background:rgba(200,215,195,.4); border-radius:4px;"></div>
+            <div style="position:absolute; top:185px; left:225px; width:70px; height:90px; background:rgba(200,215,195,.4); border-radius:4px;"></div>
+            <div style="position:absolute; top:30px; left:225px; width:70px; height:45px; background:rgba(200,215,195,.4); border-radius:4px;"></div>
+
+            <!-- Red Pin (Alta priority) -->
+            <div style="position:absolute; top:60px; left:140px; display:flex; flex-direction:column; align-items:center; z-index:5;">
+              <div style="width:36px; height:36px; border-radius:18px; background:#d93832; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(217,56,50,.4);">
+                <span class="mi" style="font-size:20px; color:white;">location_on</span>
+              </div>
+              <div style="width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #d93832; margin-top:-2px;"></div>
+            </div>
+
+            <!-- Yellow Pin (Media priority) -->
+            <div style="position:absolute; top:150px; left:260px; display:flex; flex-direction:column; align-items:center; z-index:5;">
+              <div style="width:36px; height:36px; border-radius:18px; background:#fed108; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(254,209,8,.4);">
+                <span class="mi" style="font-size:20px; color:white;">location_on</span>
+              </div>
+              <div style="width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #fed108; margin-top:-2px;"></div>
+            </div>
+
+            <!-- Green Pin 1 (Baja priority) -->
+            <div style="position:absolute; top:100px; left:60px; display:flex; flex-direction:column; align-items:center; z-index:5;">
+              <div style="width:36px; height:36px; border-radius:18px; background:#b2d236; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(178,210,54,.4);">
+                <span class="mi" style="font-size:20px; color:white;">location_on</span>
+              </div>
+              <div style="width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #b2d236; margin-top:-2px;"></div>
+            </div>
+
+            <!-- Green Pin 2 (Baja priority) -->
+            <div style="position:absolute; top:220px; left:180px; display:flex; flex-direction:column; align-items:center; z-index:5;">
+              <div style="width:36px; height:36px; border-radius:18px; background:#b2d236; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(178,210,54,.4);">
+                <span class="mi" style="font-size:20px; color:white;">location_on</span>
+              </div>
+              <div style="width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #b2d236; margin-top:-2px;"></div>
+            </div>
+          </div>
+
+          <!-- Popup Card (overlay at bottom of map) -->
+          <div style="position:absolute; bottom:16px; left:16px; right:16px; background:white; border-radius:20px; padding:20px; box-shadow:0 8px 32px rgba(0,0,0,.18); z-index:10;">
+            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">Datos del Tendero</div>
+
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">person</span>
+              <span style="font-size:14px; color:var(--text-dark);">Tendero/a: <strong>Maria Garcia</strong></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">fingerprint</span>
+              <span style="font-size:14px; color:var(--text-dark);">DPI: <strong>1234567890101</strong></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">phone</span>
+              <span style="font-size:14px; color:var(--text-dark);">Telefono: <strong>5555-1234</strong></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">location_city</span>
+              <span style="font-size:14px; color:var(--text-dark);">Comunidad: <strong>San Pedro</strong></span>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div style="display:flex; gap:10px;">
+              <button style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; border-radius:12px; background:#0a70b9; color:white; border:none; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+                <span class="mi" style="font-size:18px;">map</span>
+                Google Maps
+              </button>
+              <button style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; border-radius:12px; background:#049cd7; color:white; border:none; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+                <span class="mi" style="font-size:18px;">navigation</span>
+                Waze
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- NO tab bar -->
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
