@@ -68,7 +68,8 @@
 
     /* Input grande para Quetzales — usable por cualquier usuario */
     .gtq-input-wrap { background:white; border:3px solid var(--tether); border-radius:20px; padding:20px 24px; text-align:center; margin-bottom:16px; box-shadow:0 4px 16px rgba(252,107,23,.15); }
-    .gtq-prefix { font-size:32px; font-weight:900; color:var(--tether); display:block; margin-bottom:4px; }
+    .gtq-row { display:flex; align-items:baseline; justify-content:center; gap:6px; }
+    .gtq-prefix { font-size:40px; font-weight:900; color:var(--tether); line-height:1; }
     .gtq-amount { font-size:56px; font-weight:900; color:var(--text-dark); line-height:1; letter-spacing:-2px; }
     .gtq-label { font-size:13px; color:var(--gray); margin-top:6px; }
     .usdt-conversion { background:var(--tether-light); border-radius:14px; padding:14px 20px; margin-bottom:20px; text-align:center; }
@@ -1029,8 +1030,10 @@
 
           <!-- Input Q — el usuario escribe en Quetzales -->
           <div class="gtq-input-wrap">
-            <span class="gtq-prefix">Q</span>
-            <span class="gtq-amount">25.00</span>
+            <div class="gtq-row">
+              <span class="gtq-prefix">Q</span>
+              <span class="gtq-amount">25.00</span>
+            </div>
             <span class="gtq-label">Quetzales</span>
           </div>
 
@@ -1085,8 +1088,10 @@
           <!-- Input con monto ingresado — igual que T11 -->
           <div style="font-size:13px; color:var(--gray); text-align:center; margin-bottom:14px;">¿Cuánto vas a pagar?</div>
           <div class="gtq-input-wrap" style="border-color:#EF4444; background:#FEF2F2;">
-            <span class="gtq-prefix" style="color:#EF4444;">Q</span>
-            <span class="gtq-amount" style="color:#EF4444;">25.00</span>
+            <div class="gtq-row">
+              <span class="gtq-prefix" style="color:#EF4444;">Q</span>
+              <span class="gtq-amount" style="color:#EF4444;">25.00</span>
+            </div>
             <span class="gtq-label" style="color:#EF4444;">Quetzales</span>
           </div>
 
