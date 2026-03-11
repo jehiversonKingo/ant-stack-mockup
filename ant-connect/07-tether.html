@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ant Connect — Tether Wallet</title>
+  <title>Ant Connect — Kingo Cash</title>
   <link rel="stylesheet" href="../shared/styles.css">
   <style>
     :root {
-      --tether: #26A17B;
-      --tether-dark: #1a7a5c;
-      --tether-light: #E8F7F2;
-      --tether-20: #d0ede4;
+      --tether: #FC6B17;
+      --tether-dark: #c44d00;
+      --tether-light: #fce1d4;
+      --tether-20: #f9c3a8;
     }
 
-    /* Tether gradient header banner */
-    .tether-banner { background:linear-gradient(135deg, #26A17B 0%, #1a7a5c 100%); border-radius:20px; padding:20px; color:white; margin-bottom:16px; position:relative; overflow:hidden; }
+    /* Kingo Cash gradient header banner */
+    .tether-banner { background:linear-gradient(135deg, #FC6B17 0%, #c44d00 100%); border-radius:20px; padding:20px; color:white; margin-bottom:16px; position:relative; overflow:hidden; }
     .tether-banner::before { content:''; position:absolute; right:-20px; top:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.08); }
     .tether-banner::after  { content:''; position:absolute; right:20px; bottom:-30px; width:80px;  height:80px;  border-radius:50%; background:rgba(255,255,255,.06); }
 
-    /* Seed phrase grid */
-    .seed-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:16px 0; }
-    .seed-word { background:var(--tether-light); border:1.5px solid var(--tether-20); border-radius:10px; padding:8px; text-align:center; }
-    .seed-word .num { font-size:10px; color:var(--tether); font-weight:700; }
-    .seed-word .word { font-size:13px; font-weight:700; color:var(--text-dark); margin-top:2px; }
+    /* Seed phrase grid — palabras grandes y claras */
+    .seed-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:16px 0; }
+    .seed-word { background:var(--tether-light); border:2px solid var(--tether-20); border-radius:12px; padding:10px 6px; text-align:center; }
+    .seed-word .num { font-size:11px; color:var(--tether); font-weight:700; }
+    .seed-word .word { font-size:14px; font-weight:800; color:var(--text-dark); margin-top:3px; }
 
     /* Network option card */
     .net-card { background:white; border-radius:16px; padding:14px 16px; box-shadow:0 2px 8px rgba(0,0,0,.06); border:2px solid var(--gray-border); margin-bottom:12px; display:flex; align-items:center; gap:14px; cursor:pointer; }
@@ -31,47 +31,62 @@
 
     /* Course card */
     .course-card { background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px; border:1.5px solid var(--gray-border); display:flex; gap:12px; align-items:flex-start; }
-    .course-thumb { width:72px; height:56px; border-radius:10px; background:linear-gradient(135deg,#26A17B,#1a7a5c); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .reward-badge { background:#26A17B; color:white; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
+    .course-thumb { width:72px; height:56px; border-radius:10px; background:linear-gradient(135deg,#FC6B17,#c44d00); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .reward-badge { background:#FC6B17; color:white; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; }
 
     /* Wallet address box */
     .wallet-addr { background:var(--tether-light); border:1.5px dashed var(--tether); border-radius:12px; padding:14px; display:flex; align-items:center; gap:10px; margin-bottom:16px; }
     .wallet-addr .addr { font-size:11px; font-family:'Courier New', monospace; color:var(--tether-dark); font-weight:600; flex:1; word-break:break-all; line-height:1.6; }
 
-    /* QR mockup (SVG placeholder) */
+    /* QR mockup */
     .qr-box { width:140px; height:140px; border:3px solid var(--tether); border-radius:16px; display:flex; align-items:center; justify-content:center; background:white; margin:0 auto 16px; }
 
-    /* Push notification bubble (for notification screen) */
+    /* Push notification bubble */
     .push-notif { background:white; border-radius:14px; padding:14px 16px; box-shadow:0 4px 20px rgba(0,0,0,.18); display:flex; align-items:flex-start; gap:12px; margin:0 16px; }
-    .push-icon { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#26A17B,#1a7a5c); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .push-icon { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#FC6B17,#c44d00); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 
     /* Spam banner inline */
-    .spam-tether { background:linear-gradient(135deg,#26A17B,#1a7a5c); border-radius:16px; padding:16px; color:white; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+    .spam-tether { background:linear-gradient(135deg,#FC6B17,#c44d00); border-radius:16px; padding:16px; color:white; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
 
     /* Steps for onboarding */
     .ob-step { display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; }
-    .ob-num { width:32px; height:32px; border-radius:16px; background:var(--tether); color:white; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+    .ob-num { width:36px; height:36px; border-radius:18px; background:var(--tether); color:white; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; flex-shrink:0; }
 
     /* Video player mock */
     .video-player { background:#000; border-radius:14px; height:140px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; position:relative; overflow:hidden; }
-    .video-bg { position:absolute; inset:0; background:linear-gradient(135deg,#1a4a3a,#26A17B,#1a7a5c); opacity:.7; }
+    .video-bg { position:absolute; inset:0; background:linear-gradient(135deg,#7a2e00,#FC6B17,#c44d00); opacity:.7; }
     .play-btn { width:52px; height:52px; border-radius:26px; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; z-index:1; }
 
     /* Quiz option */
     .quiz-opt { border:2px solid var(--gray-border); border-radius:12px; padding:12px 14px; margin-bottom:8px; display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-dark); font-weight:500; cursor:pointer; }
     .quiz-opt.correct { border-color:var(--tether); background:var(--tether-light); color:var(--tether-dark); }
 
-    /* Drawer item highlight for Tether */
+    /* Drawer */
     .drawer-overlay { position:absolute; inset:0; display:flex; z-index:10; }
     .drawer-panel { width:300px; height:100%; background:white; display:flex; flex-direction:column; flex-shrink:0; }
     .drawer-dim { flex:1; background:rgba(0,0,0,.45); }
+
+    /* Input grande para Quetzales — usable por cualquier usuario */
+    .gtq-input-wrap { background:white; border:3px solid var(--tether); border-radius:20px; padding:20px 24px; text-align:center; margin-bottom:16px; box-shadow:0 4px 16px rgba(252,107,23,.15); }
+    .gtq-prefix { font-size:32px; font-weight:900; color:var(--tether); display:block; margin-bottom:4px; }
+    .gtq-amount { font-size:56px; font-weight:900; color:var(--text-dark); line-height:1; letter-spacing:-2px; }
+    .gtq-label { font-size:13px; color:var(--gray); margin-top:6px; }
+    .usdt-conversion { background:var(--tether-light); border-radius:14px; padding:14px 20px; margin-bottom:20px; text-align:center; }
+    .usdt-amount { font-size:22px; font-weight:800; color:var(--tether); }
+    .usdt-label { font-size:12px; color:var(--tether-dark); margin-top:2px; }
+
+    /* Numpad para usuarios sin teclado fácil */
+    .numpad { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:16px; }
+    .numpad-key { background:white; border:2px solid var(--gray-border); border-radius:16px; padding:16px 0; font-size:24px; font-weight:700; color:var(--text-dark); text-align:center; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.05); }
+    .numpad-key:active,.numpad-key.zero { font-size:20px; }
+    .numpad-key.del { background:var(--gray-bg); font-size:18px; }
   </style>
 </head>
 <body>
-  <div class="page-header" style="background:linear-gradient(135deg, #26A17B 0%, #1a7a5c 100%);">
+  <div class="page-header">
     <a href="index.html" class="back-link"><span class="mi" style="font-size:18px;">arrow_back</span> Volver al Hub</a>
     <h1>Ant Connect</h1>
-    <p>Tether Wallet — Onboarding, Actividades & Pago Crypto</p>
+    <p>Kingo Cash — Onboarding, Actividades & Pago con Cripto</p>
   </div>
   <nav class="page-nav">
     <a href="01-auth.html">Auth</a>
@@ -80,7 +95,7 @@
     <a href="04-navigation.html">Navigation</a>
     <a href="05-gobierno.html">Gobierno</a>
     <a href="06-gbb.html">GBB</a>
-    <a class="active" href="07-tether.html">Tether</a>
+    <a class="active" href="07-tether.html">Kingo Cash</a>
   </nav>
 
   <div class="screens-container">
@@ -89,7 +104,7 @@
     <!-- T0. DRAWER CON OPCION TETHER                                       -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T0. Drawer + Tether Wallet</div>
+      <div class="screen-label">T0. Drawer + Kingo Cash</div>
       <div class="screen-sublabel">Nueva opción en el menú lateral</div>
       <div class="phone" style="overflow:hidden;">
         <div class="drawer-overlay">
@@ -129,13 +144,13 @@
                 <span class="mi" style="color:var(--gray-border); font-size:20px;">chevron_right</span>
               </div>
               <div style="height:1px; background:var(--gray-border); margin:8px 0;"></div>
-              <!-- ★ NUEVA OPCION: Tether Wallet (activa) -->
+              <!-- ★ NUEVA OPCION: Kingo Cash (activa) -->
               <div style="display:flex; align-items:center; padding:13px 16px; background:var(--tether-light); border-radius:12px; margin:4px 0; gap:14px;">
                 <div style="width:26px; height:26px; border-radius:13px; background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span style="font-size:13px; font-weight:900; color:white;">₮</span>
+                  <span class="mi" style="font-size:16px; color:white;">wallet</span>
                 </div>
-                <span style="flex:1; font-size:15px; font-weight:700; color:var(--tether-dark);">Tether Wallet</span>
-                <span style="background:#26A17B; color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px;">NUEVO</span>
+                <span style="flex:1; font-size:15px; font-weight:700; color:var(--tether-dark);">Kingo Cash</span>
+                <span style="background:var(--tether); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px;">NUEVO</span>
               </div>
               <div style="height:1px; background:var(--gray-border); margin:8px 0;"></div>
               <div style="display:flex; align-items:center; padding:13px 16px; border-radius:12px; margin:4px 0; gap:14px;">
@@ -179,17 +194,17 @@
             <div style="font-size:28px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
           </div>
 
-          <!-- ★ SPAM BANNER TETHER — compact alert style -->
-          <div style="background:linear-gradient(135deg,#26A17B,#1a7a5c); border-radius:14px; padding:12px 14px; margin-bottom:16px; display:flex; align-items:center; gap:10px; cursor:pointer;">
-            <div style="width:38px; height:38px; border-radius:19px; background:rgba(255,255,255,.2); border:1.5px solid rgba(255,255,255,.4); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              <span style="font-size:20px; font-weight:900; color:white;">₮</span>
+          <!-- ★ SPAM BANNER KINGO CASH — fácil de entender -->
+          <div style="background:linear-gradient(135deg,#FC6B17,#c44d00); border-radius:16px; padding:14px 16px; margin-bottom:16px; display:flex; align-items:center; gap:12px; cursor:pointer; box-shadow:0 4px 14px rgba(252,107,23,.3);">
+            <div style="width:44px; height:44px; border-radius:14px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:26px; color:white;">wallet</span>
             </div>
             <div style="flex:1; color:white;">
-              <div style="font-size:13px; font-weight:700; line-height:1.2; margin-bottom:1px;">¡Crea tu Wallet Tether!</div>
-              <div style="font-size:11px; opacity:.85;">Gana $3 USDT por cada curso completado</div>
+              <div style="font-size:14px; font-weight:800; line-height:1.2; margin-bottom:2px;">¡Crea tu Kingo Cash!</div>
+              <div style="font-size:12px; opacity:.9;">Gana $3 USDT <span style="opacity:.8;">(≈ Q 22.50)</span> por cada curso</div>
             </div>
-            <div style="background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.3); border-radius:8px; padding:6px 10px; flex-shrink:0;">
-              <div style="font-size:11px; font-weight:700; color:white; white-space:nowrap;">Comenzar →</div>
+            <div style="background:white; border-radius:10px; padding:8px 12px; flex-shrink:0;">
+              <div style="font-size:12px; font-weight:800; color:var(--tether); white-space:nowrap;">Empezar</div>
             </div>
           </div>
 
@@ -240,59 +255,60 @@
     <!-- T2. ONBOARDING INTRO — BIENVENIDA TETHER                          -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T2. Onboarding — Intro Tether Wallet</div>
-      <div class="screen-sublabel">Pantalla de bienvenida al módulo</div>
+      <div class="screen-label">T2. Onboarding — Intro Kingo Cash</div>
+      <div class="screen-sublabel">Pantalla de bienvenida al módulo (UX simplificado)</div>
       <div class="phone">
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Tether Wallet</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo Cash</span></div>
           <div style="width:44px;"></div>
         </div>
         <div class="content content-pad">
-          <!-- Hero banner -->
-          <div class="tether-banner" style="text-align:center; padding:32px 20px; margin-bottom:20px;">
-            <div style="width:80px; height:80px; border-radius:40px; background:rgba(255,255,255,.2); border:3px solid rgba(255,255,255,.4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
-              <span style="font-size:42px; font-weight:900; color:white;">₮</span>
+          <!-- Hero banner — grande y visual -->
+          <div class="tether-banner" style="text-align:center; padding:28px 20px; margin-bottom:20px;">
+            <div style="width:88px; height:88px; border-radius:44px; background:rgba(255,255,255,.2); border:3px solid rgba(255,255,255,.4); display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
+              <span class="mi" style="font-size:48px; color:white;">wallet</span>
             </div>
-            <div style="font-size:22px; font-weight:700; margin-bottom:6px;">Tu Wallet Tether</div>
-            <div style="font-size:13px; opacity:.85; line-height:1.5;">Recibe pagos en USDT, aprende sobre cripto y gana recompensas</div>
+            <div style="font-size:24px; font-weight:800; margin-bottom:6px;">Tu Billetera Digital</div>
+            <div style="font-size:13px; opacity:.9; line-height:1.6;">Gana dinero viendo videos cortos y paga con tu teléfono</div>
           </div>
 
-          <!-- Beneficios -->
-          <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">¿Cómo funciona?</div>
+          <!-- Pasos — íconos grandes, texto mínimo -->
+          <div style="font-size:16px; font-weight:800; color:var(--text-dark); margin-bottom:16px; text-align:center;">¿Cómo funciona?</div>
+
           <div class="ob-step">
-            <div class="ob-num">1</div>
-            <div>
-              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Crea tu wallet</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.5; margin-top:2px;">Genera tu billetera en segundos, tú controlas tus claves</div>
+            <div class="ob-num" style="width:44px; height:44px; border-radius:22px; font-size:20px; flex-shrink:0; background:var(--tether);">1</div>
+            <div style="background:var(--tether-light); border-radius:14px; padding:12px 14px; flex:1;">
+              <div style="font-size:15px; font-weight:800; color:var(--text-dark); margin-bottom:2px;">Crea tu billetera</div>
+              <div style="font-size:12px; color:var(--gray); line-height:1.5;">Solo tomas 1 minuto. Es gratis.</div>
             </div>
           </div>
           <div class="ob-step">
-            <div class="ob-num">2</div>
-            <div>
-              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Completa actividades</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.5; margin-top:2px;">Ve videos educativos sobre cripto y responde preguntas</div>
+            <div class="ob-num" style="width:44px; height:44px; border-radius:22px; font-size:20px; flex-shrink:0; background:var(--tether);">2</div>
+            <div style="background:var(--tether-light); border-radius:14px; padding:12px 14px; flex:1;">
+              <div style="font-size:15px; font-weight:800; color:var(--text-dark); margin-bottom:2px;">Ve un video corto</div>
+              <div style="font-size:12px; color:var(--gray); line-height:1.5;">Aprende algo nuevo en 10 minutos.</div>
             </div>
           </div>
           <div class="ob-step">
-            <div class="ob-num">3</div>
-            <div>
-              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Gana $3 USDT</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.5; margin-top:2px;">Por cada curso completado recibes $3 directamente a tu wallet</div>
+            <div class="ob-num" style="width:44px; height:44px; border-radius:22px; font-size:20px; flex-shrink:0; background:var(--tether);">3</div>
+            <div style="background:var(--tether-light); border-radius:14px; padding:12px 14px; flex:1;">
+              <div style="font-size:15px; font-weight:800; color:var(--text-dark); margin-bottom:2px;">Gana $3 USDT por curso</div>
+              <div style="font-size:12px; color:var(--gray); line-height:1.5;">El dinero llega directo a tu billetera. <strong style="color:var(--tether);">≈ Q 22.50</strong></div>
             </div>
           </div>
           <div class="ob-step" style="margin-bottom:0;">
-            <div class="ob-num">4</div>
-            <div>
-              <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Paga en tu tienda</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.5; margin-top:2px;">Usa tu USDT para pagar planes KingoNet con cripto</div>
+            <div class="ob-num" style="width:44px; height:44px; border-radius:22px; font-size:20px; flex-shrink:0; background:var(--tether);">4</div>
+            <div style="background:var(--tether-light); border-radius:14px; padding:12px 14px; flex:1;">
+              <div style="font-size:15px; font-weight:800; color:var(--text-dark); margin-bottom:2px;">Paga en tu tienda Kingo</div>
+              <div style="font-size:12px; color:var(--gray); line-height:1.5;">Muestra un QR y listo.</div>
             </div>
           </div>
 
-          <button class="btn mt-16" style="background:var(--tether); color:white;">
-            <span style="font-size:20px; font-weight:900;">₮</span>
-            Crear mi Wallet Ahora
+          <button class="btn mt-16" style="background:var(--tether); color:white; font-size:16px; padding:18px;">
+            <span class="mi" style="font-size:22px;">wallet</span>
+            Crear mi Billetera Ahora
           </button>
           <button class="btn btn-ghost mt-8" style="font-size:14px;">Tal vez después</button>
         </div>
@@ -316,20 +332,20 @@
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Tu Frase Secreta</span></div>
+          <div class="logo"><span style="font-size:17px; font-weight:700; color:var(--tether);">Tu Contraseña de Respaldo</span></div>
           <div style="width:44px;"></div>
         </div>
         <div class="content content-pad">
-          <!-- Warning box -->
-          <div style="background:#FFF8E1; border:1.5px solid #F59E0B; border-radius:14px; padding:14px; display:flex; gap:10px; margin-bottom:16px; align-items:flex-start;">
-            <span class="mi" style="font-size:22px; color:#F59E0B; flex-shrink:0;">warning</span>
+          <!-- Warning box — lenguaje simple -->
+          <div style="background:#FFF8E1; border:2px solid #F59E0B; border-radius:16px; padding:16px; display:flex; gap:12px; margin-bottom:16px; align-items:flex-start;">
+            <span class="mi" style="font-size:28px; color:#F59E0B; flex-shrink:0;">lock</span>
             <div>
-              <div style="font-size:13px; font-weight:700; color:#92400E; margin-bottom:4px;">¡Guarda esto en un lugar seguro!</div>
-              <div style="font-size:12px; color:#92400E; line-height:1.5;">Esta es la única forma de recuperar tu wallet. Nunca la compartas con nadie.</div>
+              <div style="font-size:15px; font-weight:800; color:#92400E; margin-bottom:6px;">Estas palabras abren tu billetera</div>
+              <div style="font-size:12px; color:#92400E; line-height:1.6;">Guárdalas como tu contraseña más importante. <strong>No las compartas con nadie, ni con Kingo.</strong></div>
             </div>
           </div>
 
-          <div style="font-size:14px; color:var(--gray); text-align:center; margin-bottom:12px;">Tu frase de recuperación de 12 palabras:</div>
+          <div style="font-size:13px; color:var(--gray); text-align:center; margin-bottom:12px;">Tus 12 palabras secretas (escríbelas o guárdalas):</div>
 
           <!-- Seed grid -->
           <div class="seed-grid">
@@ -376,64 +392,140 @@
     </div>
 
     <!-- ================================================================= -->
+    <!-- T3b. VER PALABRAS SECRETAS — ACCESO CON HUELLA O CONTRASEÑA      -->
+    <!-- ================================================================= -->
+    <div class="screen-wrapper">
+      <div class="screen-label">T3b. Ver Palabras Secretas</div>
+      <div class="screen-sublabel">Autenticación biométrica o contraseña para revelar</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span style="font-size:17px; font-weight:700; color:var(--tether);">Mis Palabras Secretas</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+
+          <!-- Info banner -->
+          <div style="background:var(--tether-light); border:1.5px solid var(--tether-20); border-radius:14px; padding:12px 14px; display:flex; gap:10px; align-items:center; margin-bottom:20px;">
+            <span class="mi" style="font-size:22px; color:var(--tether); flex-shrink:0;">info</span>
+            <span style="font-size:12px; color:var(--tether-dark); line-height:1.5;">Estas palabras son la llave de tu billetera. Solo tú puedes verlas.</span>
+          </div>
+
+          <!-- Seed grid bloqueada — blur overlay -->
+          <div style="position:relative; margin-bottom:20px;">
+            <!-- Grid borrosa (simula blur) -->
+            <div class="seed-grid" style="filter:blur(4px); pointer-events:none; opacity:.6;">
+              <div class="seed-word"><div class="num">1</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">2</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">3</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">4</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">5</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">6</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">7</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">8</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">9</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">10</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">11</div><div class="word">•••••</div></div>
+              <div class="seed-word"><div class="num">12</div><div class="word">•••••</div></div>
+            </div>
+            <!-- Overlay de seguridad centrado -->
+            <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(252,107,23,.06); border-radius:14px; border:2px dashed var(--tether-20);">
+              <div style="width:64px; height:64px; border-radius:32px; background:white; border:2.5px solid var(--tether-20); display:flex; align-items:center; justify-content:center; margin-bottom:10px; box-shadow:0 4px 16px rgba(0,0,0,.1);">
+                <span class="mi" style="font-size:36px; color:var(--tether);">lock</span>
+              </div>
+              <div style="font-size:13px; font-weight:700; color:var(--text-dark);">Protegidas</div>
+              <div style="font-size:11px; color:var(--gray); margin-top:2px;">Autentícate para verlas</div>
+            </div>
+          </div>
+
+          <!-- Botón principal: Huella -->
+          <button class="btn" style="background:var(--tether); color:white; font-size:16px; padding:18px; margin-bottom:12px;">
+            <span class="mi" style="font-size:26px;">fingerprint</span>
+            Usar mi Huella Digital
+          </button>
+
+          <!-- Alternativa: contraseña -->
+          <button class="btn btn-outline" style="font-size:14px; padding:14px; margin-bottom:16px;">
+            <span class="mi" style="font-size:20px;">password</span>
+            Usar Contraseña
+          </button>
+
+          <!-- Warning -->
+          <div style="background:#FFF8E1; border:1px solid #F59E0B; border-radius:12px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start;">
+            <span class="mi" style="font-size:18px; color:#F59E0B; flex-shrink:0; margin-top:1px;">warning</span>
+            <span style="font-size:11px; color:#92400E; line-height:1.6;"><strong>Nunca las compartas.</strong> Ni con Kingo ni con nadie. Quien tenga estas palabras, controla tu dinero.</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
     <!-- T4. SELECCION DE RED                                               -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T4. Selección de Red</div>
+      <div class="screen-label">T4. Selección de Red — Kingo Cash</div>
       <div class="screen-sublabel">Tron recomendado · registerWallet()</div>
       <div class="phone">
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Elige tu Red</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo Cash</span></div>
           <div style="width:44px;"></div>
         </div>
         <div class="content content-pad">
-          <div style="font-size:14px; color:var(--gray); margin-bottom:20px; line-height:1.5;">Selecciona la red donde quieres guardar tu USDT. Puedes agregar más después.</div>
+          <div style="font-size:14px; color:var(--gray); margin-bottom:20px; line-height:1.6;">¿Dónde quieres guardar tu dinero digital? Puedes agregar más opciones después.</div>
 
-          <!-- TRON — Recomendado -->
+          <!-- TRON — Recomendado, UX simplificado sin jerga técnica -->
           <div class="net-card recommended" style="background:var(--tether-light);">
             <div class="net-icon" style="background:var(--tether); color:white; font-size:18px; font-weight:900;">T</div>
             <div style="flex:1;">
-              <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px; flex-wrap:nowrap;">
-                <div style="font-size:15px; font-weight:700; color:var(--text-dark); white-space:nowrap;">Tron (TRC-20)</div>
-                <span style="background:var(--tether); color:white; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; white-space:nowrap; flex-shrink:0; line-height:1.6;">⭐ Recomendado</span>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:nowrap;">
+                <div style="font-size:16px; font-weight:800; color:var(--text-dark); white-space:nowrap;">Tron</div>
+                <span style="background:var(--tether); color:white; font-size:10px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0; display:flex; align-items:center; gap:3px;"><span class="mi" style="font-size:12px;">star</span> Recomendado</span>
               </div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.4;">Comisiones bajas · Rápido · Ideal para USDT</div>
-              <div style="font-size:11px; color:var(--tether); font-weight:600; margin-top:3px;">api.trongrid.io</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span style="background:rgba(16,185,129,.1); color:#065f46; font-size:11px; font-weight:700; padding:3px 8px; border-radius:8px; display:flex; align-items:center; gap:3px;"><span class="mi" style="font-size:12px;">bolt</span> Rápido</span>
+                <span style="background:rgba(16,185,129,.1); color:#065f46; font-size:11px; font-weight:700; padding:3px 8px; border-radius:8px; display:flex; align-items:center; gap:3px;"><span class="mi" style="font-size:12px;">savings</span> Comisión baja</span>
+              </div>
             </div>
-            <div style="width:24px; height:24px; border-radius:12px; border:2px solid var(--tether); background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              <span class="mi" style="font-size:16px; color:white;">check</span>
+            <div style="width:28px; height:28px; border-radius:14px; border:2px solid var(--tether); background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:18px; color:white;">check</span>
             </div>
           </div>
 
-          <div style="font-size:13px; font-weight:600; color:var(--gray); margin:16px 0 12px;">Redes adicionales (opcional)</div>
+          <div style="font-size:13px; font-weight:600; color:var(--gray); margin:16px 0 12px;">Otras opciones (más adelante)</div>
 
           <!-- ETHEREUM -->
-          <div class="net-card">
+          <div class="net-card" style="opacity:.65;">
             <div class="net-icon" style="background:#627EEA; color:white;">Ξ</div>
             <div style="flex:1;">
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Ethereum (ERC-20)</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.4;">Alta seguridad · Comisiones más altas · Gas fees</div>
-              <div style="font-size:11px; color:var(--gray); margin-top:4px;">eth.drpc.org</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Ethereum</div>
+              <div style="font-size:12px; color:var(--gray);">Más lento · Comisión mayor</div>
             </div>
-            <div style="width:24px; height:24px; border-radius:12px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center;"></div>
+            <div style="width:24px; height:24px; border-radius:12px; border:2px solid var(--gray-border);"></div>
           </div>
 
           <!-- BITCOIN -->
-          <div class="net-card">
+          <div class="net-card" style="opacity:.65;">
             <div class="net-icon" style="background:#F7931A; color:white;">₿</div>
             <div style="flex:1;">
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Bitcoin (BTC)</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.4;">Reserva de valor · Mainnet · Electrum</div>
-              <div style="font-size:11px; color:var(--gray); margin-top:4px;">electrum.blockstream.info</div>
+              <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Bitcoin</div>
+              <div style="font-size:12px; color:var(--gray);">Para guardar a largo plazo</div>
             </div>
-            <div style="width:24px; height:24px; border-radius:12px; border:2px solid var(--gray-border); display:flex; align-items:center; justify-content:center;"></div>
+            <div style="width:24px; height:24px; border-radius:12px; border:2px solid var(--gray-border);"></div>
           </div>
 
-          <button class="btn mt-8" style="background:var(--tether); color:white;">
-            <span class="mi" style="font-size:20px;">account_balance_wallet</span>
-            Crear Wallet con Tron
+          <button class="btn mt-8" style="background:var(--tether); color:white; font-size:16px; padding:16px;">
+            <span class="mi" style="font-size:22px;">wallet</span>
+            Crear mi Billetera con Tron
           </button>
         </div>
         <div class="tab-bar">
@@ -450,13 +542,13 @@
     <!-- T5. WALLET CREADA — ÉXITO                                          -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T5. ¡Wallet Creada!</div>
+      <div class="screen-label">T5. ¡Kingo Cash Creada!</div>
       <div class="screen-sublabel">Dirección TRC-20 + QR · CTA "Ver Actividades"</div>
       <div class="phone">
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn" style="opacity:0;"></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Wallet Lista</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo Cash Lista ✓</span></div>
           <div style="width:44px;"></div>
         </div>
         <div class="content content-pad" style="text-align:center;">
@@ -464,31 +556,31 @@
           <div style="width:72px; height:72px; border-radius:36px; background:var(--tether); display:inline-flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(38,161,123,.35); margin-bottom:12px; margin-top:8px;">
             <span class="mi" style="font-size:36px; color:white;">check</span>
           </div>
-          <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">¡Tu Wallet está lista!</div>
-          <div style="font-size:13px; color:var(--gray); margin-bottom:20px;">Red Tron (TRC-20) · USDT</div>
+          <div style="font-size:22px; font-weight:800; color:var(--text-dark); margin-bottom:4px;">¡Tu Kingo Cash está lista!</div>
+          <div style="font-size:13px; color:var(--gray); margin-bottom:20px;">Billetera digital activa · Red Tron</div>
 
           <!-- QR mock -->
           <div class="qr-box">
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
               <!-- Simple QR pattern mockup -->
-              <rect x="5" y="5" width="38" height="38" rx="4" fill="#26A17B" opacity=".15"/>
-              <rect x="10" y="10" width="28" height="28" rx="2" fill="#26A17B" opacity=".3"/>
-              <rect x="15" y="15" width="18" height="18" rx="1" fill="#26A17B"/>
-              <rect x="57" y="5" width="38" height="38" rx="4" fill="#26A17B" opacity=".15"/>
-              <rect x="62" y="10" width="28" height="28" rx="2" fill="#26A17B" opacity=".3"/>
-              <rect x="67" y="15" width="18" height="18" rx="1" fill="#26A17B"/>
-              <rect x="5" y="57" width="38" height="38" rx="4" fill="#26A17B" opacity=".15"/>
-              <rect x="10" y="62" width="28" height="28" rx="2" fill="#26A17B" opacity=".3"/>
-              <rect x="15" y="67" width="18" height="18" rx="1" fill="#26A17B"/>
+              <rect x="5" y="5" width="38" height="38" rx="4" fill="#FC6B17" opacity=".15"/>
+              <rect x="10" y="10" width="28" height="28" rx="2" fill="#FC6B17" opacity=".3"/>
+              <rect x="15" y="15" width="18" height="18" rx="1" fill="#FC6B17"/>
+              <rect x="57" y="5" width="38" height="38" rx="4" fill="#FC6B17" opacity=".15"/>
+              <rect x="62" y="10" width="28" height="28" rx="2" fill="#FC6B17" opacity=".3"/>
+              <rect x="67" y="15" width="18" height="18" rx="1" fill="#FC6B17"/>
+              <rect x="5" y="57" width="38" height="38" rx="4" fill="#FC6B17" opacity=".15"/>
+              <rect x="10" y="62" width="28" height="28" rx="2" fill="#FC6B17" opacity=".3"/>
+              <rect x="15" y="67" width="18" height="18" rx="1" fill="#FC6B17"/>
               <!-- center dots -->
-              <rect x="47" y="47" width="6" height="6" rx="1" fill="#26A17B"/>
-              <rect x="57" y="57" width="6" height="6" rx="1" fill="#26A17B"/>
-              <rect x="47" y="57" width="6" height="6" rx="1" fill="#26A17B" opacity=".5"/>
-              <rect x="57" y="47" width="6" height="6" rx="1" fill="#26A17B" opacity=".5"/>
-              <rect x="67" y="57" width="6" height="6" rx="1" fill="#26A17B"/>
-              <rect x="57" y="67" width="6" height="6" rx="1" fill="#26A17B"/>
-              <rect x="67" y="67" width="6" height="6" rx="1" fill="#26A17B" opacity=".5"/>
-              <rect x="47" y="67" width="6" height="6" rx="1" fill="#26A17B" opacity=".5"/>
+              <rect x="47" y="47" width="6" height="6" rx="1" fill="#FC6B17"/>
+              <rect x="57" y="57" width="6" height="6" rx="1" fill="#FC6B17"/>
+              <rect x="47" y="57" width="6" height="6" rx="1" fill="#FC6B17" opacity=".5"/>
+              <rect x="57" y="47" width="6" height="6" rx="1" fill="#FC6B17" opacity=".5"/>
+              <rect x="67" y="57" width="6" height="6" rx="1" fill="#FC6B17"/>
+              <rect x="57" y="67" width="6" height="6" rx="1" fill="#FC6B17"/>
+              <rect x="67" y="67" width="6" height="6" rx="1" fill="#FC6B17" opacity=".5"/>
+              <rect x="47" y="67" width="6" height="6" rx="1" fill="#FC6B17" opacity=".5"/>
             </svg>
           </div>
 
@@ -501,8 +593,9 @@
           <!-- Balance info -->
           <div style="background:var(--gray-bg); border-radius:14px; padding:14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <div style="text-align:left;">
-              <div style="font-size:12px; color:var(--gray);">Balance Tron</div>
-              <div style="font-size:20px; font-weight:700; color:var(--text-dark);">0.00 USDT</div>
+              <div style="font-size:12px; color:var(--gray);">Tu saldo Kingo Cash</div>
+              <div style="font-size:20px; font-weight:700; color:var(--text-dark);">$0.00 USDT</div>
+              <div style="font-size:11px; color:var(--gray);">≈ Q 0.00</div>
             </div>
             <div style="text-align:right;">
               <div style="font-size:12px; color:var(--gray);">Red</div>
@@ -510,13 +603,13 @@
             </div>
           </div>
 
-          <button class="btn" style="background:var(--tether); color:white; margin-bottom:10px;">
-            <span class="mi" style="font-size:20px;">play_circle</span>
-            Ver Actividades y Ganar
+          <button class="btn" style="background:var(--tether); color:white; margin-bottom:10px; font-size:16px; padding:16px;">
+            <span class="mi" style="font-size:22px;">play_circle</span>
+            Ver Videos y Ganar Dinero
           </button>
           <button class="btn btn-outline" style="font-size:13px;">
-            <span class="mi" style="font-size:18px;">account_balance_wallet</span>
-            Ver mi Wallet
+            <span class="mi" style="font-size:18px;">wallet</span>
+            Ver mi Kingo Cash
           </button>
         </div>
         <div class="tab-bar">
@@ -533,13 +626,13 @@
     <!-- T6. ACTIVIDADES TETHER — LISTA DE CURSOS                          -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T6. Actividades Tether</div>
-      <div class="screen-sublabel">Ver video + quiz → ganar $3 USDT por curso</div>
+      <div class="screen-label">T6. Actividades Kingo Cash</div>
+      <div class="screen-sublabel">Ver video + quiz → ganar $3 USDT (≈ Q 22.50) por curso</div>
       <div class="phone">
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Actividades</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo Cash — Cursos</span></div>
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--tether);">account_balance_wallet</span></div>
         </div>
         <div class="content content-pad">
@@ -547,12 +640,13 @@
           <div class="tether-banner" style="margin-bottom:20px;">
             <div style="display:flex; align-items:center; gap:12px;">
               <div>
-                <div style="font-size:16px; font-weight:700; margin-bottom:2px;">Aprende y Gana USDT</div>
-                <div style="font-size:12px; opacity:.85;">Completa cursos y recibe $3 por cada uno</div>
+                <div style="font-size:16px; font-weight:800; margin-bottom:2px;">Aprende y Gana</div>
+                <div style="font-size:12px; opacity:.9;">Completa un video y recibe $3 USDT en tu Kingo Cash</div>
               </div>
               <div style="text-align:right; flex-shrink:0;">
-                <div style="font-size:11px; opacity:.75;">Tu balance</div>
+                <div style="font-size:11px; opacity:.75;">Tu saldo</div>
                 <div style="font-size:20px; font-weight:900;">$3 USDT</div>
+                <div style="font-size:10px; opacity:.7;">≈ Q 22.50</div>
               </div>
             </div>
           </div>
@@ -573,7 +667,7 @@
                   <span class="mi" style="font-size:12px;">check_circle</span> Completado
                 </div>
               </div>
-              <div class="reward-badge"><span>₮</span> $3 USDT ganados</div>
+              <div class="reward-badge"><span class="mi" style="font-size:14px;">check_circle</span> $3 USDT ganados</div>
             </div>
           </div>
 
@@ -591,7 +685,7 @@
                   Disponible
                 </div>
               </div>
-              <div class="reward-badge" style="background:var(--tether-light); color:var(--tether-dark);">₮ Gana $3 USDT</div>
+              <div class="reward-badge" style="background:var(--tether-light); color:var(--tether-dark);">Gana $3 USDT <span style="opacity:.7; font-size:10px;">(Q 22.50)</span></div>
             </div>
           </div>
 
@@ -609,7 +703,7 @@
                   Próximamente
                 </div>
               </div>
-              <div class="reward-badge" style="background:var(--gray-bg); color:var(--gray);">₮ Gana $3 USDT</div>
+              <div class="reward-badge" style="background:var(--gray-bg); color:var(--gray);">Gana $3 USDT</div>
             </div>
           </div>
         </div>
@@ -634,7 +728,7 @@
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
           <div class="logo"><span style="font-size:16px; font-weight:700; color:var(--tether);">Curso</span></div>
-          <div class="reward-badge" style="font-size:12px;">₮ $3 USDT</div>
+          <div class="reward-badge" style="font-size:12px;">$3 USDT al completar</div>
         </div>
         <div class="content content-pad">
           <!-- Video player -->
@@ -681,9 +775,9 @@
             Solo funciona con Bitcoin
           </div>
 
-          <button class="btn mt-12" style="background:var(--tether); color:white;">
-            <span style="font-size:18px; font-weight:900;">₮</span>
-            Reclamar mis $3 USDT
+          <button class="btn mt-12" style="background:var(--tether); color:white; font-size:16px; padding:16px;">
+            <span class="mi" style="font-size:22px;">savings</span>
+            Reclamar $3 USDT <span style="font-size:13px; opacity:.8;">(Q 22.50)</span>
           </button>
         </div>
         <div class="tab-bar">
@@ -700,50 +794,81 @@
     <!-- T8. MODAL RECOMPENSA — $3 USDT GANADOS                            -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T8. Modal Recompensa Tether</div>
-      <div class="screen-sublabel">$3 USDT ganados → CTA ir a Actividades</div>
-      <div class="phone">
-        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-        <div class="header" style="filter:brightness(.7);"><div class="icon-btn"></div><div class="logo"><span class="logo-text">KingoNet</span></div><div style="width:44px;"></div></div>
-        <div class="content" style="filter:brightness(.7);"></div>
+      <div class="screen-label">T8. Recompensa Kingo Cash — Pantalla Completa</div>
+      <div class="screen-sublabel">$3 USDT ganados · celebración full-screen sin modal</div>
+      <div class="phone" style="overflow:hidden;">
+        <!-- Full-screen celebration — sin header normal -->
+        <div style="flex:1; background:linear-gradient(160deg,#FC6B17 0%,#c44d00 60%,#8c3200 100%); display:flex; flex-direction:column; align-items:center; position:relative; overflow:hidden; padding-bottom:0;">
 
-        <!-- Modal overlay -->
-        <div class="modal-overlay">
-          <div class="modal-card" style="background:var(--tether-light); text-align:center;">
-            <!-- Animated success -->
-            <div style="width:80px; height:80px; border-radius:40px; background:var(--tether); display:inline-flex; align-items:center; justify-content:center; margin-bottom:16px; box-shadow:0 6px 24px rgba(38,161,123,.4);">
-              <span style="font-size:40px; font-weight:900; color:white;">₮</span>
+          <!-- Status bar blanca sobre fondo naranja -->
+          <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; width:100%; color:white; flex-shrink:0;">
+            <span style="font-size:14px; font-weight:600;">9:41</span>
+            <div style="display:flex; gap:6px;">
+              <span class="mi" style="font-size:16px; color:white;">signal_cellular_alt</span>
+              <span class="mi" style="font-size:16px; color:white;">wifi</span>
+              <span class="mi" style="font-size:16px; color:white;">battery_full</span>
             </div>
-            <div style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">¡$3 USDT Ganados!</div>
-            <div style="font-size:13px; color:var(--gray); margin-bottom:20px;">Completaste el curso exitosamente</div>
+          </div>
 
-            <!-- Amount display -->
-            <div style="background:white; border-radius:14px; padding:16px; margin-bottom:16px; border:2px solid var(--tether-20);">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Enviado a tu wallet TRC-20</div>
-              <div style="font-size:28px; font-weight:900; color:var(--tether);">+$3.00 USDT</div>
-              <div style="font-size:11px; color:var(--gray); margin-top:4px; font-family:monospace;">TJRabPr...nPJC2NP</div>
+          <!-- Confetti dots decorativos -->
+          <div style="position:absolute; top:50px; left:20px; width:14px; height:14px; border-radius:50%; background:rgba(255,255,255,.3);"></div>
+          <div style="position:absolute; top:80px; left:50px; width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.2);"></div>
+          <div style="position:absolute; top:60px; right:30px; width:12px; height:12px; border-radius:50%; background:rgba(255,255,255,.25);"></div>
+          <div style="position:absolute; top:110px; right:55px; width:6px; height:20px; border-radius:3px; background:rgba(255,255,255,.2); transform:rotate(30deg);"></div>
+          <div style="position:absolute; top:95px; left:35px; width:6px; height:18px; border-radius:3px; background:rgba(255,255,255,.2); transform:rotate(-20deg);"></div>
+          <div style="position:absolute; bottom:200px; left:16px; width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.15);"></div>
+          <div style="position:absolute; bottom:220px; right:22px; width:8px; height:24px; border-radius:4px; background:rgba(255,255,255,.18); transform:rotate(15deg);"></div>
+
+          <!-- Contenido centrado -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 24px; text-align:center; width:100%;">
+
+            <!-- Ícono grande -->
+            <div style="width:96px; height:96px; border-radius:48px; background:rgba(255,255,255,.2); border:3px solid rgba(255,255,255,.4); display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+              <span class="mi" style="font-size:56px; color:white;">workspace_premium</span>
             </div>
 
-            <!-- Stats -->
-            <div style="display:flex; gap:12px; margin-bottom:20px;">
-              <div style="flex:1; background:white; border-radius:12px; padding:12px; border:1px solid var(--tether-20);">
-                <div style="font-size:11px; color:var(--gray);">Total ganado</div>
-                <div style="font-size:18px; font-weight:700; color:var(--tether);">$6 USDT</div>
+            <div style="font-size:14px; font-weight:600; color:rgba(255,255,255,.8); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;">¡Curso completado!</div>
+
+            <!-- Monto principal -->
+            <div style="font-size:64px; font-weight:900; color:white; line-height:1; margin-bottom:6px;">$3.00</div>
+            <div style="font-size:18px; font-weight:700; color:rgba(255,255,255,.85); margin-bottom:4px;">USDT</div>
+            <div style="font-size:13px; color:rgba(255,255,255,.65); margin-bottom:28px;">≈ Q 22.50.00 · enviado a tu Kingo Cash</div>
+
+            <!-- Ticket / recibo -->
+            <div style="background:white; border-radius:20px; padding:16px 20px; width:100%; margin-bottom:20px;">
+              <!-- Perforated line -->
+              <div style="border-top:2px dashed var(--gray-border); margin:0 -4px 14px;"></div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span style="font-size:12px; color:var(--gray);">Curso</span>
+                <span style="font-size:12px; font-weight:700; color:var(--text-dark);">Cómo enviar USDT</span>
               </div>
-              <div style="flex:1; background:white; border-radius:12px; padding:12px; border:1px solid var(--tether-20);">
-                <div style="font-size:11px; color:var(--gray);">Cursos completos</div>
-                <div style="font-size:18px; font-weight:700; color:var(--text-dark);">2 / 3</div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span style="font-size:12px; color:var(--gray);">Cursos completos</span>
+                <span style="font-size:12px; font-weight:700; color:var(--text-dark);">2 de 3</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:var(--gray);">Total ganado</span>
+                <div style="text-align:right;">
+                  <div style="font-size:16px; font-weight:900; color:var(--tether);">$6.00 USDT</div>
+                  <div style="font-size:11px; color:var(--gray);">≈ Q 45.00</div>
+                </div>
               </div>
             </div>
+          </div>
 
-            <button class="btn" style="background:var(--tether); color:white; margin-bottom:10px;">
-              Ver más Actividades
+          <!-- Botones al fondo -->
+          <div style="padding:0 20px 28px; width:100%; display:flex; flex-direction:column; gap:10px;">
+            <button class="btn" style="background:white; color:var(--tether); font-size:15px; font-weight:800; padding:16px;">
+              <span class="mi" style="font-size:20px;">play_circle</span>
+              Ver siguiente curso
             </button>
-            <button class="btn btn-ghost" style="font-size:13px;">Ver mi Wallet</button>
+            <button style="background:rgba(255,255,255,.15); border:1.5px solid rgba(255,255,255,.3); border-radius:14px; padding:13px; color:white; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+              <span class="mi" style="font-size:18px;">wallet</span>
+              Ver mi Kingo Cash
+            </button>
           </div>
         </div>
-
-        <div class="tab-bar" style="filter:brightness(.7);"><div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div><div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div><div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div><div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div></div>
       </div>
     </div>
 
@@ -775,15 +900,15 @@
           <!-- ★ PUSH NOTIFICATION -->
           <div class="push-notif" style="width:calc(100% - 32px);">
             <div class="push-icon">
-              <span style="font-size:22px; font-weight:900; color:white;">₮</span>
+              <span class="mi" style="font-size:22px; color:white;">wallet</span>
             </div>
             <div style="flex:1; min-width:0;">
               <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:3px;">
-                <div style="font-size:12px; font-weight:700; color:var(--text-dark);">KingoNet · Tether Wallet</div>
+                <div style="font-size:12px; font-weight:700; color:var(--text-dark);">KingoNet · Kingo Cash</div>
                 <div style="font-size:11px; color:var(--gray);">ahora</div>
               </div>
               <div style="font-size:13px; font-weight:600; color:var(--text-dark); margin-bottom:2px;">🎓 Nuevo curso disponible</div>
-              <div style="font-size:12px; color:var(--gray); line-height:1.4;">"Protege tu wallet" — Gana $3 USDT. ¡Toca para ver!</div>
+              <div style="font-size:12px; color:var(--gray); line-height:1.4;">"Protege tu billetera" — Gana $3 USDT (≈ Q 22.50). ¡Toca!</div>
             </div>
           </div>
 
@@ -828,44 +953,49 @@
             <div style="font-size:26px; font-weight:700; color:var(--text-dark);">Juan Carlos</div>
           </div>
 
-          <!-- ★ NUEVO CURSO INLINE BANNER -->
-          <div style="background:linear-gradient(135deg,#26A17B,#1a7a5c); border-radius:16px; padding:14px 16px; margin-bottom:14px; display:flex; align-items:center; gap:12px; cursor:pointer; position:relative; overflow:hidden;">
+          <!-- ★ NUEVO CURSO INLINE BANNER — Kingo Cash -->
+          <div style="background:linear-gradient(135deg,#FC6B17,#c44d00); border-radius:16px; padding:14px 16px; margin-bottom:14px; display:flex; align-items:center; gap:12px; cursor:pointer; position:relative; overflow:hidden; box-shadow:0 4px 14px rgba(252,107,23,.3);">
             <div style="position:absolute; right:-10px; top:-10px; width:70px; height:70px; border-radius:50%; background:rgba(255,255,255,.08);"></div>
             <div style="width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <span class="mi" style="font-size:24px; color:white;">school</span>
             </div>
             <div style="flex:1; color:white;">
-              <div style="font-size:11px; opacity:.8; font-weight:600; text-transform:uppercase; letter-spacing:.5px;">Tether Academy · Nuevo</div>
-              <div style="font-size:13px; font-weight:700; margin:2px 0;">"Protege tu wallet" disponible</div>
-              <div style="font-size:11px; opacity:.85;">Gana <strong>$3 USDT</strong> al completarlo</div>
+              <div style="font-size:11px; opacity:.9; font-weight:700; text-transform:uppercase; letter-spacing:.5px;">Kingo Cash · Nuevo curso</div>
+              <div style="font-size:13px; font-weight:800; margin:2px 0;">"Protege tu billetera" disponible</div>
+              <div style="font-size:11px; opacity:.9;">Gana <strong>$3 USDT</strong> <span style="opacity:.75;">(≈ Q 22.50)</span></div>
             </div>
-            <div style="background:rgba(255,255,255,.25); border-radius:8px; padding:6px 10px; flex-shrink:0;">
-              <div style="font-size:11px; font-weight:700; color:white;">Ver →</div>
+            <div style="background:white; border-radius:8px; padding:6px 10px; flex-shrink:0;">
+              <div style="font-size:11px; font-weight:800; color:var(--tether);">Ver</div>
             </div>
           </div>
 
-          <!-- Plan card (compacto) -->
-          <div class="card" style="padding:16px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+          <!-- Plan Active Card — idéntico al T1 / 4b original -->
+          <div class="card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
               <div class="badge badge-green"><span class="mi" style="font-size:14px;">check_circle</span> Plan Activo</div>
-              <div class="icon-btn" style="width:32px; height:32px;"><span class="mi" style="font-size:18px; color:var(--gray);">refresh</span></div>
+              <div class="icon-btn" style="width:36px; height:36px;"><span class="mi" style="font-size:20px; color:var(--gray);">refresh</span></div>
             </div>
-            <div style="width:140px; height:140px; margin:0 auto 12px; position:relative;">
-              <svg viewBox="0 0 200 200" width="140" height="140">
+            <div style="width:200px; height:200px; margin:0 auto 20px; position:relative;">
+              <svg viewBox="0 0 200 200" width="200" height="200">
                 <circle cx="100" cy="100" r="88" fill="none" stroke="#F0F0F0" stroke-width="12"/>
                 <circle cx="100" cy="100" r="88" fill="none" stroke="#10B981" stroke-width="12" stroke-linecap="round" stroke-dasharray="553" stroke-dashoffset="166" transform="rotate(-90 100 100)"/>
               </svg>
               <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                <div style="font-size:20px; font-weight:700; color:var(--text-dark);">5.2 hrs</div>
-                <div style="font-size:10px; color:var(--gray);">de 1 Semana</div>
-                <div style="font-size:11px; color:var(--green); font-weight:600;">120/500 MB</div>
+                <div style="font-size:14px; color:var(--gray);">Llevas</div>
+                <div style="font-size:28px; font-weight:700; color:var(--text-dark);">5.2 Horas</div>
+                <div style="font-size:13px; color:var(--gray);">Activo de <span style="font-weight:600;">1 Semana</span></div>
+                <div style="font-size:12px; color:var(--green); font-weight:600; margin-top:4px;">120 MB / 500 MB</div>
               </div>
             </div>
-            <div style="background:var(--orange); border-radius:10px; padding:10px 12px; display:flex; align-items:center; gap:8px; color:white;">
-              <span class="mi" style="font-size:16px;">calendar_today</span>
+            <div style="display:flex; align-items:center; gap:8px; justify-content:center; margin-bottom:16px;">
+              <span class="mi" style="font-size:18px; color:var(--gray);">schedule</span>
+              <span style="font-size:14px; color:var(--gray);">Plan: <strong>1 Semana</strong></span>
+            </div>
+            <div style="background:var(--orange); border-radius:12px; padding:14px; display:flex; align-items:center; gap:10px; color:white;">
+              <span class="mi" style="font-size:22px;">calendar_today</span>
               <div>
-                <div style="font-size:10px; opacity:.8;">Vence el</div>
-                <div style="font-size:13px; font-weight:700;">23-02-2026 18:30</div>
+                <div style="font-size:12px; opacity:.8;">Disfruta tu plan hasta el</div>
+                <div style="font-size:15px; font-weight:700;">23-02-2026 18:30</div>
               </div>
             </div>
           </div>
@@ -885,75 +1015,191 @@
     <!-- T11. CLIENTE MUESTRA QR WALLET — PAGO CON CRIPTO                  -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T11. Cliente — Mostrar QR para Pago</div>
-      <div class="screen-sublabel">Ant Connect: cliente presenta su QR al tendero</div>
+      <div class="screen-label">T11. Cliente — Ingresar Monto en Quetzales</div>
+      <div class="screen-sublabel">Ant Connect: el cliente escribe cuánto va a pagar y ve conversión a USDT</div>
       <div class="phone">
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Pagar con Cripto</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Pagar con Kingo Cash</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+          <div style="font-size:13px; color:var(--gray); text-align:center; margin-bottom:14px;">¿Cuánto vas a pagar?</div>
+
+          <!-- Input Q — el usuario escribe en Quetzales -->
+          <div class="gtq-input-wrap">
+            <span class="gtq-prefix">Q</span>
+            <span class="gtq-amount">25.00</span>
+            <span class="gtq-label">Quetzales</span>
+          </div>
+
+          <!-- Conversión automática a USDT -->
+          <div class="usdt-conversion">
+            <div style="font-size:11px; color:var(--gray); margin-bottom:6px; display:flex; align-items:center; justify-content:center; gap:4px;">
+              <span class="mi" style="font-size:14px;">sync_alt</span> Equivale a
+            </div>
+            <div style="font-size:28px; font-weight:900; color:var(--tether);">$3.33 USDT</div>
+            <div style="font-size:11px; color:var(--tether-dark); margin-top:3px;">de tu Kingo Cash · Red Tron</div>
+          </div>
+
+          <!-- Numpad — para facilitar sin teclado -->
+          <div class="numpad">
+            <div class="numpad-key">1</div><div class="numpad-key">2</div><div class="numpad-key">3</div>
+            <div class="numpad-key">4</div><div class="numpad-key">5</div><div class="numpad-key">6</div>
+            <div class="numpad-key">7</div><div class="numpad-key">8</div><div class="numpad-key">9</div>
+            <div class="numpad-key">,</div><div class="numpad-key zero">0</div><div class="numpad-key del"><span class="mi" style="font-size:22px;">backspace</span></div>
+          </div>
+
+          <!-- Botón principal -->
+          <button class="btn" style="background:var(--tether); color:white; font-size:16px; padding:18px;">
+            <span class="mi" style="font-size:22px;">qr_code</span>
+            Generar QR para Pagar
+          </button>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- T11c. FONDOS INSUFICIENTES                                        -->
+    <!-- ================================================================= -->
+    <div class="screen-wrapper">
+      <div class="screen-label">T11c. Sin Fondos Suficientes</div>
+      <div class="screen-sublabel">El cliente intenta pagar Q25 pero solo tiene $1.50 USDT</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Pagar con Kingo Cash</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content content-pad">
+
+          <!-- Input con monto ingresado — igual que T11 -->
+          <div style="font-size:13px; color:var(--gray); text-align:center; margin-bottom:14px;">¿Cuánto vas a pagar?</div>
+          <div class="gtq-input-wrap" style="border-color:#EF4444; background:#FEF2F2;">
+            <span class="gtq-prefix" style="color:#EF4444;">Q</span>
+            <span class="gtq-amount" style="color:#EF4444;">25.00</span>
+            <span class="gtq-label" style="color:#EF4444;">Quetzales</span>
+          </div>
+
+          <!-- Alerta de fondos insuficientes — clara y simple -->
+          <div style="background:#FEF2F2; border:2px solid #EF4444; border-radius:16px; padding:18px; margin-bottom:20px; text-align:center;">
+            <div style="width:56px; height:56px; border-radius:28px; background:#EF4444; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;">
+              <span class="mi" style="font-size:30px; color:white;">account_balance_wallet</span>
+            </div>
+            <div style="font-size:16px; font-weight:800; color:#991B1B; margin-bottom:6px;">Saldo insuficiente</div>
+            <div style="font-size:13px; color:#B91C1C; line-height:1.6; margin-bottom:14px;">Necesitas <strong>$3.33 USDT</strong> para este pago<br>pero solo tienes <strong>$1.50 USDT</strong> en tu Kingo Cash</div>
+
+            <!-- Barra de progreso de cuánto falta -->
+            <div style="background:white; border-radius:12px; padding:12px 14px; border:1px solid #FECACA; text-align:left;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="font-size:11px; color:#B91C1C; font-weight:600;">Tu saldo actual</span>
+                <span style="font-size:12px; font-weight:800; color:#B91C1C;">$1.50 USDT <span style="font-weight:500;">(Q 11.25)</span></span>
+              </div>
+              <div style="height:8px; background:#FECACA; border-radius:4px; overflow:hidden; margin-bottom:8px;">
+                <div style="width:45%; height:100%; background:#EF4444; border-radius:4px;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="font-size:11px; color:var(--gray);">Te faltan</span>
+                <span style="font-size:12px; font-weight:800; color:#991B1B;">$1.83 USDT <span style="font-weight:500; font-size:11px;">(≈ Q 13.73)</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTAs — qué puede hacer -->
+          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">¿Qué puedes hacer?</div>
+
+          <button class="btn" style="background:var(--tether); color:white; font-size:15px; padding:16px; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">play_circle</span>
+            Ver un curso y ganar $3 USDT
+          </button>
+          <button class="btn btn-outline" style="font-size:14px; padding:14px; margin-bottom:10px;">
+            <span class="mi" style="font-size:20px;">edit</span>
+            Pagar menos
+          </button>
+          <button class="btn btn-ghost" style="font-size:13px;">
+            Cancelar pago
+          </button>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- T11b. CLIENTE — QR GENERADO PARA MOSTRAR AL TENDERO              -->
+    <!-- ================================================================= -->
+    <div class="screen-wrapper">
+      <div class="screen-label">T11b. Cliente — QR Generado · Mostrar al Tendero</div>
+      <div class="screen-sublabel">QR con monto bloqueado Q25 · el tendero solo lo escanea</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Pagar con Kingo Cash</span></div>
           <div style="width:44px;"></div>
         </div>
         <div class="content content-pad" style="text-align:center;">
-          <div style="font-size:15px; font-weight:600; color:var(--text-dark); margin-bottom:4px;">Muestra este QR al tendero</div>
-          <div style="font-size:12px; color:var(--gray); margin-bottom:14px;">Tu firma digital ya está incluida — el tendero solo escanea</div>
+          <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Muéstrale este QR al tendero</div>
+          <div style="font-size:12px; color:var(--gray); margin-bottom:14px;">El tendero lo escanea y el pago se procesa solo</div>
 
-          <!-- Monto autorizado — locked, no editable -->
-          <div style="background:var(--tether-light); border:2px solid var(--tether); border-radius:14px; padding:12px 18px; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; text-align:left;">
+          <!-- Monto bloqueado — Q primero -->
+          <div style="background:var(--tether-light); border:2.5px solid var(--tether); border-radius:16px; padding:12px 18px; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; text-align:left;">
             <div>
-              <div style="font-size:10px; color:var(--tether-dark); font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-bottom:2px;">Monto autorizado</div>
-              <div style="font-size:26px; font-weight:900; color:var(--tether); line-height:1.1;">$3.25 USDT</div>
-              <div style="font-size:11px; color:var(--gray);">≈ Q 25.00 · Plan 1 Semana · TRC-20</div>
+              <div style="font-size:10px; color:var(--tether-dark); font-weight:700; text-transform:uppercase; margin-bottom:2px;">Monto autorizado</div>
+              <div style="font-size:30px; font-weight:900; color:var(--tether); line-height:1.1;">$3.33 USDT</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">≈ Q 25.00 · Red Tron</div>
             </div>
             <div style="width:36px; height:36px; border-radius:18px; background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <span class="mi" style="font-size:20px; color:white;">lock</span>
             </div>
           </div>
 
-          <!-- Nota de seguridad -->
-          <div style="background:#FFF8E1; border:1px solid #F59E0B; border-radius:10px; padding:9px 12px; display:flex; gap:8px; align-items:flex-start; margin-bottom:16px; text-align:left;">
-            <span class="mi" style="font-size:16px; color:#F59E0B; flex-shrink:0; margin-top:1px;">verified_user</span>
-            <span style="font-size:11px; color:#92400E; line-height:1.5;">El tendero <strong>solo puede cobrar exactamente $3.25 USDT</strong> a tu wallet. Ni más, ni a otra dirección.</span>
+          <!-- Nota seguridad simple -->
+          <div style="background:#FFF8E1; border:1px solid #F59E0B; border-radius:10px; padding:9px 12px; display:flex; gap:8px; align-items:center; margin-bottom:16px; text-align:left;">
+            <span class="mi" style="font-size:20px; color:#F59E0B; flex-shrink:0;">verified_user</span>
+            <span style="font-size:11px; color:#92400E; line-height:1.5;">El tendero <strong>solo puede cobrar exactamente Q25</strong>. No más.</span>
           </div>
 
-          <!-- Large QR -->
-          <div style="width:200px; height:200px; border:3px solid var(--tether); border-radius:20px; display:flex; align-items:center; justify-content:center; background:white; margin:0 auto 16px; box-shadow:0 4px 20px rgba(38,161,123,.2);">
-            <svg width="160" height="160" viewBox="0 0 160 160" fill="none">
-              <rect x="8" y="8" width="58" height="58" rx="6" fill="#26A17B" opacity=".12"/>
-              <rect x="16" y="16" width="42" height="42" rx="4" fill="#26A17B" opacity=".25"/>
-              <rect x="24" y="24" width="26" height="26" rx="2" fill="#26A17B"/>
-              <rect x="94" y="8" width="58" height="58" rx="6" fill="#26A17B" opacity=".12"/>
-              <rect x="102" y="16" width="42" height="42" rx="4" fill="#26A17B" opacity=".25"/>
-              <rect x="110" y="24" width="26" height="26" rx="2" fill="#26A17B"/>
-              <rect x="8" y="94" width="58" height="58" rx="6" fill="#26A17B" opacity=".12"/>
-              <rect x="16" y="102" width="42" height="42" rx="4" fill="#26A17B" opacity=".25"/>
-              <rect x="24" y="110" width="26" height="26" rx="2" fill="#26A17B"/>
-              <!-- Center ₮ symbol -->
-              <text x="80" y="88" text-anchor="middle" font-size="28" font-weight="900" fill="#26A17B">₮</text>
-              <!-- dots -->
-              <rect x="72" y="94" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="86" y="94" width="8" height="8" rx="2" fill="#26A17B" opacity=".5"/>
-              <rect x="94" y="94" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="94" y="108" width="8" height="8" rx="2" fill="#26A17B" opacity=".5"/>
-              <rect x="108" y="94" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="108" y="108" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="94" y="122" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="108" y="122" width="8" height="8" rx="2" fill="#26A17B" opacity=".5"/>
-              <rect x="122" y="94" width="8" height="8" rx="2" fill="#26A17B" opacity=".7"/>
-              <rect x="122" y="108" width="8" height="8" rx="2" fill="#26A17B"/>
-              <rect x="122" y="122" width="8" height="8" rx="2" fill="#26A17B" opacity=".5"/>
+          <!-- QR grande -->
+          <div style="width:190px; height:190px; border:3px solid var(--tether); border-radius:20px; display:flex; align-items:center; justify-content:center; background:white; margin:0 auto 16px; box-shadow:0 4px 20px rgba(252,107,23,.2);">
+            <svg width="150" height="150" viewBox="0 0 160 160" fill="none">
+              <rect x="8" y="8" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+              <rect x="16" y="16" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+              <rect x="24" y="24" width="26" height="26" rx="2" fill="#FC6B17"/>
+              <rect x="94" y="8" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+              <rect x="102" y="16" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+              <rect x="110" y="24" width="26" height="26" rx="2" fill="#FC6B17"/>
+              <rect x="8" y="94" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+              <rect x="16" y="102" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+              <rect x="24" y="110" width="26" height="26" rx="2" fill="#FC6B17"/>
+              <text x="80" y="90" text-anchor="middle" font-size="20" font-weight="900" fill="#FC6B17">Q25</text>
+              <rect x="72" y="94" width="8" height="8" rx="2" fill="#FC6B17"/>
+              <rect x="86" y="94" width="8" height="8" rx="2" fill="#FC6B17" opacity=".5"/>
+              <rect x="94" y="94" width="8" height="8" rx="2" fill="#FC6B17"/>
+              <rect x="108" y="108" width="8" height="8" rx="2" fill="#FC6B17"/>
+              <rect x="94" y="122" width="8" height="8" rx="2" fill="#FC6B17"/>
+              <rect x="122" y="94" width="8" height="8" rx="2" fill="#FC6B17" opacity=".7"/>
+              <rect x="122" y="108" width="8" height="8" rx="2" fill="#FC6B17"/>
             </svg>
           </div>
 
-          <!-- Address truncated -->
-          <div style="background:var(--gray-bg); border-radius:10px; padding:10px 16px; margin-bottom:16px; font-family:monospace; font-size:12px; color:var(--gray);">
-            TJRabPrwbZy45sbavf...nPJC2NPztaEHF
-          </div>
-
-          <!-- Info -->
-          <div style="display:flex; align-items:center; gap:8px; background:var(--tether-light); border-radius:10px; padding:10px 14px;">
-            <span class="mi" style="font-size:18px; color:var(--tether);">info</span>
-            <span style="font-size:12px; color:var(--tether-dark); text-align:left; line-height:1.4;">El tendero escaneará este QR con Ant Shopkeeper para confirmar el pago</span>
+          <!-- Dirección -->
+          <div style="background:var(--gray-bg); border-radius:10px; padding:10px 16px; font-family:monospace; font-size:11px; color:var(--gray);">
+            TJRabPrwbZy...nPJC2NPztaEHF
           </div>
         </div>
         <div class="tab-bar">
@@ -1009,9 +1255,12 @@
                 <span style="font-size:13px; color:var(--gray);">Plan</span>
                 <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Plan 1 Semana</span>
               </div>
-              <div style="display:flex; justify-content:space-between; padding:6px 0;">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0;">
                 <span style="font-size:13px; color:var(--gray);">Total</span>
-                <span style="font-size:16px; font-weight:700; color:#f16824;">Q 25.00 / $3.25 USDT</span>
+                <div style="text-align:right;">
+                  <div style="font-size:17px; font-weight:800; color:#f16824;">$3.33 USDT</div>
+                  <div style="font-size:11px; color:var(--gray); margin-top:1px;">≈ Q 25.00</div>
+                </div>
               </div>
             </div>
 
@@ -1023,8 +1272,8 @@
                 <div style="font-size:11px; font-weight:700; color:#f16824; margin-top:2px;">Efectivo</div>
               </div>
               <div style="flex:1; border:2px solid var(--tether); border-radius:12px; padding:10px; text-align:center; background:var(--tether-light);">
-                <span style="font-size:20px; font-weight:900; color:var(--tether); display:block; line-height:1.2;">₮</span>
-                <div style="font-size:11px; font-weight:700; color:var(--tether-dark); margin-top:2px;">USDT / Cripto</div>
+                <span class="mi" style="font-size:20px; color:var(--tether); display:block; line-height:1.2;">wallet</span>
+                <div style="font-size:11px; font-weight:700; color:var(--tether-dark); margin-top:2px;">Kingo Cash</div>
               </div>
             </div>
 
@@ -1052,14 +1301,14 @@
         <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div style="height:56px; display:flex; align-items:center; padding:0 16px; background:#f16824; gap:8px; flex-shrink:0;">
           <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
-          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Pago con Cripto</div>
+          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Pago Kingo Cash</div>
           <span style="width:24px;"></span>
         </div>
-        <div style="flex:1; background:#0d1a14; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
-          <div style="position:absolute; inset:0; background:linear-gradient(180deg,#0d1a14 0%,#142b1e 100%);"></div>
+        <div style="flex:1; background:#1a0800; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg,#1a0800 0%,#2d1000 100%);"></div>
           <div style="color:white; text-align:center; margin-bottom:28px; z-index:1; padding:0 24px;">
-            <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Escanea el QR del cliente</div>
-            <div style="font-size:12px; opacity:.65; line-height:1.4;">El monto ya está fijado en la app del cliente</div>
+            <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Escanea el QR del cliente</div>
+            <div style="font-size:12px; opacity:.75; line-height:1.4;">El monto ya está fijado — no necesitas ingresar nada</div>
           </div>
           <!-- QR scanning frame -->
           <div style="width:220px; height:220px; position:relative; z-index:1;">
@@ -1070,11 +1319,11 @@
             <!-- Animated scan line -->
             <div style="position:absolute; top:40%; left:8px; right:8px; height:2px; background:linear-gradient(90deg,transparent,var(--tether),transparent); opacity:.9;"></div>
           </div>
-          <!-- Amount shown below frame -->
-          <div style="z-index:1; margin-top:28px; background:rgba(38,161,123,.2); border:1.5px solid rgba(38,161,123,.5); border-radius:16px; padding:14px 32px; text-align:center;">
-            <div style="font-size:11px; color:rgba(255,255,255,.6); margin-bottom:2px;">Monto a cobrar (del cliente)</div>
-            <div style="font-size:28px; font-weight:900; color:white;">$3.25 USDT</div>
-            <div style="font-size:11px; color:rgba(255,255,255,.55);">≈ Q 25.00 · Plan 1 Semana</div>
+          <!-- Amount shown below frame — Q primero -->
+          <div style="z-index:1; margin-top:28px; background:rgba(252,107,23,.2); border:1.5px solid rgba(252,107,23,.5); border-radius:16px; padding:14px 32px; text-align:center;">
+            <div style="font-size:11px; color:rgba(255,255,255,.7); margin-bottom:4px;">El cliente va a pagar</div>
+            <div style="font-size:36px; font-weight:900; color:white;">$3.33 USDT</div>
+            <div style="font-size:12px; color:rgba(255,255,255,.65); margin-top:2px;">≈ Q 25.00 · Plan 1 Semana</div>
           </div>
           <div style="z-index:1; margin-top:20px;">
             <button style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:12px; padding:10px 28px; color:rgba(255,255,255,.8); font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;">Cancelar</button>
@@ -1092,13 +1341,13 @@
     <!-- El cliente ya fijó Q25 → el tendero solo confirma y listo         -->
     <!-- ================================================================= -->
     <div class="screen-wrapper">
-      <div class="screen-label">T14. Shopkeeper — QR Leído · Confirmar con 1 Tap</div>
-      <div class="screen-sublabel">Monto preestablecido por el cliente · sin re-ingresar nada</div>
+      <div class="screen-label">T14. Shopkeeper — QR Leído · 1 Tap y Listo</div>
+      <div class="screen-sublabel">El cliente ya autorizó Q25 · el tendero solo confirma y la transacción va</div>
       <div class="phone">
         <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div style="height:56px; display:flex; align-items:center; padding:0 16px; background:#f16824; gap:8px; flex-shrink:0;">
           <span class="mi" style="color:white; font-size:24px;">close</span>
-          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Pago con Cripto</div>
+          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Pago Kingo Cash</div>
           <span style="width:24px;"></span>
         </div>
         <div class="content content-pad" style="background:var(--gray-bg);">
@@ -1115,9 +1364,9 @@
 
           <!-- Monto grande y claro -->
           <div style="background:white; border-radius:16px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:14px; text-align:center;">
-            <div style="font-size:12px; color:var(--gray); margin-bottom:6px;">El cliente pagará</div>
-            <div style="font-size:40px; font-weight:900; color:var(--tether); line-height:1;">$3.25 <span style="font-size:22px;">USDT</span></div>
-            <div style="font-size:14px; color:var(--gray); margin-top:4px;">≈ Q 25.00 · Plan 1 Semana · Kingo 9931838</div>
+            <div style="font-size:12px; color:var(--gray); margin-bottom:6px;">El cliente va a pagar</div>
+            <div style="font-size:44px; font-weight:900; color:var(--tether); line-height:1;">$3.33 <span style="font-size:22px;">USDT</span></div>
+            <div style="font-size:13px; color:var(--gray); margin-top:4px;">≈ Q 25.00 · Plan 1 Semana · Kingo 9931838</div>
             <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-top:10px;">
               <div style="width:16px; height:16px; border-radius:8px; background:var(--tether); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; font-weight:900; color:white;">T</span></div>
               <span style="font-size:12px; color:var(--tether); font-weight:600;">Red Tron TRC-20</span>
@@ -1131,9 +1380,9 @@
           </div>
 
           <!-- Un solo botón grande -->
-          <button class="btn" style="background:var(--tether); color:white; font-size:16px; padding:18px; margin-bottom:10px;">
-            <span class="mi" style="font-size:22px;">check_circle</span>
-            Confirmar Cobro de $3.25 USDT
+          <button class="btn" style="background:var(--tether); color:white; font-size:17px; padding:20px; margin-bottom:10px;">
+            <span class="mi" style="font-size:24px;">check_circle</span>
+            Confirmar Cobro · $3.33 USDT
           </button>
           <button class="btn btn-ghost" style="font-size:13px; padding:12px;">Cancelar</button>
         </div>
@@ -1171,9 +1420,9 @@
           <div style="background:white; border-radius:16px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px;">
             <!-- Tether amount highlight -->
             <div style="background:var(--tether-light); border-radius:12px; padding:14px; text-align:center; margin-bottom:16px; border:1.5px solid var(--tether-20);">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Monto recibido</div>
-              <div style="font-size:32px; font-weight:900; color:var(--tether);">+$3.25 USDT</div>
-              <div style="font-size:12px; color:var(--gray);">≈ Q 25.00</div>
+              <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Pago recibido</div>
+              <div style="font-size:36px; font-weight:900; color:var(--tether);">+$3.33 USDT</div>
+              <div style="font-size:12px; color:var(--gray); margin-top:2px;">≈ Q 25.00 · Red Tron</div>
             </div>
 
             <div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--gray-border);">
@@ -1218,7 +1467,7 @@
 
           <div style="display:flex; flex-direction:column; gap:10px;">
             <button class="btn" style="background:#41a247; color:white;"><span class="mi" style="font-size:20px;">share</span> Compartir Código</button>
-            <button class="btn" style="background:var(--tether); color:white;"><span class="mi" style="font-size:20px;">account_balance_wallet</span> Ver mi Wallet USDT</button>
+            <button class="btn" style="background:var(--tether); color:white;"><span class="mi" style="font-size:20px;">wallet</span> Ver mi Kingo Cash</button>
           </div>
         </div>
         <div class="tab-bar">
