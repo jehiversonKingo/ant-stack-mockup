@@ -493,52 +493,120 @@
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:16px; font-weight:700; color:var(--tether);">Video</span></div>
-          <div class="reward-badge" style="font-size:12px;">$2 USDT al completar</div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo</span><span style="font-size:18px; font-weight:700; color:var(--text-dark);">net</span></div>
+          <div style="width:44px;"></div>
         </div>
-        <div class="content content-pad">
+        <div class="content" style="padding:0;">
           <!-- Video player -->
-          <div class="video-player">
+          <div class="video-player" style="border-radius:0; margin:0;">
             <div class="video-bg"></div>
-            <div style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,.5); border-radius:6px; padding:3px 8px; z-index:1;">
-              <span style="font-size:11px; color:white; font-weight:600;">8:24 / 10:00</span>
-            </div>
-            <div style="position:absolute; top:10px; right:10px; z-index:1;">
-              <span class="mi" style="font-size:20px; color:white; opacity:.8;">fullscreen</span>
-            </div>
-            <div class="play-btn">
-              <span class="mi" style="font-size:28px; color:var(--tether); margin-left:3px;">pause</span>
-            </div>
             <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,.2); z-index:1;">
-              <div style="width:84%; height:100%; background:var(--tether);"></div>
+              <div style="width:7%; height:100%; background:var(--tether);"></div>
             </div>
           </div>
 
-          <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px; line-height:1.3;">Cómo enviar y recibir USDT seguro</div>
-          <div style="font-size:12px; color:var(--gray); margin-bottom:16px;">Red Tron (TRC-20) · 10 min · Tether Academy</div>
-
-          <!-- Progress bar -->
-          <div style="background:var(--gray-bg); border-radius:8px; height:6px; margin-bottom:16px; overflow:hidden;">
-            <div style="width:84%; height:100%; background:var(--tether); border-radius:8px;"></div>
+          <!-- Timestamp bar -->
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 16px; background:#2d2d44; color:white; font-size:11px;">
+            <span>0:01 / 0:30</span>
+            <span>7% visto · Mín 100%</span>
           </div>
 
-          <!-- Quiz section -->
-          <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Responde para completar el video:</div>
-          <div style="font-size:13px; color:var(--gray); margin-bottom:12px; line-height:1.4;">¿Cuál es la ventaja principal de enviar USDT por la red Tron?</div>
-
-          <div class="quiz-opt correct">
-            <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--tether); background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              <span class="mi" style="font-size:14px; color:white;">check</span>
+          <div style="padding:16px;">
+            <!-- Step indicator -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <div style="width:10px; height:10px; border-radius:5px; background:var(--tether);"></div>
+                <span style="font-size:14px; font-weight:700; color:var(--text-dark);">Paso 1 de 1</span>
+              </div>
+              <span style="font-size:14px; font-weight:700; color:var(--tether);">0%</span>
             </div>
-            Comisiones muy bajas y transacciones rápidas
+
+            <!-- Locked form -->
+            <div style="background:white; border-radius:12px; padding:32px 24px; text-align:center; border:1px solid var(--gray-border);">
+              <span class="mi" style="font-size:36px; color:var(--gray-border); margin-bottom:8px; display:block;">lock</span>
+              <div style="font-size:13px; color:var(--gray); line-height:1.4;">Completa el video para desbloquear el formulario</div>
+            </div>
           </div>
-          <div class="quiz-opt">
-            <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); flex-shrink:0;"></div>
-            Mayor anonimato en las transacciones
+
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">schedule</span><span>Historial</span></div>
+          <div class="tab-qr"><span class="mi" style="font-size:28px;">qr_code_scanner</span></div>
+          <div class="tab-item"><span class="mi">confirmation_number</span><span>Suscripciones</span></div>
+          <div class="tab-item"><span class="mi">more_horiz</span><span>Más</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- T7.1 VIDEO COMPLETADO — FORMULARIO DESBLOQUEADO                    -->
+    <!-- ================================================================= -->
+    <div class="screen-wrapper">
+      <div class="screen-label">T7.1 Video Completado + Formulario</div>
+      <div class="screen-sublabel">Video completado → formulario desbloqueado con preguntas</div>
+      <div class="phone">
+        <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div class="header">
+          <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo</span><span style="font-size:18px; font-weight:700; color:var(--text-dark);">net</span></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="content" style="padding:0;">
+          <!-- Video player -->
+          <div class="video-player" style="border-radius:0; margin:0;">
+            <div class="video-bg"></div>
+            <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,.2); z-index:1;">
+              <div style="width:100%; height:100%; background:var(--tether);"></div>
+            </div>
           </div>
-          <div class="quiz-opt">
-            <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); flex-shrink:0;"></div>
-            Solo funciona con Bitcoin
+
+          <!-- Timestamp bar -->
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 16px; background:#2d2d44; color:white; font-size:11px;">
+            <span>0:30 / 0:30</span>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span class="mi" style="font-size:14px; color:#10B981;">check_circle</span>
+              <span style="color:#10B981;">Completado</span>
+            </div>
+          </div>
+
+          <div style="padding:16px;">
+            <!-- Step indicator -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <div style="width:10px; height:10px; border-radius:5px; background:var(--tether);"></div>
+                <span style="font-size:14px; font-weight:700; color:var(--text-dark);">Paso 1 de 1</span>
+              </div>
+              <span style="font-size:14px; font-weight:700; color:var(--tether);">0%</span>
+            </div>
+
+            <!-- Unlocked form banner -->
+            <div style="background:#e8f5e9; border-radius:8px; padding:10px 14px; margin-bottom:20px; display:flex; align-items:center; gap:8px; border-left:3px solid #10B981;">
+              <span class="mi" style="font-size:18px; color:#10B981;">quiz</span>
+              <span style="font-size:13px; font-weight:600; color:#10B981;">Responde el formulario para continuar</span>
+            </div>
+
+            <!-- Question -->
+            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Introducción a la wallet</div>
+            <div style="font-size:13px; color:var(--text-dark); margin-bottom:12px; line-height:1.4;">El dinero digital se puede mandar desde tu teléfono? <span style="color:#e53935;">*</span></div>
+
+            <!-- Sí / No buttons -->
+            <div style="display:flex; gap:12px; margin-bottom:20px;">
+              <button style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; border-radius:10px; border:1px solid var(--gray-border); background:white; font-size:14px; font-weight:600; color:var(--text-dark); cursor:pointer;">
+                <span style="font-size:18px;">👍</span> Sí
+              </button>
+              <button style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; border-radius:10px; border:1px solid var(--gray-border); background:white; font-size:14px; font-weight:600; color:var(--text-dark); cursor:pointer;">
+                <span style="font-size:18px;">👎</span> No
+              </button>
+            </div>
+
+            <!-- Helper text -->
+            <div style="font-size:12px; color:var(--gray); text-align:center; margin-bottom:16px;">Completa todos los campos requeridos (*) para enviar.</div>
+
+            <!-- Submit button -->
+            <button class="btn" style="background:var(--tether); color:white; font-size:15px; font-weight:700; padding:14px; width:100%; display:flex; align-items:center; justify-content:center; gap:8px;">
+              <span class="mi" style="font-size:18px;">send</span> Enviar Respuestas
+            </button>
           </div>
 
         </div>
@@ -562,50 +630,45 @@
         <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
         <div class="header">
           <div class="icon-btn"><span class="mi" style="font-size:22px; color:var(--text-dark);">arrow_back</span></div>
-          <div class="logo"><span style="font-size:16px; font-weight:700; color:var(--tether);">Video</span></div>
-          <div class="reward-badge" style="font-size:12px;">$2 USDT al completar</div>
+          <div class="logo"><span style="font-size:18px; font-weight:700; color:var(--tether);">Kingo</span><span style="font-size:18px; font-weight:700; color:var(--text-dark);">net</span></div>
+          <div style="width:44px;"></div>
         </div>
-        <div class="content content-pad" style="position:relative; opacity:1;">
+        <div class="content" style="padding:0; position:relative; opacity:1;">
 
           <!-- T7 background content (dimmed) -->
           <div style="opacity:.4; pointer-events:none;">
             <!-- Video player -->
-            <div class="video-player">
+            <div class="video-player" style="border-radius:0; margin:0;">
               <div class="video-bg"></div>
-              <div style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,.5); border-radius:6px; padding:3px 8px; z-index:1;">
-                <span style="font-size:11px; color:white; font-weight:600;">8:24 / 10:00</span>
-              </div>
-              <div style="position:absolute; top:10px; right:10px; z-index:1;">
-                <span class="mi" style="font-size:20px; color:white; opacity:.8;">fullscreen</span>
-              </div>
-              <div class="play-btn">
-                <span class="mi" style="font-size:28px; color:var(--tether); margin-left:3px;">pause</span>
-              </div>
               <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,.2); z-index:1;">
-                <div style="width:84%; height:100%; background:var(--tether);"></div>
+                <div style="width:100%; height:100%; background:var(--tether);"></div>
               </div>
             </div>
 
-            <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px; line-height:1.3;">Cómo enviar y recibir USDT seguro</div>
-            <div style="font-size:12px; color:var(--gray); margin-bottom:16px;">Red Tron (TRC-20) · 10 min · Tether Academy</div>
-
-            <!-- Quiz section -->
-            <div style="font-size:14px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Responde para completar el video:</div>
-            <div style="font-size:13px; color:var(--gray); margin-bottom:12px; line-height:1.4;">¿Cuál es la ventaja principal de enviar USDT por la red Tron?</div>
-
-            <div class="quiz-opt correct">
-              <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--tether); background:var(--tether); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span class="mi" style="font-size:14px; color:white;">check</span>
+            <!-- Timestamp bar -->
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 16px; background:#2d2d44; color:white; font-size:11px;">
+              <span>0:30 / 0:30</span>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="mi" style="font-size:14px; color:#10B981;">check_circle</span>
+                <span style="color:#10B981;">Completado</span>
               </div>
-              Comisiones muy bajas y transacciones rápidas
             </div>
-            <div class="quiz-opt">
-              <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); flex-shrink:0;"></div>
-              Mayor anonimato en las transacciones
-            </div>
-            <div class="quiz-opt">
-              <div style="width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); flex-shrink:0;"></div>
-              Solo funciona con Bitcoin
+
+            <div style="padding:16px;">
+              <!-- Step indicator -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <div style="width:10px; height:10px; border-radius:5px; background:var(--tether);"></div>
+                  <span style="font-size:14px; font-weight:700; color:var(--text-dark);">Paso 1 de 1</span>
+                </div>
+                <span style="font-size:14px; font-weight:700; color:var(--tether);">0%</span>
+              </div>
+
+              <!-- Unlocked form -->
+              <div style="background:#e8f5e9; border-radius:8px; padding:10px 14px; margin-bottom:16px; display:flex; align-items:center; gap:8px; border-left:3px solid #10B981;">
+                <span class="mi" style="font-size:18px; color:#10B981;">quiz</span>
+                <span style="font-size:13px; font-weight:600; color:#10B981;">Responde el formulario para continuar</span>
+              </div>
             </div>
           </div>
 
