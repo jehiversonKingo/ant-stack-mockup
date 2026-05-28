@@ -369,6 +369,309 @@
       </div>
     </div>
 
+    <!-- ========== 4d: KINGO CASH — DASHBOARD ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4d. Kingo Cash — Dashboard</div>
+      <div class="screen-sublabel">Saldo USDT + Recibir/Pagar deuda + Actividades + Movimientos</div>
+      <div class="phone" style="background:#f5f6fa;">
+        <div class="status-bar" style="background:#FC6B17; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <!-- Appbar naranja con back + título + QR scanner -->
+        <div style="height:56px; background:#FC6B17; display:flex; align-items:center; padding:0 4px; gap:4px; flex-shrink:0;">
+          <div style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; font-size:18px; font-weight:700; color:white;">Kingo Cash</div>
+          <div style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">qr_code_scanner</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Balance card — LinearGradient -->
+          <div style="background:linear-gradient(135deg, #FC6B17 0%, #c44d00 100%); border-radius:24px; padding:24px; color:white; position:relative; overflow:hidden; margin-bottom:14px; box-shadow:0 8px 24px rgba(252,107,23,.3);">
+            <div style="position:absolute; right:-40px; top:-40px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.08);"></div>
+            <div style="position:absolute; right:30px; bottom:-50px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.06);"></div>
+            <div style="font-size:13px; opacity:.9; margin-bottom:8px; position:relative; z-index:1;">Tu saldo</div>
+            <div style="display:flex; align-items:flex-end; gap:8px; margin-bottom:6px; position:relative; z-index:1;">
+              <span style="font-size:48px; font-weight:800; line-height:1; letter-spacing:-1px;">12.50</span>
+              <span style="font-size:18px; font-weight:600; opacity:.85; padding-bottom:6px;">USDT</span>
+            </div>
+            <div style="font-size:13px; opacity:.8; position:relative; z-index:1;">≈ Q 93.75 GTQ</div>
+          </div>
+
+          <!-- Action cards: Recibir + Pagar deuda -->
+          <div style="display:flex; gap:12px; margin-bottom:14px;">
+            <!-- Recibir -->
+            <div style="flex:1; background:white; border-radius:16px; padding:16px 12px; box-shadow:0 2px 8px rgba(0,0,0,.06); display:flex; flex-direction:column; align-items:center; gap:8px; border:1px solid #F0F0F0;">
+              <div style="width:56px; height:56px; border-radius:18px; background:#FFF5ED; display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:28px; color:#FC6B17;">arrow_downward</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:#1A1A2E;">Recibir</div>
+              <div style="font-size:11px; color:#9CA3AF; text-align:center;">QR de depósito</div>
+            </div>
+            <!-- Pagar deuda -->
+            <div style="flex:1; background:white; border-radius:16px; padding:16px 12px; box-shadow:0 2px 8px rgba(0,0,0,.06); display:flex; flex-direction:column; align-items:center; gap:8px; border:1px solid #F0F0F0;">
+              <div style="width:56px; height:56px; border-radius:18px; background:#EFF6FF; display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:28px; color:#0a70b9;">swap_horiz</span>
+              </div>
+              <div style="font-size:14px; font-weight:700; color:#1A1A2E;">Pagar deuda</div>
+              <div style="font-size:11px; color:#9CA3AF; text-align:center;">Usar saldo USDT</div>
+            </div>
+          </div>
+
+          <!-- Actividades row -->
+          <div style="background:white; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid #F0F0F0; margin-bottom:14px;">
+            <div style="width:44px; height:44px; border-radius:14px; background:#FFF5ED; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:22px; color:#FC6B17;">school</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:14px; font-weight:700; color:#1A1A2E;">Actividades</div>
+              <div style="font-size:12px; color:#9CA3AF;">Completa tareas y gana USDT</div>
+            </div>
+            <span class="mi" style="font-size:22px; color:#FC6B17;">chevron_right</span>
+          </div>
+
+          <!-- Movimientos recientes -->
+          <div style="font-size:15px; font-weight:700; color:#1A1A2E; margin-bottom:10px;">Movimientos recientes</div>
+
+          <!-- Tx: Recompensa actividad -->
+          <div style="background:white; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; box-shadow:0 2px 6px rgba(0,0,0,.05); margin-bottom:8px;">
+            <div style="width:38px; height:38px; border-radius:19px; background:rgba(252,107,23,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:20px; color:#FC6B17;">card_giftcard</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:#1A1A2E;">Recompensa de actividad</div>
+              <div style="font-size:11px; color:#9CA3AF; margin-top:2px;">15 mar 2026 · 14:30</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px; font-weight:700; color:#FC6B17;">+2.00</div>
+              <div style="font-size:10px; color:#9CA3AF;">USDT</div>
+            </div>
+          </div>
+
+          <!-- Tx: Cobro QR cliente -->
+          <div style="background:white; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; box-shadow:0 2px 6px rgba(0,0,0,.05); margin-bottom:8px;">
+            <div style="width:38px; height:38px; border-radius:19px; background:rgba(65,162,71,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:20px; color:#41a247;">qr_code_scanner</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:#1A1A2E;">Cobro QR a cliente</div>
+              <div style="font-size:11px; color:#9CA3AF; margin-top:2px;">12 mar 2026 · 10:15</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px; font-weight:700; color:#41a247;">+3.33</div>
+              <div style="font-size:10px; color:#9CA3AF;">USDT</div>
+            </div>
+          </div>
+
+          <!-- Tx: Pago de deuda -->
+          <div style="background:white; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; box-shadow:0 2px 6px rgba(0,0,0,.05);">
+            <div style="width:38px; height:38px; border-radius:19px; background:rgba(194,34,34,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span class="mi" style="font-size:20px; color:#C22222;">swap_horiz</span>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600; color:#1A1A2E;">Pago de deuda</div>
+              <div style="font-size:11px; color:#9CA3AF; margin-top:2px;">10 mar 2026 · 09:00</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px; font-weight:700; color:#C22222;">-5.00</div>
+              <div style="font-size:10px; color:#9CA3AF;">USDT</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item"><span class="mi">home</span><span>Inicio</span></div>
+          <div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 4e: KINGO CASH — MODAL RECIBIR ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4e. Kingo Cash — Modal Recibir</div>
+      <div class="screen-sublabel">Selector de red Polygon/Arbitrum/Ethereum · QR · dirección · compartir</div>
+      <div class="phone" style="background:#f5f6fa; position:relative;">
+        <div class="status-bar" style="background:#FC6B17; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div style="height:56px; background:#FC6B17; display:flex; align-items:center; padding:0 4px; flex-shrink:0;">
+          <div style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; font-size:18px; font-weight:700; color:white;">Kingo Cash</div>
+          <div style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">qr_code_scanner</span>
+          </div>
+        </div>
+        <!-- Dashboard dimmed -->
+        <div style="flex:1; opacity:.25; padding:16px; background:#f5f6fa; overflow:hidden; pointer-events:none;">
+          <div style="background:linear-gradient(135deg,#FC6B17,#c44d00); border-radius:20px; padding:20px; color:white; margin-bottom:12px;">
+            <div style="font-size:13px; opacity:.9;">Tu saldo</div>
+            <div style="font-size:40px; font-weight:800;">12.50 USDT</div>
+          </div>
+        </div>
+        <!-- Bottom sheet modal -->
+        <div style="position:absolute; bottom:0; left:0; right:0; background:white; border-radius:24px 24px 0 0; padding:0 20px 32px; box-shadow:0 -4px 40px rgba(0,0,0,.15); z-index:10;">
+          <div style="width:36px; height:4px; border-radius:2px; background:#E5E7EB; margin:12px auto 20px;"></div>
+          <div style="font-size:18px; font-weight:700; color:#1A1A2E; margin-bottom:4px;">Recibir USDT</div>
+          <div style="font-size:13px; color:#9CA3AF; margin-bottom:14px;">Elige la red, luego muestra el QR o copia tu dirección</div>
+
+          <!-- Seleccionar red label -->
+          <div style="font-size:11px; font-weight:700; color:#6B7280; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;">SELECCIONAR RED</div>
+          <!-- Chain chips: Polygon (activa) + Arbitrum + Ethereum -->
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px;">
+            <div style="display:inline-flex; align-items:center; gap:5px; padding:7px 12px; border-radius:20px; background:#FC6B17; border:1.5px solid #FC6B17; font-size:11px; font-weight:600; color:white;">
+              <span class="mi" style="font-size:13px;">link</span>
+              Polygon · ERC-20
+              <span class="mi" style="font-size:13px;">check</span>
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:5px; padding:7px 12px; border-radius:20px; background:white; border:1.5px solid #E5E7EB; font-size:11px; font-weight:600; color:#6B7280;">
+              <span class="mi" style="font-size:13px;">link</span>
+              Arbitrum · ERC-20
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:5px; padding:7px 12px; border-radius:20px; background:white; border:1.5px solid #E5E7EB; font-size:11px; font-weight:600; color:#6B7280;">
+              <span class="mi" style="font-size:13px;">link</span>
+              Ethereum · ERC-20
+            </div>
+          </div>
+          <!-- Chain note: misma dirección en todas las redes EVM -->
+          <div style="font-size:11px; color:#9CA3AF; margin-bottom:14px;">Misma dirección en todas las redes EVM</div>
+
+          <!-- QR -->
+          <div style="display:flex; justify-content:center; margin-bottom:10px;">
+            <div style="width:160px; height:160px; border:2px solid #F0F0F0; border-radius:14px; display:flex; align-items:center; justify-content:center; background:white;">
+              <svg width="130" height="130" viewBox="0 0 160 160" fill="none">
+                <rect x="8" y="8" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+                <rect x="16" y="16" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+                <rect x="24" y="24" width="26" height="26" rx="2" fill="#FC6B17"/>
+                <rect x="94" y="8" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+                <rect x="102" y="16" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+                <rect x="110" y="24" width="26" height="26" rx="2" fill="#FC6B17"/>
+                <rect x="8" y="94" width="58" height="58" rx="6" fill="#FC6B17" opacity=".12"/>
+                <rect x="16" y="102" width="42" height="42" rx="4" fill="#FC6B17" opacity=".25"/>
+                <rect x="24" y="110" width="26" height="26" rx="2" fill="#FC6B17"/>
+                <rect x="72" y="72" width="8" height="8" rx="2" fill="#FC6B17"/>
+                <rect x="86" y="72" width="8" height="8" rx="2" fill="#FC6B17" opacity=".5"/>
+                <rect x="94" y="72" width="8" height="8" rx="2" fill="#FC6B17"/>
+                <rect x="108" y="86" width="8" height="8" rx="2" fill="#FC6B17"/>
+                <rect x="94" y="100" width="8" height="8" rx="2" fill="#FC6B17"/>
+                <rect x="122" y="72" width="8" height="8" rx="2" fill="#FC6B17" opacity=".7"/>
+                <rect x="122" y="86" width="8" height="8" rx="2" fill="#FC6B17"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Network tag -->
+          <div style="display:flex; align-items:center; gap:4px; justify-content:center; margin-bottom:10px;">
+            <span class="mi" style="font-size:13px; color:#FC6B17;">link</span>
+            <span style="font-size:11px; color:#FC6B17; font-weight:600;">Polygon · ERC-20</span>
+          </div>
+
+          <!-- Address -->
+          <div style="background:#F9FAFB; border:1px solid #F0F0F0; border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <span style="font-size:11px; font-family:'Courier New',monospace; color:#374151; flex:1;">0x71C7656EC7ab88b...7B26</span>
+            <div style="display:flex; align-items:center; gap:4px; background:#FFF5ED; border-radius:8px; padding:5px 10px; flex-shrink:0;">
+              <span class="mi" style="font-size:15px; color:#FC6B17;">content_copy</span>
+              <span style="font-size:11px; color:#FC6B17; font-weight:600;">Copiar</span>
+            </div>
+          </div>
+
+          <!-- Compartir -->
+          <button style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1.5px solid #FC6B17; border-radius:14px; background:white; font-size:13px; font-weight:600; color:#FC6B17; font-family:inherit; cursor:pointer;">
+            <span class="mi" style="font-size:17px;">share</span>
+            Compartir dirección
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 4f: KINGO CASH — ONBOARDING ========== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">4f. Kingo Cash — Onboarding</div>
+      <div class="screen-sublabel">Hero icon cuadrado + steps card + badge + footer CTA</div>
+      <div class="phone" style="background:#fff;">
+        <div class="status-bar" style="background:#FC6B17; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+        <div style="height:56px; background:#FC6B17; display:flex; align-items:center; padding:0 4px; flex-shrink:0;">
+          <div style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; font-size:18px; font-weight:700; color:white;">Kingo Cash</div>
+          <div style="width:48px;"></div>
+        </div>
+        <div class="content content-pad" style="background:white; padding-bottom:90px;">
+
+          <!-- Hero -->
+          <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:24px; margin-top:8px;">
+            <div style="width:80px; height:80px; border-radius:24px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+              <span class="mi" style="font-size:40px; color:#FC6B17;">account_balance_wallet</span>
+            </div>
+            <div style="font-size:24px; font-weight:800; color:#1A1A2E; margin-bottom:8px; text-align:center;">Tu Billetera Digital</div>
+            <div style="font-size:13px; color:#888; text-align:center; line-height:1.5; padding:0 12px;">Gana USDT viendo videos y paga en tu tienda Kingo</div>
+          </div>
+
+          <!-- Steps card -->
+          <div style="background:white; border-radius:20px; border:1px solid #F0F0F0; box-shadow:0 2px 12px rgba(0,0,0,.06); margin-bottom:16px; overflow:hidden;">
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid #F5F5F5;">
+              <div style="width:44px; height:44px; border-radius:14px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:#FC6B17;">account_balance_wallet</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#1A1A2E; margin-bottom:2px;">Crea tu billetera</div>
+                <div style="font-size:11px; color:#999;">Solo toma 1 minuto. Es gratis.</div>
+              </div>
+              <div style="width:24px; height:24px; border-radius:12px; background:#F5F5F5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:700; color:#999;">1</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid #F5F5F5;">
+              <div style="width:44px; height:44px; border-radius:14px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:#FC6B17;">play_circle_filled</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#1A1A2E; margin-bottom:2px;">Ve un video corto</div>
+                <div style="font-size:11px; color:#999;">Aprende algo nuevo en 10 minutos.</div>
+              </div>
+              <div style="width:24px; height:24px; border-radius:12px; background:#F5F5F5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:700; color:#999;">2</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid #F5F5F5;">
+              <div style="width:44px; height:44px; border-radius:14px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:#FC6B17;">savings</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#1A1A2E; margin-bottom:2px;">Gana $2 USDT por curso</div>
+                <div style="font-size:11px; color:#999;">El dinero llega directo a tu billetera.</div>
+              </div>
+              <div style="width:24px; height:24px; border-radius:12px; background:#F5F5F5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:700; color:#999;">3</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
+              <div style="width:44px; height:44px; border-radius:14px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:22px; color:#FC6B17;">qr_code</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:700; color:#1A1A2E; margin-bottom:2px;">Paga en tu tienda Kingo</div>
+                <div style="font-size:11px; color:#999;">Muestra un QR y listo.</div>
+              </div>
+              <div style="width:24px; height:24px; border-radius:12px; background:#F5F5F5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:700; color:#999;">4</div>
+            </div>
+          </div>
+
+          <!-- Security badge -->
+          <div style="display:flex; align-items:center; gap:6px; background:#F0FDF4; border-radius:10px; padding:10px 14px; justify-content:center;">
+            <span class="mi" style="font-size:16px; color:#10B981;">verified_user</span>
+            <span style="font-size:11px; color:#10B981; font-weight:500;">Custodia segura · Sin palabras secretas · Sin comisiones</span>
+          </div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:16px 20px; border-top:1px solid #F0F0F0; background:white; display:flex; flex-direction:column; gap:10px;">
+          <button class="btn" style="background:#FC6B17; color:white; font-size:15px; padding:15px; display:flex; align-items:center; justify-content:center; gap:8px; border-radius:14px;">
+            Crear mi Billetera
+            <span class="mi" style="font-size:19px;">arrow_forward</span>
+          </button>
+          <div style="text-align:center; font-size:13px; color:#AAA; font-weight:500;">Tal vez después</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </body>
 </html>
