@@ -458,8 +458,21 @@
             </div>
           </div>
 
+          <!-- CRECIDA Alert — borde purple -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; border-left:5px solid #7B1FA2; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="background:#7B1FA2; color:white; font-size:9px; font-weight:700; padding:2px 8px; border-radius:6px;">CRECIDA</span>
+              <span style="background:var(--red); color:white; font-size:9px; font-weight:700; padding:2px 8px; border-radius:6px;">HIGH</span>
+              <span style="font-size:11px; color:var(--gray); margin-left:2px;">01 Jun — 08 Jun 2026</span>
+            </div>
+            <div style="font-size:14px; font-weight:700; color:#7B1FA2; margin-bottom:6px;">Río en alza — 45 → 120 m³/s</div>
+            <div style="font-size:13px; color:var(--gray); line-height:1.5;">
+              El caudal del río cercano tiene tendencia alcista. Monitoree zonas de inundación y asegure herramientas en riberas.
+            </div>
+          </div>
+
           <!-- LOW Alert — borde gris, opacidad 60% (historial) -->
-          <div style="background:white; border-radius:16px; padding:16px; opacity:.6; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+          <div style="background:white; border-radius:16px; padding:16px; opacity:.6; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
             <div style="display:flex; align-items:center; gap:10px;">
               <span class="mi" style="font-size:24px; color:var(--green);">check_circle</span>
               <div style="flex:1;">
@@ -467,6 +480,12 @@
                 <div style="font-size:11px; color:var(--gray);">20 May 2026 · Duracion: 8 hrs</div>
               </div>
             </div>
+          </div>
+
+          <!-- Note about river alerts -->
+          <div style="background:rgba(123,31,162,.07); border-radius:12px; padding:12px 14px; display:flex; align-items:flex-start; gap:8px;">
+            <span class="mi" style="font-size:16px; color:#7B1FA2; flex-shrink:0; margin-top:1px;">info</span>
+            <div style="font-size:11px; color:#7B1FA2; line-height:1.5;">Las alertas de crecida solo aparecen cuando hay un río significativo (≥10 m³/s) cerca de la ubicación del cliente.</div>
           </div>
         </div>
       </div>
@@ -633,7 +652,7 @@
           </div>
 
           <!-- Riesgo helada -->
-          <div style="background:white; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
               <span class="mi" style="font-size:24px; color:var(--blue);">ac_unit</span>
               <div style="flex:1; font-size:15px; font-weight:700; color:var(--text-dark);">Riesgo de Helada</div>
@@ -651,8 +670,68 @@
             </div>
           </div>
 
+          <!-- Card A: Temperatura del Suelo por Profundidad -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+              <span class="mi" style="font-size:24px; color:var(--gbb-earth);">thermostat</span>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Temperatura del Suelo por Profundidad</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; background:#F9FBF7; border-radius:10px; padding:10px 6px; text-align:center;">
+                <div style="font-size:10px; color:var(--gray); margin-bottom:4px; line-height:1.3;">Superficie<br>(0cm)</div>
+                <div style="font-size:22px; font-weight:800; color:var(--text-dark);">22°C</div>
+                <div style="font-size:9px; color:var(--gbb-green); margin-top:4px; line-height:1.3;">Óptimo para la mayoría de cultivos</div>
+              </div>
+              <div style="flex:1; background:#F9FBF7; border-radius:10px; padding:10px 6px; text-align:center;">
+                <div style="font-size:10px; color:var(--gray); margin-bottom:4px; line-height:1.3;">Germinación<br>(6cm)</div>
+                <div style="font-size:22px; font-weight:800; color:var(--text-dark);">20°C</div>
+                <div style="font-size:9px; color:var(--gbb-green); margin-top:4px; line-height:1.3;">Óptimo para la mayoría de cultivos</div>
+              </div>
+              <div style="flex:1; background:#F9FBF7; border-radius:10px; padding:10px 6px; text-align:center;">
+                <div style="font-size:10px; color:var(--gray); margin-bottom:4px; line-height:1.3;">Raíz activa<br>(18cm)</div>
+                <div style="font-size:22px; font-weight:800; color:var(--text-dark);">18°C</div>
+                <div style="font-size:9px; color:var(--gbb-green); margin-top:4px; line-height:1.3;">Óptimo para la mayoría de cultivos</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card B: Estrés Hídrico Ambiental (VPD) -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+              <span class="mi" style="font-size:24px; color:var(--gbb-green);">water_drop</span>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Estrés Hídrico Ambiental (VPD)</div>
+            </div>
+            <div style="background:rgba(76,175,80,.13); border-radius:12px; padding:12px 14px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:13px; font-weight:700; color:#4CAF50;">Óptimo</span>
+                <span style="font-size:26px; font-weight:800; color:var(--text-dark);">1.2 <span style="font-size:14px; font-weight:600;">kPa</span></span>
+              </div>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.5; margin-bottom:6px;">Transpiración y absorción de nutrientes en niveles ideales</div>
+            <div style="font-size:12px; color:var(--gray);">Humedad relativa: <strong style="color:var(--text-dark);">72%</strong></div>
+          </div>
+
+          <!-- Card C: Radiación Solar -->
+          <div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+              <span class="mi" style="font-size:24px; color:#FFA726;">wb_sunny</span>
+              <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Radiación Solar</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <div style="flex:1; background:#F9FBF7; border-radius:10px; padding:12px 10px; text-align:center;">
+                <div style="font-size:10px; color:var(--gray); margin-bottom:6px; line-height:1.3;">Radiación al mediodía</div>
+                <div style="font-size:22px; font-weight:800; color:var(--text-dark);">650 <span style="font-size:12px; font-weight:600;">W/m²</span></div>
+                <div style="font-size:9px; color:var(--gbb-green); margin-top:4px;">Buena radiación solar</div>
+              </div>
+              <div style="flex:1; background:#F9FBF7; border-radius:10px; padding:12px 10px; text-align:center;">
+                <div style="font-size:10px; color:var(--gray); margin-bottom:6px; line-height:1.3;">Horas de sol directo</div>
+                <div style="font-size:22px; font-weight:800; color:var(--text-dark);">6.5 <span style="font-size:12px; font-weight:600;">h</span></div>
+              </div>
+            </div>
+          </div>
+
           <div style="text-align:center; margin-top:14px; font-size:11px; color:var(--gray);">
-            <span class="mi" style="font-size:14px;">info</span> UV: Open Meteo · Suelo: NASA POWER API
+            <span class="mi" style="font-size:14px;">info</span> Datos: Open-Meteo + NASA POWER (gratuitos, sin API key)
           </div>
         </div>
       </div>
@@ -672,59 +751,90 @@
         </div>
         <div class="content content-pad" style="background:#F8FBF8;">
 
-          <!-- URGENTE -->
-          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--red); box-shadow:0 2px 8px rgba(0,0,0,.04);">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="mi" style="font-size:20px; color:var(--red);">dangerous</span>
-              <div style="flex:1; font-size:14px; font-weight:700; color:var(--text-dark);">Proteger almacigos</div>
-              <span style="background:rgba(239,68,68,.1); color:var(--red); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">URGENTE</span>
+          <!-- Count header -->
+          <div style="font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">6 recomendaciones para hoy</div>
+
+          <!-- 1: No fumigar — CUIDADO (orange) -->
+          <div style="background:rgba(255,152,0,.08); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid #FF9800; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#FF9800; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">CUIDADO</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:72px;">
+              <span class="mi" style="font-size:20px; color:#FF9800;">science</span>
+              <div style="font-size:14px; font-weight:700; color:#FF9800;">No fumigar</div>
             </div>
-            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Helada pronosticada Jue 29 madrugada. Cubrir semilleros con plastico o sararan.</div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Alta probabilidad de lluvia próximas 48h (85%) — el químico se lavará</div>
             <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
               <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
-              <span style="font-size:11px; color:var(--gray);">Antes de las 9:00 PM hoy</span>
+              <span style="font-size:11px; color:var(--gray);">Jue–Sáb</span>
             </div>
           </div>
 
-          <!-- CUIDADO -->
-          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--amber); box-shadow:0 2px 8px rgba(0,0,0,.04);">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="mi" style="font-size:20px; color:var(--amber);">warning</span>
-              <div style="flex:1; font-size:14px; font-weight:700; color:var(--text-dark);">No fumigar Vie–Sab</div>
-              <span style="background:rgba(245,158,11,.1); color:var(--amber); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">CUIDADO</span>
+          <!-- 2: Fertilizar — IDEAL (green) -->
+          <div style="background:rgba(76,175,80,.08); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid #4CAF50; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#4CAF50; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">IDEAL</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:60px;">
+              <span class="mi" style="font-size:20px; color:#4CAF50;">grass</span>
+              <div style="font-size:14px; font-weight:700; color:#4CAF50;">Fertilizar</div>
             </div>
-            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Tormenta pronosticada lavara los productos. Esperar hasta Dom–Lun.</div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Humedad raíz óptima (45%) y lluvia baja — fertilizante se absorbe sin lavarse</div>
             <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
               <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
-              <span style="font-size:11px; color:var(--gray);">Vie 30 – Sab 31</span>
+              <span style="font-size:11px; color:var(--gray);">Hoy Jue–Vie</span>
             </div>
           </div>
 
-          <!-- IDEAL -->
-          <div style="background:white; border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(--gbb-green); box-shadow:0 2px 8px rgba(0,0,0,.04);">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="mi" style="font-size:20px; color:var(--gbb-green);">check_circle</span>
-              <div style="flex:1; font-size:14px; font-weight:700; color:var(--gbb-green-dark);">Fertilizar</div>
-              <span style="background:var(--gbb-green-light); color:var(--gbb-green); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">IDEAL</span>
+          <!-- 3: Sembrar — IDEAL (green) -->
+          <div style="background:rgba(76,175,80,.08); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid #4CAF50; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#4CAF50; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">IDEAL</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:60px;">
+              <span class="mi" style="font-size:20px; color:#4CAF50;">spa</span>
+              <div style="font-size:14px; font-weight:700; color:#4CAF50;">Sembrar</div>
             </div>
-            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Humedad del suelo optima para absorcion. Aplicar hoy o mañana antes de la lluvia.</div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Temperatura de germinación óptima a 6cm (20°C) y humedad raíz adecuada (45%)</div>
             <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
               <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
-              <span style="font-size:11px; color:var(--gray);">Hoy – Jue 29</span>
+              <span style="font-size:11px; color:var(--gray);">Jue–Sáb</span>
             </div>
           </div>
 
-          <!-- BUEN MOMENTO -->
-          <div style="background:white; border-radius:14px; padding:14px; border-left:4px solid var(--blue); box-shadow:0 2px 8px rgba(0,0,0,.04);">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="mi" style="font-size:20px; color:var(--blue);">check_circle</span>
-              <div style="flex:1; font-size:14px; font-weight:700; color:var(--text-dark);">Cosechar cafe</div>
-              <span style="background:rgba(59,130,246,.1); color:var(--blue); font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px;">BUEN MOMENTO</span>
+          <!-- 4: Proteger trabajadores — URGENTE (red) -->
+          <div style="background:rgba(244,67,54,.08); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid #F44336; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#F44336; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">URGENTE</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:72px;">
+              <span class="mi" style="font-size:20px; color:#F44336;">health_and_safety</span>
+              <div style="font-size:14px; font-weight:700; color:#F44336;">Proteger trabajadores</div>
             </div>
-            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Recoger cereza madura disponible antes de la tormenta del Vie.</div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">Índice UV extremo (11) — evitar exposición entre 10am y 3pm; riesgo de quemadura en minutos</div>
             <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
               <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
-              <span style="font-size:11px; color:var(--gray);">Hoy – Jue 29</span>
+              <span style="font-size:11px; color:var(--gray);">Hoy Jue</span>
+            </div>
+          </div>
+
+          <!-- 5: Prevenir hongos — CUIDADO (orange) -->
+          <div style="background:rgba(255,152,0,.08); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid #FF9800; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#FF9800; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">CUIDADO</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:72px;">
+              <span class="mi" style="font-size:20px; color:#FF9800;">coronavirus</span>
+              <div style="font-size:14px; font-weight:700; color:#FF9800;">Prevenir hongos</div>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">8h de hoja mojada, humedad elevada y temperatura cálida — condiciones críticas para mildiu, roya y botrytis</div>
+            <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
+              <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
+              <span style="font-size:11px; color:var(--gray);">Jue–Sáb</span>
+            </div>
+          </div>
+
+          <!-- 6: Secar cosecha — BUEN_MOMENTO (blue) -->
+          <div style="background:rgba(2,136,209,.08); border-radius:14px; padding:14px; border-left:4px solid #0288D1; box-shadow:0 2px 8px rgba(0,0,0,.04); position:relative;">
+            <span style="position:absolute; top:10px; right:10px; background:#0288D1; color:white; font-size:9px; font-weight:700; padding:3px 8px; border-radius:8px;">BUEN MOMENTO</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; padding-right:100px;">
+              <span class="mi" style="font-size:20px; color:#0288D1;">wb_sunny</span>
+              <div style="font-size:14px; font-weight:700; color:#0288D1;">Secar cosecha</div>
+            </div>
+            <div style="font-size:12px; color:var(--gray); line-height:1.4;">7.5h de sol directo y semana seca (&lt; 5 mm) — ideal para secar maíz, frijol o café</div>
+            <div style="display:flex; align-items:center; gap:4px; margin-top:8px;">
+              <span class="mi" style="font-size:14px; color:var(--gray);">schedule</span>
+              <span style="font-size:11px; color:var(--gray);">Jue–Dom</span>
             </div>
           </div>
 
@@ -1056,6 +1166,190 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GBB-12. CURSOS GBB — PANEL WEB (ant-web admin /app/gbb/courses)       -->
+    <!-- ===================================================================== -->
+    <div class="screen-wrapper" style="width:100%; max-width:1100px;">
+      <div class="screen-label">GBB-12. Cursos GBB — Panel Web (ant-web Admin)</div>
+      <div class="screen-sublabel">Vista de escritorio: /app/gbb/courses — lo que ve el administrador</div>
+      <!-- Wide desktop card instead of a phone frame -->
+      <div style="width:100%; max-width:1060px; background:white; border-radius:20px; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06);">
+
+        <!-- Top nav bar (browser-style chrome) -->
+        <div style="background:#252542; display:flex; align-items:center; padding:10px 16px; gap:10px; border-bottom:1px solid rgba(255,255,255,.08);">
+          <div style="display:flex; gap:6px;">
+            <div style="width:12px; height:12px; border-radius:6px; background:#FF5F57;"></div>
+            <div style="width:12px; height:12px; border-radius:6px; background:#FEBC2E;"></div>
+            <div style="width:12px; height:12px; border-radius:6px; background:#28C840;"></div>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,.08); border-radius:8px; padding:6px 14px; font-size:12px; color:rgba(255,255,255,.5);">app.kingo.gt/app/gbb/courses</div>
+        </div>
+
+        <!-- App shell -->
+        <div style="display:flex; min-height:580px; background:#F8F9FA;">
+
+          <!-- Sidebar -->
+          <div style="width:220px; background:white; border-right:1px solid #E5E7EB; flex-shrink:0; padding:20px 0;">
+            <div style="padding:0 20px 20px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #E5E7EB; margin-bottom:12px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#1A5C32,#2D8B4E); display:flex; align-items:center; justify-content:center;">
+                <span class="mi" style="font-size:20px; color:white;">eco</span>
+              </div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">GBB Admin</div>
+                <div style="font-size:10px; color:#6B7280;">Green Business Belt</div>
+              </div>
+            </div>
+            <div style="padding:0 8px;">
+              <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; margin-bottom:4px;">
+                <span class="mi" style="font-size:18px; color:#6B7280;">dashboard</span>
+                <span style="font-size:13px; font-weight:500; color:#6B7280;">Dashboard</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--gbb-green-light); margin-bottom:4px;">
+                <span class="mi" style="font-size:18px; color:var(--gbb-green);">play_circle_outline</span>
+                <span style="font-size:13px; font-weight:600; color:var(--gbb-green);">Cursos</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; margin-bottom:4px;">
+                <span class="mi" style="font-size:18px; color:#6B7280;">people</span>
+                <span style="font-size:13px; font-weight:500; color:#6B7280;">Productores</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; margin-bottom:4px;">
+                <span class="mi" style="font-size:18px; color:#6B7280;">cloud</span>
+                <span style="font-size:13px; font-weight:500; color:#6B7280;">Clima &amp; Alertas</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px;">
+                <span class="mi" style="font-size:18px; color:#6B7280;">bar_chart</span>
+                <span style="font-size:13px; font-weight:500; color:#6B7280;">Reportes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main content area -->
+          <div style="flex:1; padding:28px 32px; overflow:auto;">
+
+            <!-- Page header -->
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+              <div>
+                <div style="font-size:22px; font-weight:700; color:#1A1A1A;">Cursos GBB</div>
+                <div style="font-size:13px; color:#6B7280; margin-top:2px;">Actividades del módulo Green Business Belt</div>
+              </div>
+              <div style="background:#FC6B17; color:white; padding:10px 20px; border-radius:10px; display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; cursor:pointer;">
+                <span class="mi" style="font-size:18px;">add</span>
+                + Crear Curso
+              </div>
+            </div>
+
+            <!-- Filter bar -->
+            <div style="background:white; border-radius:14px; padding:14px 16px; margin-bottom:20px; border:1px solid #E5E7EB; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <!-- Search -->
+              <div style="display:flex; align-items:center; border:1.5px solid #E5E7EB; border-radius:9px; background:#F9F9F9; padding:7px 12px; gap:8px; flex:1; min-width:200px;">
+                <span class="mi" style="font-size:18px; color:#9CA3AF;">search</span>
+                <span style="font-size:13px; color:#9CA3AF;">Buscar cursos...</span>
+              </div>
+              <!-- Category dropdown -->
+              <div style="display:flex; align-items:center; border:1.5px solid #E5E7EB; border-radius:9px; background:#F9F9F9; padding:7px 14px; gap:6px; cursor:pointer;">
+                <span style="font-size:13px; color:#374151;">Todas las categorías</span>
+                <span class="mi" style="font-size:18px; color:#6B7280;">expand_more</span>
+              </div>
+              <!-- State chips -->
+              <div style="display:flex; gap:6px; align-items:center;">
+                <div style="background:var(--gbb-green); color:white; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:4px; cursor:pointer;">
+                  Todos <span class="mi" style="font-size:14px;">check</span>
+                </div>
+                <div style="background:#F3F4F6; color:#6B7280; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:500; cursor:pointer;">Activos</div>
+                <div style="background:#F3F4F6; color:#6B7280; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:500; cursor:pointer;">Inactivos</div>
+              </div>
+              <!-- Refresh + count -->
+              <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
+                <span class="mi" style="font-size:20px; color:#9CA3AF; cursor:pointer;">refresh</span>
+                <span style="font-size:13px; color:#6B7280; font-weight:600;">3 cursos</span>
+              </div>
+            </div>
+
+            <!-- Course cards grid — 3 columns -->
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+
+              <!-- Card 1: Manejo Sostenible del Suelo — Activo / Agricultura -->
+              <div style="background:white; border-radius:16px; border:1px solid #E5E7EB; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+                <div style="height:110px; background:linear-gradient(135deg,#1A5C32 0%,#2D8B4E 60%,#4CAF50 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <span class="mi" style="font-size:52px; color:rgba(255,255,255,.2);">eco</span>
+                  <span style="position:absolute; top:10px; left:10px; background:#4CAF50; color:white; font-size:9px; font-weight:700; padding:3px 9px; border-radius:20px;">Activo</span>
+                </div>
+                <div style="padding:14px;">
+                  <span style="background:var(--gbb-green-light); color:var(--gbb-green); font-size:10px; font-weight:700; padding:3px 9px; border-radius:6px;">Agricultura</span>
+                  <div style="font-size:15px; font-weight:700; color:#1A1A1A; margin-top:8px; margin-bottom:6px;">Manejo Sostenible del Suelo</div>
+                  <div style="font-size:12px; color:#6B7280; line-height:1.5; margin-bottom:10px;">Aprende técnicas para mejorar la fertilidad y estructura del suelo en cultivos de maíz y frijol.</div>
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:4px; font-size:12px; color:#6B7280;">
+                      <span class="mi" style="font-size:16px; color:#9CA3AF;">menu_book</span>
+                      5 lecciones
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">edit</span>
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">more_vert</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Gestión Financiera — Activo / Finanzas -->
+              <div style="background:white; border-radius:16px; border:1px solid #E5E7EB; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+                <div style="height:110px; background:linear-gradient(135deg,#0D47A1 0%,#1976D2 60%,#42A5F5 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <span class="mi" style="font-size:52px; color:rgba(255,255,255,.2);">account_balance_wallet</span>
+                  <span style="position:absolute; top:10px; left:10px; background:#4CAF50; color:white; font-size:9px; font-weight:700; padding:3px 9px; border-radius:20px;">Activo</span>
+                </div>
+                <div style="padding:14px;">
+                  <span style="background:rgba(13,71,161,.1); color:#1565C0; font-size:10px; font-weight:700; padding:3px 9px; border-radius:6px;">Finanzas</span>
+                  <div style="font-size:15px; font-weight:700; color:#1A1A1A; margin-top:8px; margin-bottom:6px;">Gestión Financiera para Productores</div>
+                  <div style="font-size:12px; color:#6B7280; line-height:1.5; margin-bottom:10px;">Control de ingresos, egresos y planificación de inversiones para el ciclo agrícola.</div>
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <div style="display:flex; align-items:center; gap:4px; font-size:12px; color:#6B7280;">
+                        <span class="mi" style="font-size:16px; color:#9CA3AF;">menu_book</span>
+                        4 lecciones
+                      </div>
+                      <div style="display:flex; align-items:center; gap:3px; font-size:12px; color:#6B7280;">
+                        <span class="mi" style="font-size:14px; color:#FFA726;">star</span>
+                        4.8 (12)
+                      </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">edit</span>
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">more_vert</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Seguridad Agrícola — Borrador / Salud -->
+              <div style="background:white; border-radius:16px; border:1px solid #E5E7EB; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+                <div style="height:110px; background:linear-gradient(135deg,#BF360C 0%,#E64A19 60%,#FF7043 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <span class="mi" style="font-size:52px; color:rgba(255,255,255,.2);">health_and_safety</span>
+                  <span style="position:absolute; top:10px; left:10px; background:#FF9800; color:white; font-size:9px; font-weight:700; padding:3px 9px; border-radius:20px;">Borrador</span>
+                </div>
+                <div style="padding:14px;">
+                  <span style="background:rgba(239,68,68,.1); color:#E53935; font-size:10px; font-weight:700; padding:3px 9px; border-radius:6px;">Salud</span>
+                  <div style="font-size:15px; font-weight:700; color:#1A1A1A; margin-top:8px; margin-bottom:6px;">Seguridad Agrícola y Uso de Agroquímicos</div>
+                  <div style="font-size:12px; color:#6B7280; line-height:1.5; margin-bottom:10px;">Protocolos de seguridad, EPP y manejo responsable de fertilizantes y pesticidas.</div>
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:4px; font-size:12px; color:#6B7280;">
+                      <span class="mi" style="font-size:16px; color:#9CA3AF;">menu_book</span>
+                      6 lecciones
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">edit</span>
+                      <span class="mi" style="font-size:18px; color:#9CA3AF; cursor:pointer;">more_vert</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /grid -->
+
+          </div><!-- /main content -->
+        </div><!-- /app shell -->
+      </div><!-- /wide card -->
     </div>
 
   </div><!-- /screens-container -->
