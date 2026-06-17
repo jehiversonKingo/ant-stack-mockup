@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Offline Catalog</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* ---- Animations ---- */
+    @keyframes pulse-blue {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.45; }
+    }
+    @keyframes spin-full {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pop-in {
+      0%   { transform: scale(0.5); opacity: 0; }
+      70%  { transform: scale(1.1); }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+    @keyframes amber-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,.5); }
+      50%       { box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+    }
+
+    /* ---- Catalog hub row ---- */
+    .cat-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .cat-row:last-child { border-bottom: none; }
+    .cat-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-icon-orange { background: rgba(241,104,36,.1); }
+    .cat-icon-green  { background: rgba(16,185,129,.1); }
+    .cat-icon-blue   { background: rgba(59,130,246,.1); }
+    .cat-icon-amber  { background: rgba(245,158,11,.1); }
+    .cat-icon-purple { background: rgba(139,92,246,.1); }
+    .cat-main { flex: 1; min-width: 0; }
+    .cat-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .cat-sub  { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+    /* ---- Stepper (9c) ---- */
+    .sync-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .sync-step:last-child { border-bottom: none; }
+    .step-icon {
+      width: 32px; height: 32px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px; font-weight: 700;
+    }
+    .step-done    { background: var(--green); color: white; }
+    .step-active  { background: var(--blue);  color: white; animation: pulse-blue 1.4s ease-in-out infinite; }
+    .step-pending { background: #E5E7EB; color: #9CA3AF; }
+
+    /* ---- Plan grid (9e) ---- */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .plan-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .plan-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--kingo-orange);
+      line-height: 1.1;
+    }
+
+    /* ---- Debt gauge (9f) ---- */
+    .debt-gauge-track {
+      height: 10px;
+      background: #F0F0F0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 8px 0 4px;
+    }
+    .debt-gauge-fill {
+      height: 10px;
+      background: linear-gradient(90deg, #F59E0B, #EF4444);
+      border-radius: 5px;
+    }
+
+    /* ---- Clock ring (9g) ---- */
+    .clock-ring {
+      width: 110px; height: 110px;
+      border-radius: 55px;
+      border: 7px solid;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto;
+    }
+    .ring-amber  { border-color: #F59E0B; animation: amber-pulse 2s ease-in-out infinite; }
+    .ring-green  { border-color: #10B981; }
+    .ring-orange { border-color: #FC6B17; }
+    .ring-red    { border-color: #EF4444; }
+
+    /* ---- Quality scale row ---- */
+    .quality-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 12px;
+    }
+    .quality-row:last-child { border-bottom: none; }
+    .quality-dot {
+      width: 10px; height: 10px;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ---- Filter chips ---- */
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chip-row::-webkit-scrollbar { display: none; }
+    .chip {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid #E0E0E0;
+      background: white;
+      color: var(--gray);
+    }
+    .chip.active {
+      background: var(--kingo-orange);
+      border-color: var(--kingo-orange);
+      color: white;
+    }
+
+    /* ---- Big success circle (9d) ---- */
+    .success-circle {
+      width: 90px; height: 90px;
+      border-radius: 45px;
+      background: rgba(16,185,129,.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 8px auto 12px;
+      animation: pop-in .5s ease-out both;
+    }
+
+    /* ---- Summary row (9d) ---- */
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 13px;
+    }
+    .summary-row:last-child { border-bottom: none; }
+
+    /* ---- Project balance row (9f) ---- */
+    .proj-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 13px;
+    }
+    .proj-row:last-child { border-bottom: none; }
+
+    /* Inline spinner small */
+    .spinner-sm {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(59,130,246,.25);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin-full .7s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Orange outline btn variant */
+    .btn-orange-outline {
+      background: transparent;
+      border: 1.5px solid var(--kingo-orange);
+      color: var(--kingo-orange);
+    }
+
+    /* Status bar icons */
+    .sb-icons { display:flex; gap:6px; align-items:center; }
+    .sb-icons .mi { font-size:16px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Offline Catalog — Pre-cache, sync &amp; inspect</p>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+    <a class="active" href="09-offline-catalog.html">Offline Catalog</a>
+    <a href="10-offline-sales.html">Offline Sales</a>
+    <a href="11-ble-transfer.html">BLE Transfer</a>
+  </nav>
+
+  <!-- ===== SCREENS ===== -->
+  <div class="screens-container">
+
+
+    <!-- ============================================================
+         9a. CATALOG HUB — ALL FRESH
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9a. Catalog Hub</div>
+      <div class="screen-sublabel">All catalogs fresh — ready offline</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:#f16824;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:700;color:white;">Catálogos Offline</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">sync</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Green banner -->
+          <div class="alert alert-green" style="margin-bottom:14px;">
+            <span class="mi" style="color:var(--green);font-size:20px;">check_circle</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--green);">Listo para trabajar offline</div>
+              <div style="font-size:11px;color:var(--green);opacity:.8;">Todos los catálogos actualizados</div>
+            </div>
+          </div>
+
+          <!-- Last sync label -->
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+            <span class="mi" style="font-size:16px;color:var(--gray);">schedule</span>
+            <span style="font-size:12px;color:var(--gray);">Última sincronización: <strong>hace 23 minutos</strong></span>
+          </div>
+
+          <!-- Catalog rows card -->
+          <div class="card" style="padding:8px 16px;margin-bottom:16px;">
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-orange">
+                <span class="mi" style="color:var(--kingo-orange);font-size:22px;">bolt</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Planes B2C</div>
+                <div class="cat-sub">8 planes · hace 23 min</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-blue">
+                <span class="mi" style="color:var(--blue);font-size:22px;">account_balance_wallet</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Balance y Deuda</div>
+                <div class="cat-sub">Q 2,450.00 disponible · hace 23 min</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-amber">
+                <span class="mi" style="color:var(--amber);font-size:22px;">percent</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Comisiones</div>
+                <div class="cat-sub">12 reglas activas · hace 23 min</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-purple">
+                <span class="mi" style="color:#8B5CF6;font-size:22px;">people</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Clientes</div>
+                <div class="cat-sub">47 clientes · hace 23 min</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-green">
+                <span class="mi" style="color:var(--green);font-size:22px;">business</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Proyectos</div>
+                <div class="cat-sub">3 proyectos · hace 23 min</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-orange">
+                <span class="mi" style="color:var(--kingo-orange);font-size:22px;">schedule</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Reloj Confiable</div>
+                <div style="margin-top:3px;">
+                  <span class="badge badge-green" style="font-size:11px;">TRUSTED · hace 8 min</span>
+                </div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+          </div>
+
+          <button class="btn btn-sm btn-orange-outline" style="border-radius:10px;">
+            <span class="mi" style="font-size:18px;">sync</span>
+            Actualizar todo
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9b. CATALOG HUB — PARTIALLY EXPIRED
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9b. Catalog Hub</div>
+      <div class="screen-sublabel">Partially expired — action needed</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:#f16824;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:700;color:white;">Catálogos Offline</div>
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:white;font-size:24px;">sync</span>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Red warning banner -->
+          <div class="alert alert-red" style="margin-bottom:14px;">
+            <span class="mi" style="color:var(--red);font-size:20px;">warning</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--red);">2 catálogos expirados</div>
+              <div style="font-size:11px;color:var(--red);opacity:.85;">Genera códigos con riesgo hasta sincronizar</div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:8px 16px;margin-bottom:16px;">
+
+            <!-- Planes B2C — EXPIRADO -->
+            <div class="cat-row">
+              <div class="cat-icon" style="background:rgba(239,68,68,.1);">
+                <span class="mi" style="color:var(--red);font-size:22px;">bolt</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Planes B2C</div>
+                <div style="margin-top:3px;">
+                  <span class="badge badge-red" style="font-size:11px;">EXPIRADO 74h</span>
+                </div>
+              </div>
+              <span class="mi" style="color:var(--red);font-size:22px;">error_outline</span>
+            </div>
+
+            <!-- Balance y Deuda — CADUCA EN 2h -->
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-blue">
+                <span class="mi" style="color:var(--blue);font-size:22px;">account_balance_wallet</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Balance y Deuda</div>
+                <div style="margin-top:3px;">
+                  <span class="badge badge-amber" style="font-size:11px;">CADUCA EN 2h</span>
+                </div>
+              </div>
+              <span class="mi" style="color:var(--amber);font-size:22px;">warning_amber</span>
+            </div>
+
+            <!-- Comisiones — OK -->
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-amber">
+                <span class="mi" style="color:var(--amber);font-size:22px;">percent</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Comisiones</div>
+                <div class="cat-sub">12 reglas · hace 1 hora</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <!-- Clientes — OK -->
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-purple">
+                <span class="mi" style="color:#8B5CF6;font-size:22px;">people</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Clientes</div>
+                <div class="cat-sub">47 clientes · hace 1 hora</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <!-- Proyectos — OK -->
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-green">
+                <span class="mi" style="color:var(--green);font-size:22px;">business</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Proyectos</div>
+                <div class="cat-sub">3 proyectos · hace 1 hora</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:13px;">check</span></span>
+            </div>
+
+            <!-- Reloj — ESTIMATED -->
+            <div class="cat-row">
+              <div class="cat-icon cat-icon-amber">
+                <span class="mi" style="color:var(--amber);font-size:22px;">schedule</span>
+              </div>
+              <div class="cat-main">
+                <div class="cat-name">Reloj Confiable</div>
+                <div style="margin-top:3px;">
+                  <span class="badge badge-amber" style="font-size:11px;">ESTIMATED · hace 38h</span>
+                </div>
+              </div>
+              <span class="mi" style="color:var(--amber);font-size:22px;">warning_amber</span>
+            </div>
+
+          </div>
+
+          <button class="btn btn-orange" style="border-radius:12px;font-size:15px;">
+            <span class="mi" style="font-size:20px;">sync</span>
+            Sincronizar Ahora
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9c. SYNC IN PROGRESS
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9c. Sync In Progress</div>
+      <div class="screen-sublabel">Step-by-step live download</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <!-- Header with inline spinner -->
+        <div style="height:56px;background:#f16824;display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;">
+          <div style="width:26px;height:26px;border:3px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:spin-full .8s linear infinite;flex-shrink:0;"></div>
+          <div style="flex:1;font-size:17px;font-weight:700;color:white;">Sincronizando...</div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Overall progress bar -->
+          <div style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:13px;font-weight:600;color:var(--text-dark);">Progreso general</span>
+              <span style="font-size:13px;font-weight:700;color:var(--blue);">3 / 6 completado</span>
+            </div>
+            <div style="height:8px;background:#E5E7EB;border-radius:4px;overflow:hidden;">
+              <div style="height:8px;background:linear-gradient(90deg,var(--green),#34D399);border-radius:4px;width:50%;"></div>
+            </div>
+          </div>
+
+          <!-- Stepper card -->
+          <div class="card" style="padding:8px 16px;">
+
+            <div class="sync-step">
+              <div class="step-icon step-done"><span class="mi" style="font-size:16px;">check</span></div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--text-dark);">Planes B2C</div>
+                <div style="font-size:11px;color:var(--green);margin-top:2px;">8 planes descargados</div>
+              </div>
+              <span class="badge badge-green" style="font-size:11px;">✓</span>
+            </div>
+
+            <div class="sync-step">
+              <div class="step-icon step-done"><span class="mi" style="font-size:16px;">check</span></div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--text-dark);">Balance y Deuda</div>
+                <div style="font-size:11px;color:var(--green);margin-top:2px;">Q 2,450.00 disponible</div>
+              </div>
+              <span class="badge badge-green" style="font-size:11px;">✓</span>
+            </div>
+
+            <!-- ACTIVE step -->
+            <div class="sync-step">
+              <div class="step-icon step-active">
+                <div style="width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:white;border-radius:50%;animation:spin-full .7s linear infinite;"></div>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--blue);">Comisiones</div>
+                <div style="font-size:11px;color:var(--blue);margin-top:2px;animation:pulse-blue 1.2s ease-in-out infinite;">Descargando reglas...</div>
+              </div>
+              <div class="spinner-sm"></div>
+            </div>
+
+            <div class="sync-step">
+              <div class="step-icon step-pending" style="font-size:13px;">4</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:#9CA3AF;">Clientes</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:2px;">47 pendientes</div>
+              </div>
+            </div>
+
+            <div class="sync-step">
+              <div class="step-icon step-pending" style="font-size:13px;">5</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:#9CA3AF;">Proyectos</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:2px;">En espera</div>
+              </div>
+            </div>
+
+            <div class="sync-step">
+              <div class="step-icon step-pending" style="font-size:13px;">6</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:#9CA3AF;">Reloj Confiable</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:2px;">En espera</div>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="btn btn-outline btn-sm" style="margin-top:4px;">
+            Cancelar
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9d. SYNC COMPLETE
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9d. Sync Complete</div>
+      <div class="screen-sublabel">All catalogs downloaded successfully</div>
+      <div class="phone">
+        <div class="status-bar" style="background:#f16824; color:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:#f16824;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;">
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:700;color:white;">Sincronización</div>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;display:flex;flex-direction:column;align-items:stretch;">
+
+          <!-- Big green check -->
+          <div style="text-align:center;padding:24px 0 8px;">
+            <div class="success-circle">
+              <span class="mi" style="font-size:48px;color:var(--green);">check_circle</span>
+            </div>
+            <div style="font-size:19px;font-weight:700;color:var(--text-dark);">Sincronización completa</div>
+            <div style="font-size:13px;color:var(--gray);margin-top:4px;">Todos los catálogos están actualizados</div>
+          </div>
+
+          <!-- Summary card -->
+          <div class="card" style="margin-top:16px;">
+            <div style="font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:12px;">Resumen</div>
+            <div class="summary-row">
+              <span style="color:var(--gray);">Catálogos descargados</span>
+              <span style="font-weight:700;color:var(--text-dark);">6 de 6</span>
+            </div>
+            <div class="summary-row">
+              <span style="color:var(--gray);">Registros sincronizados</span>
+              <span style="font-weight:700;color:var(--text-dark);">78 registros</span>
+            </div>
+            <div class="summary-row">
+              <span style="color:var(--gray);">Duración</span>
+              <span style="font-weight:700;color:var(--text-dark);">8 segundos</span>
+            </div>
+            <div class="summary-row">
+              <span style="color:var(--gray);">Datos transferidos</span>
+              <span style="font-weight:700;color:var(--text-dark);">142 KB</span>
+            </div>
+          </div>
+
+          <!-- Offline validity -->
+          <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:14px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <span class="mi" style="font-size:18px;color:var(--green);">offline_bolt</span>
+              <span style="font-size:13px;font-weight:700;color:var(--green);">Offline hasta</span>
+            </div>
+            <div style="font-size:15px;font-weight:700;color:var(--text-dark);">~72 horas</div>
+            <div style="font-size:12px;color:var(--gray);margin-top:2px;">02/06/2026 09:41 &rarr; 05/06/2026 09:41</div>
+          </div>
+
+          <button class="btn btn-orange" style="border-radius:12px;font-size:15px;">
+            <span class="mi" style="font-size:20px;">qr_code</span>
+            Ir a generar códigos
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9e. PLAN CATALOG DETAIL — B2C PLANS
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9e. Plan Catalog Detail</div>
+      <div class="screen-sublabel">B2C plans offline cache</div>
+      <div class="phone">
+        <div class="status-bar" style="background:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:white;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;border-bottom:1px solid #F0F0F0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:var(--text-dark);font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;font-size:17px;font-weight:700;color:var(--text-dark);">Planes B2C</div>
+          <span class="badge badge-amber" style="font-size:11px;">offline</span>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Filter chips -->
+          <div class="chip-row">
+            <div class="chip active">Todos</div>
+            <div class="chip">Kingo Luz</div>
+            <div class="chip">Kingo TV</div>
+            <div class="chip">Kingo Básico</div>
+            <div class="chip">Mensual</div>
+            <div class="chip">Semanal</div>
+          </div>
+
+          <!-- Plan grid -->
+          <div class="plan-grid">
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">1 Día</div>
+              <div class="plan-price">Q15</div>
+              <span class="badge badge-orange" style="font-size:10px;align-self:flex-start;margin-top:2px;">Diario</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 1.75</div>
+            </div>
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">1 Semana</div>
+              <div class="plan-price">Q75</div>
+              <span class="badge badge-blue" style="font-size:10px;align-self:flex-start;margin-top:2px;">Semanal</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 8.50</div>
+            </div>
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">15 Días</div>
+              <div class="plan-price">Q120</div>
+              <span class="badge badge-blue" style="font-size:10px;align-self:flex-start;margin-top:2px;">Quincenal</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 12.50</div>
+            </div>
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">1 Mes</div>
+              <div class="plan-price">Q200</div>
+              <span class="badge badge-amber" style="font-size:10px;align-self:flex-start;margin-top:2px;">Mensual</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 22.00</div>
+            </div>
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">3 Meses</div>
+              <div class="plan-price">Q550</div>
+              <span class="badge badge-amber" style="font-size:10px;align-self:flex-start;margin-top:2px;">Trimestral</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 60.50</div>
+            </div>
+
+            <div class="plan-card">
+              <span class="badge badge-green" style="font-size:10px;margin-bottom:4px;align-self:flex-start;">B2C</span>
+              <div style="font-size:13px;font-weight:700;color:var(--text-dark);">1 Año</div>
+              <div class="plan-price">Q2,100</div>
+              <span class="badge" style="font-size:10px;align-self:flex-start;margin-top:2px;background:rgba(139,92,246,.12);color:#8B5CF6;">Anual</span>
+              <div style="font-size:11px;color:var(--gray);margin-top:4px;">Com: Q 231.00</div>
+            </div>
+
+          </div>
+
+          <!-- Footer -->
+          <div style="text-align:center;padding:8px 0 4px;">
+            <span style="font-size:11px;color:var(--gray);">Caché actualizado hace 23 min · válido 72h</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9f. BALANCE SNAPSHOT DETAIL
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9f. Balance Snapshot</div>
+      <div class="screen-sublabel">Offline balance &amp; debt view</div>
+      <div class="phone">
+        <div class="status-bar" style="background:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:white;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;border-bottom:1px solid #F0F0F0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:var(--text-dark);font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;font-size:17px;font-weight:700;color:var(--text-dark);">Mi Balance Offline</div>
+          <span class="badge badge-amber" style="font-size:11px;">offline</span>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Orange hero card -->
+          <div style="background:linear-gradient(135deg,#f16824,#f3864f);border-radius:20px;padding:20px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <div style="width:40px;height:40px;border-radius:20px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;">
+                <span class="mi" style="color:white;font-size:22px;">person</span>
+              </div>
+              <div>
+                <div style="font-size:12px;color:rgba(255,255,255,.75);">Vendedor</div>
+                <div style="font-size:14px;font-weight:700;color:white;">Carlos Pérez</div>
+              </div>
+              <span class="badge" style="margin-left:auto;background:rgba(255,255,255,.2);color:white;font-size:10px;">
+                <span class="mi" style="font-size:12px;">verified_user</span> Integridad ✓
+              </span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.7);margin-bottom:4px;">Total disponible</div>
+            <div style="font-size:34px;font-weight:800;color:white;line-height:1;">Q 2,450.00</div>
+            <div style="display:flex;gap:24px;margin-top:12px;">
+              <div>
+                <div style="font-size:10px;color:rgba(255,255,255,.65);">Límite crédito</div>
+                <div style="font-size:14px;font-weight:700;color:white;">Q 5,000</div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:rgba(255,255,255,.65);">Deuda actual</div>
+                <div style="font-size:14px;font-weight:700;color:white;">Q 2,550</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Debt gauge -->
+          <div class="card" style="margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:13px;font-weight:600;color:var(--text-dark);">Uso de crédito</span>
+              <span style="font-size:13px;font-weight:700;color:var(--amber);">51%</span>
+            </div>
+            <div class="debt-gauge-track">
+              <div class="debt-gauge-fill" style="width:51%;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;">
+              <span style="font-size:10px;color:var(--gray);">Q 0</span>
+              <span style="font-size:10px;color:var(--gray);">Q 5,000</span>
+            </div>
+          </div>
+
+          <!-- Project balances -->
+          <div class="card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px;">Balance por Proyecto</div>
+            <div class="proj-row">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="mi" style="font-size:18px;color:var(--kingo-orange);">bolt</span>
+                <span style="font-weight:600;color:var(--text-dark);">Kingo Energía</span>
+              </div>
+              <span style="font-weight:700;color:var(--green);">Q 1,800.00</span>
+            </div>
+            <div class="proj-row">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="mi" style="font-size:18px;color:var(--blue);">wifi</span>
+                <span style="font-weight:600;color:var(--text-dark);">Viasat Internet</span>
+              </div>
+              <span style="font-weight:700;color:var(--green);">Q 650.00</span>
+            </div>
+          </div>
+
+          <!-- Snapshot info + HMAC -->
+          <div style="background:#F9F9F9;border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <div style="font-size:11px;color:var(--gray);">Tomado</div>
+                <div style="font-size:12px;font-weight:600;color:var(--text-dark);">01/06/2026 09:18</div>
+                <div style="font-size:11px;color:var(--gray);margin-top:6px;">Válido hasta</div>
+                <div style="font-size:12px;font-weight:600;color:var(--text-dark);">04/06/2026 09:18</div>
+              </div>
+              <span class="badge badge-green" style="font-size:11px;align-self:flex-start;">
+                <span class="mi" style="font-size:12px;">verified_user</span> Integridad ✓
+              </span>
+            </div>
+          </div>
+
+          <!-- Warning box -->
+          <div class="alert alert-orange" style="margin-bottom:0;">
+            <span class="mi" style="color:var(--kingo-orange);font-size:18px;flex-shrink:0;">info</span>
+            <div style="font-size:12px;color:var(--text-dark);">Este saldo se usará para validar transacciones offline. El saldo real puede diferir al sincronizar.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9g. TRUSTEDCLOCK DETAIL — ESTIMATED STATE
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9g. TrustedClock Detail</div>
+      <div class="screen-sublabel">ESTIMATED state + quality scale</div>
+      <div class="phone">
+        <div class="status-bar" style="background:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:white;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;border-bottom:1px solid #F0F0F0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:var(--text-dark);font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;font-size:17px;font-weight:700;color:var(--text-dark);">Reloj Confiable</div>
+          <span class="badge badge-amber" style="font-size:11px;">ESTIMATED</span>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Clock ring -->
+          <div style="text-align:center;padding:18px 0 14px;">
+            <div class="clock-ring ring-amber" style="background:rgba(245,158,11,.06);">
+              <span class="mi" style="font-size:48px;color:var(--amber);">schedule</span>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:var(--amber);margin-top:10px;letter-spacing:.5px;">ESTIMATED</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:2px;">Precisión reducida — sincroniza pronto</div>
+          </div>
+
+          <!-- Stats 2x2 grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Último anchor</div>
+              <div style="font-size:15px;font-weight:700;color:var(--text-dark);">hace 38h</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Precisión</div>
+              <div style="font-size:15px;font-weight:700;color:var(--amber);">±19 min</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Desviación</div>
+              <div style="font-size:15px;font-weight:700;color:var(--text-dark);">+3m 42s</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Calidad</div>
+              <div style="font-size:15px;font-weight:700;color:var(--amber);">ESTIMATED</div>
+            </div>
+          </div>
+
+          <!-- Quality scale card -->
+          <div class="card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Escala de Calidad</div>
+
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--green);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--green);">TRUSTED</span><span style="color:var(--gray);font-size:11px;"> · 0 – 1 hora desde anchor</span></div>
+            </div>
+
+            <div class="quality-row" style="background:rgba(245,158,11,.06);border-radius:8px;padding:7px 6px;border-bottom:none;margin-bottom:1px;">
+              <div class="quality-dot" style="background:var(--amber);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--amber);">ESTIMATED</span><span style="color:var(--gray);font-size:11px;"> · 1 – 72 horas ← actual</span></div>
+              <span class="mi" style="font-size:16px;color:var(--amber);">chevron_left</span>
+            </div>
+
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--orange);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--orange);">STALE</span><span style="color:var(--gray);font-size:11px;"> · &gt; 72 horas sin anchor</span></div>
+            </div>
+
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--red);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--red);">SUSPECT</span><span style="color:var(--gray);font-size:11px;"> · Reloj del dispositivo modificado</span></div>
+            </div>
+
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--red);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--red);">DEVICE_ONLY</span><span style="color:var(--gray);font-size:11px;"> · Sin anchor NTP/servidor</span></div>
+            </div>
+
+          </div>
+
+          <!-- Info box -->
+          <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:13px;">
+            <span class="mi" style="font-size:18px;color:var(--blue);flex-shrink:0;">info</span>
+            <div style="font-size:12px;color:var(--text-dark);line-height:1.5;">Los códigos siempre usan el tiempo del <strong>anchor</strong>, no el reloj del teléfono. El reloj del dispositivo nunca afecta la validez del código.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         9g-alt. TRUSTEDCLOCK — SUSPECT STATE
+    ============================================================ -->
+    <div class="screen-wrapper">
+      <div class="screen-label">9g-alt. TrustedClock — SUSPECT</div>
+      <div class="screen-sublabel">Device clock tampered detection</div>
+      <div class="phone">
+        <div class="status-bar" style="background:white;">
+          <span>9:41</span>
+          <div class="sb-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div>
+        </div>
+        <div style="height:56px;background:white;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;border-bottom:1px solid #F0F0F0;">
+          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+            <span class="mi" style="color:var(--text-dark);font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1;font-size:17px;font-weight:700;color:var(--text-dark);">Reloj Confiable</div>
+          <span class="badge badge-red" style="font-size:11px;">SUSPECT</span>
+        </div>
+
+        <div class="content content-pad" style="background:#f5f6fa;">
+
+          <!-- Red alert at top -->
+          <div class="alert alert-red" style="margin-bottom:14px;align-items:flex-start;">
+            <span class="mi" style="color:var(--red);font-size:22px;flex-shrink:0;margin-top:1px;">gpp_bad</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--red);">Reloj del dispositivo modificado</div>
+              <div style="font-size:12px;color:var(--red);opacity:.85;margin-top:4px;line-height:1.6;">
+                Tiempo del anchor: <strong>09:22</strong><br>
+                Reloj del dispositivo: <strong>15:47</strong><br>
+                Diferencia: <strong>+6h 25 min</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clock ring red -->
+          <div style="text-align:center;padding:8px 0 14px;">
+            <div class="clock-ring ring-red" style="background:rgba(239,68,68,.06);">
+              <span class="mi" style="font-size:48px;color:var(--red);">gpp_bad</span>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:var(--red);margin-top:10px;letter-spacing:.5px;">SUSPECT</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:2px;">Manipulación detectada</div>
+          </div>
+
+          <!-- Stats 2x2 -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Último anchor</div>
+              <div style="font-size:14px;font-weight:700;color:var(--text-dark);">09:22 hoy</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Reloj dispositivo</div>
+              <div style="font-size:14px;font-weight:700;color:var(--red);">15:47 hoy</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Desviación</div>
+              <div style="font-size:14px;font-weight:700;color:var(--red);">+6h 25m</div>
+            </div>
+            <div class="card card-sm" style="text-align:center;margin-bottom:0;">
+              <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">Calidad</div>
+              <div style="font-size:14px;font-weight:700;color:var(--red);">SUSPECT</div>
+            </div>
+          </div>
+
+          <!-- Quality scale (SUSPECT highlighted) -->
+          <div class="card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Escala de Calidad</div>
+
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--green);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--green);">TRUSTED</span><span style="color:var(--gray);font-size:11px;"> · 0 – 1h</span></div>
+            </div>
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--amber);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--amber);">ESTIMATED</span><span style="color:var(--gray);font-size:11px;"> · 1 – 72h</span></div>
+            </div>
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--orange);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--orange);">STALE</span><span style="color:var(--gray);font-size:11px;"> · &gt; 72h</span></div>
+            </div>
+            <div class="quality-row" style="background:rgba(239,68,68,.07);border-radius:8px;padding:7px 6px;border-bottom:none;margin-bottom:1px;">
+              <div class="quality-dot" style="background:var(--red);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--red);">SUSPECT</span><span style="color:var(--gray);font-size:11px;"> · Reloj modificado ← actual</span></div>
+              <span class="mi" style="font-size:16px;color:var(--red);">chevron_left</span>
+            </div>
+            <div class="quality-row">
+              <div class="quality-dot" style="background:var(--red);"></div>
+              <div style="flex:1;"><span style="font-weight:700;color:var(--red);">DEVICE_ONLY</span><span style="color:var(--gray);font-size:11px;"> · Sin anchor NTP/servidor</span></div>
+            </div>
+
+          </div>
+
+          <!-- Info box -->
+          <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:13px;">
+            <span class="mi" style="font-size:18px;color:var(--red);flex-shrink:0;">info</span>
+            <div style="font-size:12px;color:var(--text-dark);line-height:1.5;">Los códigos generados usarán el tiempo del anchor (<strong>09:22</strong>). Sincroniza para restablecer la confianza del reloj.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div><!-- /screens-container -->
+</body>
+</html>

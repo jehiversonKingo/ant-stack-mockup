@@ -5,12 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ant Fieldservice — Sync</title>
   <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* ---- local helpers for this page ---- */
+    @keyframes pulse-amber {
+      0%,100% { opacity:1; }
+      50%      { opacity:.45; }
+    }
+    .pulse-amber { animation: pulse-amber 1.4s ease-in-out infinite; }
+
+    @keyframes spin-sm { to { transform:rotate(360deg); } }
+    .spinner-sm {
+      width:18px; height:18px;
+      border:2px solid rgba(59,130,246,.2);
+      border-top-color:#3B82F6;
+      border-radius:50%;
+      animation: spin-sm .7s linear infinite;
+      flex-shrink:0;
+    }
+    .spinner-white {
+      width:20px; height:20px;
+      border:2px solid rgba(255,255,255,.3);
+      border-top-color:#fff;
+      border-radius:50%;
+      animation: spin-sm .7s linear infinite;
+      flex-shrink:0;
+    }
+
+    /* Catalog row */
+    .catalog-row {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid #F0F0F0;
+    }
+    .catalog-row:last-child { border-bottom:none; }
+    .catalog-icon {
+      width:36px; height:36px; border-radius:10px;
+      background:#F5F6FA;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .catalog-info { flex:1; min-width:0; }
+    .catalog-name { font-size:13px; font-weight:600; color:#1A1A1A; }
+    .catalog-meta { font-size:11px; color:#727176; }
+    .catalog-status { display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex-shrink:0; }
+
+    /* Step items for download progress */
+    .dl-step {
+      display:flex; align-items:flex-start; gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid #F0F0F0;
+    }
+    .dl-step:last-child { border-bottom:none; }
+    .dl-dot {
+      width:24px; height:24px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; margin-top:1px;
+    }
+    .dl-dot.done  { background:#ECFDF5; }
+    .dl-dot.active{ background:#EFF6FF; }
+    .dl-dot.wait  { background:#F5F6FA; }
+    .dl-step-body { flex:1; min-width:0; }
+    .dl-step-name { font-size:13px; font-weight:600; color:#1A1A1A; }
+    .dl-step-sub  { font-size:11px; color:#727176; margin-top:2px; }
+
+    /* Accordion */
+    .accordion-item {
+      border:1px solid #E5E7EB; border-radius:12px;
+      margin-bottom:10px; overflow:hidden;
+    }
+    .accordion-header {
+      display:flex; align-items:center; padding:14px;
+      background:#FAFAFA; gap:10px;
+    }
+    .accordion-body { padding:12px 14px; background:white; }
+    .sale-row {
+      display:flex; align-items:center; gap:8px;
+      padding:7px 0; border-bottom:1px solid #F0F0F0; font-size:12px;
+    }
+    .sale-row:last-child { border-bottom:none; }
+
+    /* Lot result card */
+    .lot-result {
+      border-radius:12px; padding:14px; margin-bottom:10px;
+    }
+    .lot-result-green { background:#F0FDF4; border:1px solid rgba(16,185,129,.25); }
+    .lot-result-amber { background:#FFFBEB; border:1px solid rgba(245,158,11,.3); }
+    .lot-result-red   { background:#FEF2F2; border:1px solid rgba(239,68,68,.25); }
+
+    /* Section divider */
+    .section-title {
+      font-size:10px; font-weight:700; letter-spacing:.8px;
+      color:#727176; text-transform:uppercase;
+      margin:16px 0 10px;
+    }
+
+    /* Upload lot row */
+    .upload-lot-row {
+      display:flex; align-items:center; gap:10px;
+      padding:12px 0; border-bottom:1px solid #F0F0F0;
+    }
+    .upload-lot-row:last-child { border-bottom:none; }
+    .upload-lot-icon {
+      width:36px; height:36px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+
+    /* HTTP code chip */
+    .http-chip {
+      font-family:monospace; font-size:11px;
+      background:#F0F0F0; padding:4px 10px;
+      border-radius:6px; color:#374151;
+    }
+    .http-chip.ok { background:#ECFDF5; color:#059669; }
+
+    /* Dimmed overlay on menu */
+    .dim-overlay {
+      position:absolute; inset:0;
+      background:rgba(255,255,255,.72);
+      z-index:5;
+      border-radius:12px;
+    }
+
+    /* Online/offline pill */
+    .sync-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:5px 14px; border-radius:20px;
+      font-size:12px; font-weight:600;
+    }
+    .sync-pill.online  { background:#ECFDF5; color:#059669; }
+    .sync-pill.offline { background:#FEF2F2; color:#DC2626; }
+
+    /* Collapsible anomaly block */
+    .anomaly-block {
+      background:#FEF2F2; border:1px solid rgba(239,68,68,.25);
+      border-radius:10px; padding:12px; margin-top:10px;
+    }
+    .anomaly-key { font-size:11px; font-weight:600; color:#B91C1C; }
+    .anomaly-val { font-size:11px; color:#374151; font-family:monospace; }
+
+    /* Progress bar row */
+    .progress-track {
+      height:6px; background:#F0F0F0; border-radius:3px; overflow:hidden;
+    }
+    .progress-fill {
+      height:6px; background:var(--orange); border-radius:3px;
+    }
+  </style>
 </head>
 <body>
-  <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+
+  <div class="page-header" style="background:linear-gradient(135deg, #f16824, #f3864f);">
     <h1>Ant Fieldservice</h1>
-    <p>Sync — Data Synchronization</p>
+    <p>Sync — Sincronizacion de Datos y Subida Offline</p>
   </div>
+
   <nav class="page-nav">
     <a href="01-auth.html">Auth</a>
     <a href="02-home.html">Home</a>
@@ -19,293 +168,1053 @@
     <a href="05-tasks.html">Tasks</a>
     <a href="06-visits.html">Visits</a>
     <a class="active" href="07-sync.html">Sync</a>
+    <a href="08-offline.html">Offline</a>
   </nav>
 
   <div class="screens-container">
 
-    <!-- ========== 7a: SYNC DATA ========== -->
+    <!-- ========================================================
+         7a. Home Screen — BLOCKED (pending upload)
+         ======================================================== -->
     <div class="screen-wrapper">
-      <div class="screen-label">7a. Sincronizacion</div>
-      <div class="screen-sublabel">Data sync status & download</div>
+      <div class="screen-label">7a. Home Screen — Bloqueado</div>
+      <div class="screen-sublabel">Pending upload blocks navigation</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-        <!-- Orange Header -->
+        <!-- Offline status bar -->
+        <div class="status-bar" style="background:#1a1a1a; color:white;">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_off</span>
+            <span class="mi" style="font-size:16px;">wifi_off</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <!-- Header orange -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Inicio</div>
+          <span class="mi" style="color:white; font-size:24px;">notifications_none</span>
+        </div>
+
+        <!-- Content -->
+        <div class="content content-pad" style="position:relative;">
+
+          <!-- RED BLOCKING CARD -->
+          <div class="card card-red" style="border:2px solid rgba(239,68,68,.4); margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="width:44px; height:44px; border-radius:22px; background:rgba(239,68,68,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:24px; color:#EF4444;">lock</span>
+              </div>
+              <div>
+                <div style="font-size:16px; font-weight:700; color:#B91C1C;">Sincronizacion Pendiente</div>
+                <div style="font-size:12px; color:#DC2626; margin-top:2px;">Accion requerida</div>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#7F1D1D; line-height:1.5; margin-bottom:6px;">
+              Tienes <strong>3 lotes de clientes</strong> sin subir al servidor.
+            </p>
+            <p style="font-size:13px; color:#7F1D1D; line-height:1.5; margin-bottom:14px;">
+              Debes subir estos datos antes de continuar usando la aplicacion.
+            </p>
+            <button class="btn btn-orange btn-sm" style="background:#EF4444;">
+              <span class="mi" style="font-size:18px;">sync</span>
+              Ir a Sincronizar
+            </button>
+          </div>
+
+          <!-- Menu grid dimmed -->
+          <div style="position:relative;">
+            <div class="section-title" style="margin-top:4px;">Modulos</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; position:relative;">
+              <!-- dim overlay -->
+              <div class="dim-overlay"></div>
+
+              <!-- Grid items -->
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#f16824; display:block; margin-bottom:6px;">point_of_sale</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Ventas</div>
+              </div>
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#3B82F6; display:block; margin-bottom:6px;">account_balance_wallet</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Mi Banco</div>
+              </div>
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#10B981; display:block; margin-bottom:6px;">task_alt</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Tareas</div>
+              </div>
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#F59E0B; display:block; margin-bottom:6px;">map</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Visitas</div>
+              </div>
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#8B5CF6; display:block; margin-bottom:6px;">bluetooth</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">BLE</div>
+              </div>
+              <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+                <span class="mi" style="font-size:28px; color:#EC4899; display:block; margin-bottom:6px;">people</span>
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Clientes</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /content -->
+      </div><!-- /phone -->
+    </div>
+
+    <!-- ========================================================
+         7b. Home Screen — WARNING (navigable)
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7b. Home Screen — Advertencia</div>
+      <div class="screen-sublabel">Warning banner, navigation available</div>
+      <div class="phone">
+        <!-- Offline status -->
+        <div class="status-bar" style="background:#1a1a1a; color:white;">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_off</span>
+            <span class="mi" style="font-size:16px;">wifi_off</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 16px; flex-shrink:0;">
+          <div style="flex:1; text-align:center; font-size:18px; font-weight:700; color:white;">Inicio</div>
+          <span class="mi" style="color:white; font-size:24px;">notifications_none</span>
+        </div>
+
+        <!-- Amber warning banner (dismissible) -->
+        <div style="background:#FFFBEB; border-bottom:1px solid rgba(245,158,11,.35); padding:10px 16px; display:flex; align-items:center; gap:8px; flex-shrink:0;">
+          <span class="mi" style="font-size:18px; color:#F59E0B;">warning</span>
+          <div style="flex:1; font-size:12px; font-weight:500; color:#92400E;">
+            2 lotes pendientes de subir
+            <span style="color:#F59E0B; font-weight:700; margin-left:4px;">Ir a sync →</span>
+          </div>
+          <span class="mi" style="font-size:18px; color:#F59E0B; cursor:pointer;">close</span>
+        </div>
+
+        <div class="content content-pad">
+          <div class="section-title" style="margin-top:4px;">Modulos</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#f16824; display:block; margin-bottom:6px;">point_of_sale</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Ventas</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#3B82F6; display:block; margin-bottom:6px;">account_balance_wallet</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Mi Banco</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#10B981; display:block; margin-bottom:6px;">task_alt</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Tareas</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#F59E0B; display:block; margin-bottom:6px;">map</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Visitas</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#8B5CF6; display:block; margin-bottom:6px;">bluetooth</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">BLE</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#EC4899; display:block; margin-bottom:6px;">people</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Clientes</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px;">
+              <span class="mi" style="font-size:28px; color:#14B8A6; display:block; margin-bottom:6px;">receipt_long</span>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Operaciones</div>
+            </div>
+            <div class="card card-sm" style="text-align:center; padding:20px 12px; background:#FFF7ED; border:1px solid rgba(245,158,11,.25);">
+              <div style="position:relative; display:inline-block;">
+                <span class="mi" style="font-size:28px; color:#F59E0B; display:block; margin-bottom:6px;">sync</span>
+                <div style="position:absolute; top:-4px; right:-4px; width:14px; height:14px; border-radius:7px; background:#EF4444; display:flex; align-items:center; justify-content:center;">
+                  <span style="color:white; font-size:9px; font-weight:700;">2</span>
+                </div>
+              </div>
+              <div style="font-size:13px; font-weight:600; color:#92400E;">Sync</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         7c. SyncDataScreen — Catalog Overview
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7c. Sincronizacion — Vision General</div>
+      <div class="screen-sublabel">Full catalog overview for field agents</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <!-- Header -->
         <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronizacion</div>
+          <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; text-align:center; font-size:17px; font-weight:700; color:white;">Sincronizacion de Datos</div>
           <div style="width:40px;"></div>
         </div>
-        <div class="content content-pad" style="background:#f5f5f5;">
-          <!-- Sync Status Card -->
-          <div class="card card-sm" style="display:flex; align-items:center; gap:14px; padding:18px;">
-            <div style="width:48px; height:48px; border-radius:24px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
-              <span class="mi" style="font-size:28px; color:#41a247;">cloud_done</span>
+
+        <!-- Online pill -->
+        <div style="padding:12px 16px; border-bottom:1px solid #F0F0F0; background:#FAFAFA; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+          <div class="sync-pill online">
+            <span style="width:8px;height:8px;border-radius:4px;background:#10B981;display:inline-block;"></span>
+            ONLINE
+          </div>
+          <div style="font-size:11px; color:#727176;">
+            <span class="mi" style="font-size:13px; vertical-align:middle;">history</span>
+            ultima sync: hace 1h
+          </div>
+        </div>
+
+        <div class="content content-pad" style="padding-top:14px;">
+
+          <!-- SECTION A: Descarga -->
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div class="section-title" style="margin:0;">DESCARGA (Catalogos)</div>
+            <span style="font-size:11px; color:#727176;">Datos para trabajar offline</span>
+          </div>
+
+          <div class="card card-sm" style="padding:12px 14px; margin-bottom:14px;">
+            <!-- row -->
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#f16824;">assignment</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Menu de modulos</div>
+                <div class="catalog-meta">8 opciones</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
             </div>
-            <div>
-              <div style="font-size:17px; font-weight:700; color:#41a247;">Datos sincronizados</div>
-              <div style="font-size:13px; color:var(--gray);">Ultima sincronizacion: 19/02/2026 14:30</div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#8B5CF6;">inventory_2</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Bodega / Addons</div>
+                <div class="catalog-meta">134 items</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#3B82F6;">location_city</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Comunidades</div>
+                <div class="catalog-meta">892 comunidades</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#10B981;">account_balance_wallet</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Mi Billetera</div>
+                <div class="catalog-meta" style="color:#059669; font-weight:600;">Q 3,200 disponible</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#EF4444;">money_off</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Mi Deuda</div>
+                <div class="catalog-meta" style="color:#EF4444; font-weight:600;">Q 1,800 deuda</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#F59E0B;">receipt_long</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Mis Transacciones</div>
+                <div class="catalog-meta">47 transacciones</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#14B8A6;">task_alt</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Mis Tareas</div>
+                <div class="catalog-meta">12 tareas</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#7C3AED;">gavel</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Reglas de negocio</div>
+                <div class="catalog-meta">28 reglas</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#EC4899;">price_change</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Planes activos</div>
+                <div class="catalog-meta">8 planes B2C</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#F97316;">local_offer</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Promociones</div>
+                <div class="catalog-meta">3 activas</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#0EA5E9;">people</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Clientes asignados</div>
+                <div class="catalog-meta">47 clientes</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
+            </div>
+            <div class="catalog-row">
+              <div class="catalog-icon"><span class="mi" style="font-size:18px; color:#0D9488;">account_balance</span></div>
+              <div class="catalog-info">
+                <div class="catalog-name">Wallets de clientes</div>
+                <div class="catalog-meta">47 wallets</div>
+              </div>
+              <div class="catalog-status">
+                <span class="badge badge-green" style="font-size:10px; padding:2px 8px;"><span class="mi" style="font-size:12px;">check_circle</span> Sync</span>
+                <span style="font-size:10px; color:#727176;">hace 2h</span>
+              </div>
             </div>
           </div>
 
-          <!-- Server Data Section -->
-          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Datos del Servidor</div>
-          <div class="card card-sm" style="padding:0;">
-            <!-- Menu -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">menu_book</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Menu</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">12</span>
-            </div>
-            <!-- Inventario -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">inventory_2</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Inventario</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">24</span>
-            </div>
-            <!-- Comunidades -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">location_city</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Comunidades</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">8</span>
-            </div>
-            <!-- Tareas -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">task_alt</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Tareas</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">15</span>
-            </div>
-            <!-- Planes -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px;">
-              <span class="mi" style="font-size:22px; color:var(--gray);">sell</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Planes</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">6</span>
-            </div>
-          </div>
-
-          <!-- Local Data Section -->
-          <div style="font-size:12px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; margin-top:8px;">Datos Locales</div>
-          <div class="card card-sm" style="padding:0;">
-            <!-- Ventas -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">shopping_cart</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Ventas</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">3</span>
-            </div>
-            <!-- Boletas -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:var(--gray);">receipt_long</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Boletas</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">2</span>
-            </div>
-            <!-- Lotes -->
-            <div style="display:flex; align-items:center; padding:12px 16px; gap:12px;">
-              <span class="mi" style="font-size:22px; color:var(--gray);">layers</span>
-              <div style="flex:1; font-size:14px; color:var(--text-dark);">Lotes</div>
-              <span style="font-size:13px; color:white; background:#f16824; padding:2px 10px; border-radius:10px; font-weight:600;">1</span>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <button class="btn" style="background:#f16824; color:white; margin-bottom:10px;">
-            <span class="mi" style="font-size:20px;">cloud_download</span>
-            Descargar Todo
+          <button class="btn btn-orange btn-sm" style="margin-bottom:20px;">
+            <span class="mi" style="font-size:18px;">sync</span>
+            Sincronizar Todo
           </button>
-          <button class="btn" style="background:#41a247; color:white;">
+
+          <!-- SECTION B: Subida -->
+          <div class="section-title">SUBIDA (Datos offline recolectados)</div>
+          <div class="card card-sm" style="padding:12px 14px;">
+            <div class="upload-lot-row">
+              <div class="upload-lot-icon" style="background:#FFFBEB;">
+                <span class="mi" style="font-size:18px; color:#F59E0B;">cloud_upload</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">3 lotes de ventas offline</div>
+                <div style="font-size:11px; color:#727176;">32 registros · Q 4,250</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                <span class="badge badge-amber">Pendiente</span>
+                <button style="font-size:11px; font-weight:700; color:#f16824; background:none; border:none; cursor:pointer; padding:0;">Subir</button>
+              </div>
+            </div>
+            <div class="upload-lot-row">
+              <div class="upload-lot-icon" style="background:#F0FDF4;">
+                <span class="mi" style="font-size:18px; color:#10B981;">confirmation_number</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:#1A1A1A;">0 tickets pendientes</div>
+                <div style="font-size:11px; color:#727176;">Nada que subir</div>
+              </div>
+              <span class="badge badge-green"><span class="mi" style="font-size:12px;">check</span> OK</span>
+            </div>
+          </div>
+
+        </div><!-- /content -->
+      </div><!-- /phone -->
+    </div>
+
+    <!-- ========================================================
+         7d. SyncDataScreen — Download In Progress
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7d. Descarga en Progreso</div>
+      <div class="screen-sublabel">Step-by-step catalog download</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <!-- Header with spinner -->
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;"></div>
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:10px;">
+            <div class="spinner-white"></div>
+            <span style="font-size:16px; font-weight:700; color:white;">Descargando catalogos...</span>
+          </div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <!-- Progress strip -->
+        <div style="padding:12px 16px; background:#FAFAFA; border-bottom:1px solid #F0F0F0; flex-shrink:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:#1A1A1A;">Progreso general</span>
+            <span style="font-size:12px; font-weight:700; color:#f16824;">5 / 12 items</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:41%;"></div>
+          </div>
+        </div>
+
+        <div class="content content-pad" style="padding-top:14px;">
+
+          <div class="card card-sm" style="padding:12px 14px;">
+
+            <!-- Done -->
+            <div class="dl-step">
+              <div class="dl-dot done"><span class="mi" style="font-size:14px; color:#10B981;">check</span></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name">Menu de modulos</div>
+                <div class="dl-step-sub" style="color:#10B981;">8 opciones cargadas</div>
+              </div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot done"><span class="mi" style="font-size:14px; color:#10B981;">check</span></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name">Bodega / Addons</div>
+                <div class="dl-step-sub" style="color:#10B981;">134 items cargados</div>
+              </div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot done"><span class="mi" style="font-size:14px; color:#10B981;">check</span></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name">Comunidades</div>
+                <div class="dl-step-sub" style="color:#10B981;">892 comunidades cargadas</div>
+              </div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot done"><span class="mi" style="font-size:14px; color:#10B981;">check</span></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name">Mi Billetera</div>
+                <div class="dl-step-sub" style="color:#10B981; font-weight:600;">Q 3,200 &larr; actualizado</div>
+              </div>
+            </div>
+
+            <!-- Active -->
+            <div class="dl-step" style="background:rgba(59,130,246,.04); margin:0 -14px; padding:10px 14px; border-radius:10px;">
+              <div class="dl-dot active"><div class="spinner-sm"></div></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name" style="color:#2563EB;">Mi Deuda</div>
+                <div class="dl-step-sub" style="color:#2563EB;">Obteniendo deuda del servidor...</div>
+              </div>
+            </div>
+
+            <!-- Waiting -->
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Mis Transacciones</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Mis Tareas</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Reglas de negocio</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Planes activos</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Promociones</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Clientes asignados</div></div>
+            </div>
+            <div class="dl-step">
+              <div class="dl-dot wait"><span class="mi" style="font-size:14px; color:#D1D5DB;">radio_button_unchecked</span></div>
+              <div class="dl-step-body"><div class="dl-step-name" style="color:#9CA3AF;">Wallets de clientes</div></div>
+            </div>
+          </div>
+
+          <button class="btn btn-outline btn-sm" style="margin-bottom:10px;">
+            Cancelar descarga
+          </button>
+          <p style="text-align:center; font-size:11px; color:#9CA3AF; margin-bottom:20px;">
+            <span class="mi" style="font-size:13px; vertical-align:middle;">info</span>
+            Manten la app abierta durante la descarga
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         7e. Deuda Refreshed After Offline BLE Payment
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7e. Deuda Actualizada (pagos offline)</div>
+      <div class="screen-sublabel">Debt increases after BLE offline payments uploaded</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px;"></div>
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:10px;">
+            <div class="spinner-white"></div>
+            <span style="font-size:16px; font-weight:700; color:white;">Sincronizando...</span>
+          </div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <!-- Amber alert -->
+        <div style="background:#FEF3C7; border-bottom:1px solid rgba(245,158,11,.4); padding:10px 16px; display:flex; align-items:flex-start; gap:8px; flex-shrink:0;">
+          <span class="mi" style="font-size:18px; color:#D97706; flex-shrink:0; margin-top:1px;">warning</span>
+          <span style="font-size:12px; color:#92400E; font-weight:500; line-height:1.4;">Tu deuda aumento por pagos offline recibidos</span>
+        </div>
+
+        <div class="content content-pad" style="padding-top:14px;">
+
+          <div class="card card-sm" style="padding:12px 14px; margin-bottom:14px;">
+            <!-- Billetera done -->
+            <div class="dl-step">
+              <div class="dl-dot done"><span class="mi" style="font-size:14px; color:#10B981;">check</span></div>
+              <div class="dl-step-body">
+                <div class="dl-step-name">Mi Billetera</div>
+                <div class="dl-step-sub" style="color:#10B981; font-weight:600;">Q 3,200 actualizado</div>
+              </div>
+            </div>
+
+            <!-- Deuda pulsing amber — active -->
+            <div class="dl-step" style="background:#FFFBEB; margin:0 -14px; padding:10px 14px; border-radius:10px;">
+              <div class="dl-dot" style="background:#FEF3C7; width:24px; height:24px; border-radius:12px; display:flex; align-items:center; justify-content:center;">
+                <span class="mi pulse-amber" style="font-size:14px; color:#D97706;">sync</span>
+              </div>
+              <div class="dl-step-body">
+                <div class="dl-step-name" style="color:#D97706;">Mi Deuda</div>
+                <div class="dl-step-sub pulse-amber" style="color:#D97706; font-weight:600;">Actualizando (pagos offline incluidos)</div>
+              </div>
+            </div>
+
+            <!-- Deuda result (shown below active) -->
+            <div style="margin:8px 0 4px; padding:10px 12px; background:#FFFBEB; border:1px solid rgba(245,158,11,.3); border-radius:10px;">
+              <div style="font-size:12px; font-weight:700; color:#92400E; margin-bottom:4px;">
+                <span class="mi" style="font-size:14px; vertical-align:middle; color:#D97706;">trending_up</span>
+                Mi Deuda: Q 1,800 &rarr; Q 2,550
+              </div>
+              <div style="font-size:11px; color:#92400E;">
+                <span style="font-weight:700; color:#D97706;">+Q 750</span> por 3 pagos offline recibidos via BLE
+              </div>
+            </div>
+          </div>
+
+          <!-- Info card -->
+          <div style="background:#EFF6FF; border:1px solid rgba(59,130,246,.25); border-radius:12px; padding:14px; margin-bottom:14px;">
+            <div style="display:flex; align-items:flex-start; gap:8px;">
+              <span class="mi" style="font-size:18px; color:#3B82F6; flex-shrink:0; margin-top:1px;">info</span>
+              <p style="font-size:12px; color:#1E40AF; line-height:1.5;">
+                Los pagos de clientes que recibiste offline aumentaron tu deuda con Kingo. Esto es normal: cada pago recibido fuera de linea se registra cuando te conectas.
+              </p>
+            </div>
+          </div>
+
+          <button style="background:none; border:none; padding:0; cursor:pointer; width:100%; text-align:center; margin-bottom:16px;">
+            <span style="font-size:13px; font-weight:600; color:#3B82F6;">
+              <span class="mi" style="font-size:14px; vertical-align:middle;">open_in_new</span>
+              Ver detalle de pagos
+            </span>
+          </button>
+
+          <div style="background:#F5F6FA; border-radius:12px; padding:14px; margin-bottom:16px;">
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#727176; margin-bottom:10px;">Capacidad Crediticia</div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:12px; color:#1A1A1A;">Limite base</span>
+              <span style="font-size:12px; font-weight:700; color:#1A1A1A;">Q 5,000</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:12px; color:#1A1A1A;">Financiamiento adicional</span>
+              <span style="font-size:12px; font-weight:700; color:#1A1A1A;">Q 1,000</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:12px; font-weight:600; color:#1A1A1A;">Deuda actual</span>
+              <span style="font-size:12px; font-weight:700; color:#EF4444;">Q 2,550</span>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:12px; color:#1A1A1A;">Disponible</span>
+              <span style="font-size:12px; font-weight:700; color:#10B981;">Q 3,450</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         7f. Upload View — Lotes Overview
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7f. Vista de Subida — Lotes</div>
+      <div class="screen-sublabel">Offline collected data ready to upload</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
+          <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; text-align:center; font-size:17px; font-weight:700; color:white;">Datos para Subir</div>
+          <div style="width:40px;"></div>
+        </div>
+
+        <div class="content content-pad">
+          <div class="section-title">LOTES DE CLIENTES</div>
+
+          <!-- Lote A7F2 — expanded -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div style="width:36px; height:36px; border-radius:10px; background:#FEF3C7; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:#D97706;">receipt_long</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">Lote #A7F2</div>
+                <div style="font-size:11px; color:#727176;">Maria Garcia &middot; 20 ventas</div>
+              </div>
+              <span class="badge badge-amber" style="margin-right:6px;">20</span>
+              <span class="mi" style="color:#727176; font-size:18px;">expand_less</span>
+            </div>
+            <div class="accordion-body">
+              <div class="sale-row">
+                <span class="mi" style="font-size:14px; color:#727176; flex-shrink:0;">bolt</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:#1A1A1A;">Kingo 1048293 &middot; Plan 1 Mes</div>
+                  <div style="color:#727176; font-size:10px;">01/06 08:17</div>
+                </div>
+                <span style="font-weight:700; color:#10B981;">Q 200</span>
+              </div>
+              <div class="sale-row">
+                <span class="mi" style="font-size:14px; color:#727176; flex-shrink:0;">bolt</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:#1A1A1A;">Kingo 2093847 &middot; Plan 1 Semana</div>
+                  <div style="color:#727176; font-size:10px;">01/06 08:45</div>
+                </div>
+                <span style="font-weight:700; color:#10B981;">Q 75</span>
+              </div>
+              <div class="sale-row">
+                <span class="mi" style="font-size:14px; color:#727176; flex-shrink:0;">bolt</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:#1A1A1A;">Kingo 3847291 &middot; Plan 1 Dia</div>
+                  <div style="color:#727176; font-size:10px;">01/06 09:10</div>
+                </div>
+                <span style="font-weight:700; color:#10B981;">Q 15</span>
+              </div>
+              <div style="text-align:center; padding:8px 0; font-size:11px; color:#9CA3AF; border-top:1px dashed #E5E7EB; margin-top:4px;">
+                ... 17 ventas mas
+              </div>
+            </div>
+          </div>
+
+          <!-- Lote B3C1 — collapsed -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div style="width:36px; height:36px; border-radius:10px; background:#EFF6FF; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:#3B82F6;">payments</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">Lote #B3C1</div>
+                <div style="font-size:11px; color:#727176;">Juan Perez &middot; 8 pagos</div>
+              </div>
+              <span class="badge badge-blue" style="margin-right:6px;">8</span>
+              <span class="mi" style="color:#727176; font-size:18px;">expand_more</span>
+            </div>
+          </div>
+
+          <!-- Lote D9E4 — collapsed -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div style="width:36px; height:36px; border-radius:10px; background:#F0FDF4; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:18px; color:#10B981;">credit_score</span>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">Lote #D9E4</div>
+                <div style="font-size:11px; color:#727176;">Ana Lopez &middot; 4 creditos</div>
+              </div>
+              <span class="badge badge-green" style="margin-right:6px;">4</span>
+              <span class="mi" style="color:#727176; font-size:18px;">expand_more</span>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-top:1px solid #F0F0F0; margin-top:4px;">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#1A1A1A;">32 registros totales</div>
+              <div style="font-size:12px; color:#727176;">Q 4,250 en ventas</div>
+            </div>
+            <span class="badge badge-amber">3 lotes</span>
+          </div>
+
+          <button class="btn btn-orange" style="margin-top:8px; margin-bottom:16px;">
             <span class="mi" style="font-size:20px;">cloud_upload</span>
-            Subir Pendientes
+            Subir al Servidor
           </button>
+
         </div>
-        <!-- NO tab bar -->
       </div>
     </div>
 
-    <!-- ========== 7b: HANDSHAKE SERVER (BLUETOOTH SYNC) ========== -->
+    <!-- ========================================================
+         7g. Upload In Progress — Per-lot
+         ======================================================== -->
     <div class="screen-wrapper">
-      <div class="screen-label">7b. Sincronizacion Bluetooth</div>
-      <div class="screen-sublabel">Bluetooth handshake server</div>
+      <div class="screen-label">7g. Subida en Progreso</div>
+      <div class="screen-sublabel">Per-lot upload with record-level progress</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-        <!-- Orange Header -->
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
         <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Sincronizacion Bluetooth</div>
+          <div style="width:40px;"></div>
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:10px;">
+            <div class="spinner-white"></div>
+            <span style="font-size:16px; font-weight:700; color:white;">Subiendo datos...</span>
+          </div>
           <div style="width:40px;"></div>
         </div>
-        <div class="content content-pad" style="background:#f5f5f5;">
-          <!-- Bluetooth Icon + Title -->
-          <div style="text-align:center; margin-bottom:24px; padding-top:12px;">
-            <div style="width:80px; height:80px; border-radius:40px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
-              <span class="mi" style="font-size:50px; color:#f16824;">bluetooth</span>
+
+        <div class="content content-pad">
+          <div class="section-title">PROGRESO DE SUBIDA</div>
+
+          <!-- Lote A7F2 — active -->
+          <div class="card card-sm" style="padding:14px; border:2px solid rgba(59,130,246,.3); margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div class="spinner-sm"></div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:700; color:#2563EB;">Lote #A7F2 — Maria Garcia</div>
+                <div style="font-size:11px; color:#3B82F6;">Procesando 20 ventas...</div>
+              </div>
             </div>
-            <div style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Sincronizacion por Bluetooth</div>
-            <div style="font-size:13px; color:var(--gray); line-height:1.5;">Sincronice datos con otro dispositivo cercano mediante conexion Bluetooth.</div>
+            <!-- Record progress -->
+            <div style="background:#EFF6FF; border-radius:8px; padding:10px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:11px; color:#1E40AF;">Registro 7 / 20</span>
+                <span style="font-size:11px; font-weight:700; color:#2563EB;">35%</span>
+              </div>
+              <div class="progress-track">
+                <div style="height:6px; background:#3B82F6; border-radius:3px; width:35%;"></div>
+              </div>
+            </div>
           </div>
 
-          <!-- Requirements Checklist Card -->
-          <div class="card card-sm" style="padding:0;">
-            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
-              <div style="font-size:14px; color:var(--text-dark);">Bluetooth activado</div>
-            </div>
-            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
-              <div style="font-size:14px; color:var(--text-dark);">Ubicacion activada</div>
-            </div>
-            <div style="display:flex; align-items:center; padding:14px 16px; gap:12px;">
-              <span class="mi" style="font-size:22px; color:#41a247;">check_circle</span>
-              <div style="font-size:14px; color:var(--text-dark);">El cliente cerca del dispositivo</div>
+          <!-- Lote B3C1 — waiting -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:12px; opacity:.55;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:20px; height:20px; border-radius:10px; border:2px solid #D1D5DB; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:#9CA3AF;">Lote #B3C1 — Juan Perez</div>
+                <div style="font-size:11px; color:#D1D5DB;">En espera (8 pagos)</div>
+              </div>
             </div>
           </div>
 
-          <!-- Info Note -->
-          <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; border-radius:12px; background:rgba(241,104,36,.08); margin-bottom:16px;">
-            <span class="mi" style="font-size:20px; color:#f16824; flex-shrink:0;">info</span>
-            <span style="font-size:12px; color:var(--text-dark); line-height:1.5;">Asegurese de que ambos dispositivos tengan Bluetooth activado y esten a menos de 10 metros de distancia.</span>
+          <!-- Lote D9E4 — waiting -->
+          <div class="card card-sm" style="padding:14px; margin-bottom:16px; opacity:.55;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:20px; height:20px; border-radius:10px; border:2px solid #D1D5DB; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:#9CA3AF;">Lote #D9E4 — Ana Lopez</div>
+                <div style="font-size:11px; color:#D1D5DB;">En espera (4 creditos)</div>
+              </div>
+            </div>
           </div>
 
-          <!-- Buttons -->
-          <button class="btn" style="background:#f16824; color:white; margin-bottom:10px;">
-            <span class="mi" style="font-size:20px;">bluetooth</span>
-            Iniciar Sincronizacion
+          <!-- HTTP request indicator -->
+          <div style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:10px; padding:10px 14px; margin-bottom:16px;">
+            <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#9CA3AF; margin-bottom:6px;">Ultima solicitud HTTP</div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span class="http-chip">POST /offline/syncData</span>
+              <span class="http-chip ok">201 Created</span>
+            </div>
+          </div>
+
+          <!-- Cancel disabled -->
+          <button class="btn btn-outline btn-sm" disabled style="opacity:.4; cursor:not-allowed;">
+            <span class="mi" style="font-size:16px;">cancel</span>
+            Cancelar subida
           </button>
-          <button class="btn" style="background:white; border:1.5px solid #f16824; color:#f16824; margin-bottom:16px;">
-            Cancelar
-          </button>
 
-          <!-- Server Status -->
-          <div class="card card-sm" style="display:flex; align-items:center; gap:10px; padding:14px 16px; margin-bottom:16px;">
-            <div style="width:10px; height:10px; border-radius:5px; background:#41a247;"></div>
-            <span style="font-size:14px; font-weight:600; color:#41a247;">Servidor activo</span>
-          </div>
-
-          <!-- Timeline Card -->
-          <div class="card card-sm" style="padding:0;">
-            <div style="padding:14px 16px 8px; font-size:14px; font-weight:700; color:var(--text-dark);">Eventos de Sincronizacion</div>
-            <!-- Event 1 -->
-            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:20px; color:#41a247;">check_circle</span>
-              <div style="flex:1;">
-                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Conectado</span>
-                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:01</span>
-              </div>
-            </div>
-            <!-- Event 2 -->
-            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px; border-bottom:1px solid var(--gray-border);">
-              <span class="mi" style="font-size:20px; color:#0a70b9;">sync</span>
-              <div style="flex:1;">
-                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Enviando datos</span>
-                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:05</span>
-              </div>
-            </div>
-            <!-- Event 3 -->
-            <div style="display:flex; align-items:center; padding:10px 16px; gap:12px;">
-              <span class="mi" style="font-size:20px; color:#41a247;">check_circle</span>
-              <div style="flex:1;">
-                <span style="font-size:13px; font-weight:600; color:var(--text-dark);">Completado</span>
-                <span style="font-size:12px; color:var(--gray); margin-left:8px;">14:30:12</span>
-              </div>
-            </div>
-          </div>
         </div>
-        <!-- NO tab bar -->
       </div>
     </div>
 
-    <!-- ========== 7c: SYNC LIST (PENDING BATCHES) ========== -->
+    <!-- ========================================================
+         7h. Upload Result — Mixed Success
+         ======================================================== -->
     <div class="screen-wrapper">
-      <div class="screen-label">7c. Lotes Pendientes</div>
-      <div class="screen-sublabel">Pending sync batches list</div>
+      <div class="screen-label">7h. Resultado de Subida — Mixto</div>
+      <div class="screen-sublabel">Some records accepted, one rejected</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-        <!-- Orange Header -->
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
         <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:24px;">arrow_back</span></div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Lotes Pendientes</div>
+          <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+            <span class="mi" style="color:white; font-size:24px;">arrow_back</span>
+          </div>
+          <div style="flex:1; text-align:center; font-size:17px; font-weight:700; color:white;">Resultado de Subida</div>
           <div style="width:40px;"></div>
         </div>
-        <div class="content content-pad" style="background:#f5f5f5;">
-          <!-- Stats Card -->
-          <div class="card card-sm" style="display:flex; align-items:center; justify-content:space-around; padding:18px; text-align:center;">
-            <div>
-              <div style="font-size:24px; font-weight:700; color:#f16824;">3</div>
-              <div style="font-size:12px; color:var(--gray); font-weight:600;">Lotes</div>
+
+        <div class="content content-pad">
+          <!-- Summary strip -->
+          <div style="display:flex; gap:8px; margin-bottom:14px; justify-content:center; flex-wrap:wrap;">
+            <div style="background:#F0FDF4; border:1px solid rgba(16,185,129,.2); border-radius:10px; padding:10px 14px; text-align:center; flex:1; min-width:80px;">
+              <div style="font-size:20px; font-weight:800; color:#10B981;">31</div>
+              <div style="font-size:11px; color:#059669; font-weight:600;">Aceptados</div>
             </div>
-            <div style="width:1px; height:36px; background:var(--gray-border);"></div>
-            <div>
-              <div style="font-size:24px; font-weight:700; color:#0a70b9;">12</div>
-              <div style="font-size:12px; color:var(--gray); font-weight:600;">Registros</div>
+            <div style="background:#FEF2F2; border:1px solid rgba(239,68,68,.2); border-radius:10px; padding:10px 14px; text-align:center; flex:1; min-width:80px;">
+              <div style="font-size:20px; font-weight:800; color:#EF4444;">1</div>
+              <div style="font-size:11px; color:#DC2626; font-weight:600;">Rechazado</div>
             </div>
-            <div style="width:1px; height:36px; background:var(--gray-border);"></div>
-            <div>
-              <div style="font-size:24px; font-weight:700; color:#41a247;">2.4 MB</div>
-              <div style="font-size:12px; color:var(--gray); font-weight:600;">Tamano</div>
+            <div style="background:#EFF6FF; border:1px solid rgba(59,130,246,.2); border-radius:10px; padding:10px 14px; text-align:center; flex:1; min-width:80px;">
+              <div style="font-size:14px; font-weight:800; color:#3B82F6;">Q 4,175</div>
+              <div style="font-size:11px; color:#2563EB; font-weight:600;">Procesados</div>
             </div>
           </div>
 
-          <!-- Batch #1 — Tareas -->
-          <div class="card card-sm" style="padding:16px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-              <div style="width:44px; height:44px; border-radius:22px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:24px; color:#f16824;">task_alt</span>
-              </div>
+          <div class="section-title">DETALLE POR LOTE</div>
+
+          <!-- A7F2 OK -->
+          <div class="lot-result lot-result-green">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="mi" style="font-size:20px; color:#10B981;">check_circle</span>
               <div style="flex:1;">
-                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#1 — Tareas</div>
-                <div style="font-size:12px; color:var(--gray);">19/02/2026 14:30</div>
+                <div style="font-size:13px; font-weight:700; color:#065F46;">Lote #A7F2 — Maria Garcia</div>
+                <div style="font-size:12px; color:#059669; font-weight:600;">20 / 20 aceptados</div>
               </div>
-              <span style="font-size:12px; color:#F59E0B; background:rgba(245,158,11,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Pendiente</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
-              <span style="font-size:13px; color:var(--gray);">5 registros</span>
+              <span class="badge badge-green">OK</span>
             </div>
           </div>
 
-          <!-- Batch #2 — Boletas -->
-          <div class="card card-sm" style="padding:16px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-              <div style="width:44px; height:44px; border-radius:22px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:24px; color:#0a70b9;">receipt_long</span>
-              </div>
+          <!-- B3C1 partial -->
+          <div class="lot-result lot-result-amber">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="mi" style="font-size:20px; color:#F59E0B;">warning</span>
               <div style="flex:1;">
-                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#2 — Boletas</div>
-                <div style="font-size:12px; color:var(--gray);">19/02/2026 13:15</div>
+                <div style="font-size:13px; font-weight:700; color:#78350F;">Lote #B3C1 — Juan Perez</div>
+                <div style="font-size:12px; color:#D97706; font-weight:600;">7 / 8 aceptados &middot; 1 rechazado</div>
               </div>
-              <span style="font-size:12px; color:#F59E0B; background:rgba(245,158,11,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Pendiente</span>
+              <span class="badge badge-amber">Parcial</span>
             </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
-              <span style="font-size:13px; color:var(--gray);">4 registros</span>
+            <div style="background:rgba(245,158,11,.12); border-radius:8px; padding:8px 10px;">
+              <div style="font-size:11px; font-weight:700; color:#92400E; margin-bottom:2px;">Pago rechazado:</div>
+              <div style="font-size:11px; color:#78350F;">
+                Pago #3: cliente sin ID Odoo
+              </div>
+              <div style="margin-top:4px;">
+                <span style="font-size:10px; font-family:monospace; background:#FEF3C7; border:1px solid rgba(245,158,11,.3); padding:2px 6px; border-radius:4px; color:#92400E;">CUSTOMER_MISSING_ODOO</span>
+              </div>
             </div>
           </div>
 
-          <!-- Batch #3 — Inventario -->
-          <div class="card card-sm" style="padding:16px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-              <div style="width:44px; height:44px; border-radius:22px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:24px; color:#41a247;">inventory_2</span>
-              </div>
+          <!-- D9E4 OK -->
+          <div class="lot-result lot-result-green">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="mi" style="font-size:20px; color:#10B981;">check_circle</span>
               <div style="flex:1;">
-                <div style="font-size:15px; font-weight:700; color:var(--text-dark);">#3 — Inventario</div>
-                <div style="font-size:12px; color:var(--gray);">19/02/2026 11:45</div>
+                <div style="font-size:13px; font-weight:700; color:#065F46;">Lote #D9E4 — Ana Lopez</div>
+                <div style="font-size:12px; color:#059669; font-weight:600;">4 / 4 aceptados</div>
               </div>
-              <span style="font-size:12px; color:#EF4444; background:rgba(239,68,68,.12); padding:4px 12px; border-radius:20px; font-weight:600;">Error</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span class="mi" style="font-size:16px; color:var(--gray);">description</span>
-              <span style="font-size:13px; color:var(--gray);">3 registros</span>
+              <span class="badge badge-green">OK</span>
             </div>
           </div>
 
-          <!-- Upload All Button -->
-          <button class="btn" style="background:#f16824; color:white; margin-top:4px;">
-            <span class="mi" style="font-size:20px;">cloud_upload</span>
-            Subir Todos
+          <button style="background:none; border:none; padding:0; cursor:pointer; width:100%; text-align:center; margin:8px 0 12px;">
+            <span style="font-size:13px; font-weight:600; color:#EF4444;">
+              <span class="mi" style="font-size:14px; vertical-align:middle;">open_in_new</span>
+              Ver detalles de rechazados
+            </span>
           </button>
+
+          <!-- Info blue box -->
+          <div style="background:#EFF6FF; border:1px solid rgba(59,130,246,.25); border-radius:12px; padding:14px; margin-bottom:14px;">
+            <div style="display:flex; align-items:flex-start; gap:8px;">
+              <span class="mi" style="font-size:18px; color:#3B82F6; flex-shrink:0; margin-top:1px;">bluetooth</span>
+              <p style="font-size:12px; color:#1E40AF; line-height:1.5;">
+                En la proxima visita BLE notificaras al cliente que sus lotes fueron procesados. El dispositivo del cliente recibira el estado actualizado.
+              </p>
+            </div>
+          </div>
+
+          <button class="btn btn-orange btn-sm">
+            Continuar
+          </button>
+
         </div>
-        <!-- NO tab bar -->
       </div>
     </div>
 
-  </div>
+    <!-- ========================================================
+         7i. Upload Error — Lot Rejected (Fraud / HMAC)
+         ======================================================== -->
+    <div class="screen-wrapper">
+      <div class="screen-label">7i. Lote Rechazado — Fraude</div>
+      <div class="screen-sublabel">HMAC failure, device blocked</div>
+      <div class="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span class="mi" style="font-size:16px;">signal_cellular_alt</span>
+            <span class="mi" style="font-size:16px;">wifi</span>
+            <span class="mi" style="font-size:16px;">battery_full</span>
+          </div>
+        </div>
+
+        <!-- Red alert header -->
+        <div style="background:#EF4444; padding:16px 16px 18px; flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="mi" style="font-size:28px; color:white;">gpp_bad</span>
+            <div>
+              <div style="font-size:17px; font-weight:800; color:white;">Lote Rechazado</div>
+              <div style="font-size:12px; color:rgba(255,255,255,.8);">Firma del lote invalida — accion requerida</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content content-pad">
+
+          <!-- Lot identity -->
+          <div style="background:#FEF2F2; border:2px solid rgba(239,68,68,.3); border-radius:14px; padding:14px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div style="width:40px; height:40px; border-radius:20px; background:rgba(239,68,68,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span class="mi" style="font-size:20px; color:#EF4444;">person_off</span>
+              </div>
+              <div>
+                <div style="font-size:14px; font-weight:700; color:#B91C1C;">Lote #X9K2</div>
+                <div style="font-size:12px; color:#DC2626;">Carlos Rodriguez</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <span style="font-size:11px; font-family:monospace; background:#FEE2E2; border:1px solid rgba(239,68,68,.3); padding:3px 8px; border-radius:5px; color:#B91C1C; font-weight:700;">HMAC_FAILURE</span>
+              <span style="font-size:11px; color:#7F1D1D;">Firma del lote invalida</span>
+            </div>
+            <div style="background:#FEE2E2; border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:6px;">
+              <span class="mi" style="font-size:16px; color:#EF4444;">block</span>
+              <span style="font-size:12px; font-weight:700; color:#B91C1C;">El dispositivo del cliente ha sido bloqueado</span>
+            </div>
+          </div>
+
+          <!-- Required actions -->
+          <div class="section-title">ACCIONES REQUERIDAS</div>
+          <div style="margin-bottom:14px;">
+            <div class="step-row" style="margin-bottom:12px;">
+              <div class="step-num" style="background:#EF4444; min-width:32px;">1</div>
+              <div style="padding-top:4px;">
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">Reporta al supervisor de inmediato</div>
+                <div style="font-size:12px; color:#727176; margin-top:2px;">Notifica la anomalia antes de continuar</div>
+              </div>
+            </div>
+            <div class="step-row">
+              <div class="step-num" style="background:#EF4444; min-width:32px;">2</div>
+              <div style="padding-top:4px;">
+                <div style="font-size:13px; font-weight:700; color:#1A1A1A;">No proceses mas transacciones de este cliente</div>
+                <div style="font-size:12px; color:#727176; margin-top:2px;">El dispositivo esta marcado como comprometido</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anomaly details collapsible -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; padding:10px 12px; background:#FEF2F2; border-radius:10px; border:1px solid rgba(239,68,68,.2);">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="mi" style="font-size:16px; color:#EF4444;">analytics</span>
+                <span style="font-size:12px; font-weight:700; color:#B91C1C;">Anomaly Details</span>
+              </div>
+              <span class="mi" style="font-size:16px; color:#EF4444;">expand_more</span>
+            </div>
+            <div class="anomaly-block">
+              <div style="margin-bottom:6px;">
+                <span class="anomaly-key">anomalyScore: </span>
+                <span class="anomaly-val" style="color:#DC2626; font-weight:700;">95</span>
+              </div>
+              <div style="margin-bottom:6px;">
+                <span class="anomaly-key">flags: </span>
+                <span class="anomaly-val">
+                  [<span style="color:#DC2626;">SNAPSHOT_TAMPERED</span>, <span style="color:#DC2626;">SEQUENCE_REGRESSION</span>]
+                </span>
+              </div>
+              <div>
+                <span class="anomaly-key">deviceFingerprint: </span>
+                <span class="anomaly-val">a3f7...b92e</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-red btn-sm">
+            <span class="mi" style="font-size:18px;">report</span>
+            Reportar al Supervisor
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screens-container -->
+
 </body>
 </html>

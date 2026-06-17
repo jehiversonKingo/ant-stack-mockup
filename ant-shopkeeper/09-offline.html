@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ant Shopkeeper — Módulo Offline</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .sk-header { height:56px; display:flex; align-items:center; padding:0 16px; flex-shrink:0; background:#f16824; gap:8px; }
+    .sk-header .mi { color:white; font-size:24px; }
+    .sk-header-title { flex:1; text-align:center; font-size:18px; font-weight:700; color:white; }
+    .sk-header-dark { background:#1a1a1a; }
+    .detail-row { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--gray-border); }
+    .detail-row:last-child { border-bottom:none; }
+    .detail-row .mi { font-size:20px; color:var(--gray); flex-shrink:0; }
+    .detail-row-label { font-size:13px; color:var(--gray); flex:1; }
+    .detail-row-value { font-size:14px; font-weight:600; color:var(--text-dark); }
+    .plan-card { background:white; border-radius:14px; padding:14px; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1.5px solid var(--gray-border); margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+    .plan-card.selected { border-color:#f16824; background:rgba(241,104,36,.04); }
+    .radio { width:22px; height:22px; border-radius:11px; border:2px solid var(--gray-border); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .radio.checked { border-color:#f16824; background:#f16824; }
+    .radio.checked::after { content:''; width:8px; height:8px; border-radius:4px; background:white; }
+    .prog-bar { height:6px; background:#F0F0F0; border-radius:3px; overflow:hidden; }
+    .prog-fill { height:6px; border-radius:3px; background:#f16824; }
+    .prog-fill-red { background:var(--red); }
+    .prog-fill-green { background:var(--green); }
+    .log-box { background:#1a1a1a; border-radius:10px; padding:12px; font-family:'Courier New',monospace; font-size:11px; color:#a3e635; line-height:1.6; margin:12px 0; }
+    .log-line-out { color:#60a5fa; }
+    .log-line-in { color:#a3e635; }
+    .lot-card { background:white; border-radius:14px; padding:14px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+    .lot-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .section-div { width:100%; padding:14px 40px; margin:32px 0 0; }
+    .section-div-orange { background:linear-gradient(135deg,#f16824,#f3864f); }
+    .section-div-label { font-size:11px; font-weight:700; color:rgba(255,255,255,.65); letter-spacing:1px; text-transform:uppercase; margin-bottom:2px; }
+    .section-div-title { font-size:18px; font-weight:700; color:white; }
+    .section-div-sub { font-size:12px; color:rgba(255,255,255,.75); margin-top:2px; }
+    .cat-row { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--gray-border); }
+    .cat-row:last-child { border-bottom:none; }
+    .cat-icon { width:40px; height:40px; border-radius:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .device-card { background:white; border-radius:14px; padding:14px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+    .signal-dots { display:flex; gap:3px; align-items:center; }
+    .dot-full { width:6px; height:6px; border-radius:3px; background:#10B981; }
+    .dot-empty { width:6px; height:6px; border-radius:3px; background:#E5E7EB; }
+    .quality-row { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--gray-border); }
+    .quality-row:last-child { border-bottom:none; }
+    .q-dot { width:10px; height:10px; border-radius:5px; flex-shrink:0; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .spinner-lg { width:48px; height:48px; border:4px solid rgba(241,104,36,.2); border-top-color:#f16824; border-radius:50%; animation:spin .8s linear infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+    .pulse-dot { width:10px; height:10px; border-radius:5px; background:var(--green); animation:pulse 1.5s infinite; }
+  </style>
+</head>
+<body>
+  <div class="page-header" style="background:linear-gradient(135deg,#f16824,#f3864f);">
+    <h1>Ant Shopkeeper</h1>
+    <p>Módulo Offline — Catálogos · Ventas Kingo Luz · Transferencia BLE</p>
+  </div>
+  <nav class="page-nav">
+    <a href="01-auth.html">Auth</a>
+    <a href="02-home.html">Home</a>
+    <a href="03-sales.html">Sales</a>
+    <a href="04-balance.html">Balance</a>
+    <a href="05-billing.html">Billing</a>
+    <a href="06-clients.html">Clients</a>
+    <a href="07-sync.html">Sync</a>
+    <a href="08-tickets.html">Tickets</a>
+    <a class="active" href="09-offline.html">Offline</a>
+  </nav>
+
+  <div class="screens-container">
+
+  <!-- ══ SECTION A ══ -->
+  <div class="section-div section-div-orange">
+    <div class="section-div-label">Sección A</div>
+    <div class="section-div-title">CATÁLOGOS OFFLINE</div>
+    <div class="section-div-sub">Pre-carga de datos del backend para trabajar sin internet</div>
+  </div>
+
+  <!-- 9a. Catálogos — Todo al día -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9a. Catálogos — Todo al día</div>
+    <div class="screen-sublabel">Todos los catálogos frescos</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header">
+        <span class="mi">arrow_back</span>
+        <div class="sk-header-title">Catálogos Offline</div>
+        <span class="mi">sync</span>
+      </div>
+      <div class="content content-pad">
+        <div class="alert alert-green" style="margin-bottom:14px;">
+          <span class="mi" style="color:var(--green);font-size:20px;">check_circle</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--green);">Listo para trabajar offline</div><div style="font-size:11px;color:var(--green);">Última sync: hace 23 minutos</div></div>
+        </div>
+        <div class="card" style="padding:8px 16px;margin-bottom:14px;">
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(241,104,36,.1);"><span class="mi" style="color:#f16824;font-size:20px;">bolt</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Planes B2C</div><div style="font-size:12px;color:var(--gray);">8 planes · hace 23 min</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(59,130,246,.1);"><span class="mi" style="color:var(--blue);font-size:20px;">account_balance_wallet</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Balance y Deuda</div><div style="font-size:12px;color:var(--gray);">Q 2,450.00 disponible · hace 23 min</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(245,158,11,.1);"><span class="mi" style="color:var(--amber);font-size:20px;">percent</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Comisiones</div><div style="font-size:12px;color:var(--gray);">12 reglas activas · hace 23 min</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(139,92,246,.1);"><span class="mi" style="color:#8B5CF6;font-size:20px;">people</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Clientes</div><div style="font-size:12px;color:var(--gray);">47 clientes · hace 23 min</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(16,185,129,.1);"><span class="mi" style="color:var(--green);font-size:20px;">business</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Proyectos</div><div style="font-size:12px;color:var(--gray);">3 proyectos · hace 23 min</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(241,104,36,.1);"><span class="mi" style="color:#f16824;font-size:20px;">schedule</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Reloj Confiable</div><span class="badge badge-green" style="font-size:11px;">TRUSTED · hace 8 min</span></div><span class="badge badge-green">✓</span></div>
+        </div>
+        <button class="btn" style="background:transparent;border:1.5px solid #f16824;color:#f16824;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="mi">sync</span>Actualizar todo</button>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9b. Catálogos — 2 Expirados -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9b. Catálogos — 2 Expirados</div>
+    <div class="screen-sublabel">Acción requerida</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Catálogos Offline</div><span class="mi">sync</span></div>
+      <div class="content content-pad">
+        <div class="alert alert-red" style="margin-bottom:14px;"><span class="mi" style="color:var(--red);font-size:20px;">warning</span><div><div style="font-size:13px;font-weight:700;color:var(--red);">2 catálogos expirados</div><div style="font-size:11px;color:var(--red);">Sincroniza antes de generar códigos</div></div></div>
+        <div class="card" style="padding:8px 16px;margin-bottom:14px;">
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(239,68,68,.1);"><span class="mi" style="color:var(--red);font-size:20px;">bolt</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Planes B2C</div><span class="badge badge-red" style="font-size:11px;">EXPIRADO 74h</span></div><span class="mi" style="color:var(--red);">error</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(245,158,11,.1);"><span class="mi" style="color:var(--amber);font-size:20px;">account_balance_wallet</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Balance y Deuda</div><span class="badge badge-amber" style="font-size:11px;">CADUCA EN 2h</span></div><span class="mi" style="color:var(--amber);">warning</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(245,158,11,.1);"><span class="mi" style="color:var(--amber);font-size:20px;">percent</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Comisiones</div><div style="font-size:12px;color:var(--gray);">12 reglas · hace 1h</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(139,92,246,.1);"><span class="mi" style="color:#8B5CF6;font-size:20px;">people</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Clientes</div><div style="font-size:12px;color:var(--gray);">47 · hace 1h</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(16,185,129,.1);"><span class="mi" style="color:var(--green);font-size:20px;">business</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Proyectos</div><div style="font-size:12px;color:var(--gray);">3 · hace 1h</div></div><span class="badge badge-green">✓</span></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(245,158,11,.1);"><span class="mi" style="color:var(--amber);font-size:20px;">schedule</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);">Reloj Confiable</div><span class="badge badge-amber" style="font-size:11px;">ESTIMATED · hace 38h</span></div><span class="badge badge-amber">!</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="mi">sync</span>Sincronizar Ahora</button>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9c. Sincronizando -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9c. Sincronizando — Progreso</div>
+    <div class="screen-sublabel">Descargando catálogos paso a paso</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">arrow_back</span><div class="sk-header-title">Sincronizando...</div><div class="spinner" style="width:22px;height:22px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div>
+      <div class="content content-pad">
+        <div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;color:var(--gray);">Progreso</span><span style="font-size:13px;font-weight:700;color:#f16824;">3 / 6</span></div><div class="prog-bar"><div class="prog-fill" style="width:50%;"></div></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Planes B2C</div><span class="badge badge-green" style="font-size:11px;">8 planes</span></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Balance y Deuda</div><span class="badge badge-green" style="font-size:11px;">Q 2,450</span></div></div>
+        <div class="step-row"><div class="step-num" style="background:#f16824;"><div class="spinner" style="width:16px;height:16px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div><div><div style="font-size:14px;font-weight:600;color:#f16824;">Comisiones</div><div style="font-size:12px;color:var(--gray);font-style:italic;">Descargando reglas...</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">4</div><div style="color:var(--gray);font-size:14px;">Clientes</div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">5</div><div style="color:var(--gray);font-size:14px;">Proyectos</div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">6</div><div style="color:var(--gray);font-size:14px;">Reloj Confiable</div></div>
+        <button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);margin-top:8px;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9d. Sync Completo -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9d. Sincronización Completa</div>
+    <div class="screen-sublabel">Listo para trabajar offline</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Sincronización</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:32px;">
+        <div style="width:80px;height:80px;border-radius:40px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><span class="mi" style="color:white;font-size:40px;">check</span></div>
+        <div style="font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:4px;">Sincronización completa</div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:20px;">Todos los catálogos actualizados</div>
+        <div class="card" style="width:100%;text-align:left;">
+          <div class="detail-row"><span class="mi">list</span><span class="detail-row-label">Ítems sincronizados</span><span class="detail-row-value">6 catálogos</span></div>
+          <div class="detail-row"><span class="mi">timer</span><span class="detail-row-label">Duración</span><span class="detail-row-value">8 segundos</span></div>
+          <div class="detail-row"><span class="mi">event_available</span><span class="detail-row-label">Offline hasta</span><span class="detail-row-value" style="color:var(--green);">04/06/2026 09:41</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;margin-top:16px;display:flex;align-items:center;gap:8px;"><span class="mi">offline_bolt</span>Ir a generar códigos</button>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9e. Planes B2C Caché -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9e. Planes B2C (caché offline)</div>
+    <div class="screen-sublabel">Catálogo de planes disponibles</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Planes B2C</div><span class="badge badge-amber" style="font-size:11px;">offline</span></div>
+      <div class="content content-pad">
+        <div style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;"><span style="padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:#f16824;color:white;white-space:nowrap;">Todos</span><span style="padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--gray-bg);color:var(--gray);white-space:nowrap;">Kingo Luz</span><span style="padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--gray-bg);color:var(--gray);white-space:nowrap;">Kingo TV</span><span style="padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--gray-bg);color:var(--gray);white-space:nowrap;">Básico</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">1 Día</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 15</div><div style="font-size:11px;color:var(--gray);">Com: Q 1.50</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">1 Semana</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 75</div><div style="font-size:11px;color:var(--gray);">Com: Q 7.50</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">15 Días</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 120</div><div style="font-size:11px;color:var(--gray);">Com: Q 12.00</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">1 Mes</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 200</div><div style="font-size:11px;color:var(--gray);">Com: Q 20.00</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">3 Meses</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 550</div><div style="font-size:11px;color:var(--gray);">Com: Q 55.00</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:13px;font-weight:700;color:#41a247;margin-bottom:4px;">1 Año</div><div style="font-size:18px;font-weight:700;color:#f16824;">Q 2,100</div><div style="font-size:11px;color:var(--gray);">Com: Q 210</div><span class="badge badge-green" style="font-size:10px;margin-top:4px;">B2C</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray);text-align:center;margin-top:12px;">Caché actualizado hace 23 min · válido 72h</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9f. Balance Snapshot -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9f. Balance Snapshot</div>
+    <div class="screen-sublabel">Saldo offline disponible</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Mi Balance Offline</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:#f16824;border-radius:16px;padding:20px;color:white;margin-bottom:16px;">
+          <div style="font-size:18px;font-weight:700;margin-bottom:2px;">Carlos Pérez</div>
+          <div style="font-size:13px;opacity:.8;margin-bottom:16px;">ID 12345</div>
+          <div style="font-size:28px;font-weight:700;margin-bottom:4px;">Q 2,450.00</div>
+          <div style="font-size:13px;opacity:.8;margin-bottom:12px;">Disponible para ventas offline</div>
+          <div style="display:flex;gap:16px;font-size:13px;"><div><div style="opacity:.7;">Límite</div><div style="font-weight:700;">Q 5,000</div></div><div><div style="opacity:.7;">Deuda</div><div style="font-weight:700;">Q 2,550</div></div></div>
+        </div>
+        <div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;color:var(--gray);">Uso de crédito</span><span style="font-size:13px;font-weight:700;color:#f16824;">51%</span></div><div class="prog-bar"><div class="prog-fill" style="width:51%;"></div></div></div>
+        <div class="card" style="padding:8px 16px;margin-bottom:12px;">
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(241,104,36,.1);"><span class="mi" style="color:#f16824;font-size:18px;">bolt</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;">Kingo Energía</div></div><div style="font-size:15px;font-weight:700;color:#f16824;">Q 1,800.00</div></div>
+          <div class="cat-row"><div class="cat-icon" style="background:rgba(59,130,246,.1);"><span class="mi" style="color:var(--blue);font-size:18px;">router</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;">Viasat Internet</div></div><div style="font-size:15px;font-weight:700;color:#f16824;">Q 650.00</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><span style="font-size:12px;color:var(--gray);">Tomado: 01/06/2026 · Válido hasta: 04/06/2026</span><span class="badge badge-green" style="font-size:11px;">HMAC ✓</span></div>
+        <div class="alert alert-orange"><span class="mi" style="color:#f16824;font-size:18px;">info</span><span style="font-size:12px;color:#f16824;">Este saldo se usa para validar transacciones offline</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9g. TrustedClock ESTIMATED -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9g. TrustedClock — ESTIMATED</div>
+    <div class="screen-sublabel">Reloj confiable, anchor de 38h</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Reloj Confiable</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+          <div style="width:80px;height:80px;border-radius:40px;border:6px solid var(--amber);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><span class="mi" style="color:var(--amber);font-size:40px;">schedule</span></div>
+          <span class="badge badge-amber" style="font-size:14px;padding:6px 16px;">ESTIMATED</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:11px;color:var(--gray);margin-bottom:4px;">Último anchor</div><div style="font-size:16px;font-weight:700;">38h atrás</div></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:11px;color:var(--gray);margin-bottom:4px;">Precisión</div><div style="font-size:16px;font-weight:700;">±19 min</div></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:11px;color:var(--gray);margin-bottom:4px;">Deriva</div><div style="font-size:16px;font-weight:700;">+3m 42s</div></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;background:rgba(245,158,11,.08);border:1.5px solid var(--amber);"><div style="font-size:11px;color:var(--amber);margin-bottom:4px;">Calidad</div><div style="font-size:16px;font-weight:700;color:var(--amber);">ESTIMATED</div></div>
+        </div>
+        <div class="card" style="padding:8px 16px;margin-bottom:12px;">
+          <div class="quality-row"><div class="q-dot" style="background:var(--green);"></div><div style="flex:1;font-size:13px;">TRUSTED</div><span class="badge badge-green" style="font-size:11px;">0–1h</span></div>
+          <div class="quality-row" style="background:rgba(245,158,11,.06);margin:0 -16px;padding:9px 16px;"><div class="q-dot" style="background:var(--amber);"></div><div style="flex:1;font-size:13px;font-weight:700;color:var(--amber);">ESTIMATED ← actual</div><span class="badge badge-amber" style="font-size:11px;">1–72h</span></div>
+          <div class="quality-row"><div class="q-dot" style="background:var(--orange);"></div><div style="flex:1;font-size:13px;">STALE</div><span class="badge badge-orange" style="font-size:11px;">&gt;72h</span></div>
+          <div class="quality-row"><div class="q-dot" style="background:var(--red);"></div><div style="flex:1;font-size:13px;">SUSPECT</div><span class="badge badge-red" style="font-size:11px;">Reloj cambiado</span></div>
+          <div class="quality-row"><div class="q-dot" style="background:var(--red);opacity:.6;"></div><div style="flex:1;font-size:13px;">DEVICE_ONLY</div><span class="badge badge-red" style="font-size:11px;">Sin anchor</span></div>
+        </div>
+        <div class="alert" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);"><span class="mi" style="color:var(--blue);font-size:18px;">info</span><span style="font-size:12px;color:var(--blue);">Los códigos usan el anchor, no el reloj del dispositivo</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9h. TrustedClock SUSPECT -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9h. TrustedClock — SUSPECT</div>
+    <div class="screen-sublabel">Reloj del dispositivo manipulado</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Reloj Confiable</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div class="alert alert-red" style="margin-bottom:14px;"><span class="mi" style="color:var(--red);font-size:18px;">warning</span><div><div style="font-size:12px;font-weight:700;color:var(--red);">Reloj del dispositivo modificado</div><div style="font-size:11px;color:var(--red);">Anchor: 09:22 · Dispositivo: 15:47 (+6h 25min)</div></div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px;">
+          <div style="width:80px;height:80px;border-radius:40px;border:6px solid var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><span class="mi" style="color:var(--red);font-size:40px;">gpp_bad</span></div>
+          <span class="badge badge-red" style="font-size:14px;padding:6px 16px;">SUSPECT</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:11px;color:var(--gray);margin-bottom:4px;">Anchor</div><div style="font-size:15px;font-weight:700;">09:22:14</div></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;"><div style="font-size:11px;color:var(--gray);margin-bottom:4px;">Dispositivo</div><div style="font-size:15px;font-weight:700;color:var(--red);">15:47:03</div></div>
+          <div class="card card-sm" style="text-align:center;padding:12px;background:rgba(239,68,68,.06);border:1.5px solid var(--red);grid-column:span 2;"><div style="font-size:11px;color:var(--red);margin-bottom:4px;">Deriva detectada</div><div style="font-size:16px;font-weight:700;color:var(--red);">+6 horas 25 minutos</div></div>
+        </div>
+        <div class="alert alert-red"><span class="mi" style="color:var(--red);font-size:18px;">verified_user</span><span style="font-size:12px;color:var(--red);">Usando tiempo verificado del anchor para generar códigos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION B ══ -->
+  <div class="section-div section-div-orange">
+    <div class="section-div-label">Sección B</div>
+    <div class="section-div-title">VENTAS OFFLINE — Crédito + Kingo Luz</div>
+    <div class="section-div-sub">Compra de crédito offline · Generación de códigos · Bloqueo por días sin pago</div>
+  </div>
+
+  <!-- 9i. Home — Bloqueado CON internet -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9i. Home — Bloqueado (con internet)</div>
+    <div class="screen-sublabel">Puede pagar, subir voucher y subir lotes</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><div class="icon-btn"><span class="mi" style="font-size:22px;color:white;">menu</span></div><div class="sk-header-title">Inicio</div><div style="width:44px;"></div></div>
+      <div class="content content-pad">
+        <!-- Orange header block — same as real app (blockedDate) -->
+        <div style="background:#f16824;border-radius:12px;padding:16px;margin-bottom:14px;color:white;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span class="mi" style="font-size:24px;">warning</span><div style="font-size:16px;font-weight:700;">Cuenta con deuda pendiente</div></div>
+          <div style="font-size:24px;font-weight:700;margin-bottom:4px;">Q 2,550.00</div>
+          <div style="font-size:12px;opacity:.85;">Deuda total · Bloqueo: 16/06/2026 · Motivo: Falta de pago</div>
+        </div>
+        <!-- Pending lots banner — NEW -->
+        <div class="alert" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);margin-bottom:12px;">
+          <span class="mi" style="color:var(--blue);font-size:20px;">cloud_upload</span>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:var(--blue);">3 lotes pendientes de subir</div><div style="font-size:11px;color:var(--blue);">Tienes internet — puedes subir tus datos ahora</div></div>
+          <span class="mi" style="color:var(--blue);">chevron_right</span>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Realiza tu pago para desbloquear:</div>
+        <div style="display:flex;gap:10px;margin-bottom:12px;">
+          <!-- Subir Boleta — same as real app -->
+          <button class="btn" style="background:#f16824;color:white;flex:1;padding:14px 10px;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:12px;">
+            <span class="mi" style="font-size:24px;">money_check</span>Subir Boleta
+          </button>
+          <!-- Pagar a Agente — same as real app -->
+          <button class="btn" style="background:#41a247;color:white;flex:1;padding:14px 10px;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:12px;">
+            <span class="mi" style="font-size:24px;">address_book</span>Pagar a Agente
+          </button>
+        </div>
+        <!-- Upload lots button — NEW -->
+        <button class="btn" style="background:var(--blue);color:white;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span class="mi">cloud_upload</span>Subir mis lotes pendientes
+        </button>
+        <div style="font-size:11px;color:var(--gray);text-align:center;">Subir los lotes no desbloquea la cuenta · El pago sí lo hace</div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9i-b. Home — Bloqueado SIN internet -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9i-b. Home — Bloqueado (sin internet)</div>
+    <div class="screen-sublabel">Solo puede esperar al técnico vía BLE</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><div class="icon-btn"><span class="mi" style="font-size:22px;color:white;">menu</span></div><div class="sk-header-title">Inicio</div><div style="width:44px;"></div></div>
+      <div class="content content-pad">
+        <div style="background:#f16824;border-radius:12px;padding:16px;margin-bottom:14px;color:white;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span class="mi" style="font-size:24px;">warning</span><div style="font-size:16px;font-weight:700;">Cuenta con deuda pendiente</div></div>
+          <div style="font-size:24px;font-weight:700;margin-bottom:4px;">Q 2,550.00</div>
+          <div style="font-size:12px;opacity:.85;">Deuda total · Bloqueo: 16/06/2026 · Motivo: Falta de pago</div>
+        </div>
+        <div class="alert alert-orange" style="margin-bottom:12px;">
+          <span class="mi" style="color:#f16824;font-size:20px;">wifi_off</span>
+          <span style="font-size:12px;color:#f16824;">Sin internet — las opciones de pago online no están disponibles</span>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Opciones disponibles:</div>
+        <!-- Pagar a Agente via BLE — works offline -->
+        <div class="card card-sm" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(65,162,71,.15);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:#41a247;font-size:22px;">bluetooth</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:700;">Pagar al Técnico vía Bluetooth</div><div style="font-size:12px;color:var(--gray);">Funciona sin internet — el técnico aprueba</div></div>
+          <span class="mi" style="color:var(--gray);">chevron_right</span>
+        </div>
+        <!-- Subir Boleta — disabled offline -->
+        <div class="card card-sm" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;opacity:.4;">
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);font-size:22px;">money_check</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:700;color:var(--gray);">Subir Boleta</div><div style="font-size:12px;color:var(--gray);">Requiere internet</div></div>
+          <span class="badge badge-red" style="font-size:10px;">Offline</span>
+        </div>
+        <!-- Upload lots — disabled offline -->
+        <div class="card card-sm" style="display:flex;align-items:center;gap:12px;opacity:.4;">
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);font-size:22px;">cloud_upload</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:700;color:var(--gray);">Subir lotes pendientes</div><div style="font-size:12px;color:var(--gray);">Requiere internet</div></div>
+          <span class="badge badge-red" style="font-size:10px;">Offline</span>
+        </div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">home</span><span>Inicio</span></div><div class="tab-item"><span class="mi">settings</span><span>Ajustes</span></div></div>
+    </div>
+  </div>
+
+  <!-- 9j. Compra de Crédito / Balance — Offline -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9j. Compra de Crédito — Offline</div>
+    <div class="screen-sublabel">SaleBalanceScreen sin internet</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Comprar Balance</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:rgba(241,104,36,.1);border:1.5px solid rgba(241,104,36,.3);border-radius:12px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:8px;"><span class="mi" style="color:#f16824;font-size:18px;">wifi_off</span><span style="font-size:12px;font-weight:700;color:#f16824;">OFFLINE — la compra quedará en lote</span></div>
+        <!-- Wallet state -->
+        <div class="card" style="margin-bottom:12px;">
+          <div class="detail-row"><span class="mi">account_balance_wallet</span><span class="detail-row-label">Límite disponible</span><span class="detail-row-value" style="color:#f16824;">Q 5,000.00</span></div>
+          <div class="detail-row"><span class="mi">money_off</span><span class="detail-row-label">Deuda actual</span><span class="detail-row-value" style="color:var(--red);">Q 2,550.00</span></div>
+          <div class="detail-row"><span class="mi">add_circle</span><span class="detail-row-label">Disponible para comprar</span><span class="detail-row-value" style="color:var(--green);">Q 2,450.00</span></div>
+        </div>
+        <!-- Amount input -->
+        <div class="input-group" style="margin-bottom:10px;">
+          <label>Monto a comprar</label>
+          <div class="input-wrap" style="border-color:var(--green);"><span class="mi" style="color:var(--green);">attach_money</span><input value="500.00" style="color:var(--text-dark);font-weight:700;font-size:18px;" /></div>
+        </div>
+        <!-- Promotion preview -->
+        <div style="background:rgba(65,162,71,.08);border:1px solid rgba(65,162,71,.2);border-radius:10px;padding:12px;margin-bottom:14px;">
+          <div style="font-size:12px;font-weight:700;color:#41a247;margin-bottom:6px;">Promoción aplicada (desde caché)</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="color:var(--gray);">Monto comprado</span><span style="font-weight:600;">Q 500.00</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="color:var(--gray);">Bonus (10%)</span><span style="font-weight:600;color:#41a247;">+ Q 50.00</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;border-top:1px solid rgba(65,162,71,.2);padding-top:6px;margin-top:4px;"><span style="font-weight:700;">Balance que recibirás</span><span style="font-weight:700;color:#41a247;">Q 550.00</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;gap:8px;"><span class="mi">shopping_cart</span>Confirmar Compra Offline</button>
+        <div style="font-size:11px;color:var(--gray);text-align:center;margin-top:8px;">Se guardará en el lote actual · Se procesa cuando el técnico suba los datos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9k. Confirmar Compra de Crédito Offline -->
+  <div class="screen-wrapper">
+    <div class="screen-label">9k. Crédito Offline — Guardado en Lote</div>
+    <div class="screen-sublabel">Compra registrada, pendiente de procesar</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Compra Registrada</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;padding-top:24px;text-align:center;">
+        <div style="width:72px;height:72px;border-radius:36px;background:#41a247;display:flex;align-items:center;justify-content:center;margin-bottom:14px;"><span class="mi" style="color:white;font-size:36px;">shopping_cart</span></div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:4px;">Compra registrada offline</div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:18px;">Se procesará cuando el técnico suba los datos</div>
+        <div class="card" style="width:100%;text-align:left;margin-bottom:12px;">
+          <div class="detail-row"><span class="mi">attach_money</span><span class="detail-row-label">Monto comprado</span><span class="detail-row-value">Q 500.00</span></div>
+          <div class="detail-row"><span class="mi" style="color:#41a247;">add_circle</span><span class="detail-row-label">Balance a recibir</span><span class="detail-row-value" style="color:#41a247;">Q 550.00</span></div>
+          <div class="detail-row"><span class="mi">folder</span><span class="detail-row-label">Lote</span><span class="badge badge-amber">#A7F2 · BUILDING</span></div>
+          <div class="detail-row"><span class="mi">list</span><span class="detail-row-label">Registro en lote</span><span class="detail-row-value">Crédito #5 de 50</span></div>
+        </div>
+        <div class="alert alert-orange" style="width:100%;text-align:left;margin-bottom:14px;"><span class="mi" style="color:#f16824;font-size:18px;">info</span><span style="font-size:12px;color:#f16824;">El balance se acreditará DESPUÉS de que el técnico procese el lote en el servidor</span></div>
+        <div style="display:flex;gap:10px;width:100%;"><button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);flex:1;font-size:13px;">Comprar más</button><button class="btn" style="background:#f16824;color:white;flex:1;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center;"><span class="mi">home</span>Inicio</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10a. PlansScreen Offline -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10a. PlansScreen — Entrada Offline</div>
+    <div class="screen-sublabel">Modo sin conexión activo</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Venta Offline — Kingo Luz</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:rgba(241,104,36,.1);border:1.5px solid rgba(241,104,36,.3);border-radius:12px;padding:12px;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span class="mi" style="color:#f16824;font-size:18px;">wifi_off</span><span style="font-size:13px;font-weight:700;color:#f16824;">OFFLINE · 6/20 códigos usados</span><span class="badge badge-amber" style="font-size:10px;margin-left:auto;">ESTIMATED</span></div><div class="prog-bar"><div class="prog-fill" style="width:30%;"></div></div></div>
+        <div class="input-group">
+          <label>ID del dispositivo Kingo</label>
+          <div class="input-wrap"><span class="mi">bolt</span><input placeholder="ej. 1048293" /></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span class="mi">search</span>Validar dispositivo</button>
+        <div class="alert" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);margin-bottom:12px;"><span class="mi" style="color:var(--blue);font-size:18px;">info</span><span style="font-size:12px;color:var(--blue);">Solo Kingo Luz disponible sin conexión</span></div>
+        <div style="font-size:12px;color:var(--gray);text-align:center;">Última sync: hace 2h 15min · Expira en 69h 45min</div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 10b. ID Inválido -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10b. ID Inválido</div>
+    <div class="screen-sublabel">Error en validación de dispositivo</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Venta Offline — Kingo Luz</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:rgba(241,104,36,.1);border:1.5px solid rgba(241,104,36,.3);border-radius:12px;padding:12px;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span class="mi" style="color:#f16824;font-size:18px;">wifi_off</span><span style="font-size:13px;font-weight:700;color:#f16824;">OFFLINE · 6/20 códigos</span></div><div class="prog-bar"><div class="prog-fill" style="width:30%;"></div></div></div>
+        <div class="input-group">
+          <label>ID del dispositivo Kingo</label>
+          <div class="input-wrap" style="border-color:var(--red);"><span class="mi" style="color:var(--red);">bolt</span><input value="ABC123" style="color:var(--red);" /></div>
+        </div>
+        <div class="card card-red" style="margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;"><span class="mi" style="color:var(--red);font-size:20px;flex-shrink:0;">error</span><div><div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:4px;">ID no válido</div><div style="font-size:13px;color:var(--red);">No encontrado en rangos conocidos</div><div style="font-size:12px;color:var(--gray);margin-top:4px;">Verifica el ID impreso en el dispositivo Kingo</div></div></div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;gap:8px;"><span class="mi">refresh</span>Intentar de nuevo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10c. ID Validado -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10c. ID Validado — Kingo Luz</div>
+    <div class="screen-sublabel">Dispositivo detectado correctamente</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Venta Offline — Kingo Luz</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:rgba(241,104,36,.1);border:1.5px solid rgba(241,104,36,.3);border-radius:12px;padding:12px;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:8px;"><span class="mi" style="color:#f16824;font-size:18px;">wifi_off</span><span style="font-size:13px;font-weight:700;color:#f16824;">OFFLINE · 6/20 códigos</span></div></div>
+        <div class="input-group">
+          <label>ID del dispositivo Kingo</label>
+          <div class="input-wrap" style="border-color:var(--green);"><span class="mi" style="color:var(--green);">bolt</span><input value="1048293" style="color:var(--green);font-weight:700;" /></div>
+        </div>
+        <div class="card alert-green" style="margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><span class="mi" style="color:var(--green);font-size:28px;">check_circle</span><div><div style="font-size:16px;font-weight:700;color:var(--text-dark);">Dispositivo encontrado</div><div style="font-size:13px;color:var(--gray);">ID: 1048293</div></div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="badge badge-blue">Kingo — Luz</span><span class="badge badge-green" style="font-size:11px;">v2</span><span class="badge" style="background:var(--gray-bg);color:var(--gray);font-size:11px;">GTM-PET</span><span class="badge badge-green" style="font-size:11px;">Máscara HMAC ✓</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;gap:8px;"><span class="mi">list</span>Seleccionar plan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10d. Selección de Plan -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10d. Selección de Plan</div>
+    <div class="screen-sublabel">Planes desde caché offline</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Selecciona un Plan</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div class="alert alert-orange" style="margin-bottom:12px;"><span class="mi" style="color:#f16824;font-size:18px;">cloud_off</span><span style="font-size:12px;color:#f16824;">Mostrando planes desde caché offline</span></div>
+        <div class="plan-card"><div class="radio"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">1 Día</div><div style="font-size:12px;color:var(--gray);">24 horas</div></div><div style="font-size:16px;font-weight:700;color:#f16824;">Q 15.00</div></div>
+        <div class="plan-card selected"><div class="radio checked"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">1 Semana</div><div style="font-size:12px;color:var(--gray);">7 días</div></div><div style="text-align:right;"><div style="font-size:16px;font-weight:700;color:#f16824;">Q 75.00</div><span class="badge badge-orange" style="font-size:10px;">Seleccionado</span></div></div>
+        <div class="plan-card"><div class="radio"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">15 Días</div><div style="font-size:12px;color:var(--gray);">15 días</div></div><div style="font-size:16px;font-weight:700;color:#f16824;">Q 120.00</div></div>
+        <div class="plan-card"><div class="radio"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">1 Mes</div><div style="font-size:12px;color:var(--gray);">30 días</div></div><div style="font-size:16px;font-weight:700;color:#f16824;">Q 200.00</div></div>
+        <div class="alert alert-green" style="margin:12px 0;"><span class="mi" style="color:var(--green);font-size:18px;">check_circle</span><span style="font-size:12px;color:var(--green);">Saldo: Q 850.00 (Kingo Energía) — suficiente</span></div>
+        <button class="btn" style="background:#f16824;color:white;">Confirmar Plan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10e. Confirmar + TrustedClock -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10e. Confirmar + TrustedClock</div>
+    <div class="screen-sublabel">Tiempo verificado del anchor</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Confirmar Venta</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div class="card" style="margin-bottom:12px;">
+          <div class="detail-row"><span class="mi">bolt</span><span class="detail-row-label">Dispositivo</span><span class="detail-row-value">Kingo Luz · 1048293</span></div>
+          <div class="detail-row"><span class="mi">local_offer</span><span class="detail-row-label">Plan</span><span class="detail-row-value" style="color:#f16824;">1 Semana — Q 75.00</span></div>
+          <div class="detail-row"><span class="mi">percent</span><span class="detail-row-label">Comisión</span><span class="detail-row-value">Q 7.50</span></div>
+          <div class="detail-row"><span class="mi">business</span><span class="detail-row-label">Proyecto</span><span class="detail-row-value">Kingo Energía</span></div>
+        </div>
+        <div style="border:1.5px solid var(--amber);border-radius:12px;padding:14px;background:rgba(245,158,11,.05);margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span class="mi" style="color:var(--amber);font-size:20px;">schedule</span><span style="font-size:13px;font-weight:700;color:var(--amber);">Tiempo del código (TrustedClock)</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><span style="font-size:15px;font-weight:700;color:var(--text-dark);">01/06/2026 14:22:33</span><span class="badge badge-amber">ESTIMATED</span></div>
+          <div style="font-size:12px;color:var(--gray);">Anchor: hace 2h 15min · Precisión ±7 min</div>
+          <div style="font-size:11px;color:var(--amber);margin-top:4px;font-style:italic;">Se usa el anchor, no el reloj del teléfono</div>
+        </div>
+        <div class="card card-gray" style="margin-bottom:12px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:13px;font-weight:700;">#A7F2</span><span class="badge badge-amber" style="font-size:11px;">BUILDING</span><span style="font-size:12px;color:var(--gray);margin-left:auto;">3 / 50 registros</span></div>
+          <div class="prog-bar"><div class="prog-fill" style="width:6%;"></div></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;font-size:16px;display:flex;align-items:center;gap:8px;"><span class="mi">offline_bolt</span>Generar Código</button>
+        <button class="btn" style="background:transparent;color:var(--gray);margin-top:8px;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10f. Generando -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10f. Generando Código</div>
+    <div class="screen-sublabel">Algoritmo Speck en proceso</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Generando...</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;padding-top:48px;">
+        <div class="spinner-lg" style="margin-bottom:24px;"></div>
+        <div style="font-size:18px;font-weight:700;color:var(--text-dark);margin-bottom:24px;">Generando código...</div>
+        <div style="width:100%;">
+          <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div style="font-size:14px;">Validando balance offline</div></div>
+          <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div style="font-size:14px;">Derivando máscara HMAC</div></div>
+          <div class="step-row"><div class="step-num" style="background:#f16824;"><div class="spinner" style="width:16px;height:16px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div><div><div style="font-size:14px;color:#f16824;font-weight:600;">Algoritmo Speck...</div></div></div>
+          <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">4</div><div style="font-size:14px;color:var(--gray);">Firmando registro en lote</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10g. Código Generado -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10g. Código Generado ✓</div>
+    <div class="screen-sublabel">Guardado en lote offline</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Código Generado ✓</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:linear-gradient(135deg,#f16824,#f3864f);border-radius:16px;padding:24px;color:white;margin-bottom:16px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;opacity:.8;margin-bottom:12px;">CÓDIGO KINGO</div>
+          <div style="font-size:28px;font-weight:700;letter-spacing:6px;font-family:'Courier New',monospace;">4829 3847</div>
+          <div style="font-size:28px;font-weight:700;letter-spacing:6px;font-family:'Courier New',monospace;margin-bottom:12px;">2934 7261</div>
+          <div style="font-size:13px;opacity:.8;">Plan: 1 Semana · Q 75.00</div>
+        </div>
+        <div class="card card-gray" style="margin-bottom:12px;padding:14px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:14px;font-weight:700;">#A7F2</span><span class="badge badge-amber">BUILDING</span><span style="font-size:12px;color:var(--gray);margin-left:auto;">4 / 50 registros</span></div>
+          <div class="prog-bar"><div class="prog-fill" style="width:8%;"></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><span style="font-size:13px;color:var(--gray);">Sesión: 16/20 restantes</span><span class="badge badge-orange">●</span></div>
+        <div style="display:flex;gap:10px;"><button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);flex:1;">Generar otro</button><button class="btn" style="background:#f16824;color:white;flex:1;display:flex;align-items:center;gap:6px;justify-content:center;"><span class="mi">folder</span>Ver lotes</button></div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 10h. Gate Bloqueado — Snapshot Expirado -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10h. Gate — Snapshot Expirado</div>
+    <div class="screen-sublabel">Sincronización requerida</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Acceso Bloqueado</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:32px;">
+        <span class="mi" style="font-size:72px;color:var(--red);margin-bottom:16px;">sync_problem</span>
+        <div style="font-size:20px;font-weight:700;color:var(--red);margin-bottom:8px;">Sincronización requerida</div>
+        <div class="card card-red" style="width:100%;margin-bottom:12px;text-align:left;">
+          <div style="display:flex;align-items:center;gap:10px;"><span class="mi" style="color:var(--red);font-size:24px;">timer_off</span><div><div style="font-size:14px;font-weight:700;color:var(--red);">Snapshot expiró hace 74h 12min</div><div style="font-size:12px;color:var(--red);opacity:.8;">Límite: 72 horas</div></div></div>
+        </div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:16px;">El snapshot protege tu balance contra uso no autorizado offline</div>
+        <div class="card card-gray" style="width:100%;text-align:left;margin-bottom:16px;"><div style="font-size:12px;color:var(--gray);margin-bottom:6px;font-weight:600;">¿Qué puedo hacer?</div><div style="font-size:12px;color:var(--text-dark);">1. Con internet: Sincronizar ahora<br>2. Sin internet: Espera al técnico y transfiere tus lotes</div></div>
+        <button class="btn" style="background:#f16824;color:white;width:100%;margin-bottom:8px;display:flex;align-items:center;gap:8px;justify-content:center;"><span class="mi">sync</span>Sincronizar ahora</button>
+        <button class="btn" style="background:transparent;color:var(--gray);">Ver mis lotes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10i. Gate — Fraude / Lock -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10i. Gate — Bloqueado por Fraude</div>
+    <div class="screen-sublabel">Anomalía de seguridad detectada</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header" style="background:#B91C1C;"><span class="mi">arrow_back</span><div class="sk-header-title">Acceso Bloqueado</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:40px;">
+        <span class="mi" style="font-size:72px;color:var(--red);margin-bottom:16px;">lock</span>
+        <div style="font-size:20px;font-weight:700;color:var(--red);margin-bottom:8px;">Acceso offline bloqueado</div>
+        <div class="card card-red" style="width:100%;margin-bottom:12px;text-align:left;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span class="mi" style="color:var(--red);font-size:24px;">gpp_bad</span><div style="font-size:14px;font-weight:700;color:var(--red);">Anomalía de seguridad detectada</div></div>
+          <span class="badge badge-red" style="font-size:11px;">SEQUENCE_REGRESSION · Score: 95</span>
+        </div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:20px;">El acceso offline fue bloqueado por el servidor.<br>Contacta a soporte para desbloquear.</div>
+        <button class="btn" style="background:var(--red);color:white;display:flex;align-items:center;gap:8px;"><span class="mi">support_agent</span>Contactar soporte</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10j. Límite 20/20 -->
+  <div class="screen-wrapper">
+    <div class="screen-label">10j. Límite de Sesión 20/20</div>
+    <div class="screen-sublabel">Máximo de códigos offline alcanzado</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Límite de Sesión</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div class="alert alert-red" style="margin-bottom:14px;"><span class="mi" style="color:var(--red);font-size:20px;">block</span><div><div style="font-size:13px;font-weight:700;color:var(--red);">Límite alcanzado: 20/20 códigos</div><div style="font-size:11px;color:var(--red);">Sincroniza para continuar generando</div></div></div>
+        <div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;font-weight:700;color:var(--text-dark);">Códigos usados esta sesión</span><span style="font-size:13px;font-weight:700;color:var(--red);">20 / 20</span></div><div class="prog-bar"><div class="prog-fill prog-fill-red" style="width:100%;"></div></div></div>
+        <div class="card card-gray" style="margin-bottom:16px;padding:14px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:14px;font-weight:700;">#A7F2</span><span class="badge badge-green">SEALED</span><span style="font-size:12px;color:var(--gray);margin-left:auto;">20 / 50 registros</span></div>
+          <div class="prog-bar"><div class="prog-fill" style="width:40%;"></div></div>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:12px;">¿Qué hacer ahora?</div>
+        <div class="card card-sm" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(241,104,36,.1);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:#f16824;">bluetooth</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Conectar con Técnico</div><div style="font-size:12px;color:var(--gray);">Transferir lotes vía Bluetooth</div></div><span class="mi" style="color:var(--gray);">chevron_right</span></div>
+        <div class="card card-sm" style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:40px;height:40px;border-radius:10px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);">wifi</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Tengo internet</div><div style="font-size:12px;color:var(--gray);">Subir directamente al servidor</div></div><span class="mi" style="color:var(--gray);">chevron_right</span></div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION C ══ -->
+  <div class="section-div section-div-orange">
+    <div class="section-div-label">Sección C</div>
+    <div class="section-div-title">VISITA DEL TÉCNICO — Pago + Transferencia de Lotes</div>
+    <div class="section-div-sub">Fase 1: Pago al técnico (desbloqueo) · Fase 2: Transferencia de lotes · Composición del lote · Protocolo BLE · Fallback</div>
+  </div>
+
+  <!-- 11-FASE1a. Inicio de visita — Pago primero -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11-F1a. Inicio Visita — Pagar al Técnico</div>
+    <div class="screen-sublabel">Fase 1: pago antes de transferir lotes</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Visita del Técnico</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="background:var(--gray-bg);border-radius:12px;padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;"><div style="width:40px;height:40px;border-radius:20px;background:#f16824;display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:white;font-size:20px;">person</span></div><div><div style="font-size:14px;font-weight:700;">José Martínez — Técnico #12</div><div style="font-size:12px;color:var(--gray);">Samsung Galaxy A15 · Conectado</div></div><div class="signal-dots" style="margin-left:auto;"><div class="dot-full"></div><div class="dot-full"></div><div class="dot-full"></div><div class="dot-full"></div></div></div>
+        <!-- Step indicator -->
+        <div style="display:flex;gap:0;margin-bottom:20px;">
+          <div style="flex:1;text-align:center;padding:10px;background:#f16824;border-radius:10px 0 0 10px;"><div style="font-size:11px;font-weight:700;color:white;">FASE 1</div><div style="font-size:12px;color:white;opacity:.9;">Pago</div></div>
+          <div style="flex:1;text-align:center;padding:10px;background:var(--gray-bg);border-radius:0 10px 10px 0;"><div style="font-size:11px;font-weight:700;color:var(--gray);">FASE 2</div><div style="font-size:12px;color:var(--gray);">Lotes</div></div>
+        </div>
+        <div class="alert alert-orange" style="margin-bottom:14px;"><span class="mi" style="color:#f16824;font-size:18px;">payment</span><div><div style="font-size:13px;font-weight:700;color:#f16824;">Tienes deuda pendiente</div><div style="font-size:12px;color:#f16824;">Paga al técnico para renovar tu servicio</div></div></div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="detail-row"><span class="mi" style="color:var(--red);">money_off</span><span class="detail-row-label">Deuda total</span><span class="detail-row-value" style="color:var(--red);">Q 2,550.00</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--amber);">event_available</span><span class="detail-row-label">Pago mínimo</span><span class="detail-row-value" style="color:var(--amber);">Q 500.00</span></div>
+          <div class="detail-row"><span class="mi">calendar_today</span><span class="detail-row-label">Último pago</span><span class="detail-row-value">01/06/2026</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;gap:8px;"><span class="mi">payment</span>Iniciar Pago al Técnico</button>
+        <div style="font-size:11px;color:var(--gray);text-align:center;margin-top:8px;">Después del pago podrás transferir tus lotes de ventas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11-FASE1b. VALIDATE_PAYMENT en progreso -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11-F1b. VALIDATE_PAYMENT — En Progreso</div>
+    <div class="screen-sublabel">Flujo existente AgentPayScreen (sin modificar)</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Pago al Técnico</div><span class="mi" style="color:var(--blue);">bluetooth</span></div>
+      <div class="content content-pad">
+        <div style="display:flex;gap:0;margin-bottom:16px;">
+          <div style="flex:1;text-align:center;padding:10px;background:#f16824;border-radius:10px 0 0 10px;"><div style="font-size:11px;font-weight:700;color:white;">FASE 1</div><div style="font-size:12px;color:white;opacity:.9;">Pago ●</div></div>
+          <div style="flex:1;text-align:center;padding:10px;background:var(--gray-bg);border-radius:0 10px 10px 0;"><div style="font-size:11px;font-weight:700;color:var(--gray);">FASE 2</div><div style="font-size:12px;color:var(--gray);">Lotes</div></div>
+        </div>
+        <!-- Agente info -->
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(16,185,129,.1);border-radius:10px;padding:12px;margin-bottom:14px;"><div style="width:8px;height:8px;border-radius:4px;background:var(--green);"></div><div><div style="font-size:13px;font-weight:700;">José Martínez · GTQ</div><div style="font-size:11px;color:var(--gray);">Divisa verificada ✓</div></div></div>
+        <!-- Amount options — mismo flujo AgentPayScreen existente -->
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px;">Selecciona monto a pagar:</div>
+        <div class="plan-card selected" style="margin-bottom:10px;"><div class="radio checked"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Pago mínimo</div><div style="font-size:12px;color:var(--gray);">Renueva 15 días</div></div><div style="font-size:16px;font-weight:700;color:#f16824;">Q 500.00</div></div>
+        <div class="plan-card" style="margin-bottom:10px;"><div class="radio"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Pago personalizado</div></div><div class="input-wrap" style="width:100px;height:36px;padding:0 8px;"><input value="800.00" style="font-size:13px;font-weight:700;text-align:right;" /></div></div>
+        <div class="plan-card" style="margin-bottom:14px;"><div class="radio"></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Pago total</div><div style="font-size:12px;color:var(--gray);">Saldar deuda completa</div></div><div style="font-size:16px;font-weight:700;color:#f16824;">Q 2,550.00</div></div>
+        <div style="font-size:11px;color:var(--gray);background:rgba(59,130,246,.06);border-radius:8px;padding:8px 10px;margin-bottom:12px;"><span class="mi" style="font-size:14px;color:var(--blue);">info</span> Este pago usa el flujo existente VALIDATE_PAYMENT — el técnico aprueba desde su app</div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;gap:8px;"><span class="mi">send</span>Enviar al técnico para aprobar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11-FASE1c. Pago Aprobado — Lote actualizado -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11-F1c. Pago Aprobado — Lote Actualizado</div>
+    <div class="screen-sublabel">Pago queda en lote, deuda actualizada offline</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Pago Registrado ✓</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;padding-top:16px;text-align:center;">
+        <div style="display:flex;gap:0;width:100%;margin-bottom:20px;">
+          <div style="flex:1;text-align:center;padding:10px;background:var(--green);border-radius:10px 0 0 10px;"><div style="font-size:11px;font-weight:700;color:white;">FASE 1 ✓</div><div style="font-size:12px;color:white;opacity:.9;">Pago OK</div></div>
+          <div style="flex:1;text-align:center;padding:10px;background:#f16824;border-radius:0 10px 10px 0;"><div style="font-size:11px;font-weight:700;color:white;">FASE 2</div><div style="font-size:12px;color:white;opacity:.9;">Lotes →</div></div>
+        </div>
+        <div style="width:72px;height:72px;border-radius:36px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px;"><span class="mi" style="color:white;font-size:36px;">check</span></div>
+        <div style="font-size:17px;font-weight:700;margin-bottom:4px;">Pago de Q 500.00 aprobado</div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:16px;">El técnico lo registrará cuando suba los datos</div>
+        <div class="card" style="width:100%;text-align:left;margin-bottom:12px;">
+          <div class="detail-row"><span class="mi" style="color:var(--green);">check_circle</span><span class="detail-row-label">Deuda anterior</span><span style="font-size:13px;color:var(--gray);text-decoration:line-through;">Q 2,550.00</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--amber);">schedule</span><span class="detail-row-label">Deuda estimada</span><span class="detail-row-value" style="color:var(--amber);">Q 2,050.00</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--green);">event_available</span><span class="detail-row-label">Próximo bloqueo</span><span class="detail-row-value" style="color:var(--green);">+15 días</span></div>
+          <div class="detail-row"><span class="mi">folder</span><span class="detail-row-label">Guardado en lote</span><span class="badge badge-amber">#A7F2 · BUILDING</span></div>
+        </div>
+        <div class="alert" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);width:100%;text-align:left;margin-bottom:14px;"><span class="mi" style="color:var(--blue);font-size:18px;">info</span><span style="font-size:12px;color:var(--blue);">El pago se confirmará cuando el técnico procese el lote. El contador de días se actualiza provisionalmente.</span></div>
+        <button class="btn" style="background:#f16824;color:white;width:100%;display:flex;align-items:center;gap:8px;"><span class="mi">bluetooth</span>Continuar — Transferir lotes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11-LOTE. Composición del Lote — Vista completa -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11-Lote. Composición del Lote</div>
+    <div class="screen-sublabel">Pago + Créditos + Ventas — orden de procesamiento</div>
+    <div class="phone">
+      <div class="status-bar" style="background:#1a1a1a;color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px;color:white;">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px;color:white;">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Lote #A7F2</div><span class="badge badge-amber" style="font-size:12px;margin-right:4px;">SEALED</span></div>
+      <div class="content content-pad">
+        <div style="font-size:12px;color:var(--gray);margin-bottom:12px;">El backend procesa este lote en orden estricto para evitar descuadres:</div>
+        <!-- Orden 1: Pagos -->
+        <div style="background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.25);border-radius:12px;padding:12px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div style="width:24px;height:24px;border-radius:12px;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">1</div><div style="font-size:13px;font-weight:700;color:var(--green);">PAGOS — Se procesan primero</div></div>
+          <div style="font-size:12px;color:var(--gray);padding-left:32px;">↳ payment · Q 500.00 al técnico José M.<br>Reduce deuda → actualiza lastSync → renueva días</div>
+        </div>
+        <!-- Orden 2: Créditos -->
+        <div style="background:rgba(65,162,71,.08);border:1.5px solid rgba(65,162,71,.25);border-radius:12px;padding:12px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div style="width:24px;height:24px;border-radius:12px;background:#41a247;color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">2</div><div style="font-size:13px;font-weight:700;color:#41a247;">CRÉDITOS — Después del pago</div></div>
+          <div style="font-size:12px;color:var(--gray);padding-left:32px;">↳ credit_sale · Q 500.00 (recibe Q 550 con promo)<br>Aumenta deuda → crea Invoice → puede subir al servidor</div>
+        </div>
+        <!-- Orden 3: Ventas -->
+        <div style="background:rgba(241,104,36,.08);border:1.5px solid rgba(241,104,36,.25);border-radius:12px;padding:12px;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div style="width:24px;height:24px;border-radius:12px;background:#f16824;color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">3</div><div style="font-size:13px;font-weight:700;color:#f16824;">VENTAS — Sobre el balance actualizado</div></div>
+          <div style="font-size:12px;color:var(--gray);padding-left:32px;">↳ 20 × sale_code (Kingo Luz)<br>Reduce balance → crea Sale + código registrado</div>
+        </div>
+        <!-- Resumen lote -->
+        <div class="card card-gray" style="padding:12px;">
+          <div style="font-size:12px;font-weight:700;margin-bottom:8px;">Resumen del lote #A7F2</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="badge badge-green" style="font-size:11px;">1 pago · Q500</span><span class="badge badge-green" style="font-size:11px;">1 crédito · Q500</span><span class="badge badge-orange" style="font-size:11px;">20 ventas</span><span class="badge badge-blue" style="font-size:11px;">22 registros total</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11a. Gestor de Lotes -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11a. Gestor de Lotes</div>
+    <div class="screen-sublabel">Vista general de lotes pendientes</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">menu</span><div class="sk-header-title">Mis Lotes Offline</div><span class="mi">bluetooth</span></div>
+      <div class="content content-pad">
+        <div class="card card-gray" style="margin-bottom:14px;padding:12px;text-align:center;"><span style="font-size:13px;color:var(--gray);">4 lotes · 47 registros · más antiguo: 18h</span></div>
+        <div class="lot-card"><div class="lot-icon" style="background:rgba(245,158,11,.15);"><span class="mi" style="color:var(--amber);">folder</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#A7F2</div><div style="font-size:12px;color:var(--gray);">20/50 · activo ahora</div></div><span class="badge badge-amber">BUILDING</span></div>
+        <div class="lot-card"><div class="lot-icon" style="background:rgba(245,158,11,.15);"><span class="mi" style="color:var(--amber);">lock</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#B3C1</div><div style="font-size:12px;color:var(--gray);">15 registros · sellado 6h</div></div><span class="badge badge-amber">SEALED</span></div>
+        <div class="lot-card"><div class="lot-icon" style="background:rgba(59,130,246,.15);"><span class="mi" style="color:var(--blue);">phone_android</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#D9E4</div><div style="font-size:12px;color:var(--gray);">8 registros · técnico tiene</div></div><span class="badge badge-blue">AGENT_HAS_IT</span></div>
+        <div class="lot-card"><div class="lot-icon" style="background:rgba(252,107,23,.15);"><span class="mi" style="color:var(--orange);">upload</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#F1A8</div><div style="font-size:12px;color:var(--gray);">4 registros · 3 visitas sin subir</div></div><span class="badge badge-orange">FALLBACK</span></div>
+        <button class="btn" style="background:#f16824;color:white;margin-top:8px;display:flex;align-items:center;gap:8px;"><span class="mi">bluetooth</span>Conectar con Técnico</button>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  <!-- 11b. Detalle de Lote -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11b. Detalle de Lote #B3C1</div>
+    <div class="screen-sublabel">Metadatos y registros del lote</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Lote #B3C1</div><span class="badge badge-amber" style="font-size:12px;margin-right:4px;">SEALED</span></div>
+      <div class="content content-pad">
+        <div class="card" style="margin-bottom:12px;">
+          <div class="detail-row"><span class="mi">schedule</span><span class="detail-row-label">Creado</span><span class="detail-row-value">01/06/2026 08:15</span></div>
+          <div class="detail-row"><span class="mi">lock</span><span class="detail-row-label">Sellado</span><span class="detail-row-value">01/06/2026 09:30</span></div>
+          <div class="detail-row"><span class="mi">list</span><span class="detail-row-label">Registros</span><span class="detail-row-value">15 / 50</span></div>
+          <div class="detail-row"><span class="mi">verified_user</span><span class="detail-row-label">Firma</span><span class="badge badge-green" style="font-size:11px;">HMAC ✓</span></div>
+          <div class="detail-row"><span class="mi">tag</span><span class="detail-row-label">Secuencia</span><span class="detail-row-value">#7 de este dispositivo</span></div>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Registros (15)</div>
+        <div class="card" style="padding:8px 16px;margin-bottom:12px;">
+          <div class="detail-row"><span class="mi" style="color:#f16824;">bolt</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Kingo 1048293 · 1 Mes · Q 200.00</div></div><span style="font-size:11px;color:var(--gray);">01/06 08:17</span></div>
+          <div class="detail-row"><span class="mi" style="color:#f16824;">bolt</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Kingo 2093847 · 1 Semana · Q 75.00</div></div><span style="font-size:11px;color:var(--gray);">01/06 08:45</span></div>
+          <div class="detail-row"><span class="mi" style="color:#f16824;">bolt</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Kingo 3847291 · 1 Día · Q 15.00</div></div><span style="font-size:11px;color:var(--gray);">01/06 09:10</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);text-align:center;">... 12 registros más</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11c. Escáner de Dispositivos -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11c. Escáner de Dispositivos</div>
+    <div class="screen-sublabel">Seleccionar técnico para conectar</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Conectar con Técnico</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:12px;">Dispositivos pareados Bluetooth</div>
+        <div class="device-card"><div style="width:44px;height:44px;border-radius:22px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);">phone_android</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">José Martínez (Técnico #12)</div><div style="font-size:12px;color:var(--gray);">Samsung Galaxy A15</div></div><div class="signal-dots"><div class="dot-full"></div><div class="dot-full"></div><div class="dot-full"></div><div class="dot-full"></div></div><button class="btn btn-sm" style="background:#f16824;color:white;width:auto;padding:8px 14px;border-radius:10px;font-size:13px;">Conectar</button></div>
+        <div class="device-card"><div style="width:44px;height:44px;border-radius:22px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);">phone_android</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Pedro García (Técnico #8)</div><div style="font-size:12px;color:var(--gray);">Redmi Note 13</div></div><div class="signal-dots"><div class="dot-full"></div><div class="dot-full"></div><div class="dot-empty"></div><div class="dot-empty"></div></div><button class="btn btn-sm" style="background:#f16824;color:white;width:auto;padding:8px 14px;border-radius:10px;font-size:13px;">Conectar</button></div>
+        <div class="device-card"><div style="width:44px;height:44px;border-radius:22px;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;"><span class="mi" style="color:var(--gray);">phone_android</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">Sin nombre asignado</div><div style="font-size:12px;color:var(--gray);">Tecno Spark 20</div></div><div class="signal-dots"><div class="dot-full"></div><div class="dot-empty"></div><div class="dot-empty"></div><div class="dot-empty"></div></div><button class="btn btn-sm" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);width:auto;padding:8px 14px;border-radius:10px;font-size:13px;">Conectar</button></div>
+        <div class="alert" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);margin-top:4px;"><span class="mi" style="color:var(--blue);font-size:18px;">bluetooth</span><span style="font-size:12px;color:var(--blue);">Solo dispositivos ya pareados en Ajustes de Android</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11d. Handshake -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11d. Conectando — Handshake</div>
+    <div class="screen-sublabel">Estableciendo sesión BLE</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Conectando...</div><div class="spinner" style="width:22px;height:22px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div>
+      <div class="content content-pad">
+        <div style="display:flex;align-items:center;gap:10px;background:var(--gray-bg);border-radius:10px;padding:12px;margin-bottom:16px;"><div style="width:8px;height:8px;border-radius:4px;background:var(--green);"></div><span style="font-size:13px;font-weight:600;">José Martínez — Samsung Galaxy A15</span></div>
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Búsqueda de dispositivo</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Canal RFCOMM establecido</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:#f16824;"><div class="spinner" style="width:16px;height:16px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div><div><div style="font-size:14px;font-weight:600;color:#f16824;">Enviando HELLO...</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">4</div><div style="color:var(--gray);font-size:14px;">Consultando lotes del técnico</div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--gray-border);color:var(--gray);">5</div><div style="color:var(--gray);font-size:14px;">Preparando transferencia</div></div>
+        <button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);margin-top:8px;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11e. LOT_STATUS_QUERY -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11e. LOT_STATUS_QUERY — Resultado</div>
+    <div class="screen-sublabel">Estado de lotes en el técnico</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Estado de Lotes</div><span class="mi">info</span></div>
+      <div class="content content-pad">
+        <div style="font-size:13px;color:var(--gray);margin-bottom:12px;">El técnico reporta para tus lotes:</div>
+        <div class="card" style="padding:8px 16px;margin-bottom:12px;">
+          <div class="detail-row"><span style="font-size:14px;font-weight:700;flex:1;">#A7F2</span><span style="font-size:12px;color:var(--gray);">No enviado aún</span></div>
+          <div class="detail-row"><span style="font-size:14px;font-weight:700;flex:1;">#B3C1</span><div style="display:flex;align-items:center;gap:6px;"><span class="mi" style="color:var(--red);font-size:16px;">warning</span><span class="badge badge-red" style="font-size:11px;">SIN REGISTRO</span></div></div>
+          <div class="detail-row"><span style="font-size:14px;font-weight:700;flex:1;">#D9E4</span><span class="badge badge-blue" style="font-size:11px;">RECEIVED ✓</span></div>
+          <div class="detail-row"><span style="font-size:14px;font-weight:700;flex:1;">#F1A8</span><span class="badge badge-green" style="font-size:11px;">UPLOAD_CONFIRMED ✓✓</span></div>
+        </div>
+        <div class="card card-gray" style="margin-bottom:14px;font-size:12px;color:var(--gray);">1 lote a transferir · 1 a confirmar upload · 1 a eliminar</div>
+        <button class="btn" style="background:#f16824;color:white;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="mi">play_circle</span>Iniciar transferencia <span class="badge badge-orange" style="font-size:11px;padding:2px 8px;">3...</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11f. LOT_CHUNK Progress -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11f. LOT_CHUNK — Progreso</div>
+    <div class="screen-sublabel">Enviando fragmentos vía Bluetooth</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Enviando #B3C1</div><span class="mi" style="color:var(--blue);">bluetooth</span></div>
+      <div class="content content-pad">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--gray-bg);border-radius:10px;padding:10px 12px;margin-bottom:16px;"><div style="width:8px;height:8px;border-radius:4px;background:var(--green);"></div><span style="font-size:13px;font-weight:600;">José Martínez</span><span style="font-size:12px;color:var(--gray);">● excelente señal</span></div>
+        <div style="text-align:center;margin-bottom:16px;">
+          <div style="font-size:22px;font-weight:700;color:var(--text-dark);margin-bottom:8px;">Fragmento 4 / 9</div>
+          <div class="prog-bar" style="margin-bottom:8px;"><div class="prog-fill" style="width:44%;"></div></div>
+          <div style="font-size:12px;color:var(--gray);">~12 KB enviados de ~27 KB · Estimado: 8 seg</div>
+        </div>
+        <div class="log-box">
+          <div class="log-line-out">→ LOT_CHUNK[0] 3.0KB</div>
+          <div class="log-line-in">← ACK[0] OK</div>
+          <div class="log-line-out">→ LOT_CHUNK[1] 3.0KB</div>
+          <div class="log-line-in">← ACK[1] OK</div>
+          <div class="log-line-out">→ LOT_CHUNK[2] 3.0KB</div>
+          <div class="log-line-in">← ACK[2] OK</div>
+          <div class="log-line-out">→ LOT_CHUNK[3] 3.0KB ●</div>
+        </div>
+        <button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11g. SHA-256 Verify -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11g. Verificación SHA-256</div>
+    <div class="screen-sublabel">Integridad del lote transferido</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Verificando Integridad</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="padding-top:32px;">
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Uniendo 9 fragmentos</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:var(--green);">✓</div><div><div style="font-size:14px;font-weight:600;">Decodificando base64</div></div></div>
+        <div class="step-row"><div class="step-num" style="background:#f16824;"><div class="spinner" style="width:16px;height:16px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white;"></div></div><div><div style="font-size:14px;font-weight:600;color:#f16824;">Verificando SHA-256...</div></div></div>
+        <div class="card card-gray" style="margin-top:16px;font-family:'Courier New',monospace;font-size:11px;line-height:1.8;">
+          <div style="color:var(--gray);margin-bottom:2px;">Checksum esperado:</div>
+          <div style="color:var(--text-dark);">a3f7c2d18b4e4f9a...</div>
+          <div style="color:var(--gray);margin-top:8px;margin-bottom:2px;">Checksum recibido:</div>
+          <div style="color:var(--text-dark);">a3f7c2d18b4e4f9a...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11h. LOT_CONFIRMED -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11h. LOT_CONFIRMED — Recibido</div>
+    <div class="screen-sublabel">Técnico guardó el lote en SQLite</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Lote Recibido</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;padding-top:32px;text-align:center;">
+        <div style="width:80px;height:80px;border-radius:40px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><span class="mi" style="color:white;font-size:40px;">check</span></div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Lote #B3C1 recibido ✓</div>
+        <span class="badge badge-blue" style="font-size:13px;margin-bottom:20px;">AGENT_HAS_IT</span>
+        <div class="card" style="width:100%;text-align:left;">
+          <div class="detail-row"><span class="mi">list</span><span class="detail-row-label">Registros transferidos</span><span class="detail-row-value">15</span></div>
+          <div class="detail-row"><span class="mi">verified</span><span class="detail-row-label">SHA-256</span><span class="badge badge-green" style="font-size:11px;">✓ Verificado</span></div>
+          <div class="detail-row"><span class="mi">phone_android</span><span class="detail-row-label">Almacenado en</span><span class="detail-row-value" style="font-size:12px;">Samsung A15 — José M.</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:12px;font-style:italic;">El técnico subirá este lote cuando tenga internet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11i. DELETE_CONFIRMED -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11i. DELETE_CONFIRMED</div>
+    <div class="screen-sublabel">Lote eliminado tras confirmar subida</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Confirmando Eliminación</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="padding-top:20px;">
+        <div class="card" style="margin-bottom:12px;">
+          <div class="detail-row"><span class="mi" style="color:var(--green);">check_circle</span><div style="flex:1;"><div style="font-size:14px;font-weight:600;">#F1A8 fue subido por el técnico</div><div style="font-size:12px;color:var(--gray);">UPLOAD_CONFIRMED → listo para eliminar</div></div></div>
+        </div>
+        <div class="log-box">
+          <div class="log-line-out">→ DELETE_CONFIRMED &#123;lotUids:['F1A8']&#125;</div>
+          <div class="log-line-in">← DELETE_CONFIRMED_ACK &#123;acknowledgedUids:['F1A8']&#125;</div>
+        </div>
+        <div class="alert alert-green" style="margin-top:12px;"><span class="mi" style="color:var(--green);font-size:20px;">delete</span><div><div style="font-size:13px;font-weight:700;color:var(--green);">#F1A8 eliminado de memoria local</div><div style="font-size:11px;color:var(--green);">4 registros liberados · B_UPLOADED → DELETED</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11j. Resumen de Sesión -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11j. Resumen de Sesión</div>
+    <div class="screen-sublabel">Transferencia BLE completada</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi" style="opacity:0;">x</span><div class="sk-header-title">Transferencia Completa ✓</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="display:flex;flex-direction:column;align-items:center;padding-top:20px;">
+        <div style="width:80px;height:80px;border-radius:40px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><span class="mi" style="color:white;font-size:40px;">check</span></div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:16px;">Sesión: 45 segundos</div>
+        <div class="card" style="width:100%;text-align:left;margin-bottom:16px;">
+          <div class="detail-row"><span class="mi" style="color:var(--green);">check_circle</span><span class="detail-row-label">#B3C1</span><span style="font-size:13px;color:var(--green);font-weight:600;">Transferido ✓</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--blue);">info</span><span class="detail-row-label">#D9E4</span><span style="font-size:13px;color:var(--blue);font-weight:600;">Ya lo tenía (skip)</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--green);">check_circle</span><span class="detail-row-label">#F1A8</span><span style="font-size:13px;color:var(--green);font-weight:600;">Subido y eliminado ✓</span></div>
+          <div class="detail-row"><span class="mi" style="color:var(--gray);">radio_button_unchecked</span><span class="detail-row-label">#A7F2</span><span style="font-size:13px;color:var(--gray);">En construcción (skip)</span></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;">Listo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11k. Error BLE Drop -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11k. Error — Conexión Interrumpida</div>
+    <div class="screen-sublabel">BLE drop durante transferencia</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px;color:var(--gray);">wifi_off</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header" style="background:#B91C1C;"><span class="mi">close</span><div class="sk-header-title">Conexión Interrumpida</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad" style="padding-top:24px;">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:20px;"><span class="mi" style="font-size:60px;color:var(--red);margin-bottom:12px;">link_off</span><div style="font-size:18px;font-weight:700;color:var(--red);">Conexión interrumpida</div></div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="detail-row"><span class="mi" style="color:#f16824;">verified_user</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">#B3C1 vuelve a estado SEALED</div><div style="font-size:12px;color:var(--gray);">Se reintentará en la próxima visita</div></div></div>
+          <div class="detail-row"><span class="mi" style="color:var(--green);">security</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">Tus datos NO se perdieron</div><div style="font-size:12px;color:var(--gray);">El lote permanece en tu dispositivo</div></div></div>
+          <div class="detail-row"><span class="mi" style="color:var(--gray);">sync</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--gray);">Siguiente intento: próxima visita</div></div></div>
+        </div>
+        <button class="btn" style="background:#f16824;color:white;margin-bottom:10px;display:flex;align-items:center;gap:8px;"><span class="mi">refresh</span>Reintentar ahora</button>
+        <button class="btn" style="background:transparent;border:1.5px solid var(--gray-border);color:var(--gray);">Intentarlo después</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11l. Fallback Subida Directa -->
+  <div class="screen-wrapper">
+    <div class="screen-label">11l. Fallback — Subida Directa</div>
+    <div class="screen-sublabel">Internet disponible, sin necesitar al técnico</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
+      <div class="sk-header"><span class="mi">arrow_back</span><div class="sk-header-title">Subida Directa</div><span class="mi" style="opacity:0;">x</span></div>
+      <div class="content content-pad">
+        <div class="alert alert-green" style="margin-bottom:14px;"><span class="mi" style="color:var(--green);font-size:20px;">wifi</span><div><div style="font-size:13px;font-weight:700;color:var(--green);">● Conexión detectada</div><div style="font-size:11px;color:var(--green);">Puedes subir sin necesitar al técnico</div></div></div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:10px;">Lotes elegibles:</div>
+        <div class="lot-card" style="margin-bottom:10px;"><div class="lot-icon" style="background:rgba(252,107,23,.15);"><span class="mi" style="color:var(--orange);">upload</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#F1A8</div><div style="font-size:12px;color:var(--gray);">3 visitas sin confirmación · 4 registros</div></div><span class="badge badge-orange" style="font-size:11px;">FALLBACK</span></div>
+        <div class="lot-card" style="margin-bottom:14px;"><div class="lot-icon" style="background:rgba(245,158,11,.15);"><span class="mi" style="color:var(--amber);">lock</span></div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">#B3C1</div><div style="font-size:12px;color:var(--gray);">Sin contacto BLE por 50h (límite: 48h)</div></div><span class="badge badge-amber" style="font-size:11px;">SEALED</span></div>
+        <button class="btn" style="background:#f16824;color:white;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><span class="mi">cloud_upload</span>Subir Lotes Ahora</button>
+        <div class="divider"></div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin:10px 0 10px;">Resultado:</div>
+        <div class="detail-row"><span class="mi" style="color:var(--green);">check_circle</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">#F1A8 — Aceptados: 4/4</div></div><span class="badge badge-green" style="font-size:11px;">HTTP 202</span></div>
+        <div class="detail-row"><span class="mi" style="color:var(--blue);">info</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">#B3C1 — Ya procesado por técnico</div></div><span class="badge badge-blue" style="font-size:11px;">HTTP 409</span></div>
+        <div class="alert alert-green" style="margin-top:12px;"><span class="mi" style="color:var(--green);font-size:18px;">check_circle</span><span style="font-size:12px;color:var(--green);font-weight:700;">Todos los lotes procesados ✓</span></div>
+      </div>
+      <div class="tab-bar"><div class="tab-item active" style="color:#f16824;"><span class="mi">wifi_off</span><span>Offline</span></div><div class="tab-item"><span class="mi">home</span><span>Inicio</span></div></div>
+    </div>
+  </div>
+
+  </div><!-- /screens-container -->
+</body>
+</html>
