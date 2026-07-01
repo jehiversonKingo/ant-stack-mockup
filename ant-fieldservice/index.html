@@ -13,22 +13,22 @@
       <span style="font-size:28px; font-weight:800; letter-spacing:1px;">Kingo</span>
     </div>
     <h1>Ant Fieldservice</h1>
-    <div class="subtitle">Field Service Management — Mockups</div>
-    <div class="version">React Native + React Navigation · Febrero 2026</div>
+    <div class="subtitle">Field Service Management — Mockups alineados a la app real</div>
+    <div class="version">React Native + Expo · React Navigation · revisión Julio 2026</div>
   </div>
 
   <div class="section-stats">
     <div class="section-stat">
-      <div class="num">53</div>
-      <div class="label">Pantallas</div>
-    </div>
-    <div class="section-stat">
-      <div class="num">53</div>
-      <div class="label">Completadas</div>
+      <div class="num">31</div>
+      <div class="label">Rutas reales</div>
     </div>
     <div class="section-stat">
       <div class="num">8</div>
-      <div class="label">Secciones</div>
+      <div class="label">Módulos app</div>
+    </div>
+    <div class="section-stat">
+      <div class="num">2026</div>
+      <div class="label">Actualizado</div>
     </div>
 
   </div>
@@ -41,7 +41,7 @@
       </div>
       <div class="section-info">
         <h3>1. Auth & Profile</h3>
-        <p>Sign in y perfil del tecnico con QR e información</p>
+        <p>Inicio de sesión, sesión persistente y perfil del técnico.</p>
         <div class="screens">
           <span class="screen-tag">Sign In</span>
           <span class="screen-tag">Profile</span>
@@ -55,13 +55,14 @@
       </div>
       <div class="section-info">
         <h3>2. Home & Settings</h3>
-        <p>Dashboard, configuracion de Kingo, codigos de restablecimiento</p>
+        <p>Menú principal dinámico por rol, bloqueo por sincronización pendiente y settings B2C.</p>
         <div class="screens">
-          <span class="screen-tag">Dashboard</span>
+          <span class="screen-tag">Menú por rol</span>
           <span class="screen-tag">Sync Blocked</span>
           <span class="screen-tag">Settings Menu</span>
           <span class="screen-tag">Kingo Settings</span>
           <span class="screen-tag">Reposition Code</span>
+          <span class="screen-tag">Generate Codes</span>
         </div>
       </div>
     </a>
@@ -71,13 +72,13 @@
         <span class="mi" style="font-size:32px; color:#F59E0B;">account_balance_wallet</span>
       </div>
       <div class="section-info">
-        <h3>3. Bank & Billing</h3>
-        <p>Estado de cuenta, boletas de deposito, pagos</p>
+        <h3>3. Banco & Cobros</h3>
+        <p>Estado de cuenta, voucher list, carga de boletas y pago bancario.</p>
         <div class="screens">
-          <span class="screen-tag">Bank Menu</span>
           <span class="screen-tag">Account Status</span>
           <span class="screen-tag">Voucher List</span>
           <span class="screen-tag">Upload Voucher</span>
+          <span class="screen-tag">Bank Pay</span>
         </div>
       </div>
     </a>
@@ -88,7 +89,7 @@
       </div>
       <div class="section-info">
         <h3>4. Operaciones en Campo</h3>
-        <p>Handshake, onboarding, barcode scanner, camara, descarga offline</p>
+        <p>Cámara, multishot, scanner, onboarding, handshake BLE y sincronización con Shopkeeper.</p>
         <div class="screens">
           <span class="screen-tag">Handshake</span>
           <span class="screen-tag">Onboarding</span>
@@ -97,7 +98,7 @@
           <span class="screen-tag">Camera</span>
           <span class="screen-tag">Preview</span>
           <span class="screen-tag">Multi-Shot</span>
-          <span class="screen-tag">Offline Download</span>
+          <span class="screen-tag">Shopkeeper Sync</span>
         </div>
       </div>
     </a>
@@ -107,11 +108,13 @@
         <span class="mi" style="font-size:32px; color:#3B82F6;">task_alt</span>
       </div>
       <div class="section-info">
-        <h3>5. Tareas & Ordenes</h3>
-        <p>Gestion de tareas, ordenes de trabajo, inventario de equipos</p>
+        <h3>5. Tareas, Órdenes & Inventario</h3>
+        <p>Acordeón de tareas, detalle, pasos dinámicos por tipo, evidencias, NOC, órdenes e inventario.</p>
         <div class="screens">
           <span class="screen-tag">Task List</span>
-          <span class="screen-tag">Task Description</span>
+          <span class="screen-tag">Steps por tipo</span>
+          <span class="screen-tag">Evidencia por paso</span>
+          <span class="screen-tag">Cobro visita</span>
           <span class="screen-tag">Task Info</span>
           <span class="screen-tag">NOC Validation</span>
           <span class="screen-tag">Orders List</span>
@@ -129,7 +132,7 @@
       </div>
       <div class="section-info">
         <h3>6. Visitas</h3>
-        <p>Mapa de visitas con prioridades y datos del tendero</p>
+        <p>Mapa/listado de visitas con clientes, prioridad y navegación a campo.</p>
         <div class="screens">
           <span class="screen-tag">Visit Map</span>
         </div>
@@ -141,36 +144,12 @@
         <span class="mi" style="font-size:32px; color:#41a247;">sync</span>
       </div>
       <div class="section-info">
-        <h3>7. Sync & Data</h3>
-        <p>Sincronización de datos, Bluetooth handshake, lotes pendientes</p>
+        <h3>7. Sync & Shopkeeper</h3>
+        <p>Sincronización actual basada en HandshakeServer/Client para pagos y configuración de tendero.</p>
         <div class="screens">
-          <span class="screen-tag">Sync Data</span>
+          <span class="screen-tag">HandshakeServer</span>
           <span class="screen-tag">Bluetooth Sync</span>
-          <span class="screen-tag">Sync List</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="08-offline.html" class="section-card">
-      <div class="section-icon" style="background:rgba(10,112,185,.15);">
-        <span class="mi" style="font-size:32px; color:#0a70b9;">wifi_off</span>
-      </div>
-      <div class="section-info">
-        <h3>8. Módulo Offline — Catálogos + Recepción BLE</h3>
-        <p>Catálogos del técnico · Sync paso a paso · Recepción de lotes · Deuda offline del agente</p>
-        <div class="screens">
-          <span class="screen-tag">Home bloqueado</span>
-          <span class="screen-tag">12 catálogos</span>
-          <span class="screen-tag">Descarga progreso</span>
-          <span class="screen-tag">Deuda post-pagos</span>
-          <span class="screen-tag">Upload lotes</span>
-          <span class="screen-tag">Servidor BLE</span>
-          <span class="screen-tag">LOT_CHUNK</span>
-          <span class="screen-tag">SHA-256 verify</span>
-          <span class="screen-tag">LOT_CONFIRMED</span>
-          <span class="screen-tag">DELETE_CONFIRMED</span>
-          <span class="screen-tag">Deuda offline</span>
-          <span class="screen-tag">Deuda confirmada</span>
+          <span class="screen-tag">Shopkeeper</span>
         </div>
       </div>
     </a>

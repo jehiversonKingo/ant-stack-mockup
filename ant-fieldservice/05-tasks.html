@@ -3,13 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ant Fieldservice — Tasks</title>
+  <title>Ant Fieldservice — Tareas</title>
   <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .task-screen { background:#f4f4f5; color:#0f0f10; }
+    .task-status { height:34px; background:#f3f3f4; color:white; display:flex; align-items:center; justify-content:space-between; padding:0 15px; font-size:13px; font-weight:800; flex-shrink:0; }
+    .task-top { height:98px; background:#fb5e18; display:flex; align-items:center; justify-content:center; position:relative; flex-shrink:0; }
+    .task-top.tall { height:112px; }
+    .task-title { color:white; font-size:24px; font-weight:900; }
+    .task-back { position:absolute; left:16px; width:46px; height:46px; border-radius:23px; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; color:white; }
+    .task-back .mi { font-size:33px; }
+    .task-content { flex:1; overflow-y:auto; background:#f4f4f5; padding:14px 15px 28px; }
+    .task-tabs { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 12px; }
+    .task-tab { min-height:44px; border-radius:13px; background:white; color:#c46236; box-shadow:0 3px 8px rgba(0,0,0,.15); display:flex; align-items:center; justify-content:center; gap:7px; font-size:15px; font-weight:900; }
+    .task-tab.active { background:#fb5e18; color:white; }
+    .task-tab .mi { font-size:21px; }
+    .task-count { min-width:30px; height:27px; border-radius:15px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.23); color:white; font-size:14px; font-weight:900; padding:0 8px; }
+    .task-search { height:48px; border-radius:13px; background:white; display:flex; align-items:center; gap:14px; padding:0 18px; box-shadow:0 3px 8px rgba(0,0,0,.12); color:#a6a7ab; font-size:17px; margin-bottom:22px; }
+    .task-search .mi { font-size:27px; color:#8e8f92; }
+    .task-list-label { color:#929397; font-size:14px; margin:0 0 14px 1px; }
+    .task-card { min-height:106px; background:white; border-radius:14px; box-shadow:0 3px 8px rgba(0,0,0,.14); margin-bottom:12px; padding:16px 13px; display:grid; grid-template-columns:57px 1fr 34px; align-items:center; gap:11px; position:relative; }
+    .task-icon-box { width:47px; height:47px; border-radius:14px; background:#feece6; display:flex; align-items:center; justify-content:center; color:#ee6123; }
+    .task-icon-box.blue { background:#e6f4fc; color:#0a7db5; }
+    .task-icon-box .mi { font-size:29px; }
+    .task-id { font-size:19px; font-weight:950; color:#050505; margin-bottom:6px; letter-spacing:-.3px; }
+    .task-desc { color:#77777c; font-size:13px; line-height:1.2; font-weight:600; margin-bottom:8px; }
+    .task-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .task-state { display:inline-flex; align-items:center; gap:4px; min-height:22px; border-radius:11px; padding:2px 9px; background:#fff4ef; color:#bd5d30; font-size:11px; font-weight:900; }
+    .task-state.review { background:#eaf6fd; color:#0b78a9; }
+    .task-state .mi { font-size:14px; }
+    .task-date { display:inline-flex; align-items:center; gap:4px; color:#999a9e; font-size:12px; font-weight:700; }
+    .task-date .mi { font-size:14px; }
+    .priority { position:absolute; right:54px; top:17px; display:inline-flex; align-items:center; gap:3px; border-radius:12px; padding:4px 8px; background:#fffde8; color:#efe544; font-size:12px; font-weight:900; }
+    .priority .mi { font-size:15px; }
+    .task-chevron { width:30px; height:30px; border-radius:15px; background:#e1e1e1; color:#9b9b9b; display:flex; align-items:center; justify-content:center; }
+    .task-chevron .mi { font-size:25px; }
+    .expanded-wrap { background:#ddd; margin:-3px 4px 13px; border-radius:10px 10px 0 0; padding:12px 8px 0; }
+    .realizar-btn { height:48px; border-radius:10px; background:#fb5e18; color:white; display:flex; align-items:center; justify-content:center; gap:10px; font-size:17px; font-weight:950; margin:0 0 16px; }
+    .realizar-btn .mi { font-size:28px; }
+    .detail-panel { background:white; border-radius:13px; padding:16px 14px; margin-bottom:13px; }
+    .detail-title { display:flex; align-items:center; gap:8px; color:#111; font-size:17px; font-weight:950; padding-bottom:12px; border-bottom:1px solid #dedede; margin-bottom:14px; }
+    .detail-title .mi { color:#c76539; font-size:22px; }
+    .detail-title.green .mi { color:#3aab55; }
+    .detail-row { display:flex; align-items:center; gap:8px; color:#aaa; font-size:14px; font-weight:700; margin:11px 0; }
+    .detail-row .mi { font-size:21px; color:#aaa; }
+    .detail-row strong { color:#080808; font-size:15px; font-weight:950; }
+    .component-row { display:flex; align-items:center; gap:13px; font-size:15px; color:#111; font-weight:700; margin:14px 0; }
+    .component-num { width:26px; height:26px; border-radius:13px; background:#e7f8ec; color:#50be65; display:flex; align-items:center; justify-content:center; font-weight:950; }
+    .task-stepper { background:white; height:86px; display:flex; align-items:center; justify-content:space-around; border-bottom:1px solid #ddd; flex-shrink:0; }
+    .step-item { width:70px; display:flex; flex-direction:column; align-items:center; gap:5px; color:#a3a3a5; font-size:12px; font-weight:700; }
+    .step-circle { width:46px; height:46px; border-radius:23px; background:#dfdfe0; color:#999; display:flex; align-items:center; justify-content:center; }
+    .step-circle .mi { font-size:24px; }
+    .step-item.active { color:#e15f25; font-weight:900; }
+    .step-item.active .step-circle { background:#fb5e18; color:white; }
+    .step-line { width:36px; height:2px; background:#ddd; margin-top:-21px; }
+    .task-form-content { flex:1; overflow-y:auto; background:#f4f4f5; padding:16px 16px 28px; }
+    .section-card-real { background:white; border-radius:13px; min-height:75px; display:flex; align-items:center; gap:14px; padding:14px 18px; box-shadow:0 3px 9px rgba(0,0,0,.18); border-left:5px solid #fb5e18; margin-bottom:18px; }
+    .section-card-real .icon-wrap { width:42px; height:42px; border-radius:13px; background:#fff0eb; display:flex; align-items:center; justify-content:center; color:#f06425; }
+    .section-card-real .main { font-size:19px; font-weight:950; color:#080808; }
+    .section-card-real .sub { color:#9b9ca0; font-size:14px; font-weight:700; margin-top:3px; }
+    .field-label { display:flex; align-items:center; gap:8px; color:#7f8083; font-size:15px; font-weight:900; margin:13px 0 8px; }
+    .field-label .mi { font-size:22px; color:#8a8b8e; }
+    .input-real { height:50px; border-radius:12px; border:1px solid #c7c8cb; background:#dedede; color:#a8a9ad; font-size:15px; font-weight:700; display:flex; align-items:center; padding:0 16px; }
+    .gps-row { display:grid; grid-template-columns:1fr 1fr 50px; gap:10px; }
+    .gps-btn { height:50px; border-radius:12px; background:#fb5e18; color:white; display:flex; align-items:center; justify-content:center; }
+    .gps-btn .mi { font-size:30px; }
+    .phone-row { display:grid; grid-template-columns:75px 1fr; }
+    .phone-code { height:50px; border:1px solid #c7c8cb; border-right:0; border-radius:12px 0 0 12px; background:#dedede; display:flex; align-items:center; justify-content:center; gap:7px; color:#0b0b0b; font-size:14px; font-weight:950; }
+    .phone-input { height:50px; border:1px solid #c7c8cb; border-radius:0 12px 12px 0; background:#dedede; display:flex; align-items:center; color:white; font-size:15px; font-weight:700; padding-left:15px; }
+    .mock-home-indicator { width:130px; height:4px; border-radius:2px; background:#9c9c9c; margin:18px auto 0; }
+  </style>
 </head>
 <body>
   <div class="page-header" style="background:linear-gradient(135deg, #0a70b9, #3B82F6);">
+    <a href="index.html" class="back-link"><span class="mi" style="font-size:18px;">arrow_back</span> Volver al Hub</a>
     <h1>Ant Fieldservice</h1>
-    <p>Tasks — Tasks, Orders & Inventory</p>
+    <p>Tareas — pantallas ajustadas al diseño actual del app</p>
   </div>
   <nav class="page-nav">
     <a href="01-auth.html">Auth</a>
@@ -19,906 +88,292 @@
     <a class="active" href="05-tasks.html">Tasks</a>
     <a href="06-visits.html">Visits</a>
     <a href="07-sync.html">Sync</a>
-    <a href="08-offline.html">Offline</a>
   </nav>
 
   <div class="screens-container">
 
-    <!-- ========== 5a: TASK LIST ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5a. Task List</div>
-      <div class="screen-sublabel">Pending & Review Tasks</div>
+      <div class="screen-label">5a. Tareas — Pendientes</div>
+      <div class="screen-sublabel">Vista real de lista con tabs, búsqueda y cards</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Tareas</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Tareas</div>
         </div>
-
-        <div class="content" style="background:#f5f5f5;">
-
-          <!-- Tab Buttons -->
-          <div style="display:flex; gap:10px; padding:16px 20px 0;">
-            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 0; border-radius:10px; background:#f16824; color:white; font-size:14px; font-weight:600; cursor:pointer;">
-              <span class="mi" style="font-size:18px;">schedule</span>
-              Pendientes
-              <span style="background:rgba(255,255,255,.3); padding:1px 8px; border-radius:10px; font-size:11px; font-weight:700;">8</span>
+        <div class="content task-screen">
+          <div class="task-content">
+            <div class="task-tabs">
+              <div class="task-tab active"><span class="mi">schedule</span>Pendientes <span class="task-count">25</span></div>
+              <div class="task-tab"><span class="mi">visibility</span>Revisión</div>
             </div>
-            <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 0; border-radius:10px; background:white; color:#f16824; font-size:14px; font-weight:600; border:1.5px solid #f16824; cursor:pointer;">
-              <span class="mi" style="font-size:18px;">visibility</span>
-              Revision
-              <span style="background:rgba(241,104,36,.12); padding:1px 8px; border-radius:10px; font-size:11px; font-weight:700;">3</span>
+            <div class="task-search"><span class="mi">search</span><span>Buscar tareas...</span></div>
+            <div class="task-list-label">25 tareas pendientes</div>
+            <div class="task-card">
+              <div class="task-icon-box"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1034</div>
+                <div class="task-desc">Instalacion Completa, KingoNet, Mikrotik Ubiquiti, Marco Tulio Caal Cuc</div>
+                <div class="task-meta"><span class="task-state"><span class="mi">schedule</span>Pendiente</span><span class="task-date"><span class="mi">calendar_month</span>14/06/2025</span></div>
+              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
+            </div>
+            <div class="task-card">
+              <div class="task-icon-box"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1348</div>
+                <div class="task-desc">Swap, Antena Groove, KingoNet, Dominga Choc Chub</div>
+                <div class="task-meta"><span class="task-state"><span class="mi">schedule</span>Pendiente</span><span class="task-date"><span class="mi">calendar_month</span>14/08/2025</span></div>
+              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
+            </div>
+            <div class="task-card">
+              <div class="task-icon-box"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1441</div>
+                <div class="task-desc">Swap, KingoNet, antenas mikrotik, Alejandro Pa Cuc</div>
+                <div class="task-meta"><span class="task-state"><span class="mi">schedule</span>Pendiente</span><span class="task-date"><span class="mi">calendar_month</span>12/09/2025</span></div>
+              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
+            </div>
+            <div class="task-card">
+              <div class="task-icon-box"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1629</div>
+                <div class="task-desc">Swap, instalacion parcial, KingoNet, Mesh x4, Mario Caal Choc</div>
+                <div class="task-meta"><span class="task-state"><span class="mi">schedule</span>Pendiente</span><span class="task-date"><span class="mi">calendar_month</span>13/11/2025</span></div>
+              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
             </div>
           </div>
-
-          <!-- Search Bar -->
-          <div style="padding:12px 20px;">
-            <div style="display:flex; align-items:center; gap:10px; background:white; border-radius:12px; padding:0 14px; height:44px; box-shadow:0 1px 4px rgba(0,0,0,.06);">
-              <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
-              <span style="font-size:14px; color:#aaa;">Buscar tareas...</span>
-            </div>
-          </div>
-
-          <div style="padding:0 20px 20px;">
-            <!-- Task Card 1 -->
-            <div class="card card-sm" style="padding:16px; cursor:pointer;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="flex:1;">
-                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-001</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-                    <span class="badge badge-orange" style="font-size:11px; padding:3px 10px;">Instalacion</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
-                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
-                    <span style="font-size:12px; color:var(--gray);">19/02/2026</span>
-                  </div>
-                </div>
-                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-              </div>
-            </div>
-
-            <!-- Task Card 2 -->
-            <div class="card card-sm" style="padding:16px; cursor:pointer;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="flex:1;">
-                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-002</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-                    <span class="badge badge-blue" style="font-size:11px; padding:3px 10px;">Mantenimiento</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
-                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
-                    <span style="font-size:12px; color:var(--gray);">19/02/2026</span>
-                  </div>
-                </div>
-                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-              </div>
-            </div>
-
-            <!-- Task Card 3 -->
-            <div class="card card-sm" style="padding:16px; cursor:pointer;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="flex:1;">
-                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">TAR-003</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-                    <span class="badge badge-red" style="font-size:11px; padding:3px 10px;">Retiro</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:6px; margin-top:8px;">
-                    <span class="mi" style="font-size:14px; color:var(--gray);">calendar_today</span>
-                    <span style="font-size:12px; color:var(--gray);">20/02/2026</span>
-                  </div>
-                </div>
-                <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-              </div>
-            </div>
-          </div>
-
+          <div class="mock-home-indicator"></div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 5b: TASK DESCRIPTION (Multi-step) ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5b. Task Description</div>
-      <div class="screen-sublabel">Multi-step Wizard</div>
+      <div class="screen-label">5b. Tareas — Pendiente expandida</div>
+      <div class="screen-sublabel">Acordeón con botón Realizar Tarea y detalle del cliente</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Tarea TAR-001</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Tareas</div>
         </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- Step Indicator -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 10px;">
-            <!-- Step 1 (active) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">1</div>
-              <span style="font-size:10px; color:#f16824; font-weight:600;">Datos</span>
+        <div class="content task-screen">
+          <div class="task-content">
+            <div class="task-tabs">
+              <div class="task-tab active"><span class="mi">schedule</span>Pendientes <span class="task-count">25</span></div>
+              <div class="task-tab"><span class="mi">visibility</span>Revisión</div>
             </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
-            <!-- Step 2 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Equipo</span>
+            <div class="task-search"><span class="mi">search</span><span>Buscar tareas...</span></div>
+            <div class="task-list-label">25 tareas pendientes</div>
+            <div class="task-card" style="margin-bottom:0;">
+              <div class="task-icon-box"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1034</div>
+                <div class="task-desc">Instalacion Completa, KingoNet, Mikrotik Ubiquiti, Marco Tulio Caal Cuc</div>
+                <div class="task-meta"><span class="task-state"><span class="mi">schedule</span>Pendiente</span><span class="task-date"><span class="mi">calendar_month</span>14/06/2025</span></div>
+              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_up</span></div>
             </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
-            <!-- Step 3 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Actividades</span>
-            </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
-            <!-- Step 4 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">4</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Retirar</span>
-            </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 4px; margin-bottom:18px;"></div>
-            <!-- Step 5 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">5</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Control</span>
-            </div>
-          </div>
-
-          <!-- Section Header -->
-          <div class="card" style="padding:20px;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-              <span class="mi" style="font-size:22px; color:#f16824;">edit</span>
-              <span style="font-size:17px; font-weight:700; color:var(--text-dark);">Datos del Cliente</span>
-            </div>
-
-            <!-- Info Rows -->
-            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Nombre</div>
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">Juan Carlos Perez</div>
-            </div>
-            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Telefono</div>
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">5555-1234</div>
-            </div>
-            <div style="border-bottom:1px solid var(--gray-border); padding:12px 0;">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">Comunidad</div>
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">San Pedro Sacatepequez</div>
-            </div>
-            <div style="padding:12px 0;">
-              <div style="font-size:12px; color:var(--gray); margin-bottom:2px;">DPI</div>
-              <div style="font-size:15px; font-weight:600; color:var(--text-dark);">2345 67890 0101</div>
-            </div>
-
-            <!-- Status -->
-            <div style="display:flex; align-items:center; gap:6px; margin-top:12px; padding:10px; background:rgba(241,104,36,.08); border-radius:10px;">
-              <span class="mi" style="font-size:18px; color:#f16824;">info</span>
-              <span style="font-size:13px; font-weight:600; color:#f16824;">3 campos por completar</span>
+            <div class="expanded-wrap">
+              <div class="realizar-btn"><span class="mi">play_circle</span>Realizar Tarea</div>
+              <div class="detail-panel">
+                <div class="detail-title"><span class="mi">person_outline</span>Datos del Cliente</div>
+                <div class="detail-row"><span class="mi">person_outline</span>Nombre: <strong>Marco Tulio Caal Cuc</strong></div>
+                <div class="detail-row"><span class="mi">call</span>Teléfono: <strong>51549292</strong></div>
+                <div class="detail-row"><span class="mi">sell</span>Tipo: <strong>Instalación Completa</strong></div>
+                <div class="detail-row"><span class="mi">calendar_today</span>Vencimiento: <strong>14/06/2025</strong></div>
+              </div>
+              <div class="detail-panel">
+                <div class="detail-title green"><span class="mi">inventory_2</span>Componentes a Entregar</div>
+                <div class="component-row"><span class="component-num">1</span>Atenea Unifi AC Mesh</div>
+                <div class="component-row"><span class="component-num">2</span>Atenea Unifi AC Mesh</div>
+                <div class="component-row"><span class="component-num">3</span>Router Mikrotik Ubiquiti</div>
+              </div>
             </div>
           </div>
-
-          <!-- Bottom Button -->
-          <button class="btn" style="background:#f16824; color:white;">
-            Siguiente
-            <span class="mi">chevron_right</span>
-          </button>
-
+          <div class="mock-home-indicator"></div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 5c: TASK INFO ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5c. Task Info</div>
-      <div class="screen-sublabel">General Information</div>
+      <div class="screen-label">5c. Tareas — Revisión</div>
+      <div class="screen-sublabel">Estado NOC con azul, contador y cards iguales</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Informacion</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Tareas</div>
         </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- Title -->
-          <div style="font-size:20px; font-weight:700; color:#f16824; text-align:center; margin-bottom:16px;">Informacion general</div>
-
-          <!-- 4 Action Buttons Row -->
-          <div style="display:flex; gap:8px; margin-bottom:20px;">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
-              <div style="width:40px; height:40px; border-radius:20px; background:rgba(65,162,71,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:20px; color:#41a247;">play_arrow</span>
-              </div>
-              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Iniciar</span>
+        <div class="content task-screen">
+          <div class="task-content">
+            <div class="task-tabs">
+              <div class="task-tab"><span class="mi">schedule</span>Pendientes</div>
+              <div class="task-tab active"><span class="mi">visibility</span>Revisión <span class="task-count">70</span></div>
             </div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
-              <div style="width:40px; height:40px; border-radius:20px; background:rgba(239,68,68,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:20px; color:#EF4444;">close</span>
+            <div class="task-search"><span class="mi">search</span><span>Buscar tareas...</span></div>
+            <div class="task-list-label">70 tareas en revisión</div>
+            <div class="task-card">
+              <div class="task-icon-box blue"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-780</div>
+                <div class="task-desc">Instalacion Completa, KingoNet, Starlink, Gilberto Cac Cho</div>
+                <div class="task-meta"><span class="task-state review"><span class="mi">visibility</span>En Revisión</span><span class="task-date"><span class="mi">calendar_month</span>24/04/2025</span></div>
               </div>
-              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Cancelar</span>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
             </div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
-              <div style="width:40px; height:40px; border-radius:20px; background:rgba(10,112,185,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:20px; color:#0a70b9;">location_on</span>
+            <div class="task-card">
+              <div class="task-icon-box blue"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-944</div>
+                <div class="task-desc">Instalacion Completa, KingoNet, Starlink GEN4, Olga Milan Alva</div>
+                <div class="task-meta"><span class="task-state review"><span class="mi">visibility</span>En Revisión</span><span class="task-date"><span class="mi">calendar_month</span>22/05/2025</span></div>
               </div>
-              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Llegada</span>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
             </div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; background:white; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.06); cursor:pointer;">
-              <div style="width:40px; height:40px; border-radius:20px; background:rgba(239,68,68,.12); display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:20px; color:#EF4444;">logout</span>
+            <div class="task-card">
+              <div class="task-icon-box blue"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1347</div>
+                <div class="task-desc">Swap telefono , KingoNet, Dominga Choc Chub</div>
+                <div class="task-meta"><span class="task-state review"><span class="mi">visibility</span>En Revisión</span><span class="task-date"><span class="mi">calendar_month</span>14/08/2025</span></div>
               </div>
-              <span style="font-size:11px; font-weight:600; color:var(--text-dark);">Salida</span>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
             </div>
-          </div>
-
-          <!-- Info Cards -->
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span class="mi" style="font-size:20px; color:#f16824;">event</span>
-              <div style="flex:1;">
-                <div style="font-size:11px; color:var(--gray);">Fecha de vencimiento</div>
-                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">25/02/2026</div>
+            <div class="task-card">
+              <div class="task-icon-box blue"><span class="mi">assignment</span></div>
+              <div>
+                <div class="task-id">T-1373</div>
+                <div class="task-desc">Pickup, KingoNet, Starlink GEN4, Hermelindo Quej Coy</div>
+                <div class="task-meta"><span class="task-state review"><span class="mi">visibility</span>En Revisión</span><span class="task-date"><span class="mi">calendar_month</span>21/08/2025</span></div>
               </div>
-            </div>
-          </div>
-
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span class="mi" style="font-size:20px; color:#f16824;">person</span>
-              <div style="flex:1;">
-                <div style="font-size:11px; color:var(--gray);">Nombre del cliente</div>
-                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Juan Carlos Perez</div>
-              </div>
+              <div class="priority"><span class="mi">flag</span>Media</div>
+              <div class="task-chevron"><span class="mi">keyboard_arrow_down</span></div>
             </div>
           </div>
-
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span class="mi" style="font-size:20px; color:#f16824;">phone</span>
-              <div style="flex:1;">
-                <div style="font-size:11px; color:var(--gray);">Telefono</div>
-                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">5555-1234</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span class="mi" style="font-size:20px; color:#f16824;">description</span>
-              <div style="flex:1;">
-                <div style="font-size:11px; color:var(--gray);">Descripcion de la tarea</div>
-                <div style="font-size:14px; font-weight:600; color:var(--text-dark);">Instalacion de sistema Kingo 15 con panel solar</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Componentes Requeridos -->
-          <div style="font-size:16px; font-weight:700; color:#f16824; text-align:center; margin:16px 0 12px;">Componentes requeridos</div>
-          <div class="card" style="padding:16px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
-                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Panel Solar</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px;">
-                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
-                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Foco LED</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px;">
-                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
-                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Cable 5m</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px;">
-                <div style="width:6px; height:6px; border-radius:3px; background:#f16824; flex-shrink:0;"></div>
-                <span style="font-size:13px; color:var(--text-dark); font-weight:500;">Base Kingo</span>
-              </div>
-            </div>
-          </div>
-
+          <div class="mock-home-indicator"></div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 5d: NOC VALIDATION ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5d. NOC Validation</div>
-      <div class="screen-sublabel">Evidence & Photos</div>
+      <div class="screen-label">5d. Realizar Tarea — Datos</div>
+      <div class="screen-sublabel">Stepper e inputs como la captura</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Evidencia</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top tall">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Realizar Tarea</div>
         </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- Title Section -->
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
-            <span class="mi" style="font-size:24px; color:#f16824;">photo_camera</span>
-            <div>
-              <div style="font-size:17px; font-weight:700; color:var(--text-dark);">Evidencia Adicional</div>
-              <div style="font-size:12px; color:var(--gray);">Sube fotos como evidencia de la tarea</div>
-            </div>
+        <div class="task-stepper">
+          <div class="step-item active"><div class="step-circle"><span class="mi">assignment</span></div><span>Datos</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">inventory_2</span></div><span>Equipo</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">checklist</span></div><span>Actividades</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">assignment_turned_in</span></div><span>Control</span></div>
+        </div>
+        <div class="task-form-content">
+          <div class="section-card-real">
+            <div class="icon-wrap"><span class="mi" style="font-size:27px;">assignment</span></div>
+            <div><div class="main">Datos Generales</div><div class="sub">5 campos por completar</div></div>
           </div>
-
-          <div style="margin-top:16px;">
-            <!-- Step Card 1 -->
-            <div class="card" style="padding:16px; border-left:4px solid #f16824; margin-bottom:14px;">
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-                <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</div>
-                <div style="flex:1;">
-                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Paso 1: Instalacion</div>
-                  <div style="font-size:12px; color:var(--gray); margin-top:2px;">2 nueva(s) | 1 existente(s)</div>
-                </div>
-                <div style="width:36px; height:36px; border-radius:18px; background:#f16824; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                  <span class="mi" style="font-size:18px; color:white;">photo_camera</span>
-                </div>
-              </div>
-              <!-- Photo Thumbnails -->
-              <div style="display:flex; gap:8px; overflow-x:auto;">
-                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
-                </div>
-                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
-                </div>
-                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step Card 2 -->
-            <div class="card" style="padding:16px; border-left:4px solid #f16824; margin-bottom:14px;">
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-                <div style="width:28px; height:28px; border-radius:14px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</div>
-                <div style="flex:1;">
-                  <div style="font-size:15px; font-weight:700; color:var(--text-dark);">Paso 2: Verificacion</div>
-                  <div style="font-size:12px; color:var(--gray); margin-top:2px;">1 nueva(s) | 0 existente(s)</div>
-                </div>
-                <div style="width:36px; height:36px; border-radius:18px; background:#f16824; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                  <span class="mi" style="font-size:18px; color:white;">photo_camera</span>
-                </div>
-              </div>
-              <!-- Photo Thumbnails -->
-              <div style="display:flex; gap:8px; overflow-x:auto;">
-                <div style="width:60px; height:60px; border-radius:8px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:24px; color:#aaa;">image</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upload Button -->
-          <button class="btn" style="background:#41a247; color:white; margin-top:8px;">
-            <span class="mi">cloud_upload</span>
-            Subir 3 foto(s)
-          </button>
-
-          <!-- Progress Bar -->
-          <div style="margin-top:10px; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
-            <div style="width:60%; height:100%; background:#f16824; border-radius:3px;"></div>
-          </div>
-
+          <div class="field-label"><span class="mi">location_on</span>GPS</div>
+          <div class="gps-row"><div class="input-real">Latitud</div><div class="input-real">Longitud</div><div class="gps-btn"><span class="mi">location_on</span></div></div>
+          <div class="field-label"><span class="mi">edit_square</span>DPI</div>
+          <div class="input-real">Ingresa dpi</div>
+          <div class="field-label"><span class="mi">edit_square</span>Nombres</div>
+          <div class="input-real">Ingresa nombres</div>
+          <div class="field-label"><span class="mi">call</span>Teléfono</div>
+          <div class="phone-row"><div class="phone-code"><span class="mi" style="font-size:22px;">arrow_drop_down</span>+502</div><div class="phone-input">Número de celular</div></div>
+          <div class="field-label"><span class="mi">edit_square</span>Apellidos</div>
+          <div class="input-real">Ingresa apellidos</div>
+          <div class="mock-home-indicator"></div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 5e: ORDERS LIST ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5e. Orders List</div>
-      <div class="screen-sublabel">Work Orders</div>
+      <div class="screen-label">5e. Realizar Tarea — Equipo</div>
+      <div class="screen-sublabel">Mismo lenguaje visual para instalación/retiro</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Ordenes</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top tall">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Realizar Tarea</div>
         </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- Order Card 1 -->
-          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-001</div>
-              <span class="badge badge-orange" style="font-size:11px; padding:3px 10px;">Bodega</span>
-              <div style="flex:1;"></div>
-              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
-              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
-                <span style="font-size:13px; color:var(--text-dark);">Bodega Central</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
-                <span style="font-size:13px; color:var(--gray);">19/02/2026</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:#41a247;">arrow_downward</span>
-                <span style="font-size:13px; font-weight:600; color:#41a247;">Recibido</span>
-              </div>
-            </div>
+        <div class="task-stepper">
+          <div class="step-item active"><div class="step-circle"><span class="mi">assignment</span></div><span>Datos</span></div>
+          <div class="step-line"></div>
+          <div class="step-item active"><div class="step-circle"><span class="mi">inventory_2</span></div><span>Equipo</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">checklist</span></div><span>Actividades</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">assignment_turned_in</span></div><span>Control</span></div>
+        </div>
+        <div class="task-form-content">
+          <div class="section-card-real">
+            <div class="icon-wrap"><span class="mi" style="font-size:27px;">inventory_2</span></div>
+            <div><div class="main">Equipo</div><div class="sub">Componentes a entregar</div></div>
           </div>
-
-          <!-- Order Card 2 -->
-          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-002</div>
-              <span class="badge badge-green" style="font-size:11px; padding:3px 10px;">Agente</span>
-              <div style="flex:1;"></div>
-              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
-              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
-                <span style="font-size:13px; color:var(--text-dark);">Agente Lopez</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
-                <span style="font-size:13px; color:var(--gray);">18/02/2026</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:#0a70b9;">arrow_upward</span>
-                <span style="font-size:13px; font-weight:600; color:#0a70b9;">Enviado</span>
-              </div>
-            </div>
+          <div class="detail-panel">
+            <div class="detail-title green"><span class="mi">inventory_2</span>Componentes a Entregar</div>
+            <div class="component-row"><span class="component-num">1</span>Atenea Unifi AC Mesh</div>
+            <div class="component-row"><span class="component-num">2</span>Atenea Unifi AC Mesh</div>
+            <div class="component-row"><span class="component-num">3</span>Router Mikrotik Ubiquiti</div>
           </div>
-
-          <!-- Order Card 3 -->
-          <div class="card" style="padding:16px; margin-bottom:12px; cursor:pointer;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-              <div style="font-size:16px; font-weight:700; color:var(--text-dark);">OIK-003</div>
-              <span class="badge badge-blue" style="font-size:11px; padding:3px 10px;">Tecnico</span>
-              <div style="flex:1;"></div>
-              <span class="mi" style="font-size:18px; color:#EF4444; cursor:pointer;">delete</span>
-              <span class="mi" style="font-size:22px; color:var(--gray);">chevron_right</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">warehouse</span>
-                <span style="font-size:13px; color:var(--text-dark);">Tecnico Martinez</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:var(--gray);">calendar_today</span>
-                <span style="font-size:13px; color:var(--gray);">17/02/2026</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mi" style="font-size:16px; color:#41a247;">arrow_downward</span>
-                <span style="font-size:13px; font-weight:600; color:#41a247;">Recibido</span>
-              </div>
-            </div>
-          </div>
-
+          <div class="field-label"><span class="mi">qr_code_scanner</span>Serial de equipo</div>
+          <div class="gps-row" style="grid-template-columns:1fr 50px;"><div class="input-real">Escanea o ingresa código</div><div class="gps-btn"><span class="mi">qr_code_scanner</span></div></div>
+          <div class="field-label"><span class="mi">edit_square</span>Observaciones</div>
+          <div class="input-real" style="height:88px; align-items:flex-start; padding-top:15px;">Ingresa observaciones</div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 5f: ORDER ADD (Step 1) ========== -->
     <div class="screen-wrapper">
-      <div class="screen-label">5f. Order Add (Step 1)</div>
-      <div class="screen-sublabel">New Order Form</div>
+      <div class="screen-label">5f. Realizar Tarea — Actividades</div>
+      <div class="screen-sublabel">Cards con instrucciones y fotos, siguiendo el mismo UI</div>
       <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Nueva Orden</div>
-          <div style="width:40px;"></div>
+        <div class="task-status"><span>2:32</span><span>LTE&nbsp;&nbsp;43</span></div>
+        <div class="task-top tall">
+          <div class="task-back"><span class="mi">chevron_left</span></div>
+          <div class="task-title">Realizar Tarea</div>
         </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- 3-Step Progress -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
-            <!-- Step 1 (active) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">1</div>
-              <span style="font-size:10px; color:#f16824; font-weight:600;">Datos</span>
-            </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 2 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Equipo</span>
-            </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 3 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Fotos</span>
-            </div>
-          </div>
-
-          <!-- Form Fields -->
-          <div class="card" style="padding:20px;">
-            <div class="input-group">
-              <label>Tipo de orden</label>
-              <div class="input-wrap" style="cursor:pointer;">
-                <span class="mi" style="color:var(--gray);">category</span>
-                <span style="flex:1; font-size:15px; color:var(--gray);">Seleccionar tipo...</span>
-                <span class="mi" style="color:var(--gray);">expand_more</span>
-              </div>
-            </div>
-
-            <div class="input-group">
-              <label>Bodega destino</label>
-              <div class="input-wrap" style="cursor:pointer;">
-                <span class="mi" style="color:var(--gray);">warehouse</span>
-                <span style="flex:1; font-size:15px; color:var(--gray);">Seleccionar bodega...</span>
-                <span class="mi" style="color:var(--gray);">expand_more</span>
-              </div>
-            </div>
-
-            <div class="input-group" style="margin-bottom:0;">
-              <label>Observaciones</label>
-              <div style="border:1.5px solid #E0E0E0; border-radius:12px; background:var(--gray-input); padding:14px 16px; min-height:90px;">
-                <span style="font-size:14px; color:#aaa;">Escribir observaciones...</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Button -->
-          <button class="btn mt-16" style="background:#0a70b9; color:white;">
-            Siguiente
-            <span class="mi">chevron_right</span>
-          </button>
-
+        <div class="task-stepper">
+          <div class="step-item active"><div class="step-circle"><span class="mi">assignment</span></div><span>Datos</span></div>
+          <div class="step-line"></div>
+          <div class="step-item active"><div class="step-circle"><span class="mi">inventory_2</span></div><span>Equipo</span></div>
+          <div class="step-line"></div>
+          <div class="step-item active"><div class="step-circle"><span class="mi">checklist</span></div><span>Actividades</span></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="step-circle"><span class="mi">assignment_turned_in</span></div><span>Control</span></div>
         </div>
-      </div>
-    </div>
-
-    <!-- ========== 5g: ORDER UPDATE (Step 2 - Equipment) ========== -->
-    <div class="screen-wrapper">
-      <div class="screen-label">5g. Order Update (Step 2)</div>
-      <div class="screen-sublabel">Equipment List</div>
-      <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
+        <div class="task-form-content">
+          <div class="section-card-real">
+            <div class="icon-wrap"><span class="mi" style="font-size:27px;">checklist</span></div>
+            <div><div class="main">Actividades</div><div class="sub">Completa tareas y toma fotos</div></div>
           </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Actualizar Orden</div>
-          <div style="width:40px;"></div>
-        </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- 3-Step Progress -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
-            <!-- Step 1 (done) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:18px;">check</span>
-              </div>
-              <span style="font-size:10px; color:#41a247; font-weight:600;">Datos</span>
-            </div>
-            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 2 (active) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">2</div>
-              <span style="font-size:10px; color:#f16824; font-weight:600;">Equipo</span>
-            </div>
-            <div style="flex:1; height:2px; background:#ddd; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 3 -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#ddd; color:var(--gray); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
-              <span style="font-size:10px; color:var(--gray); font-weight:500;">Fotos</span>
-            </div>
+          <div class="detail-panel">
+            <div class="detail-title"><span class="mi">looks_one</span>Validar instalación física</div>
+            <div class="realizar-btn" style="height:42px;font-size:15px;margin-bottom:12px;"><span class="mi">menu_book</span>Ver instrucciones</div>
+            <div class="gps-row" style="grid-template-columns:1fr 50px;"><div class="input-real">3 fotos cargadas</div><div class="gps-btn"><span class="mi">photo_camera</span></div></div>
           </div>
-
-          <!-- Equipment Item 1 -->
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
-              </div>
-              <div style="flex:1;">
-                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#1 — Panel Solar KNG-100</div>
-              </div>
-              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
-              </div>
-            </div>
+          <div class="detail-panel">
+            <div class="detail-title"><span class="mi">looks_two</span>Foto de seriales</div>
+            <div class="gps-row" style="grid-template-columns:1fr 50px;"><div class="input-real">Sin evidencia</div><div class="gps-btn"><span class="mi">photo_camera</span></div></div>
           </div>
-
-          <!-- Equipment Item 2 -->
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
-              </div>
-              <div style="flex:1;">
-                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#2 — Foco LED KNG-050</div>
-              </div>
-              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Equipment Item 3 -->
-          <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:40px; height:40px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span class="mi" style="font-size:20px; color:#f16824;">memory</span>
-              </div>
-              <div style="flex:1;">
-                <div style="font-size:14px; font-weight:700; color:var(--text-dark);">#3 — Cable 5m</div>
-              </div>
-              <div style="width:32px; height:32px; border-radius:16px; background:rgba(239,68,68,.1); display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                <span class="mi" style="font-size:18px; color:#EF4444;">close</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add Button -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:1.5px dashed #f16824; border-radius:14px; cursor:pointer; margin-bottom:20px;">
-            <span class="mi" style="font-size:22px; color:#f16824;">add_circle</span>
-            <span style="font-size:14px; font-weight:600; color:#f16824;">Agregar equipo</span>
-          </div>
-
-          <!-- Bottom Buttons -->
-          <div style="display:flex; gap:12px;">
-            <button class="btn" style="flex:1; background:white; color:#f16824; border:1.5px solid #f16824;">
-              Anterior
-            </button>
-            <button class="btn" style="flex:1; background:#0a70b9; color:white;">
-              Siguiente
-              <span class="mi">chevron_right</span>
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ========== 5h: ORDER TO-DO (Step 3 - Photos) ========== -->
-    <div class="screen-wrapper">
-      <div class="screen-label">5h. Order To-Do (Step 3)</div>
-      <div class="screen-sublabel">Photos & Completion</div>
-      <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Orden OIK-001</div>
-          <div style="width:40px;"></div>
-        </div>
-
-        <div class="content content-pad" style="background:#f5f5f5;">
-
-          <!-- 3-Step Progress -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:24px; padding:0 40px;">
-            <!-- Step 1 (done) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:18px;">check</span>
-              </div>
-              <span style="font-size:10px; color:#41a247; font-weight:600;">Datos</span>
-            </div>
-            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 2 (done) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#41a247; color:white; display:flex; align-items:center; justify-content:center;">
-                <span class="mi" style="font-size:18px;">check</span>
-              </div>
-              <span style="font-size:10px; color:#41a247; font-weight:600;">Equipo</span>
-            </div>
-            <div style="flex:1; height:2px; background:#41a247; margin:0 8px; margin-bottom:18px;"></div>
-            <!-- Step 3 (active) -->
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-              <div style="width:32px; height:32px; border-radius:16px; background:#f16824; color:white; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;">3</div>
-              <span style="font-size:10px; color:#f16824; font-weight:600;">Fotos</span>
-            </div>
-          </div>
-
-          <!-- Photo Grid (3 columns) -->
-          <div class="card" style="padding:20px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
-              <!-- Photo 1 -->
-              <div style="text-align:center;">
-                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
-                  <span class="mi" style="font-size:32px; color:#bbb;">image</span>
-                </div>
-                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 1</div>
-              </div>
-              <!-- Photo 2 -->
-              <div style="text-align:center;">
-                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
-                  <span class="mi" style="font-size:32px; color:#bbb;">image</span>
-                </div>
-                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 2</div>
-              </div>
-              <!-- Photo 3 -->
-              <div style="text-align:center;">
-                <div style="aspect-ratio:1; background:#e8e8e8; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px dashed #ccc;">
-                  <span class="mi" style="font-size:32px; color:#bbb;">add</span>
-                </div>
-                <div style="font-size:11px; color:var(--gray); margin-top:6px; font-weight:500;">Foto 3</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Buttons -->
-          <div style="display:flex; gap:12px; margin-top:16px;">
-            <button class="btn" style="flex:1; background:white; color:#f16824; border:1.5px solid #f16824;">
-              Anterior
-            </button>
-            <button class="btn" style="flex:1; background:#41a247; color:white;">
-              <span class="mi">check_circle</span>
-              Completar
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ========== 5i: INVENTORY ========== -->
-    <div class="screen-wrapper">
-      <div class="screen-label">5i. Inventory</div>
-      <div class="screen-sublabel">Equipment & Accessories</div>
-      <div class="phone">
-        <div class="status-bar" style="background:#f16824; color:white;"><span>9:41</span><div class="status-icons"><span class="mi" style="font-size:16px">signal_cellular_alt</span><span class="mi" style="font-size:16px">wifi</span><span class="mi" style="font-size:16px">battery_full</span></div></div>
-
-        <!-- Orange Header -->
-        <div style="height:56px; background:#f16824; display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0;">
-          <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-            <span class="mi" style="color:white;font-size:24px;">arrow_back</span>
-          </div>
-          <div style="flex:1;text-align:center;font-size:18px;font-weight:600;color:white;">Inventario</div>
-          <div style="width:40px;"></div>
-        </div>
-
-        <div class="content" style="background:#f5f5f5;">
-
-          <!-- Stats Card -->
-          <div style="padding:16px 20px 0;">
-            <div class="card" style="padding:16px;">
-              <div style="display:flex; gap:12px;">
-                <div style="flex:1; display:flex; align-items:center; gap:10px; background:rgba(241,104,36,.08); border-radius:12px; padding:14px;">
-                  <span class="mi" style="font-size:24px; color:#f16824;">bolt</span>
-                  <div>
-                    <div style="font-size:20px; font-weight:800; color:var(--text-dark);">24</div>
-                    <div style="font-size:11px; color:var(--gray);">Equipos</div>
-                  </div>
-                </div>
-                <div style="flex:1; display:flex; align-items:center; gap:10px; background:rgba(10,112,185,.08); border-radius:12px; padding:14px;">
-                  <span class="mi" style="font-size:24px; color:#0a70b9;">extension</span>
-                  <div>
-                    <div style="font-size:20px; font-weight:800; color:var(--text-dark);">12</div>
-                    <div style="font-size:11px; color:var(--gray);">Accesorios</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Search Bar -->
-          <div style="padding:0 20px 8px;">
-            <div style="display:flex; align-items:center; gap:10px; background:white; border-radius:12px; padding:0 14px; height:44px; box-shadow:0 1px 4px rgba(0,0,0,.06);">
-              <span class="mi" style="font-size:20px; color:var(--gray);">search</span>
-              <span style="font-size:14px; color:#aaa;">Buscar inventario...</span>
-            </div>
-          </div>
-
-          <!-- Filter Chips -->
-          <div style="display:flex; gap:8px; padding:4px 20px 12px; overflow-x:auto;">
-            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600; background:#f16824; color:white; white-space:nowrap;">Todos</div>
-            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray); white-space:nowrap;">Equipos</div>
-            <div style="padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; background:rgba(0,0,0,.06); color:var(--gray); white-space:nowrap;">Accesorios</div>
-          </div>
-
-          <div style="padding:0 20px 20px;">
-            <!-- Inventory Item 1 -->
-            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:22px; color:#f16824;">bolt</span>
-                </div>
-                <div style="flex:1;">
-                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">KNG-001 — Kingo 15</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                    <span class="badge badge-green" style="font-size:10px; padding:2px 8px;">Activo</span>
-                  </div>
-                  <div style="display:flex; gap:12px; margin-top:6px;">
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
-                      <span style="font-size:11px; color:var(--gray);">SN-20260001</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
-                      <span style="font-size:11px; color:var(--gray);">Bodega Central</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Inventory Item 2 -->
-            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:22px; color:#f16824;">solar_power</span>
-                </div>
-                <div style="flex:1;">
-                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">KNG-002 — Panel Solar</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                    <span class="badge badge-blue" style="font-size:10px; padding:2px 8px;">Asignado</span>
-                  </div>
-                  <div style="display:flex; gap:12px; margin-top:6px;">
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
-                      <span style="font-size:11px; color:var(--gray);">SN-20260045</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
-                      <span style="font-size:11px; color:var(--gray);">Tecnico Lopez</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Inventory Item 3 -->
-            <div class="card card-sm" style="padding:14px; margin-bottom:10px;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="width:44px; height:44px; border-radius:12px; background:rgba(241,104,36,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                  <span class="mi" style="font-size:22px; color:#f16824;">lightbulb</span>
-                </div>
-                <div style="flex:1;">
-                  <div style="font-size:14px; font-weight:700; color:var(--text-dark);">ACC-001 — Foco LED</div>
-                  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                    <span class="badge badge-orange" style="font-size:10px; padding:2px 8px;">Disponible</span>
-                  </div>
-                  <div style="display:flex; gap:12px; margin-top:6px;">
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">tag</span>
-                      <span style="font-size:11px; color:var(--gray);">SN-20260102</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:4px;">
-                      <span class="mi" style="font-size:13px; color:var(--gray);">location_on</span>
-                      <span style="font-size:11px; color:var(--gray);">Bodega Central</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
