@@ -29,12 +29,11 @@
   </div>
   <nav class="page-nav">
     <a href="01-auth.html">Auth</a>
-    <a href="02-home.html">Home</a>
+    <a href="07-b2c.html">B2C</a>
     <a href="03-bank.html">Bank</a>
     <a class="active" href="04-operations.html">Operations</a>
     <a href="05-tasks.html">Tasks</a>
     <a href="06-visits.html">Visits</a>
-    <a href="07-sync.html">Sync</a>
   </nav>
 
   <div class="screens-container">
@@ -87,21 +86,34 @@
     </div>
 
     <div class="screen-wrapper">
-      <div class="screen-label">4c. Configuración Shopkeeper</div>
-      <div class="screen-sublabel">Transferencias CONFIG_* desde tarea/visita</div>
+      <div class="screen-label">4c. Sincronización en Tarea</div>
+      <div class="screen-sublabel">HandshakeServer embebido en TaskDescriptionScreen</div>
       <div class="phone">
         <div class="status-bar orange-bg"><span>9:41</span><div class="status-icons"><span class="mi">signal_cellular_alt</span><span class="mi">wifi</span><span class="mi">battery_full</span></div></div>
-        <div class="fs-header"><span class="mi">arrow_back</span><div class="fs-header-title">Configuración Tendero</div><span style="width:24px;"></span></div>
+        <div class="fs-header"><span class="mi">arrow_back</span><div class="fs-header-title">Sincronizar con Cliente</div><span style="width:24px;"></span></div>
         <div class="content content-pad fs-app-bg">
-          <div class="fs-panel">
-            <div class="fs-panel-title"><span class="mi" style="color:#f16824;">settings_bluetooth</span>Datos enviados al cliente</div>
-            <div class="fs-transfer-row"><div class="fs-transfer-icon"><span class="mi">store</span></div><div class="fs-row-body"><div class="fs-row-title">Datos Tendero</div><div class="fs-row-meta">CONFIG_CUSTOMER</div></div><span class="mi" style="color:#41a247;">check</span></div>
-            <div class="fs-transfer-row"><div class="fs-transfer-icon"><span class="mi">wallet</span></div><div class="fs-row-body"><div class="fs-row-title">Billeteras y balance</div><div class="fs-row-meta">CONFIG_WALLET · CONFIG_BALANCE</div></div><span class="mi" style="color:#41a247;">check</span></div>
-            <div class="fs-transfer-row"><div class="fs-transfer-icon"><span class="mi">receipt_long</span></div><div class="fs-row-body"><div class="fs-row-title">Transacciones, ventas y compras</div><div class="fs-row-meta">CONFIG_TRANSACTION · SALES · PURCHASES</div></div><span class="mi" style="color:#f16824;">sync</span></div>
-            <div class="fs-transfer-row"><div class="fs-transfer-icon"><span class="mi">local_offer</span></div><div class="fs-row-body"><div class="fs-row-title">Reglas, planes y promociones</div><div class="fs-row-meta">CONFIG_RULES · PLANS · PROMOTIONS</div></div><span class="mi" style="color:#727176;">schedule</span></div>
+          <div class="fs-note"><span class="mi">info</span><div>La app real no muestra un resumen estático de paquetes. En la tarea se levanta HandshakeServer y el teléfono del cliente solicita cada paquete CONFIG_*.</div></div>
+          <div class="fs-panel" style="text-align:center;">
+            <div class="bt-circle"><span class="mi" style="font-size:58px;color:#f16824;">satellite_alt</span></div>
+            <div style="font-size:20px;font-weight:800;color:var(--text-dark);margin-bottom:6px;">Esperando conexión</div>
+            <div style="font-size:13px;color:var(--gray);line-height:1.45;">El servidor está activo. Pide al cliente que se conecte desde su dispositivo.</div>
           </div>
-          <div class="fs-progress-track"><div class="fs-progress-fill" style="width:68%;"></div></div>
-          <div style="font-size:12px;color:var(--gray);margin-top:8px;">Enviando paquetes al teléfono del tendero...</div>
+          <div class="fs-panel">
+            <div class="fs-panel-title"><span class="mi" style="color:#0a70b9;">timeline</span>Actividad Reciente</div>
+            <div class="event-row"><span class="event-time">10:21:18</span><span class="mi" style="color:#0a70b9;">phone_android</span><span style="font-size:13px;font-weight:600;">AGENT_DATA recibido</span></div>
+            <div class="event-row"><span class="event-time">10:21:23</span><span class="mi" style="color:#41a247;">check_circle</span><span style="font-size:13px;font-weight:600;">CONFIG_CUSTOMER enviado</span></div>
+            <div class="event-row"><span class="event-time">10:21:28</span><span class="mi" style="color:#41a247;">check_circle</span><span style="font-size:13px;font-weight:600;">CONFIG_WALLET enviado</span></div>
+            <div class="event-row"><span class="event-time">10:21:34</span><span class="mi" style="color:#f16824;">sync</span><span style="font-size:13px;font-weight:600;">CONFIG_TRANSACTION en proceso</span></div>
+          </div>
+          <div class="fs-panel">
+            <div class="fs-kv"><span>Cliente</span><span>ID 248</span></div>
+            <div class="fs-kv"><span>Origen</span><span>customers / wallets / rules</span></div>
+            <div class="fs-kv"><span>Acción</span><span>sendJsonToClient</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <button class="btn btn-outline"><span class="mi">chevron_left</span>Anterior</button>
+            <button class="btn btn-orange">Siguiente<span class="mi">chevron_right</span></button>
+          </div>
         </div>
       </div>
     </div>
